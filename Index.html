@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Debryne Match Alert</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080b10;
+  color: white;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 25px 15px 40px;
+}
+
+.brand {
+  text-align: center;
+  color: #f5c542;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #151b23;
+  border: 1px solid #29323d;
+  border-radius: 20px;
+  padding: 25px 18px;
+}
+
+.competition {
+  text-align: center;
+  color: #9da7b3;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin: 10px 0 30px;
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.team {
+  width: 35%;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.score {
+  font-size: 38px;
+  font-weight: 900;
+}
+
+.status {
+  text-align: center;
+  margin: 25px 0 15px;
+  color: #72e28b;
+  font-weight: bold;
+}
+
+.details {
+  text-align: center;
+  color: #b8c0c9;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #202934;
+  text-align: center;
+}
+
+.control {
+  margin-top: 25px;
+  border-top: 1px solid #29323d;
+  padding-top: 20px;
+}
+
+.control h2 {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: #f5c542;
+  color: #111;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button.dark {
+  background: #29323d;
+  color: white;
+}
+
+button.red {
+  background: #a83232;
+  color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="brand">
+    DEBRYNE UPDATE
+  </div>
+
+  <div class="card">
+
+    <div class="competition">
+      COMPUTER SCIENCE
+    </div>
+
+    <h1>
+      🏆 SEND-FORTH MATCH
+    </h1>
+
+    <div class="teams">
+
+      <div class="team">
+        ND1 + HND1
+      </div>
+
+      <div class="score">
+        <span id="homeScore">0</span>
+        —
+        <span id="awayScore">0</span>
+      </div>
+
+      <div class="team">
+        ND2 + HND2
+      </div>
+
+    </div>
+
+    <div class="status" id="status">
+      🟢 MATCH NOT STARTED
+    </div>
+
+    <div class="details">
+      📅 Sunday, August 9, 2026<br>
+      ⏰ 3:00 PM<br>
+      📍 School Multipurpose Field
+    </div>
+
+    <div class="alert" id="alert">
+      🔔 Match alerts will appear here.
+    </div>
+
+    <div class="control">
+
+      <h2>🎛️ MATCH CONTROL</h2>
+
+      <button id="startBtn">
+        🟢 START MATCH
+      </button>
+
+      <button id="homeGoalBtn">
+        ⚽ GOAL — ND1 + HND1
+      </button>
+
+      <button id="awayGoalBtn">
+        ⚽ GOAL — ND2 + HND2
+      </button>
+
+      <button class="dark" id="halfBtn">
+        ⏸️ HALF TIME
+      </button>
+
+      <button class="dark" id="fullBtn">
+        🏁 FULL TIME
+      </button>
+
+      <button class="red" id="resetBtn">
+        🔄 RESET MATCH
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyDWmqu7oiwivaKWjRP-v40gP7tYU-z4_yw",
+
+  authDomain: "debryne-match-alert.firebaseapp.com",
+
+  databaseURL: "https://debryne-match-alert-default-rtdb.firebaseio.com",
+
+  projectId: "debryne-match-alert",
+
+  storageBucket: "debryne-match-alert.firebasestorage.app",
+
+  messagingSenderId: "320972265326",
+
+  appId: "1:320972265326:web:52d199cc395b86de46937f",
+
+  measurementId: "G-TQ1NEJMY23"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+const matchRef = ref(db, "match");
+
+
+/* START MATCH */
+
+document.getElementById("startBtn").addEventListener("click", function() {
+
+  set(matchRef, {
+
+    homeScore: 0,
+
+    awayScore: 0,
+
+    status: "🔴 MATCH LIVE",
+
+    alert: "🔔 MATCH STARTED! The game is LIVE."
+
+  });
+
+});
+
+
+/* HOME GOAL */
+
+document.getElementById("homeGoalBtn").addEventListener("click", function() {
+
+  onValue(matchRef, function(snapshot) {
+
+    const data = snapshot.val() || {};
+
+    set(matchRef, {
+
+      homeScore: (data.homeScore || 0) + 1,
+
+      awayScore: data.awayScore || 0,
+
+      status: "🔴 MATCH LIVE",
+
+      alert: "⚽ GOAL! ND1 + HND1 have scored!"
+
+    });
+
+  }, { onlyOnce: true });
+
+});
+
+
+/* AWAY GOAL */
+
+document.getElementById("awayGoalBtn").addEventListener("click", function() {
+
+  onValue(matchRef, function(snapshot) {
+
+    const data = snapshot.val() || {};
+
+    set(matchRef, {
+
+      homeScore: data.homeScore || 0,
+
+      awayScore: (data.awayScore || 0) + 1,
+
+      status: "🔴 MATCH LIVE",
+
+      alert: "⚽ GOAL! ND2 + HND2 have scored!"
+
+    });
+
+  }, { onlyOnce: true });
+
+});
+
+
+/* HALF TIME */
+
+document.getElementById("halfBtn").addEventListener("click", function() {
+
+  onValue(matchRef, function(snapshot) {
+
+    const data = snapshot.val() || {};
+
+    set(matchRef, {
+
+      homeScore: data.homeScore || 0,
+
+      awayScore: data.awayScore || 0,
+
+      status: "⏸️ HALF TIME",
+
+      alert:
+
+        "⏸️ HALF TIME — Score: " +
+
+        (data.homeScore || 0) +
+
+        " — " +
+
+        (data.awayScore || 0)
+
+    });
+
+  }, { onlyOnce: true });
+
+});
+
+
+/* FULL TIME */
+
+document.getElementById("fullBtn").addEventListener("click", function() {
+
+  onValue(matchRef, function(snapshot) {
+
+    const data = snapshot.val() || {};
+
+    set(matchRef, {
+
+      homeScore: data.homeScore || 0,
+
+      awayScore: data.awayScore || 0,
+
+      status: "🏁 FULL TIME",
+
+      alert:
+
+        "🏆 FULL TIME — Final Score: " +
+
+        (data.homeScore || 0) +
+
+        " — " +
+
+        (data.awayScore || 0)
+
+    });
+
+  }, { onlyOnce: true });
+
+});
+
+
+/* RESET */
+
+document.getElementById("resetBtn").addEventListener("click", function() {
+
+  set(matchRef, {
+
+    homeScore: 0,
+
+    awayScore: 0,
+
+    status: "🟢 MATCH NOT STARTED",
+
+    alert: "🔔 Match alerts will appear here."
+
+  });
+
+});
+
+
+/* LIVE DATABASE LISTENER */
+
+onValue(matchRef, function(snapshot) {
+
+  const data = snapshot.val();
+
+  if (!data) return;
+
+  document.getElementById("homeScore").textContent =
+    data.homeScore || 0;
+
+  document.getElementById("awayScore").textContent =
+    data.awayScore || 0;
+
+  document.getElementById("status").textContent =
+    data.status || "🟢 MATCH NOT STARTED";
+
+  document.getElementById("alert").textContent =
+    data.alert || "🔔 Match alerts will appear here.";
+
+});
+
+</script>
+
+</body>
+</html>
