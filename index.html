@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Debryne Match Alert</title>
+<title>DeBryne Match Alert - Control</title>
 
 <style>
-
 * {
   box-sizing: border-box;
 }
@@ -25,6 +24,13 @@ body {
   padding: 25px 15px 40px;
 }
 
+.card {
+  background: #151b23;
+  border: 1px solid #29323d;
+  border-radius: 20px;
+  padding: 25px 18px;
+}
+
 .brand {
   text-align: center;
   color: #f5c542;
@@ -33,11 +39,63 @@ body {
   margin-bottom: 20px;
 }
 
-.card {
-  background: #151b23;
-  border: 1px solid #29323d;
-  border-radius: 20px;
-  padding: 25px 18px;
+.login {
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin: 10px 0 30px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border: 1px solid #394451;
+  border-radius: 10px;
+  background: #0d1218;
+  color: white;
+  font-size: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: #f5c542;
+  color: #111;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.dark {
+  background: #29323d;
+  color: white;
+}
+
+button.red {
+  background: #a83232;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  text-align: center;
+  color: #ff7070;
+  font-size: 13px;
+  margin-top: 12px;
 }
 
 .competition {
@@ -45,12 +103,6 @@ body {
   color: #9da7b3;
   font-size: 13px;
   letter-spacing: 1px;
-}
-
-h1 {
-  text-align: center;
-  font-size: 22px;
-  margin: 10px 0 30px;
 }
 
 .teams {
@@ -69,13 +121,22 @@ h1 {
 .score {
   font-size: 38px;
   font-weight: 900;
+  white-space: nowrap;
 }
 
 .status {
   text-align: center;
-  margin: 25px 0 15px;
+  margin: 25px 0 10px;
   color: #72e28b;
   font-weight: bold;
+}
+
+.timer {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 0 20px;
+  color: #f5c542;
 }
 
 .details {
@@ -102,31 +163,19 @@ h1 {
 .control h2 {
   text-align: center;
   font-size: 16px;
-  margin-bottom: 12px;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 12px;
-  background: #f5c542;
-  color: #111;
-  font-size: 15px;
-  font-weight: bold;
+.connection {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 15px;
+  color: #72e28b;
 }
 
-button.dark {
+.logout {
   background: #29323d;
   color: white;
 }
-
-button.red {
-  background: #a83232;
-  color: white;
-}
-
 </style>
 </head>
 
@@ -134,304 +183,775 @@ button.red {
 
 <div class="container">
 
+<!-- LOGIN -->
+
+<div id="loginScreen" class="card login">
+
   <div class="brand">
     DEBRYNE UPDATE
   </div>
 
-  <div class="card">
+  <h1>🔐 CONTROL PANEL LOGIN</h1>
 
-    <div class="competition">
-      COMPUTER SCIENCE
+  <input
+    type="email"
+    id="email"
+    value="kelvinechem7@gmail.com"
+    placeholder="Email"
+    autocomplete="email"
+  >
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
+
+  <button id="loginBtn">
+    🔐 LOGIN
+  </button>
+
+  <div id="loginError" class="error"></div>
+
+</div>
+
+
+<!-- CONTROL PANEL -->
+
+<div id="controlPanel" class="card hidden">
+
+  <div class="brand">
+    DEBRYNE UPDATE
+  </div>
+
+  <div class="competition">
+    COMPUTER SCIENCE
+  </div>
+
+  <h1>
+    🏆 SEND-FORTH MATCH
+  </h1>
+
+  <div class="teams">
+
+    <div class="team">
+      ND1 + HND1
     </div>
 
-    <h1>
-      🏆 SEND-FORTH MATCH
-    </h1>
-
-    <div class="teams">
-
-      <div class="team">
-        ND1 + HND1
-      </div>
-
-      <div class="score">
-        <span id="homeScore">0</span>
-        —
-        <span id="awayScore">0</span>
-      </div>
-
-      <div class="team">
-        ND2 + HND2
-      </div>
-
+    <div class="score">
+      <span id="homeScore">0</span>
+      —
+      <span id="awayScore">0</span>
     </div>
 
-    <div class="status" id="status">
-      🟢 MATCH NOT STARTED
-    </div>
-
-    <div class="details">
-      📅 Sunday, August 9, 2026<br>
-      ⏰ 3:00 PM<br>
-      📍 School Multipurpose Field
-    </div>
-
-    <div class="alert" id="alert">
-      🔔 Match alerts will appear here.
-    </div>
-
-    <div class="control">
-
-      <h2>🎛️ MATCH CONTROL</h2>
-
-      <button id="startBtn">
-        🟢 START MATCH
-      </button>
-
-      <button id="homeGoalBtn">
-        ⚽ GOAL — ND1 + HND1
-      </button>
-
-      <button id="awayGoalBtn">
-        ⚽ GOAL — ND2 + HND2
-      </button>
-
-      <button class="dark" id="halfBtn">
-        ⏸️ HALF TIME
-      </button>
-
-      <button class="dark" id="fullBtn">
-        🏁 FULL TIME
-      </button>
-
-      <button class="red" id="resetBtn">
-        🔄 RESET MATCH
-      </button>
-
+    <div class="team">
+      ND2 + HND2
     </div>
 
   </div>
+
+  <div class="status" id="status">
+    🟢 MATCH NOT STARTED
+  </div>
+
+  <div class="timer" id="timer">
+    ⏱️ 00:00
+  </div>
+
+  <div class="details">
+    📅 Sunday, August 9, 2026<br>
+    ⏰ 3:00 PM<br>
+    📍 School Multipurpose Field
+  </div>
+
+  <div class="alert" id="alert">
+    🎛️ Control panel ready.
+  </div>
+
+  <div class="control">
+
+    <h2>🎛️ MATCH CONTROL</h2>
+
+    <button id="startBtn">
+      🟢 START MATCH
+    </button>
+
+    <button id="homeGoalBtn">
+      ⚽ GOAL — ND1 + HND1
+    </button>
+
+    <button id="awayGoalBtn">
+      ⚽ GOAL — ND2 + HND2
+    </button>
+
+    <button class="dark" id="halfBtn">
+      ⏸️ HALF TIME
+    </button>
+
+    <button class="dark" id="resumeBtn">
+      ▶️ RESUME MATCH
+    </button>
+
+    <button class="dark" id="fullBtn">
+      🏁 FULL TIME
+    </button>
+
+    <button class="red" id="resetBtn">
+      🔄 RESET MATCH
+    </button>
+
+  </div>
+
+  <div class="connection" id="connection">
+    🟡 CONNECTING TO FIREBASE...
+  </div>
+
+  <button class="logout" id="logoutBtn">
+    🚪 LOG OUT
+  </button>
+
+</div>
 
 </div>
 
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
   getDatabase,
   ref,
   set,
   onValue
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDWmqu7oiwivaKWjRP-v40gP7tYU-z4_yw",
+  apiKey:
+    "AIzaSyDiv2PjGsMCOpmTqBKzbydWUsFOP36fFtM",
 
-  authDomain: "debryne-match-alert.firebaseapp.com",
+  authDomain:
+    "debryne-match-alert-a2d51.firebaseapp.com",
 
-  databaseURL: "https://debryne-match-alert-default-rtdb.firebaseio.com",
+  databaseURL:
+    "https://debryne-match-alert-a2d51-default-rtdb.firebaseio.com",
 
-  projectId: "debryne-match-alert",
+  projectId:
+    "debryne-match-alert-a2d51",
 
-  storageBucket: "debryne-match-alert.firebasestorage.app",
+  storageBucket:
+    "debryne-match-alert-a2d51.firebasestorage.app",
 
-  messagingSenderId: "320972265326",
+  messagingSenderId:
+    "967179671646",
 
-  appId: "1:320972265326:web:52d199cc395b86de46937f",
+  appId:
+    "1:967179671646:web:0cbf28b0f57a146ca2bccf",
 
-  measurementId: "G-TQ1NEJMY23"
-
+  measurementId:
+    "G-R2TYPHXC37"
 };
 
 
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
+
 const app = initializeApp(firebaseConfig);
 
-const db = getDatabase(app);
+const auth = getAuth(app);
 
-const matchRef = ref(db, "match");
+const database = getDatabase(app);
+
+const matchRef = ref(database, "match");
 
 
-/* START MATCH */
+/* =========================
+   ELEMENTS
+========================= */
 
-document.getElementById("startBtn").addEventListener("click", function() {
+const loginScreen =
+  document.getElementById("loginScreen");
 
-  set(matchRef, {
+const controlPanel =
+  document.getElementById("controlPanel");
 
-    homeScore: 0,
+const loginError =
+  document.getElementById("loginError");
 
-    awayScore: 0,
+const connection =
+  document.getElementById("connection");
 
-    status: "🔴 MATCH LIVE",
+const homeScoreDisplay =
+  document.getElementById("homeScore");
 
-    alert: "🔔 MATCH STARTED! The game is LIVE."
+const awayScoreDisplay =
+  document.getElementById("awayScore");
 
-  });
+const statusDisplay =
+  document.getElementById("status");
+
+const timerDisplay =
+  document.getElementById("timer");
+
+const alertDisplay =
+  document.getElementById("alert");
+
+
+/* =========================
+   LOCAL MATCH STATE
+========================= */
+
+let homeScore = 0;
+
+let awayScore = 0;
+
+let timerSeconds = 0;
+
+let timerRunning = false;
+
+let timerInterval = null;
+
+
+/* =========================
+   FORMAT TIMER
+========================= */
+
+function formatTime(seconds) {
+
+  seconds =
+    Math.max(0, Math.floor(seconds));
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  const secs =
+    seconds % 60;
+
+  return (
+    String(minutes).padStart(2, "0")
+    +
+    ":"
+    +
+    String(secs).padStart(2, "0")
+  );
+}
+
+
+/* =========================
+   UPDATE TIMER
+========================= */
+
+function updateTimer() {
+
+  timerDisplay.textContent =
+    "⏱️ " +
+    formatTime(timerSeconds);
+
+}
+
+
+/* =========================
+   START LOCAL TIMER
+========================= */
+
+function startLocalTimer() {
+
+  if (timerInterval !== null) {
+    return;
+  }
+
+  timerInterval =
+    setInterval(() => {
+
+      if (timerRunning) {
+
+        timerSeconds++;
+
+        updateTimer();
+
+      }
+
+    }, 1000);
+
+}
+
+
+/* =========================
+   STOP LOCAL TIMER
+========================= */
+
+function stopLocalTimer() {
+
+  if (timerInterval !== null) {
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+  }
+
+}
+
+
+/* =========================
+   SAVE MATCH TO FIREBASE
+========================= */
+
+async function saveMatch() {
+
+  if (!auth.currentUser) {
+
+    connection.textContent =
+      "🔴 NOT LOGGED IN";
+
+    return false;
+  }
+
+  const matchData = {
+
+    homeScore: homeScore,
+
+    awayScore: awayScore,
+
+    timerSeconds: timerSeconds,
+
+    timerRunning: timerRunning,
+
+    status: statusDisplay.textContent,
+
+    alert: alertDisplay.textContent,
+
+    updatedAt: Date.now()
+
+  };
+
+  try {
+
+    await set(matchRef, matchData);
+
+    connection.textContent =
+      "🟢 FIREBASE CONNECTED";
+
+    return true;
+
+  } catch (error) {
+
+    console.error("Firebase write error:", error);
+
+    connection.textContent =
+      "🔴 FIREBASE WRITE ERROR";
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+.getElementById("loginBtn")
+.addEventListener("click", async () => {
+
+  const email =
+    document.getElementById("email")
+    .value
+    .trim();
+
+  const password =
+    document.getElementById("password")
+    .value;
+
+  if (!email || !password) {
+
+    loginError.textContent =
+      "❌ Enter your email and password.";
+
+    return;
+  }
+
+  loginError.textContent =
+    "Logging in...";
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    loginError.textContent = "";
+
+  } catch (error) {
+
+    console.error(error);
+
+    loginError.textContent =
+      "❌ Login failed. Check your email and password.";
+
+  }
 
 });
 
 
-/* HOME GOAL */
+/* =========================
+   AUTH STATE
+========================= */
 
-document.getElementById("homeGoalBtn").addEventListener("click", function() {
+onAuthStateChanged(auth, (user) => {
 
-  onValue(matchRef, function(snapshot) {
+  if (user) {
 
-    const data = snapshot.val() || {};
+    loginScreen.classList.add("hidden");
 
-    set(matchRef, {
+    controlPanel.classList.remove("hidden");
 
-      homeScore: (data.homeScore || 0) + 1,
+    connection.textContent =
+      "🟢 AUTHENTICATED — FIREBASE CONNECTED";
 
-      awayScore: data.awayScore || 0,
+    startLocalTimer();
 
-      status: "🔴 MATCH LIVE",
+  } else {
 
-      alert: "⚽ GOAL! ND1 + HND1 have scored!"
+    loginScreen.classList.remove("hidden");
 
-    });
+    controlPanel.classList.add("hidden");
 
-  }, { onlyOnce: true });
+    stopLocalTimer();
 
-});
-
-
-/* AWAY GOAL */
-
-document.getElementById("awayGoalBtn").addEventListener("click", function() {
-
-  onValue(matchRef, function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    set(matchRef, {
-
-      homeScore: data.homeScore || 0,
-
-      awayScore: (data.awayScore || 0) + 1,
-
-      status: "🔴 MATCH LIVE",
-
-      alert: "⚽ GOAL! ND2 + HND2 have scored!"
-
-    });
-
-  }, { onlyOnce: true });
+  }
 
 });
 
 
-/* HALF TIME */
+/* =========================
+   FIREBASE LISTENER
+========================= */
 
-document.getElementById("halfBtn").addEventListener("click", function() {
+onValue(
+  matchRef,
+  (snapshot) => {
 
-  onValue(matchRef, function(snapshot) {
+    const data =
+      snapshot.val();
 
-    const data = snapshot.val() || {};
+    if (!data) {
 
-    set(matchRef, {
+      connection.textContent =
+        "🟢 FIREBASE CONNECTED";
 
-      homeScore: data.homeScore || 0,
+      return;
+    }
 
-      awayScore: data.awayScore || 0,
+    /*
+      Firebase is used to load the
+      current match state.
 
-      status: "⏸️ HALF TIME",
+      It does NOT save every second.
+    */
 
-      alert:
+    homeScore =
+      Number(data.homeScore || 0);
 
-        "⏸️ HALF TIME — Score: " +
+    awayScore =
+      Number(data.awayScore || 0);
 
-        (data.homeScore || 0) +
+    /*
+      Only take Firebase timer when
+      the local timer is stopped.
+    */
 
-        " — " +
+    if (!timerRunning) {
 
-        (data.awayScore || 0)
+      timerSeconds =
+        Number(data.timerSeconds || 0);
 
-    });
+      updateTimer();
 
-  }, { onlyOnce: true });
+    }
+
+    homeScoreDisplay.textContent =
+      homeScore;
+
+    awayScoreDisplay.textContent =
+      awayScore;
+
+    statusDisplay.textContent =
+      data.status ||
+      "🟢 MATCH NOT STARTED";
+
+    alertDisplay.textContent =
+      data.alert ||
+      "🎛️ Control panel ready.";
+
+    connection.textContent =
+      "🟢 LIVE DATABASE CONNECTED";
+
+  },
+
+  (error) => {
+
+    console.error(error);
+
+    connection.textContent =
+      "🔴 DATABASE CONNECTION ERROR";
+
+  }
+);
+
+
+/* =========================
+   START MATCH
+========================= */
+
+document
+.getElementById("startBtn")
+.addEventListener("click", async () => {
+
+  homeScore = 0;
+
+  awayScore = 0;
+
+  timerSeconds = 0;
+
+  timerRunning = true;
+
+  homeScoreDisplay.textContent = "0";
+
+  awayScoreDisplay.textContent = "0";
+
+  statusDisplay.textContent =
+    "🔴 MATCH LIVE";
+
+  alertDisplay.textContent =
+    "🔔 MATCH STARTED! The game is LIVE.";
+
+  updateTimer();
+
+  startLocalTimer();
+
+  await saveMatch();
 
 });
 
 
-/* FULL TIME */
+/* =========================
+   HOME GOAL
+========================= */
 
-document.getElementById("fullBtn").addEventListener("click", function() {
+document
+.getElementById("homeGoalBtn")
+.addEventListener("click", async () => {
 
-  onValue(matchRef, function(snapshot) {
+  if (!timerRunning) {
 
-    const data = snapshot.val() || {};
+    alertDisplay.textContent =
+      "⚠️ Start the match first.";
 
-    set(matchRef, {
+    return;
+  }
 
-      homeScore: data.homeScore || 0,
+  homeScore++;
 
-      awayScore: data.awayScore || 0,
+  homeScoreDisplay.textContent =
+    homeScore;
 
-      status: "🏁 FULL TIME",
+  alertDisplay.textContent =
+    "⚽ GOAL! ND1 + HND1 have scored!";
 
-      alert:
+  /*
+    Firebase receives the new score
+    only once.
+  */
 
-        "🏆 FULL TIME — Final Score: " +
-
-        (data.homeScore || 0) +
-
-        " — " +
-
-        (data.awayScore || 0)
-
-    });
-
-  }, { onlyOnce: true });
-
-});
-
-
-/* RESET */
-
-document.getElementById("resetBtn").addEventListener("click", function() {
-
-  set(matchRef, {
-
-    homeScore: 0,
-
-    awayScore: 0,
-
-    status: "🟢 MATCH NOT STARTED",
-
-    alert: "🔔 Match alerts will appear here."
-
-  });
+  await saveMatch();
 
 });
 
 
-/* LIVE DATABASE LISTENER */
+/* =========================
+   AWAY GOAL
+========================= */
 
-onValue(matchRef, function(snapshot) {
+document
+.getElementById("awayGoalBtn")
+.addEventListener("click", async () => {
 
-  const data = snapshot.val();
+  if (!timerRunning) {
 
-  if (!data) return;
+    alertDisplay.textContent =
+      "⚠️ Start the match first.";
 
-  document.getElementById("homeScore").textContent =
-    data.homeScore || 0;
+    return;
+  }
 
-  document.getElementById("awayScore").textContent =
-    data.awayScore || 0;
+  awayScore++;
 
-  document.getElementById("status").textContent =
-    data.status || "🟢 MATCH NOT STARTED";
+  awayScoreDisplay.textContent =
+    awayScore;
 
-  document.getElementById("alert").textContent =
-    data.alert || "🔔 Match alerts will appear here.";
+  alertDisplay.textContent =
+    "⚽ GOAL! ND2 + HND2 have scored!";
+
+  await saveMatch();
 
 });
+
+
+/* =========================
+   HALF TIME
+========================= */
+
+document
+.getElementById("halfBtn")
+.addEventListener("click", async () => {
+
+  timerRunning = false;
+
+  statusDisplay.textContent =
+    "⏸️ HALF TIME";
+
+  alertDisplay.textContent =
+    "⏸️ HALF TIME — Score: " +
+    homeScore +
+    " — " +
+    awayScore;
+
+  await saveMatch();
+
+});
+
+
+/* =========================
+   RESUME
+========================= */
+
+document
+.getElementById("resumeBtn")
+.addEventListener("click", async () => {
+
+  timerRunning = true;
+
+  statusDisplay.textContent =
+    "🔴 MATCH LIVE";
+
+  alertDisplay.textContent =
+    "▶️ MATCH RESUMED! The game is LIVE.";
+
+  startLocalTimer();
+
+  await saveMatch();
+
+});
+
+
+/* =========================
+   FULL TIME
+========================= */
+
+document
+.getElementById("fullBtn")
+.addEventListener("click", async () => {
+
+  timerRunning = false;
+
+  statusDisplay.textContent =
+    "🏁 FULL TIME";
+
+  alertDisplay.textContent =
+    "🏆 FULL TIME — Final Score: " +
+    homeScore +
+    " — " +
+    awayScore;
+
+  await saveMatch();
+
+});
+
+
+/* =========================
+   RESET
+========================= */
+
+document
+.getElementById("resetBtn")
+.addEventListener("click", async () => {
+
+  timerRunning = false;
+
+  timerSeconds = 0;
+
+  homeScore = 0;
+
+  awayScore = 0;
+
+  homeScoreDisplay.textContent =
+    "0";
+
+  awayScoreDisplay.textContent =
+    "0";
+
+  statusDisplay.textContent =
+    "🟢 MATCH NOT STARTED";
+
+  alertDisplay.textContent =
+    "🎛️ Control panel ready.";
+
+  updateTimer();
+
+  await saveMatch();
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+  await signOut(auth);
+
+});
+
+
+/* =========================
+   INITIAL
+========================= */
+
+updateTimer();
+
+startLocalTimer();
 
 </script>
 
 </body>
-</html>
+  </html>
