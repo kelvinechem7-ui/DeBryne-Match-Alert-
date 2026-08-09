@@ -6,7 +6,8 @@ importScripts(
   "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging-compat.js"
 );
 
-firebase.initializeApp({
+
+const firebaseConfig = {
 
   apiKey:
     "AIzaSyDiv2PjGsMCOpmTqBKzbydWUsFOP36fFtM",
@@ -32,7 +33,10 @@ firebase.initializeApp({
   measurementId:
     "G-R2TYPHXC37"
 
-});
+};
+
+
+firebase.initializeApp(firebaseConfig);
 
 
 const messaging =
@@ -43,31 +47,27 @@ messaging.onBackgroundMessage(
   function(payload) {
 
     console.log(
-      "Background notification:",
+      "Background message received:",
       payload
     );
+
 
     const title =
       payload.notification?.title ||
       "DeBryne Match Alert";
 
-    const options = {
 
-      body:
-        payload.notification?.body ||
-        "New match update!",
+    const body =
+      payload.notification?.body ||
+      "New match update!";
 
-      icon:
-        "/DeBryne-Match-Alert-/icon.png",
-
-      badge:
-        "/DeBryne-Match-Alert-/icon.png"
-
-    };
 
     self.registration.showNotification(
       title,
-      options
+      {
+        body: body,
+        icon: "/DeBryne-Match-Alert-/icon.png"
+      }
     );
 
   }
