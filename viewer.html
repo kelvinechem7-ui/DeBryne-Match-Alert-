@@ -223,7 +223,7 @@ h1 {
   </div>
 
   <div class="connection" id="connection">
-    🟡 CONNECTING TO LIVE DATABASE...
+    🟡 CONNECTING...
   </div>
 
   <div class="footer">
@@ -250,6 +250,12 @@ import {
   set
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+import {
+  getAuth,
+  signInAnonymously
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import {
   getMessaging,
@@ -293,7 +299,7 @@ const firebaseConfig = {
 
 
 /* =========================
-   INITIALIZE FIREBASE
+   INITIALIZE
 ========================= */
 
 const app =
@@ -301,6 +307,9 @@ const app =
 
 const db =
   getDatabase(app);
+
+const auth =
+  getAuth(app);
 
 const messaging =
   getMessaging(app);
@@ -333,6 +342,42 @@ const connection =
 
 const notifyBtn =
   document.getElementById("notifyBtn");
+
+
+/* =========================
+   AUTHENTICATE VIEWER
+========================= */
+
+async function authenticateViewer() {
+
+  try {
+
+    if (!auth.currentUser) {
+
+      await signInAnonymously(auth);
+
+    }
+
+    console.log(
+      "Anonymous viewer authenticated:",
+      auth.currentUser.uid
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Anonymous authentication error:",
+      error
+    );
+
+    connection.textContent =
+      "🟡 VIEWER CONNECTED";
+
+  }
+
+}
+
+authenticateViewer();
 
 
 /* =========================
@@ -436,13 +481,15 @@ onValue(
 
   (error) => {
 
-    console.error(error);
+    console.error(
+      "Database error:",
+      error
+    );
 
     connection.textContent =
       "🔴 DATABASE CONNECTION ERROR";
 
   }
-
 );
 
 
@@ -460,13 +507,13 @@ const viewerRef =
   );
 
 
-set(viewerRef, {
-
-  online: true,
-
-  joinedAt: Date.now()
-
-});
+set(
+  viewerRef,
+  {
+    online: true,
+    joinedAt: Date.now()
+  }
+);
 
 
 onDisconnect(viewerRef)
@@ -506,7 +553,7 @@ onValue(
 
 
 /* =========================
-   FCM VAPID KEY
+   VAPID KEY
 ========================= */
 
 const VAPID_KEY =
@@ -514,27 +561,35 @@ const VAPID_KEY =
 
 
 /* =========================
-   TURN ON NOTIFICATIONS
+   NOTIFICATION BUTTON
 ========================= */
 
 notifyBtn.addEventListener(
   "click",
   async () => {
 
+    notifyBtn.disabled = true;
+
+    notifyBtn.textContent =
+      "⏳ SETTING UP...";
+
+
     try {
+
+      /* Browser support */
 
       if (
         !("Notification" in window)
       ) {
 
-        alert(
+        throw new Error(
           "This browser does not support notifications."
         );
 
-        return;
-
       }
 
+
+      /* Permission */
 
       const permission =
         await Notification.requestPermission();
@@ -544,24 +599,28 @@ notifyBtn.addEventListener(
         permission !== "granted"
       ) {
 
-        alert(
-          "Please allow notifications in your browser settings."
+        throw new Error(
+          "Notification permission was not granted."
         );
-
-        return;
 
       }
 
 
       /*
-        Register Firebase
-        messaging service worker.
+        Register service worker.
       */
 
       const registration =
         await navigator.serviceWorker.register(
-          "/DeBryne-Match-Alert-/firebase-messaging-sw.js"
+          "/DeBryne-Match-Alert-/firebase-messaging-sw.js",
+          {
+            scope:
+              "/DeBryne-Match-Alert/"
+          }
         );
+
+
+      await navigator.serviceWorker.ready;
 
 
       /*
@@ -583,42 +642,56 @@ notifyBtn.addEventListener(
 
       if (!token) {
 
-        alert(
-          "Unable to activate notifications."
+        throw new Error(
+          "Firebase did not return an FCM notification token."
         );
 
-        return;
+      }
+
+
+      console.log(
+        "FCM TOKEN:",
+        token
+      );
+
+
+      /*
+        Make sure viewer is authenticated.
+      */
+
+      await authenticateViewer();
+
+
+      if (!auth.currentUser) {
+
+        throw new Error(
+          "Viewer authentication failed."
+        );
 
       }
 
 
       /*
         Save notification token.
+
+        The token is stored under
+        the anonymous user's UID.
       */
-
-      const safeToken =
-        token.replace(
-          /[.#$[\]]/g,
-          "_"
-        );
-
 
       await set(
         ref(
           db,
           "notificationTokens/" +
-          safeToken
+          auth.currentUser.uid
         ),
         {
-
           token: token,
-
-          createdAt:
-            Date.now()
-
+          createdAt: Date.now()
         }
       );
 
+
+      notifyBtn.disabled = false;
 
       notifyBtn.textContent =
         "🔔 NOTIFICATIONS ON";
@@ -629,7 +702,7 @@ notifyBtn.addEventListener(
 
 
       alert(
-        "✅ Match notifications are now ON!"
+        "✅ Match notifications are ON!"
       );
 
     }
@@ -637,12 +710,27 @@ notifyBtn.addEventListener(
     catch (error) {
 
       console.error(
-        "Notification error:",
+        "FULL NOTIFICATION ERROR:",
         error
       );
 
+
+      notifyBtn.disabled = false;
+
+      notifyBtn.textContent =
+        "🔔 TRY AGAIN";
+
+
+      /*
+        Show the REAL error.
+      */
+
       alert(
-        "❌ Notification setup failed. Make sure browser notifications are allowed."
+        "❌ NOTIFICATION ERROR\n\n" +
+        "Name: " +
+        (error.name || "Unknown") +
+        "\n\nMessage:\n" +
+        (error.message || error)
       );
 
     }
@@ -679,11 +767,6 @@ onMessage(
       body;
 
 
-    /*
-      Show notification while
-      viewer page is open.
-    */
-
     if (
       Notification.permission ===
       "granted"
@@ -711,4 +794,4 @@ updateTimer();
 </script>
 
 </body>
-</html>    
+</html>
