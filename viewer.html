@@ -299,7 +299,7 @@ const firebaseConfig = {
 
 
 /* =========================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================= */
 
 const app =
@@ -345,7 +345,7 @@ const notifyBtn =
 
 
 /* =========================
-   AUTHENTICATE VIEWER
+   AUTH
 ========================= */
 
 async function authenticateViewer() {
@@ -359,19 +359,16 @@ async function authenticateViewer() {
     }
 
     console.log(
-      "Anonymous viewer authenticated:",
+      "Viewer authenticated:",
       auth.currentUser.uid
     );
 
   } catch (error) {
 
     console.error(
-      "Anonymous authentication error:",
+      "Authentication error:",
       error
     );
-
-    connection.textContent =
-      "🟡 VIEWER CONNECTED";
 
   }
 
@@ -381,7 +378,7 @@ authenticateViewer();
 
 
 /* =========================
-   MATCH DATA
+   MATCH
 ========================= */
 
 const matchRef =
@@ -392,10 +389,6 @@ let timerSeconds = 0;
 
 let timerRunning = false;
 
-
-/* =========================
-   TIMER
-========================= */
 
 function formatTime(seconds) {
 
@@ -487,14 +480,14 @@ onValue(
     );
 
     connection.textContent =
-      "🔴 DATABASE CONNECTION ERROR";
+      "🔴 DATABASE ERROR";
 
   }
 );
 
 
 /* =========================
-   LIVE VIEWER COUNTER
+   VIEWER COUNTER
 ========================= */
 
 const viewerId =
@@ -532,17 +525,10 @@ onValue(
     const viewers =
       snapshot.val();
 
-    if (!viewers) {
-
-      viewerCountDisplay.textContent =
-        "👀 LIVE VIEWERS: 0";
-
-      return;
-
-    }
-
     const count =
-      Object.keys(viewers).length;
+      viewers
+        ? Object.keys(viewers).length
+        : 0;
 
     viewerCountDisplay.textContent =
       "👀 LIVE VIEWERS: " +
@@ -561,7 +547,7 @@ const VAPID_KEY =
 
 
 /* =========================
-   NOTIFICATION BUTTON
+   NOTIFICATIONS
 ========================= */
 
 notifyBtn.addEventListener(
@@ -576,8 +562,6 @@ notifyBtn.addEventListener(
 
     try {
 
-      /* Browser support */
-
       if (
         !("Notification" in window)
       ) {
@@ -588,8 +572,6 @@ notifyBtn.addEventListener(
 
       }
 
-
-      /* Permission */
 
       const permission =
         await Notification.requestPermission();
@@ -608,16 +590,20 @@ notifyBtn.addEventListener(
 
       /*
         Register service worker.
+
+        No manual scope is used.
       */
 
       const registration =
         await navigator.serviceWorker.register(
-          "/DeBryne-Match-Alert-/firebase-messaging-sw.js",
-          {
-            scope:
-              "/DeBryne-Match-Alert/"
-          }
+          "/DeBryne-Match-Alert-/firebase-messaging-sw.js"
         );
+
+
+      console.log(
+        "Service worker registered:",
+        registration.scope
+      );
 
 
       await navigator.serviceWorker.ready;
@@ -643,21 +629,17 @@ notifyBtn.addEventListener(
       if (!token) {
 
         throw new Error(
-          "Firebase did not return an FCM notification token."
+          "Firebase did not return an FCM token."
         );
 
       }
 
 
       console.log(
-        "FCM TOKEN:",
+        "FCM token:",
         token
       );
 
-
-      /*
-        Make sure viewer is authenticated.
-      */
 
       await authenticateViewer();
 
@@ -665,17 +647,14 @@ notifyBtn.addEventListener(
       if (!auth.currentUser) {
 
         throw new Error(
-          "Viewer authentication failed."
+          "Anonymous viewer authentication failed."
         );
 
       }
 
 
       /*
-        Save notification token.
-
-        The token is stored under
-        the anonymous user's UID.
+        Save token.
       */
 
       await set(
@@ -685,13 +664,19 @@ notifyBtn.addEventListener(
           auth.currentUser.uid
         ),
         {
-          token: token,
-          createdAt: Date.now()
+
+          token:
+            token,
+
+          createdAt:
+            Date.now()
+
         }
       );
 
 
-      notifyBtn.disabled = false;
+      notifyBtn.disabled =
+        false;
 
       notifyBtn.textContent =
         "🔔 NOTIFICATIONS ON";
@@ -702,7 +687,7 @@ notifyBtn.addEventListener(
 
 
       alert(
-        "✅ Match notifications are ON!"
+        "✅ Match notifications are now ON!"
       );
 
     }
@@ -710,20 +695,17 @@ notifyBtn.addEventListener(
     catch (error) {
 
       console.error(
-        "FULL NOTIFICATION ERROR:",
+        "NOTIFICATION ERROR:",
         error
       );
 
 
-      notifyBtn.disabled = false;
+      notifyBtn.disabled =
+        false;
 
       notifyBtn.textContent =
         "🔔 TRY AGAIN";
 
-
-      /*
-        Show the REAL error.
-      */
 
       alert(
         "❌ NOTIFICATION ERROR\n\n" +
@@ -749,7 +731,7 @@ onMessage(
   (payload) => {
 
     console.log(
-      "Foreground message:",
+      "Foreground notification:",
       payload
     );
 
