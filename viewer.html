@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +40,13 @@ body {
   color: #72e28b;
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+.viewer-count {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #b8c0c9;
 }
 
 .card {
@@ -140,6 +148,10 @@ h1 {
     🔴 LIVE MATCH CENTRE
   </div>
 
+  <div class="viewer-count" id="viewerCount">
+    👀 LIVE VIEWERS: 0
+  </div>
+
   <div class="card">
 
     <div class="competition">
@@ -211,14 +223,17 @@ from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
   getDatabase,
   ref,
-  onValue
+  onValue,
+  onDisconnect,
+  set,
+  remove
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
 /* =========================
-   SAME FIREBASE PROJECT
-   AS CONTROL PANEL
+   FIREBASE CONFIG
+   SAME PROJECT AS CONTROL
 ========================= */
 
 const firebaseConfig = {
@@ -246,11 +261,12 @@ const firebaseConfig = {
 
   measurementId:
     "G-R2TYPHXC37"
+
 };
 
 
 /* =========================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================= */
 
 const app =
@@ -259,31 +275,63 @@ const app =
 const db =
   getDatabase(app);
 
+
+/* =========================
+   MATCH DATA
+========================= */
+
 const matchRef =
   ref(db, "match");
 
 
-/* =========================
-   ELEMENTS
-========================= */
+onValue(
+  matchRef,
+  (snapshot) => {
 
-const homeScore =
-  document.getElementById("homeScore");
+    const data =
+      snapshot.val();
 
-const awayScore =
-  document.getElementById("awayScore");
+    connection.textContent =
+      "🟢 LIVE DATABASE CONNECTED";
 
-const status =
-  document.getElementById("status");
+    if (!data) {
+      return;
+    }
 
-const timer =
-  document.getElementById("timer");
+    document.getElementById("homeScore").textContent =
+      Number(data.homeScore || 0);
 
-const alertBox =
-  document.getElementById("alert");
+    document.getElementById("awayScore").textContent =
+      Number(data.awayScore || 0);
 
-const connection =
-  document.getElementById("connection");
+    document.getElementById("status").textContent =
+      data.status ||
+      "🟢 MATCH NOT STARTED";
+
+    document.getElementById("alert").textContent =
+      data.alert ||
+      "🔔 Waiting for match updates...";
+
+    timerSeconds =
+      Number(data.timerSeconds || 0);
+
+    timerRunning =
+      data.timerRunning === true;
+
+    updateTimer();
+
+  },
+
+  (error) => {
+
+    console.error(error);
+
+    connection.textContent =
+      "🔴 DATABASE CONNECTION ERROR";
+
+  }
+
+);
 
 
 /* =========================
@@ -298,9 +346,6 @@ let timerInterval = null;
 
 
 function formatTime(seconds) {
-
-  seconds =
-    Math.max(0, Math.floor(seconds));
 
   const minutes =
     Math.floor(seconds / 60);
@@ -321,134 +366,97 @@ function formatTime(seconds) {
 
 function updateTimer() {
 
-  timer.textContent =
+  document.getElementById("timer").textContent =
     "⏱️ " +
     formatTime(timerSeconds);
 
 }
 
 
-function startViewerTimer() {
+timerInterval =
+  setInterval(() => {
 
-  if (timerInterval !== null) {
-    return;
-  }
+    if (timerRunning) {
 
-  timerInterval =
-    setInterval(() => {
-
-      if (timerRunning) {
-
-        timerSeconds++;
-
-        updateTimer();
-
-      }
-
-    }, 1000);
-
-}
-
-
-/* =========================
-   LIVE FIREBASE LISTENER
-========================= */
-
-onValue(
-  matchRef,
-
-  (snapshot) => {
-
-    const data =
-      snapshot.val();
-
-    connection.textContent =
-      "🟢 LIVE DATABASE CONNECTED";
-
-    if (!data) {
-
-      homeScore.textContent = "0";
-
-      awayScore.textContent = "0";
-
-      status.textContent =
-        "🟢 MATCH NOT STARTED";
-
-      alertBox.textContent =
-        "🔔 Waiting for match updates...";
-
-      timerSeconds = 0;
-
-      timerRunning = false;
+      timerSeconds++;
 
       updateTimer();
 
-      return;
     }
 
-
-    /* SCORE */
-
-    homeScore.textContent =
-      Number(data.homeScore || 0);
-
-    awayScore.textContent =
-      Number(data.awayScore || 0);
+  }, 1000);
 
 
-    /* STATUS */
+/* =========================
+   LIVE VIEWER COUNTER
+========================= */
 
-    status.textContent =
-      data.status ||
-      "🟢 MATCH NOT STARTED";
-
-
-    /* ALERT */
-
-    alertBox.textContent =
-      data.alert ||
-      "🔔 Waiting for match updates...";
+const viewerCountDisplay =
+  document.getElementById("viewerCount");
 
 
-    /*
-      Load the Firebase timer.
-      The viewer then continues counting
-      locally while the match is live.
-    */
+const viewerId =
+  crypto.randomUUID();
 
-    timerSeconds =
-      Number(data.timerSeconds || 0);
 
-    timerRunning =
-      data.timerRunning === true;
+const viewerRef =
+  ref(db, "viewers/" + viewerId);
 
-    updateTimer();
 
-    startViewerTimer();
+/*
+  Register this viewer
+*/
 
-  },
+set(viewerRef, {
+  online: true,
+  joinedAt: Date.now()
+});
 
-  (error) => {
 
-    console.error(
-      "Firebase Viewer Error:",
-      error
-    );
+/*
+  Automatically remove this viewer
+  when the browser/tab disconnects
+*/
 
-    connection.textContent =
-      "🔴 DATABASE CONNECTION ERROR";
+onDisconnect(viewerRef)
+  .remove();
+
+
+/*
+  Listen to all active viewers
+*/
+
+const viewersRef =
+  ref(db, "viewers");
+
+
+onValue(
+  viewersRef,
+  (snapshot) => {
+
+    const viewers =
+      snapshot.val();
+
+    if (!viewers) {
+
+      viewerCountDisplay.textContent =
+        "👀 LIVE VIEWERS: 0";
+
+      return;
+
+    }
+
+    const count =
+      Object.keys(viewers).length;
+
+    viewerCountDisplay.textContent =
+      "👀 LIVE VIEWERS: " +
+      count;
 
   }
 );
 
-
-/* INITIAL */
-
-updateTimer();
-
-startViewerTimer();
-
 </script>
 
 </body>
-  </html>
+</html>
