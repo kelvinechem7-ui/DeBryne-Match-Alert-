@@ -130,9 +130,8 @@ h1 {
   cursor: pointer;
 }
 
-.notify.off {
-  background: #29323d;
-  color: white;
+.notify.on {
+  background: #72e28b;
 }
 
 .connection {
@@ -237,7 +236,7 @@ h1 {
 <script type="module">
 
 /* =========================
-   FIREBASE
+   FIREBASE IMPORTS
 ========================= */
 
 import { initializeApp }
@@ -248,8 +247,7 @@ import {
   ref,
   onValue,
   onDisconnect,
-  set,
-  remove
+  set
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
@@ -295,7 +293,7 @@ const firebaseConfig = {
 
 
 /* =========================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================= */
 
 const app =
@@ -318,20 +316,20 @@ const homeScore =
 const awayScore =
   document.getElementById("awayScore");
 
-const status =
+const statusDisplay =
   document.getElementById("status");
 
-const timer =
+const timerDisplay =
   document.getElementById("timer");
 
-const alertBox =
+const alertDisplay =
   document.getElementById("alert");
-
-const connection =
-  document.getElementById("connection");
 
 const viewerCountDisplay =
   document.getElementById("viewerCount");
+
+const connection =
+  document.getElementById("connection");
 
 const notifyBtn =
   document.getElementById("notifyBtn");
@@ -349,6 +347,10 @@ let timerSeconds = 0;
 
 let timerRunning = false;
 
+
+/* =========================
+   TIMER
+========================= */
 
 function formatTime(seconds) {
 
@@ -369,7 +371,7 @@ function formatTime(seconds) {
 
 function updateTimer() {
 
-  timer.textContent =
+  timerDisplay.textContent =
     "⏱️ " +
     formatTime(timerSeconds);
 
@@ -414,11 +416,11 @@ onValue(
     awayScore.textContent =
       Number(data.awayScore || 0);
 
-    status.textContent =
+    statusDisplay.textContent =
       data.status ||
       "🟢 MATCH NOT STARTED";
 
-    alertBox.textContent =
+    alertDisplay.textContent =
       data.alert ||
       "🔔 Waiting for match updates...";
 
@@ -440,11 +442,12 @@ onValue(
       "🔴 DATABASE CONNECTION ERROR";
 
   }
+
 );
 
 
 /* =========================
-   VIEWER COUNTER
+   LIVE VIEWER COUNTER
 ========================= */
 
 const viewerId =
@@ -503,23 +506,16 @@ onValue(
 
 
 /* =========================
-   NOTIFICATIONS
+   FCM VAPID KEY
 ========================= */
 
-/*
- IMPORTANT:
-
- Replace this value with your
- Firebase Web Push certificate
- VAPID key.
-
- Do NOT use your Firebase
- password here.
-*/
-
 const VAPID_KEY =
-  "PASTE_YOUR_FIREBASE_VAPID_KEY_HERE";
+  "BLt5HsK2VS9ZE6qMXps4dWs67MoX25gn-gwswsJ0ID8wAwYw31NASvlB_KshmihU2OVcHnXuXmc3BjT88Ny21NY";
 
+
+/* =========================
+   TURN ON NOTIFICATIONS
+========================= */
 
 notifyBtn.addEventListener(
   "click",
@@ -528,12 +524,11 @@ notifyBtn.addEventListener(
     try {
 
       if (
-        VAPID_KEY ===
-        "PASTE_YOUR_FIREBASE_VAPID_KEY_HERE"
+        !("Notification" in window)
       ) {
 
         alert(
-          "Notification setup is almost ready. We still need the Firebase Web Push VAPID key."
+          "This browser does not support notifications."
         );
 
         return;
@@ -550,7 +545,7 @@ notifyBtn.addEventListener(
       ) {
 
         alert(
-          "Notifications were not allowed."
+          "Please allow notifications in your browser settings."
         );
 
         return;
@@ -558,11 +553,20 @@ notifyBtn.addEventListener(
       }
 
 
+      /*
+        Register Firebase
+        messaging service worker.
+      */
+
       const registration =
         await navigator.serviceWorker.register(
           "/DeBryne-Match-Alert-/firebase-messaging-sw.js"
         );
 
+
+      /*
+        Get FCM token.
+      */
 
       const token =
         await getToken(
@@ -577,46 +581,60 @@ notifyBtn.addEventListener(
         );
 
 
-      if (token) {
-
-        notifyBtn.textContent =
-          "🔔 NOTIFICATIONS ON";
-
-        notifyBtn.classList.add(
-          "off"
-        );
-
-        /*
-          Save the notification token
-          so the notification system
-          can identify this viewer.
-        */
-
-        await set(
-          ref(
-            db,
-            "notificationTokens/" +
-            token.replace(/[.#$[\]]/g, "_")
-          ),
-          {
-            token: token,
-            createdAt: Date.now()
-          }
-        );
+      if (!token) {
 
         alert(
-          "🔔 Match notifications are now ON!"
+          "Unable to activate notifications."
         );
 
-      } else {
-
-        alert(
-          "Unable to get notification permission/token."
-        );
+        return;
 
       }
 
-    } catch (error) {
+
+      /*
+        Save notification token.
+      */
+
+      const safeToken =
+        token.replace(
+          /[.#$[\]]/g,
+          "_"
+        );
+
+
+      await set(
+        ref(
+          db,
+          "notificationTokens/" +
+          safeToken
+        ),
+        {
+
+          token: token,
+
+          createdAt:
+            Date.now()
+
+        }
+      );
+
+
+      notifyBtn.textContent =
+        "🔔 NOTIFICATIONS ON";
+
+      notifyBtn.classList.add(
+        "on"
+      );
+
+
+      alert(
+        "✅ Match notifications are now ON!"
+      );
+
+    }
+
+    catch (error) {
 
       console.error(
         "Notification error:",
@@ -624,7 +642,7 @@ notifyBtn.addEventListener(
       );
 
       alert(
-        "Notification setup failed. Check the browser permission and Firebase setup."
+        "❌ Notification setup failed. Make sure browser notifications are allowed."
       );
 
     }
@@ -634,7 +652,7 @@ notifyBtn.addEventListener(
 
 
 /* =========================
-   FOREGROUND NOTIFICATION
+   FOREGROUND MESSAGE
 ========================= */
 
 onMessage(
@@ -643,7 +661,7 @@ onMessage(
   (payload) => {
 
     console.log(
-      "Foreground notification:",
+      "Foreground message:",
       payload
     );
 
@@ -655,9 +673,30 @@ onMessage(
       payload.notification?.body ||
       "New match update!";
 
-    alertBox.textContent =
+
+    alertDisplay.textContent =
       "🔔 " +
       body;
+
+
+    /*
+      Show notification while
+      viewer page is open.
+    */
+
+    if (
+      Notification.permission ===
+      "granted"
+    ) {
+
+      new Notification(
+        title,
+        {
+          body: body
+        }
+      );
+
+    }
 
   }
 );
@@ -672,4 +711,4 @@ updateTimer();
 </script>
 
 </body>
-  </html>
+</html>    
