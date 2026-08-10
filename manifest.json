@@ -2,12 +2,13 @@
   "name": "DeBryne Update",
   "short_name": "DeBryne",
   "description": "Student news, education, sports and campus updates.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f5f7fa",
+  "background_color": "#111827",
   "theme_color": "#111827",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "./file_000000008e5c71f4a9d057362a556762.png",
