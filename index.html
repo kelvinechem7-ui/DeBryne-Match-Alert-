@@ -1,7 +1,12 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DeBryne Update</title>
+
+<style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -98,10 +103,11 @@ body {
     padding: 18px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     cursor: pointer;
+    transition: transform 0.15s;
 }
 
 .quick-card:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
 .icon {
@@ -132,6 +138,7 @@ body {
     font-weight: bold;
     color: #64748b;
     margin-bottom: 7px;
+    text-transform: uppercase;
 }
 
 .news-card h3 {
@@ -143,6 +150,13 @@ body {
     color: #64748b;
     font-size: 13px;
     line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.news-time {
+    margin-top: 10px;
+    color: #94a3b8;
+    font-size: 11px;
 }
 
 .page-title {
@@ -206,6 +220,8 @@ body {
     color: #64748b;
     font-size: 11px;
     cursor: pointer;
+    padding: 8px 10px;
+    user-select: none;
 }
 
 .nav-item span {
@@ -228,6 +244,7 @@ body {
     color: white;
     font-size: 15px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .notification-status {
@@ -239,25 +256,57 @@ body {
     font-size: 12px;
 }
 
+.loading {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.empty {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 14px;
+    color: #64748b;
+    font-size: 14px;
+}
+
 @media (max-width: 350px) {
     .quick-menu {
         grid-template-columns: 1fr;
     }
+
+    .nav-item {
+        padding: 8px 5px;
+    }
 }
-</style></head><body><header class="header"><div class="brand">
+</style>
+</head>
 
-    <div class="logo">
-        DU
+<body>
+
+<header class="header">
+    <div class="brand">
+
+        <div class="logo">
+            DU
+        </div>
+
+        <div>
+            <h1>DeBryne Update</h1>
+            <p>Student News • Education • Sports</p>
+        </div>
+
     </div>
+</header>
 
-    <div>
-        <h1>DeBryne Update</h1>
-        <p>Student News • Education • Sports</p>
-    </div>
 
-</div>
+<!-- ================= HOME ================= -->
 
-</header><!-- HOME --><section id="homePage" class="page active"><main class="container">
+<section id="homePage" class="page active">
+
+<main class="container">
 
     <div class="welcome">
 
@@ -271,128 +320,165 @@ body {
 
     </div>
 
+
     <h2 class="section-title">
         Student Services
     </h2>
 
+
     <div class="quick-menu">
 
-        <div class="quick-card" onclick="openPage('news')">
+        <div class="quick-card" data-page="news">
+
             <div class="icon">📰</div>
+
             <h3>Campus News</h3>
-            <p>Latest student and campus updates.</p>
+
+            <p>
+                Latest student and campus updates.
+            </p>
+
         </div>
 
-        <div class="quick-card" onclick="openPage('academics')">
+
+        <div class="quick-card" data-page="academics">
+
             <div class="icon">📚</div>
+
             <h3>Academics</h3>
-            <p>Academic information and resources.</p>
+
+            <p>
+                Academic information and resources.
+            </p>
+
         </div>
 
-        <div class="quick-card" onclick="openPage('events')">
+
+        <div class="quick-card" data-page="events">
+
             <div class="icon">📅</div>
+
             <h3>Events</h3>
-            <p>Upcoming student activities.</p>
+
+            <p>
+                Upcoming student activities.
+            </p>
+
         </div>
 
-        <div class="quick-card" onclick="openPage('sports')">
+
+        <div class="quick-card" data-page="sports">
+
             <div class="icon">⚽</div>
+
             <h3>Sports</h3>
-            <p>Fixtures, scores and sports news.</p>
+
+            <p>
+                Fixtures, scores and sports news.
+            </p>
+
         </div>
 
     </div>
+
 
     <h2 class="section-title">
         Latest Updates
     </h2>
 
-    <article class="news-card">
 
-        <div class="news-label">
-            DEBRYNE UPDATE
+    <div id="homeNewsList">
+
+        <div class="loading">
+            Loading latest updates...
         </div>
 
-        <h3>
-            Welcome to DeBryne Update
-        </h3>
-
-        <p>
-            Your platform for student news,
-            educational information, campus updates
-            and sports.
-        </p>
-
-    </article>
+    </div>
 
 </main>
 
-</section><!-- NEWS --><section id="newsPage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">📰 Campus News</h2>
+
+<!-- ================= NEWS ================= -->
+
+<section id="newsPage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        📰 Campus News
+    </h2>
 
     <p class="page-description">
         Stay updated with the latest campus news,
         student announcements and important information.
     </p>
 
+
     <div id="newsList">
 
-        <article class="news-card">
-
-            <div class="news-label">
-                DEBRYNE UPDATE
-            </div>
-
-            <h3>
-                Loading latest news...
-            </h3>
-
-            <p>
-                Please wait.
-            </p>
-
-        </article>
+        <div class="loading">
+            Loading latest news...
+        </div>
 
     </div>
 
 </main>
 
-</section><!-- SPORTS --><section id="sportsPage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">⚽ Sports</h2>
+
+<!-- ================= SPORTS ================= -->
+
+<section id="sportsPage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        ⚽ Sports
+    </h2>
 
     <p class="page-description">
         Follow fixtures, results and other student
         sports activities.
     </p>
 
-    <article class="news-card">
 
-        <div class="news-label">SPORTS</div>
+    <div id="sportsNewsList">
 
-        <h3>Sports Updates</h3>
+        <div class="loading">
+            Loading sports updates...
+        </div>
 
-        <p>
-            Sports news and updates will appear here.
-        </p>
-
-    </article>
+    </div>
 
 </main>
 
-</section><!-- ALERTS --><section id="alertsPage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">🔔 Alerts</h2>
+
+<!-- ================= ALERTS ================= -->
+
+<section id="alertsPage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        🔔 Alerts
+    </h2>
 
     <p class="page-description">
         Receive important notifications from
         DeBryne Update.
     </p>
 
+
     <div class="alert-card">
 
-        <h3>🔔 Notifications</h3>
+        <h3>
+            🔔 Notifications
+        </h3>
 
         <p>
             Enable notifications to receive breaking
@@ -400,29 +486,45 @@ body {
             updates.
         </p>
 
+
         <button
             class="action-button"
-            onclick="enableNotifications()">
+            id="enableNotificationsButton">
+
             Enable Notifications
+
         </button>
+
 
         <div
             class="notification-status"
             id="notificationStatus">
+
             Notifications have not been enabled yet.
+
         </div>
 
     </div>
 
 </main>
 
-</section><!-- PROFILE --><section id="profilePage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">👤 Profile</h2>
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profilePage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        👤 Profile
+    </h2>
 
     <p class="page-description">
         Your DeBryne Update profile.
     </p>
+
 
     <div class="profile-card">
 
@@ -430,9 +532,11 @@ body {
             👤
         </div>
 
-        <h2>Student</h2>
+        <h2>
+            Student
+        </h2>
 
-        <p style="color:#64748b; margin-top:8px;">
+        <p style="color:#64748b;margin-top:8px;">
             DeBryne Update
         </p>
 
@@ -440,99 +544,113 @@ body {
 
 </main>
 
-</section><!-- ACADEMICS --><section id="academicsPage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">📚 Academics</h2>
+
+<!-- ================= ACADEMICS ================= -->
+
+<section id="academicsPage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        📚 Academics
+    </h2>
 
     <p class="page-description">
-        Access important academic information and
-        educational updates.
+        Access important academic information
+        and educational updates.
     </p>
 
-    <article class="news-card">
 
-        <div class="news-label">ACADEMICS</div>
+    <div id="academicNewsList">
 
-        <h3>Examination Updates</h3>
+        <div class="loading">
+            Loading academic updates...
+        </div>
 
-        <p>
-            Examination timetables, practicals and
-            other academic information will appear here.
-        </p>
-
-    </article>
+    </div>
 
 </main>
 
-</section><!-- EVENTS --><section id="eventsPage" class="page"><main class="container">
+</section>
 
-    <h2 class="page-title">📅 Events</h2>
+
+<!-- ================= EVENTS ================= -->
+
+<section id="eventsPage" class="page">
+
+<main class="container">
+
+    <h2 class="page-title">
+        📅 Events
+    </h2>
 
     <p class="page-description">
         Find upcoming student events, programmes
         and activities.
     </p>
 
-    <article class="news-card">
 
-        <div class="news-label">EVENTS</div>
+    <div id="eventNewsList">
 
-        <h3>Student Events</h3>
+        <div class="loading">
+            Loading events...
+        </div>
 
-        <p>
-            Upcoming campus events and activities
-            will be published here.
-        </p>
-
-    </article>
+    </div>
 
 </main>
 
-</section><!-- NAVIGATION --><nav class="bottom-nav"><div class="nav-item active" onclick="openPage('home')">
-    <span>🏠</span>
-    Home
-</div>
+</section>
 
-<div class="nav-item" onclick="openPage('news')">
-    <span>📰</span>
-    News
-</div>
 
-<div class="nav-item" onclick="openPage('sports')">
-    <span>⚽</span>
-    Sports
-</div>
+<!-- ================= BOTTOM NAV ================= -->
 
-<div class="nav-item" onclick="openPage('alerts')">
-    <span>🔔</span>
-    Alerts
-</div>
+<nav class="bottom-nav">
 
-<div class="nav-item" onclick="openPage('profile')">
-    <span>👤</span>
-    Profile
-</div>
+    <div class="nav-item active" data-page="home">
+        <span>🏠</span>
+        Home
+    </div>
 
-</nav><script type="module">
+    <div class="nav-item" data-page="news">
+        <span>📰</span>
+        News
+    </div>
+
+    <div class="nav-item" data-page="sports">
+        <span>⚽</span>
+        Sports
+    </div>
+
+    <div class="nav-item" data-page="alerts">
+        <span>🔔</span>
+        Alerts
+    </div>
+
+    <div class="nav-item" data-page="profile">
+        <span>👤</span>
+        Profile
+    </div>
+
+</nav>
+
+
+<!-- ================= FIREBASE ================= -->
+
+<script type="module">
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
-    getMessaging,
-    getToken,
-    onMessage
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
-
-import {
     getDatabase,
     ref,
-    set
+    onValue
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
-
-/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -562,201 +680,255 @@ const firebaseConfig = {
 };
 
 
-/* INITIALIZE */
-
 const app = initializeApp(firebaseConfig);
-
-const messaging = getMessaging(app);
 
 const db = getDatabase(app);
 
 
-/*
-  VAPID KEY YOU GENERATED
-*/
+/* ===============================
+   SAFE HTML FUNCTION
+================================ */
 
-const vapidKey =
-    "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
+function escapeHTML(value) {
 
-
-/* NOTIFICATION STATUS */
-
-function setNotificationStatus(message) {
-
-    const status =
-        document.getElementById(
-            "notificationStatus"
-        );
-
-    if (status) {
-        status.textContent = message;
-    }
-
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
-/* ENABLE NOTIFICATIONS */
+/* ===============================
+   FORMAT DATE
+================================ */
 
-window.enableNotifications =
-async function() {
+function formatDate(timestamp) {
 
-    if (!("Notification" in window)) {
-
-        setNotificationStatus(
-            "This browser does not support notifications."
-        );
-
-        return;
-
+    if (!timestamp) {
+        return "";
     }
 
+    const date = new Date(timestamp);
 
-    try {
-
-        const permission =
-            await Notification.requestPermission();
+    return date.toLocaleString();
+}
 
 
-        if (permission !== "granted") {
+/* ===============================
+   CREATE NEWS CARD
+================================ */
 
-            setNotificationStatus(
-                "Notification permission was not granted."
-            );
+function createNewsCard(item) {
+
+    return `
+        <article class="news-card">
+
+            <div class="news-label">
+                ${escapeHTML(item.category || "DEBRYNE UPDATE")}
+            </div>
+
+            <h3>
+                ${escapeHTML(item.title || "Untitled")}
+            </h3>
+
+            <p>
+                ${escapeHTML(item.content || "")}
+            </p>
+
+            <div class="news-time">
+                ${formatDate(item.createdAt)}
+            </div>
+
+        </article>
+    `;
+}
+
+
+/* ===============================
+   LOAD NEWS
+================================ */
+
+const newsRef = ref(db, "news");
+
+
+onValue(
+    newsRef,
+    function(snapshot) {
+
+        const data = snapshot.val();
+
+
+        const homeList =
+            document.getElementById("homeNewsList");
+
+        const newsList =
+            document.getElementById("newsList");
+
+        const sportsList =
+            document.getElementById("sportsNewsList");
+
+        const academicList =
+            document.getElementById("academicNewsList");
+
+        const eventList =
+            document.getElementById("eventNewsList");
+
+
+        if (!data) {
+
+            const emptyMessage =
+                `<div class="empty">
+                    No updates published yet.
+                </div>`;
+
+            homeList.innerHTML = emptyMessage;
+
+            newsList.innerHTML = emptyMessage;
+
+            sportsList.innerHTML = emptyMessage;
+
+            academicList.innerHTML = emptyMessage;
+
+            eventList.innerHTML = emptyMessage;
 
             return;
-
         }
 
 
-        setNotificationStatus(
-            "Connecting to Firebase..."
-        );
+        const items =
+            Object.keys(data)
+            .map(function(key) {
+
+                return {
+                    id: key,
+                    ...data[key]
+                };
+
+            })
+            .sort(function(a, b) {
+
+                return (b.createdAt || 0)
+                    - (a.createdAt || 0);
+
+            });
 
 
-        const registration =
-            await navigator.serviceWorker.register(
-                "./firebase-messaging-sw.js"
-            );
+        /* HOME */
+
+        homeList.innerHTML =
+            items
+            .slice(0, 5)
+            .map(createNewsCard)
+            .join("");
 
 
-        const token =
-            await getToken(
-                messaging,
-                {
-                    vapidKey: vapidKey,
-                    serviceWorkerRegistration:
-                        registration
-                }
-            );
+        /* ALL NEWS */
+
+        newsList.innerHTML =
+            items
+            .map(createNewsCard)
+            .join("");
 
 
-        if (!token) {
+        /* SPORTS */
 
-            setNotificationStatus(
-                "Firebase could not create a notification token."
-            );
+        const sports =
+            items.filter(function(item) {
 
-            return;
+                return String(item.category || "")
+                    .toLowerCase()
+                    .includes("sport");
 
-        }
-
-
-        /*
-          Save this device token
-          in Realtime Database.
-        */
-
-        await set(
-            ref(
-                db,
-                "notificationTokens/" +
-                encodeURIComponent(token)
-            ),
-            {
-                token: token,
-                createdAt: Date.now()
-            }
-        );
+            });
 
 
-        localStorage.setItem(
-            "deBryneFCMToken",
-            token
-        );
+        sportsList.innerHTML =
+            sports.length
+            ? sports.map(createNewsCard).join("")
+            : `<div class="empty">
+                No sports updates yet.
+              </div>`;
 
 
-        setNotificationStatus(
-            "🔔 Notifications enabled successfully!"
-        );
+        /* ACADEMICS */
+
+        const academics =
+            items.filter(function(item) {
+
+                return String(item.category || "")
+                    .toLowerCase()
+                    .includes("academic");
+
+            });
 
 
-        console.log(
-            "FCM TOKEN:",
-            token
-        );
+        academicList.innerHTML =
+            academics.length
+            ? academics.map(createNewsCard).join("")
+            : `<div class="empty">
+                No academic updates yet.
+              </div>`;
 
-    }
 
-    catch (error) {
+        /* EVENTS */
+
+        const events =
+            items.filter(function(item) {
+
+                const category =
+                    String(item.category || "")
+                    .toLowerCase();
+
+                return category.includes("event");
+
+            });
+
+
+        eventList.innerHTML =
+            events.length
+            ? events.map(createNewsCard).join("")
+            : `<div class="empty">
+                No event updates yet.
+              </div>`;
+
+    },
+
+    function(error) {
 
         console.error(
-            "Notification error:",
+            "Firebase news error:",
             error
         );
 
 
-        setNotificationStatus(
-            "Notification setup failed: " +
-            error.message
-        );
-
-    }
-
-};
+        const message =
+            `<div class="empty">
+                Unable to load updates.
+             </div>`;
 
 
-/* FOREGROUND NOTIFICATIONS */
-
-onMessage(
-    messaging,
-    function(payload) {
-
-        console.log(
-            "Foreground notification:",
-            payload
-        );
+        document.getElementById(
+            "homeNewsList"
+        ).innerHTML = message;
 
 
-        const title =
-            payload.notification?.title ||
-            "DeBryne Update";
-
-
-        const body =
-            payload.notification?.body ||
-            "You have a new update.";
-
-
-        if (
-            Notification.permission ===
-            "granted"
-        ) {
-
-            new Notification(
-                title,
-                {
-                    body: body
-                }
-            );
-
-        }
+        document.getElementById(
+            "newsList"
+        ).innerHTML = message;
 
     }
 );
 
-</script><script>
+</script>
 
-/* PAGE NAVIGATION */
+
+<!-- ===============================
+     PAGE NAVIGATION
+================================ -->
+
+<script>
 
 function openPage(page) {
 
@@ -771,63 +943,188 @@ function openPage(page) {
     ];
 
 
-    pages.forEach(function(item) {
+    pages.forEach(function(name) {
 
-        const element =
+        const pageElement =
             document.getElementById(
-                item + "Page"
+                name + "Page"
             );
 
-        if (element) {
-            element.classList.remove("active");
+        if (pageElement) {
+
+            pageElement.classList.remove(
+                "active"
+            );
+
         }
 
     });
 
 
-    const selected =
+    const selectedPage =
         document.getElementById(
             page + "Page"
         );
 
 
-    if (selected) {
-        selected.classList.add("active");
+    if (selectedPage) {
+
+        selectedPage.classList.add(
+            "active"
+        );
+
     }
 
 
-    const navItems =
-        document.querySelectorAll(
-            ".nav-item"
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            '.nav-item[data-page="' +
+            page +
+            '"]'
+        )
+        .forEach(function(item) {
+
+            item.classList.add(
+                "active"
+            );
+
+        });
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+/* ===============================
+   BOTTOM NAV BUTTONS
+================================ */
+
+document
+    .querySelectorAll(".nav-item")
+    .forEach(function(item) {
+
+        item.addEventListener(
+            "click",
+            function() {
+
+                const page =
+                    item.getAttribute(
+                        "data-page"
+                    );
+
+                openPage(page);
+
+            }
         );
-
-
-    navItems.forEach(function(item) {
-
-        item.classList.remove("active");
 
     });
 
 
-    if (page === "home")
-        navItems[0].classList.add("active");
+/* ===============================
+   HOME SERVICE BUTTONS
+================================ */
 
-    if (page === "news")
-        navItems[1].classList.add("active");
+document
+    .querySelectorAll(".quick-card")
+    .forEach(function(card) {
 
-    if (page === "sports")
-        navItems[2].classList.add("active");
+        card.addEventListener(
+            "click",
+            function() {
 
-    if (page === "alerts")
-        navItems[3].classList.add("active");
+                const page =
+                    card.getAttribute(
+                        "data-page"
+                    );
 
-    if (page === "profile")
-        navItems[4].classList.add("active");
+                openPage(page);
+
+            }
+        );
+
+    });
 
 
-    window.scrollTo(0, 0);
+/* ===============================
+   NOTIFICATION BUTTON
+================================ */
 
-}
+const notificationButton =
+    document.getElementById(
+        "enableNotificationsButton"
+    );
 
-</script></body>
-</html>
+
+const notificationStatus =
+    document.getElementById(
+        "notificationStatus"
+    );
+
+
+notificationButton.addEventListener(
+    "click",
+    async function() {
+
+        if (!("Notification" in window)) {
+
+            notificationStatus.textContent =
+                "This browser does not support notifications.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const permission =
+                await Notification.requestPermission();
+
+
+            if (permission === "granted") {
+
+                notificationStatus.textContent =
+                    "🔔 Notifications enabled successfully!";
+
+            }
+
+            else {
+
+                notificationStatus.textContent =
+                    "Notification permission was not granted.";
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            notificationStatus.textContent =
+                "Unable to enable notifications.";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+            </html>
