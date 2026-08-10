@@ -1,0 +1,685 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>DeBryne Update - Admin</title><style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #172033;
+}
+
+.header {
+    background: #111827;
+    color: white;
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: 22px;
+}
+
+.header p {
+    color: #cbd5e1;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.container {
+    padding: 18px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 19px;
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 9px;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout {
+    background: #dc2626;
+}
+
+#adminPanel {
+    display: none;
+}
+
+.status {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f1f5f9;
+    border-radius: 9px;
+    font-size: 13px;
+    color: #475569;
+}
+
+.success {
+    color: #15803d;
+}
+
+.error {
+    color: #b91c1c;
+}
+
+</style></head><body><header class="header"><h1>
+    DeBryne Update
+</h1>
+
+<p>
+    Private Admin Panel
+</p>
+
+</header><!-- LOGIN --><div id="loginPage"><main class="container">
+
+    <div class="card">
+
+        <h2>
+            🔐 Admin Login
+        </h2>
+
+        <p
+            style="
+            color:#64748b;
+            font-size:14px;
+            line-height:1.5;
+            ">
+
+            Sign in to manage
+            DeBryne Update.
+
+        </p>
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            value="kelvinechem7@gmail.com"
+            autocomplete="email"
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+        >
+
+
+        <button id="loginButton">
+            LOGIN
+        </button>
+
+
+        <div
+            class="status"
+            id="loginStatus">
+
+            Enter your password to continue.
+
+        </div>
+
+    </div>
+
+</main>
+
+</div><!-- ADMIN PANEL --><div id="adminPanel"><main class="container">
+
+
+    <div class="card">
+
+        <h2>
+            👋 Admin Dashboard
+        </h2>
+
+        <p
+            id="userEmail"
+            style="
+            color:#64748b;
+            font-size:13px;
+            ">
+
+        </p>
+
+
+        <button
+            class="logout"
+            id="logoutButton">
+
+            LOG OUT
+
+        </button>
+
+    </div>
+
+
+
+    <!-- PUBLISH NEWS -->
+
+    <div class="card">
+
+        <h2>
+            📰 Publish News
+        </h2>
+
+
+        <label>
+            News Category
+        </label>
+
+        <select id="category">
+
+            <option value="Campus News">
+                Campus News
+            </option>
+
+            <option value="Academics">
+                Academics
+            </option>
+
+            <option value="Announcement">
+                Announcement
+            </option>
+
+            <option value="Sports">
+                Sports
+            </option>
+
+            <option value="Breaking News">
+                Breaking News
+            </option>
+
+        </select>
+
+
+        <label>
+            News Title
+        </label>
+
+        <input
+            type="text"
+            id="title"
+            placeholder="Enter news title"
+        >
+
+
+        <label>
+            News Content
+        </label>
+
+        <textarea
+            id="content"
+            placeholder="Write your news here..."
+        ></textarea>
+
+
+        <button id="publishButton">
+
+            PUBLISH NEWS
+
+        </button>
+
+
+        <div
+            class="status"
+            id="publishStatus">
+
+            Ready to publish.
+
+        </div>
+
+    </div>
+
+
+</main>
+
+</div><script type="module">
+
+
+/* =========================
+   FIREBASE APP
+========================= */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+/* =========================
+   FIREBASE AUTH
+========================= */
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+/* =========================
+   REALTIME DATABASE
+========================= */
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+
+/* =========================
+   YOUR NEW FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
+
+    authDomain:
+    "debryne-update.firebaseapp.com",
+
+    databaseURL:
+    "https://debryne-update-default-rtdb.firebaseio.com",
+
+    projectId:
+    "debryne-update",
+
+    storageBucket:
+    "debryne-update.firebasestorage.app",
+
+    messagingSenderId:
+    "218054789442",
+
+    appId:
+    "1:218054789442:web:f891b9a9cd22e7938260db",
+
+    measurementId:
+    "G-1LNK265F45"
+
+};
+
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
+
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+    auth,
+    function(user) {
+
+        const loginPage =
+            document.getElementById(
+                "loginPage"
+            );
+
+        const adminPanel =
+            document.getElementById(
+                "adminPanel"
+            );
+
+
+        if (user) {
+
+            loginPage.style.display =
+                "none";
+
+            adminPanel.style.display =
+                "block";
+
+
+            document.getElementById(
+                "userEmail"
+            ).textContent =
+                "Signed in as: " +
+                user.email;
+
+        }
+
+        else {
+
+            loginPage.style.display =
+                "block";
+
+            adminPanel.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+    .getElementById("loginButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value;
+
+
+            const status =
+                document
+                .getElementById("loginStatus");
+
+
+            if (!email || !password) {
+
+                status.textContent =
+                    "Please enter your email and password.";
+
+                status.className =
+                    "status error";
+
+                return;
+
+            }
+
+
+            status.textContent =
+                "Signing in...";
+
+            status.className =
+                "status";
+
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+                status.textContent =
+                    "Login successful.";
+
+                status.className =
+                    "status success";
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                status.textContent =
+                    "Login failed: " +
+                    error.message;
+
+                status.className =
+                    "status error";
+
+            }
+
+        }
+    );
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+            await signOut(auth);
+
+        }
+    );
+
+
+
+/* =========================
+   PUBLISH NEWS
+========================= */
+
+document
+    .getElementById("publishButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+
+            const user =
+                auth.currentUser;
+
+
+            const category =
+                document
+                .getElementById("category")
+                .value;
+
+
+            const title =
+                document
+                .getElementById("title")
+                .value
+                .trim();
+
+
+            const content =
+                document
+                .getElementById("content")
+                .value
+                .trim();
+
+
+            const status =
+                document
+                .getElementById("publishStatus");
+
+
+            if (!user) {
+
+                status.textContent =
+                    "Please log in first.";
+
+                status.className =
+                    "status error";
+
+                return;
+
+            }
+
+
+            if (!title || !content) {
+
+                status.textContent =
+                    "Please enter a title and content.";
+
+                status.className =
+                    "status error";
+
+                return;
+
+            }
+
+
+            status.textContent =
+                "Publishing...";
+
+            status.className =
+                "status";
+
+
+            try {
+
+
+                const newsRef =
+                    push(
+                        ref(
+                            db,
+                            "news"
+                        )
+                    );
+
+
+                await set(
+                    newsRef,
+                    {
+
+                        category:
+                            category,
+
+                        title:
+                            title,
+
+                        content:
+                            content,
+
+                        author:
+                            user.email,
+
+                        createdAt:
+                            Date.now()
+
+                    }
+                );
+
+
+                status.textContent =
+                    "✅ News published successfully.";
+
+                status.className =
+                    "status success";
+
+
+                document
+                    .getElementById("title")
+                    .value = "";
+
+
+                document
+                    .getElementById("content")
+                    .value = "";
+
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                status.textContent =
+                    "❌ Publishing failed: " +
+                    error.message;
+
+                status.className =
+                    "status error";
+
+            }
+
+        }
+    );
+
+
+</script></body></html>

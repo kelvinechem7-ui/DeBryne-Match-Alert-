@@ -1,345 +1,640 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update</title><style>
 
-<title>DeBryne Match Alert - Control</title>
-
-<style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080b10;
-  color: white;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #172033;
+    padding-bottom: 80px;
 }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 25px 15px 40px;
-}
-
-.card {
-  background: #151b23;
-  border: 1px solid #29323d;
-  border-radius: 20px;
-  padding: 25px 18px;
+.header {
+    background: #111827;
+    color: white;
+    padding: 20px 18px;
 }
 
 .brand {
-  text-align: center;
-  color: #f5c542;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.login {
-  margin-top: 50px;
+.logo {
+    width: 48px;
+    height: 48px;
+    background: white;
+    color: #111827;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 22px;
-  margin: 10px 0 30px;
+.brand h1 {
+    font-size: 22px;
 }
 
-input {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border: 1px solid #394451;
-  border-radius: 10px;
-  background: #0d1218;
-  color: white;
-  font-size: 15px;
+.brand p {
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-top: 3px;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 12px;
-  background: #f5c542;
-  color: #111;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
+.page {
+    display: none;
 }
 
-button:active {
-  transform: scale(0.98);
+.page.active {
+    display: block;
 }
 
-button.dark {
-  background: #29323d;
-  color: white;
+.container {
+    padding: 18px;
 }
 
-button.red {
-  background: #a83232;
-  color: white;
+.welcome {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
 }
 
-.hidden {
-  display: none;
+.welcome h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
 }
 
-.error {
-  text-align: center;
-  color: #ff7070;
-  font-size: 13px;
-  margin-top: 12px;
+.welcome p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.competition {
-  text-align: center;
-  color: #9da7b3;
-  font-size: 13px;
-  letter-spacing: 1px;
+.section-title {
+    font-size: 18px;
+    margin: 22px 0 11px;
 }
 
-.teams {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
+.quick-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
-.team {
-  width: 35%;
-  font-weight: bold;
-  font-size: 15px;
+.quick-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
 }
 
-.score {
-  font-size: 38px;
-  font-weight: 900;
-  white-space: nowrap;
+.quick-card:active {
+    transform: scale(0.97);
 }
 
-.status {
-  text-align: center;
-  margin: 25px 0 10px;
-  color: #72e28b;
-  font-weight: bold;
+.icon {
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-.timer {
-  text-align: center;
-  font-size: 32px;
-  font-weight: bold;
-  margin: 10px 0 20px;
-  color: #f5c542;
+.quick-card h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
-.details {
-  text-align: center;
-  color: #b8c0c9;
-  line-height: 1.8;
-  font-size: 14px;
+.quick-card p {
+    color: #64748b;
+    font-size: 12px;
 }
 
-.alert {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 12px;
-  background: #202934;
-  text-align: center;
+.news-card {
+    background: white;
+    border-radius: 14px;
+    padding: 17px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
-.control {
-  margin-top: 25px;
-  border-top: 1px solid #29323d;
-  padding-top: 20px;
+.news-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #64748b;
+    margin-bottom: 7px;
 }
 
-.control h2 {
-  text-align: center;
-  font-size: 16px;
+.news-card h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
 }
 
-.connection {
-  text-align: center;
-  font-size: 12px;
-  margin-top: 15px;
-  color: #72e28b;
+.news-card p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
-.logout {
-  background: #29323d;
-  color: white;
+.news-time {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #94a3b8;
 }
-</style>
-</head>
 
-<body>
+.page-title {
+    margin-bottom: 8px;
+}
 
-<div class="container">
+.page-description {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
 
-<!-- LOGIN -->
+.empty {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    color: #64748b;
+    text-align: center;
+}
 
-<div id="loginScreen" class="card login">
+.alert-card {
+    background: white;
+    border-radius: 14px;
+    padding: 17px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
 
-  <div class="brand">
-    DEBRYNE UPDATE
-  </div>
+.alert-card h3 {
+    margin-bottom: 7px;
+}
 
-  <h1>🔐 CONTROL PANEL LOGIN</h1>
+.alert-card p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.5;
+}
 
-  <input
-    type="email"
-    id="email"
-    value="kelvinechem7@gmail.com"
-    placeholder="Email"
-    autocomplete="email"
-  >
+.profile-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
 
-  <input
-    type="password"
-    id="password"
-    placeholder="Password"
-    autocomplete="current-password"
-  >
+.profile-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
 
-  <button id="loginBtn">
-    🔐 LOGIN
-  </button>
+.action-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    margin-top: 15px;
+}
 
-  <div id="loginError" class="error"></div>
+.action-button:active {
+    transform: scale(0.98);
+}
+
+.notification-status {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+
+.nav-item {
+    text-align: center;
+    color: #64748b;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.nav-item span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.nav-item.active {
+    color: #111827;
+    font-weight: bold;
+}
+
+@media (max-width: 350px) {
+
+    .quick-menu {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style></head><body><header class="header"><div class="brand">
+
+    <div class="logo">
+        DU
+    </div>
+
+    <div>
+
+        <h1>DeBryne Update</h1>
+
+        <p>
+            Student News • Education • Sports
+        </p>
+
+    </div>
+
+</div>
+
+</header><!-- HOME --><section id="homePage" class="page active"><main class="container">
+
+    <div class="welcome">
+
+        <h2>
+            Welcome 👋
+        </h2>
+
+        <p>
+            Stay informed with the latest student news,
+            academic information, campus announcements
+            and sports updates.
+        </p>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Student Services
+    </h2>
+
+
+    <div class="quick-menu">
+
+        <div
+            class="quick-card"
+            onclick="openPage('news')">
+
+            <div class="icon">📰</div>
+
+            <h3>Campus News</h3>
+
+            <p>
+                Latest student and campus updates.
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="openPage('academics')">
+
+            <div class="icon">📚</div>
+
+            <h3>Academics</h3>
+
+            <p>
+                Academic information and resources.
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="openPage('events')">
+
+            <div class="icon">📅</div>
+
+            <h3>Events</h3>
+
+            <p>
+                Upcoming student activities.
+            </p>
+
+        </div>
+
+
+        <div
+            class="quick-card"
+            onclick="openPage('sports')">
+
+            <div class="icon">⚽</div>
+
+            <h3>Sports</h3>
+
+            <p>
+                Fixtures, scores and sports news.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Latest Updates
+    </h2>
+
+
+    <div id="homeNews">
+
+        <div class="empty">
+            Loading latest updates...
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- NEWS --><section id="newsPage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        📰 Campus News
+    </h2>
+
+    <p class="page-description">
+
+        Stay updated with the latest campus news,
+        student announcements and important information.
+
+    </p>
+
+
+    <div id="newsList">
+
+        <div class="empty">
+            Loading news...
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- SPORTS --><section id="sportsPage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        ⚽ Sports
+    </h2>
+
+    <p class="page-description">
+
+        Follow fixtures, live scores, results and
+        other student sports activities.
+
+    </p>
+
+
+    <div id="sportsList">
+
+        <div class="empty">
+            Loading sports updates...
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- ACADEMICS --><section id="academicsPage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        📚 Academics
+    </h2>
+
+    <p class="page-description">
+
+        Access important academic information
+        and educational updates.
+
+    </p>
+
+
+    <div id="academicsList">
+
+        <div class="empty">
+            Loading academic updates...
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- EVENTS --><section id="eventsPage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        📅 Events
+    </h2>
+
+    <p class="page-description">
+
+        Find upcoming student events,
+        programmes and activities.
+
+    </p>
+
+
+    <div id="eventsList">
+
+        <div class="empty">
+            Loading events...
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- ALERTS --><section id="alertsPage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        🔔 Alerts
+    </h2>
+
+    <p class="page-description">
+
+        Receive important notifications from
+        DeBryne Update.
+
+    </p>
+
+
+    <div class="alert-card">
+
+        <h3>
+            🔔 Match & News Notifications
+        </h3>
+
+        <p>
+            Enable notifications to receive
+            important DeBryne Update alerts.
+        </p>
+
+
+        <button
+            id="notificationButton"
+            class="action-button">
+
+            🔔 Enable Notifications
+
+        </button>
+
+
+        <div
+            id="notificationStatus"
+            class="notification-status">
+
+            Notifications are currently disabled.
+
+        </div>
+
+    </div>
+
+</main>
+
+</section><!-- PROFILE --><section id="profilePage" class="page"><main class="container">
+
+    <h2 class="page-title">
+        👤 Profile
+    </h2>
+
+    <p class="page-description">
+        Your DeBryne Update profile.
+    </p>
+
+
+    <div class="profile-card">
+
+        <div class="profile-icon">
+            👤
+        </div>
+
+        <h2>
+            Student
+        </h2>
+
+        <p
+            style="
+            color:#64748b;
+            margin-top:8px;
+            ">
+
+            DeBryne Update
+
+        </p>
+
+    </div>
+
+</main>
+
+</section><!-- BOTTOM NAV --><nav class="bottom-nav"><div
+    class="nav-item active"
+    onclick="openPage('home')">
+
+    <span>🏠</span>
+    Home
 
 </div>
 
 
-<!-- CONTROL PANEL -->
+<div
+    class="nav-item"
+    onclick="openPage('news')">
 
-<div id="controlPanel" class="card hidden">
-
-  <div class="brand">
-    DEBRYNE UPDATE
-  </div>
-
-  <div class="competition">
-    COMPUTER SCIENCE
-  </div>
-
-  <h1>
-    🏆 SEND-FORTH MATCH
-  </h1>
-
-  <div class="teams">
-
-    <div class="team">
-      ND1 + HND1
-    </div>
-
-    <div class="score">
-      <span id="homeScore">0</span>
-      —
-      <span id="awayScore">0</span>
-    </div>
-
-    <div class="team">
-      ND2 + HND2
-    </div>
-
-  </div>
-
-  <div class="status" id="status">
-    🟢 MATCH NOT STARTED
-  </div>
-
-  <div class="timer" id="timer">
-    ⏱️ 00:00
-  </div>
-
-  <div class="details">
-    📅 Sunday, August 9, 2026<br>
-    ⏰ 3:00 PM<br>
-    📍 School Multipurpose Field
-  </div>
-
-  <div class="alert" id="alert">
-    🎛️ Control panel ready.
-  </div>
-
-  <div class="control">
-
-    <h2>🎛️ MATCH CONTROL</h2>
-
-    <button id="startBtn">
-      🟢 START MATCH
-    </button>
-
-    <button id="homeGoalBtn">
-      ⚽ GOAL — ND1 + HND1
-    </button>
-
-    <button id="awayGoalBtn">
-      ⚽ GOAL — ND2 + HND2
-    </button>
-
-    <button class="dark" id="halfBtn">
-      ⏸️ HALF TIME
-    </button>
-
-    <button class="dark" id="resumeBtn">
-      ▶️ RESUME MATCH
-    </button>
-
-    <button class="dark" id="fullBtn">
-      🏁 FULL TIME
-    </button>
-
-    <button class="red" id="resetBtn">
-      🔄 RESET MATCH
-    </button>
-
-  </div>
-
-  <div class="connection" id="connection">
-    🟡 CONNECTING TO FIREBASE...
-  </div>
-
-  <button class="logout" id="logoutBtn">
-    🚪 LOG OUT
-  </button>
-
-</div>
+    <span>📰</span>
+    News
 
 </div>
 
 
-<script type="module">
+<div
+    class="nav-item"
+    onclick="openPage('sports')">
 
-/* =========================
-   FIREBASE IMPORTS
-========================= */
+    <span>⚽</span>
+    Sports
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+</div>
+
+
+<div
+    class="nav-item"
+    onclick="openPage('alerts')">
+
+    <span>🔔</span>
+    Alerts
+
+</div>
+
+
+<div
+    class="nav-item"
+    onclick="openPage('profile')">
+
+    <span>👤</span>
+    Profile
+
+</div>
+
+</nav><!-- FIREBASE --><script type="module">
 
 import {
-  getDatabase,
-  ref,
-  set,
-  onValue
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
 
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+    getDatabase,
+    ref,
+    onValue
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+import {
+    getMessaging,
+    getToken,
+    onMessage,
+    isSupported
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
 
 
 /* =========================
@@ -348,29 +643,30 @@ from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyDiv2PjGsMCOpmTqBKzbydWUsFOP36fFtM",
+    apiKey:
+    "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
 
-  authDomain:
-    "debryne-match-alert-a2d51.firebaseapp.com",
+    authDomain:
+    "debryne-update.firebaseapp.com",
 
-  databaseURL:
-    "https://debryne-match-alert-a2d51-default-rtdb.firebaseio.com",
+    databaseURL:
+    "https://debryne-update-default-rtdb.firebaseio.com",
 
-  projectId:
-    "debryne-match-alert-a2d51",
+    projectId:
+    "debryne-update",
 
-  storageBucket:
-    "debryne-match-alert-a2d51.firebasestorage.app",
+    storageBucket:
+    "debryne-update.firebasestorage.app",
 
-  messagingSenderId:
-    "967179671646",
+    messagingSenderId:
+    "218054789442",
 
-  appId:
-    "1:967179671646:web:0cbf28b0f57a146ca2bccf",
+    appId:
+    "1:218054789442:web:f891b9a9cd22e7938260db",
 
-  measurementId:
-    "G-R2TYPHXC37"
+    measurementId:
+    "G-1LNK265F45"
+
 };
 
 
@@ -378,580 +674,616 @@ const firebaseConfig = {
    INITIALIZE FIREBASE
 ========================= */
 
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const database = getDatabase(app);
-
-const matchRef = ref(database, "match");
+const app =
+    initializeApp(firebaseConfig);
 
 
-/* =========================
-   ELEMENTS
-========================= */
-
-const loginScreen =
-  document.getElementById("loginScreen");
-
-const controlPanel =
-  document.getElementById("controlPanel");
-
-const loginError =
-  document.getElementById("loginError");
-
-const connection =
-  document.getElementById("connection");
-
-const homeScoreDisplay =
-  document.getElementById("homeScore");
-
-const awayScoreDisplay =
-  document.getElementById("awayScore");
-
-const statusDisplay =
-  document.getElementById("status");
-
-const timerDisplay =
-  document.getElementById("timer");
-
-const alertDisplay =
-  document.getElementById("alert");
+const db =
+    getDatabase(app);
 
 
 /* =========================
-   LOCAL MATCH STATE
+   REALTIME NEWS
 ========================= */
 
-let homeScore = 0;
+const newsRef =
+    ref(db, "news");
 
-let awayScore = 0;
-
-let timerSeconds = 0;
-
-let timerRunning = false;
-
-let timerInterval = null;
-
-
-/* =========================
-   FORMAT TIMER
-========================= */
-
-function formatTime(seconds) {
-
-  seconds =
-    Math.max(0, Math.floor(seconds));
-
-  const minutes =
-    Math.floor(seconds / 60);
-
-  const secs =
-    seconds % 60;
-
-  return (
-    String(minutes).padStart(2, "0")
-    +
-    ":"
-    +
-    String(secs).padStart(2, "0")
-  );
-}
-
-
-/* =========================
-   UPDATE TIMER
-========================= */
-
-function updateTimer() {
-
-  timerDisplay.textContent =
-    "⏱️ " +
-    formatTime(timerSeconds);
-
-}
-
-
-/* =========================
-   START LOCAL TIMER
-========================= */
-
-function startLocalTimer() {
-
-  if (timerInterval !== null) {
-    return;
-  }
-
-  timerInterval =
-    setInterval(() => {
-
-      if (timerRunning) {
-
-        timerSeconds++;
-
-        updateTimer();
-
-      }
-
-    }, 1000);
-
-}
-
-
-/* =========================
-   STOP LOCAL TIMER
-========================= */
-
-function stopLocalTimer() {
-
-  if (timerInterval !== null) {
-
-    clearInterval(timerInterval);
-
-    timerInterval = null;
-
-  }
-
-}
-
-
-/* =========================
-   SAVE MATCH TO FIREBASE
-========================= */
-
-async function saveMatch() {
-
-  if (!auth.currentUser) {
-
-    connection.textContent =
-      "🔴 NOT LOGGED IN";
-
-    return false;
-  }
-
-  const matchData = {
-
-    homeScore: homeScore,
-
-    awayScore: awayScore,
-
-    timerSeconds: timerSeconds,
-
-    timerRunning: timerRunning,
-
-    status: statusDisplay.textContent,
-
-    alert: alertDisplay.textContent,
-
-    updatedAt: Date.now()
-
-  };
-
-  try {
-
-    await set(matchRef, matchData);
-
-    connection.textContent =
-      "🟢 FIREBASE CONNECTED";
-
-    return true;
-
-  } catch (error) {
-
-    console.error("Firebase write error:", error);
-
-    connection.textContent =
-      "🔴 FIREBASE WRITE ERROR";
-
-    return false;
-
-  }
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-document
-.getElementById("loginBtn")
-.addEventListener("click", async () => {
-
-  const email =
-    document.getElementById("email")
-    .value
-    .trim();
-
-  const password =
-    document.getElementById("password")
-    .value;
-
-  if (!email || !password) {
-
-    loginError.textContent =
-      "❌ Enter your email and password.";
-
-    return;
-  }
-
-  loginError.textContent =
-    "Logging in...";
-
-  try {
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    loginError.textContent = "";
-
-  } catch (error) {
-
-    console.error(error);
-
-    loginError.textContent =
-      "❌ Login failed. Check your email and password.";
-
-  }
-
-});
-
-
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(auth, (user) => {
-
-  if (user) {
-
-    loginScreen.classList.add("hidden");
-
-    controlPanel.classList.remove("hidden");
-
-    connection.textContent =
-      "🟢 AUTHENTICATED — FIREBASE CONNECTED";
-
-    startLocalTimer();
-
-  } else {
-
-    loginScreen.classList.remove("hidden");
-
-    controlPanel.classList.add("hidden");
-
-    stopLocalTimer();
-
-  }
-
-});
-
-
-/* =========================
-   FIREBASE LISTENER
-========================= */
 
 onValue(
-  matchRef,
-  (snapshot) => {
+    newsRef,
+    function(snapshot) {
 
-    const data =
-      snapshot.val();
+        const data =
+            snapshot.val();
 
-    if (!data) {
+        const allNews = [];
 
-      connection.textContent =
-        "🟢 FIREBASE CONNECTED";
 
-      return;
+        if (data) {
+
+            Object.keys(data).forEach(
+                function(id) {
+
+                    allNews.push({
+
+                        id: id,
+
+                        ...data[id]
+
+                    });
+
+                }
+            );
+
+        }
+
+
+        allNews.sort(
+            function(a, b) {
+
+                return (
+                    Number(b.createdAt || 0) -
+                    Number(a.createdAt || 0)
+                );
+
+            }
+        );
+
+
+        renderHome(allNews);
+
+        renderNews(allNews);
+
+        renderCategory(
+            allNews,
+            "Sports",
+            "sportsList"
+        );
+
+        renderCategory(
+            allNews,
+            "Academics",
+            "academicsList"
+        );
+
+        renderCategory(
+            allNews,
+            "Announcement",
+            "eventsList"
+        );
+
+    },
+
+    function(error) {
+
+        console.error(
+            "Database error:",
+            error
+        );
+
     }
-
-    /*
-      Firebase is used to load the
-      current match state.
-
-      It does NOT save every second.
-    */
-
-    homeScore =
-      Number(data.homeScore || 0);
-
-    awayScore =
-      Number(data.awayScore || 0);
-
-    /*
-      Only take Firebase timer when
-      the local timer is stopped.
-    */
-
-    if (!timerRunning) {
-
-      timerSeconds =
-        Number(data.timerSeconds || 0);
-
-      updateTimer();
-
-    }
-
-    homeScoreDisplay.textContent =
-      homeScore;
-
-    awayScoreDisplay.textContent =
-      awayScore;
-
-    statusDisplay.textContent =
-      data.status ||
-      "🟢 MATCH NOT STARTED";
-
-    alertDisplay.textContent =
-      data.alert ||
-      "🎛️ Control panel ready.";
-
-    connection.textContent =
-      "🟢 LIVE DATABASE CONNECTED";
-
-  },
-
-  (error) => {
-
-    console.error(error);
-
-    connection.textContent =
-      "🔴 DATABASE CONNECTION ERROR";
-
-  }
 );
 
 
 /* =========================
-   START MATCH
+   NEWS CARD
 ========================= */
 
-document
-.getElementById("startBtn")
-.addEventListener("click", async () => {
+function createNewsCard(news) {
 
-  homeScore = 0;
+    const card =
+        document.createElement("article");
 
-  awayScore = 0;
+    card.className =
+        "news-card";
 
-  timerSeconds = 0;
 
-  timerRunning = true;
+    const label =
+        document.createElement("div");
 
-  homeScoreDisplay.textContent = "0";
+    label.className =
+        "news-label";
 
-  awayScoreDisplay.textContent = "0";
+    label.textContent =
+        news.category ||
+        "DEBRYNE UPDATE";
 
-  statusDisplay.textContent =
-    "🔴 MATCH LIVE";
 
-  alertDisplay.textContent =
-    "🔔 MATCH STARTED! The game is LIVE.";
+    const title =
+        document.createElement("h3");
 
-  updateTimer();
+    title.textContent =
+        news.title ||
+        "Untitled Update";
 
-  startLocalTimer();
 
-  await saveMatch();
+    const content =
+        document.createElement("p");
 
-});
+    content.textContent =
+        news.content ||
+        "";
+
+
+    card.appendChild(label);
+
+    card.appendChild(title);
+
+    card.appendChild(content);
+
+
+    if (news.createdAt) {
+
+        const time =
+            document.createElement("div");
+
+        time.className =
+            "news-time";
+
+        time.textContent =
+            formatDate(news.createdAt);
+
+        card.appendChild(time);
+
+    }
+
+
+    return card;
+
+}
 
 
 /* =========================
-   HOME GOAL
+   HOME NEWS
 ========================= */
 
-document
-.getElementById("homeGoalBtn")
-.addEventListener("click", async () => {
+function renderHome(news) {
 
-  if (!timerRunning) {
+    const container =
+        document.getElementById(
+            "homeNews"
+        );
 
-    alertDisplay.textContent =
-      "⚠️ Start the match first.";
+    container.innerHTML = "";
 
-    return;
-  }
 
-  homeScore++;
+    if (news.length === 0) {
 
-  homeScoreDisplay.textContent =
-    homeScore;
+        container.innerHTML =
+            '<div class="empty">' +
+            'No updates published yet.' +
+            '</div>';
 
-  alertDisplay.textContent =
-    "⚽ GOAL! ND1 + HND1 have scored!";
+        return;
 
-  /*
-    Firebase receives the new score
-    only once.
-  */
+    }
 
-  await saveMatch();
 
-});
+    news
+        .slice(0, 5)
+        .forEach(function(item) {
+
+            container.appendChild(
+                createNewsCard(item)
+            );
+
+        });
+
+}
 
 
 /* =========================
-   AWAY GOAL
+   NEWS PAGE
 ========================= */
 
-document
-.getElementById("awayGoalBtn")
-.addEventListener("click", async () => {
+function renderNews(news) {
 
-  if (!timerRunning) {
+    const container =
+        document.getElementById(
+            "newsList"
+        );
 
-    alertDisplay.textContent =
-      "⚠️ Start the match first.";
+    container.innerHTML = "";
 
-    return;
-  }
 
-  awayScore++;
+    if (news.length === 0) {
 
-  awayScoreDisplay.textContent =
-    awayScore;
+        container.innerHTML =
+            '<div class="empty">' +
+            'No news published yet.' +
+            '</div>';
 
-  alertDisplay.textContent =
-    "⚽ GOAL! ND2 + HND2 have scored!";
+        return;
 
-  await saveMatch();
+    }
 
-});
+
+    news.forEach(function(item) {
+
+        container.appendChild(
+            createNewsCard(item)
+        );
+
+    });
+
+}
 
 
 /* =========================
-   HALF TIME
+   CATEGORY
 ========================= */
 
-document
-.getElementById("halfBtn")
-.addEventListener("click", async () => {
+function renderCategory(
+    news,
+    category,
+    elementId
+) {
 
-  timerRunning = false;
+    const container =
+        document.getElementById(
+            elementId
+        );
 
-  statusDisplay.textContent =
-    "⏸️ HALF TIME";
+    container.innerHTML = "";
 
-  alertDisplay.textContent =
-    "⏸️ HALF TIME — Score: " +
-    homeScore +
-    " — " +
-    awayScore;
 
-  await saveMatch();
+    const filtered =
+        news.filter(function(item) {
 
-});
+            return item.category === category;
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'No updates available yet.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    filtered.forEach(function(item) {
+
+        container.appendChild(
+            createNewsCard(item)
+        );
+
+    });
+
+}
 
 
 /* =========================
-   RESUME
+   DATE
 ========================= */
 
-document
-.getElementById("resumeBtn")
-.addEventListener("click", async () => {
+function formatDate(timestamp) {
 
-  timerRunning = true;
+    const date =
+        new Date(Number(timestamp));
 
-  statusDisplay.textContent =
-    "🔴 MATCH LIVE";
 
-  alertDisplay.textContent =
-    "▶️ MATCH RESUMED! The game is LIVE.";
+    return date.toLocaleString(
+        [],
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
 
-  startLocalTimer();
-
-  await saveMatch();
-
-});
+}
 
 
 /* =========================
-   FULL TIME
+   PAGE NAVIGATION
 ========================= */
 
-document
-.getElementById("fullBtn")
-.addEventListener("click", async () => {
+window.openPage =
+function(page) {
 
-  timerRunning = false;
+    const pages = [
+        "home",
+        "news",
+        "sports",
+        "alerts",
+        "profile",
+        "academics",
+        "events"
+    ];
 
-  statusDisplay.textContent =
-    "🏁 FULL TIME";
 
-  alertDisplay.textContent =
-    "🏆 FULL TIME — Final Score: " +
-    homeScore +
-    " — " +
-    awayScore;
+    pages.forEach(function(item) {
 
-  await saveMatch();
+        const element =
+            document.getElementById(
+                item + "Page"
+            );
 
-});
+        if (element) {
+
+            element.classList.remove(
+                "active"
+            );
+
+        }
+
+    });
+
+
+    const selected =
+        document.getElementById(
+            page + "Page"
+        );
+
+
+    if (selected) {
+
+        selected.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const navItems =
+        document.querySelectorAll(
+            ".nav-item"
+        );
+
+
+    navItems.forEach(function(item) {
+
+        item.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    const navMap = {
+
+        home: 0,
+        news: 1,
+        sports: 2,
+        alerts: 3,
+        profile: 4
+
+    };
+
+
+    if (
+        navMap[page] !== undefined
+    ) {
+
+        navItems[
+            navMap[page]
+        ].classList.add(
+            "active"
+        );
+
+    }
+
+
+    window.scrollTo(0, 0);
+
+};
 
 
 /* =========================
-   RESET
+   FIREBASE MESSAGING
 ========================= */
 
-document
-.getElementById("resetBtn")
-.addEventListener("click", async () => {
+let messaging = null;
 
-  timerRunning = false;
 
-  timerSeconds = 0;
+async function setupMessaging() {
 
-  homeScore = 0;
+    try {
 
-  awayScore = 0;
+        const supported =
+            await isSupported();
 
-  homeScoreDisplay.textContent =
-    "0";
 
-  awayScoreDisplay.textContent =
-    "0";
+        if (!supported) {
 
-  statusDisplay.textContent =
-    "🟢 MATCH NOT STARTED";
+            console.log(
+                "Firebase Messaging is not supported."
+            );
 
-  alertDisplay.textContent =
-    "🎛️ Control panel ready.";
+            return;
 
-  updateTimer();
+        }
 
-  await saveMatch();
 
-});
+        messaging =
+            getMessaging(app);
+
+
+        onMessage(
+            messaging,
+            function(payload) {
+
+                console.log(
+                    "Notification received:",
+                    payload
+                );
+
+
+                const title =
+                    payload.notification?.title ||
+                    "DeBryne Update";
+
+
+                const body =
+                    payload.notification?.body ||
+                    "You have a new update.";
+
+
+                alert(
+                    "🔔 " +
+                    title +
+                    "\n\n" +
+                    body
+                );
+
+            }
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Messaging setup error:",
+            error
+        );
+
+    }
+
+}
+
+
+setupMessaging();
 
 
 /* =========================
-   LOGOUT
+   ENABLE NOTIFICATIONS
 ========================= */
 
 document
-.getElementById("logoutBtn")
-.addEventListener("click", async () => {
+    .getElementById(
+        "notificationButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
 
-  await signOut(auth);
+            const status =
+                document.getElementById(
+                    "notificationStatus"
+                );
 
-});
+
+            if (
+                !("Notification" in window)
+            ) {
+
+                status.textContent =
+                    "Your browser does not support notifications.";
+
+                return;
+
+            }
 
 
-/* =========================
-   INITIAL
-========================= */
+            try {
 
-updateTimer();
+                const permission =
+                    await Notification.requestPermission();
 
-startLocalTimer();
 
-</script>
+                if (
+                    permission !== "granted"
+                ) {
 
-</body>
-  </html>
+                    status.textContent =
+                        "Notification permission was not granted.";
+
+                    return;
+
+                }
+
+
+                const supported =
+                    await isSupported();
+
+
+                if (!supported) {
+
+                    status.textContent =
+                        "Firebase notifications are not supported on this browser.";
+
+                    return;
+
+                }
+
+
+                if (!messaging) {
+
+                    messaging =
+                        getMessaging(app);
+
+                }
+
+
+                const registration =
+                    await navigator.serviceWorker.register(
+                        "./firebase-messaging-sw.js"
+                    );
+
+
+                const token =
+                    await getToken(
+                        messaging,
+                        {
+                            vapidKey:
+                            "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o",
+
+                            serviceWorkerRegistration:
+                                registration
+                        }
+                    );
+
+
+                if (!token) {
+
+                    status.textContent =
+                        "Notification token could not be created.";
+
+                    return;
+
+                }
+
+
+                console.log(
+                    "FCM TOKEN:",
+                    token
+                );
+
+
+                status.textContent =
+                    "🔔 Notifications enabled successfully!";
+
+
+                alert(
+                    "🔔 Notifications enabled successfully!"
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Notification error:",
+                    error
+                );
+
+
+                status.textContent =
+                    "Notification setup failed: " +
+                    error.code;
+
+            }
+
+        }
+    );
+
+</script></body></html>
