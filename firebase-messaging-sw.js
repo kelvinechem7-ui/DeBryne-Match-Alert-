@@ -6,77 +6,49 @@ importScripts(
   "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging-compat.js"
 );
 
-
 firebase.initializeApp({
-
-  apiKey:
-    "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
-
-  authDomain:
-    "debryne-update.firebaseapp.com",
-
-  databaseURL:
-    "https://debryne-update-default-rtdb.firebaseio.com",
-
-  projectId:
-    "debryne-update",
-
-  storageBucket:
-    "debryne-update.firebasestorage.app",
-
-  messagingSenderId:
-    "218054789442",
-
-  appId:
-    "1:218054789442:web:f891b9a9cd22e7938260db",
-
-  measurementId:
-    "G-1LNK265F45"
-
+  apiKey: "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
+  authDomain: "debryne-update.firebaseapp.com",
+  databaseURL: "https://debryne-update-default-rtdb.firebaseio.com",
+  projectId: "debryne-update",
+  storageBucket: "debryne-update.firebasestorage.app",
+  messagingSenderId: "218054789442",
+  appId: "1:218054789442:web:f891b9a9cd22e7938260db",
+  measurementId: "G-1LNK265F45"
 });
 
+const messaging = firebase.messaging();
 
-const messaging =
-  firebase.messaging();
+messaging.onBackgroundMessage(function(payload) {
 
+  console.log(
+    "Background notification received:",
+    payload
+  );
 
-messaging.onBackgroundMessage(
-  function(payload) {
+  const notificationTitle =
+    payload.notification?.title ||
+    "DeBryne Update";
 
-    console.log(
-      "Background notification received:",
-      payload
-    );
+  const notificationOptions = {
 
+    body:
+      payload.notification?.body ||
+      "You have a new update from DeBryne Update.",
 
-    const notificationTitle =
-      payload.notification?.title ||
-      "DeBryne Update";
+    icon: "./icon-192.png",
 
+    badge: "./icon-192.png",
 
-    const notificationOptions = {
+    data: {
+      url: "./index.html"
+    }
 
-      body:
-        payload.notification?.body ||
-        "You have a new update from DeBryne Update.",
+  };
 
-      icon:
-        "./file_000000008e5c71f4a9d057362a556762.png",
+  self.registration.showNotification(
+    notificationTitle,
+    notificationOptions
+  );
 
-      badge:
-        "./file_000000008e5c71f4a9d057362a556762.png",
-
-      data: {
-        url: "./index.html"
-      }
-
-    };
-
-
-    self.registration.showNotification(
-      notificationTitle,
-      notificationOptions
-    );
-
-  }
-);
+});
