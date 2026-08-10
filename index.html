@@ -9,20 +9,21 @@
 
 <!-- PWA -->
 <link rel="manifest" href="./manifest.json">
+
 <meta name="theme-color" content="#111827">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="DeBryne Update">
 
 <link
-  rel="icon"
-  type="image/png"
-  href="./file_000000008e5c71f4a9d057362a556762.png"
+    rel="icon"
+    type="image/png"
+    href="./icon-192.png"
 >
 
 <link
-  rel="apple-touch-icon"
-  href="./file_000000008e5c71f4a9d057362a556762.png"
+    rel="apple-touch-icon"
+    href="./icon-192.png"
 >
 
 <style>
@@ -321,7 +322,7 @@ body {
         <div class="logo">
 
             <img
-                src="./file_000000008e5c71f4a9d057362a556762.png"
+                src="./icon-192.png"
                 alt="DeBryne Update"
             >
 
@@ -929,7 +930,7 @@ onValue(
 </script>
 
 
-<!-- NAVIGATION SCRIPT -->
+<!-- NAVIGATION + PWA SCRIPT -->
 
 <script>
 
@@ -937,6 +938,8 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
+
+        /* PAGE NAVIGATION */
 
         function openPage(page) {
 
@@ -1033,6 +1036,8 @@ document.addEventListener(
             });
 
 
+        /* NOTIFICATIONS */
+
         const notificationButton =
             document.getElementById(
                 "enableNotificationsButton"
@@ -1079,6 +1084,16 @@ document.addEventListener(
 
                         }
 
+                        else if (
+                            permission ===
+                            "denied"
+                        ) {
+
+                            notificationStatus.textContent =
+                                "Notifications are blocked. Allow them in Chrome settings.";
+
+                        }
+
                         else {
 
                             notificationStatus.textContent =
@@ -1090,7 +1105,10 @@ document.addEventListener(
 
                     catch (error) {
 
-                        console.error(error);
+                        console.error(
+                            "Notification error:",
+                            error
+                        );
 
                         notificationStatus.textContent =
                             "Unable to enable notifications.";
@@ -1103,7 +1121,7 @@ document.addEventListener(
         }
 
 
-        /* REGISTER SERVICE WORKER */
+        /* FIREBASE MESSAGING SERVICE WORKER */
 
         if (
             "serviceWorker" in
@@ -1112,51 +1130,7 @@ document.addEventListener(
 
             navigator.serviceWorker
                 .register(
-                    "./firebase-messaging-sw.js"
-                )
-                .then(function(registration) {
-
-                    console.log(
-                        "Firebase service worker ready:",
-                        registration.scope
-                    );
-
-                })
-                .catch(function(error) {
-
-                    console.error(
-                        "Service worker error:",
-                        error
-                    );
-
-                });
-
-        }
-
-
-        /* REGISTER PWA */
-
-        if ("serviceWorker" in navigator) {
-
-            window.addEventListener(
-                "load",
-                function() {
-
-                    console.log(
-                        "DeBryne Update loaded successfully."
-                    );
-
-                }
-            );
-
-        }
-
-    }
-
-);
-
-</script>
-
-
-</body>
-</html>
+                    "./firebase-messaging-sw.js",
+                    {
+                        scope: "./"
+      
