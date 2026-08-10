@@ -7,37 +7,17 @@
 
 <title>DeBryne Update</title>
 
-<!-- ================= PWA / APP SETTINGS ================= -->
-
 <link rel="manifest" href="./manifest.json">
-
 <meta name="theme-color" content="#111827">
 
 <link
-    rel="apple-touch-icon"
-    href="./file_000000008e5c71f4a9d057362a556762.png"
+  rel="apple-touch-icon"
+  href="./file_000000008e5c71f4a9d057362a556762.png"
 >
 
-<meta
-    name="mobile-web-app-capable"
-    content="yes"
->
-
-<meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
->
-
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
->
-
-<meta
-    name="apple-mobile-web-app-title"
-    content="DeBryne Update"
->
-
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DeBryne Update">
 
 <style>
 
@@ -77,6 +57,13 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 18px;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .brand h1 {
@@ -137,7 +124,7 @@ body {
     padding: 18px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     cursor: pointer;
-    transition: transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .quick-card:active {
@@ -246,7 +233,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .nav-item {
@@ -256,6 +243,7 @@ body {
     cursor: pointer;
     padding: 8px 10px;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-item span {
@@ -322,7 +310,6 @@ body {
 
 </head>
 
-
 <body>
 
 
@@ -331,14 +318,18 @@ body {
     <div class="brand">
 
         <div class="logo">
-            DU
+
+            <img
+                src="./file_000000008e5c71f4a9d057362a556762.png"
+                alt="DeBryne Update"
+                onerror="this.style.display='none'; this.parentElement.textContent='DU';"
+            >
+
         </div>
 
         <div>
 
-            <h1>
-                DeBryne Update
-            </h1>
+            <h1>DeBryne Update</h1>
 
             <p>
                 Student News • Education • Sports
@@ -359,9 +350,7 @@ body {
 
     <div class="welcome">
 
-        <h2>
-            Welcome 👋
-        </h2>
+        <h2>Welcome 👋</h2>
 
         <p>
             Stay informed with the latest student news,
@@ -381,13 +370,9 @@ body {
 
         <div class="quick-card" data-page="news">
 
-            <div class="icon">
-                📰
-            </div>
+            <div class="icon">📰</div>
 
-            <h3>
-                Campus News
-            </h3>
+            <h3>Campus News</h3>
 
             <p>
                 Latest student and campus updates.
@@ -398,13 +383,9 @@ body {
 
         <div class="quick-card" data-page="academics">
 
-            <div class="icon">
-                📚
-            </div>
+            <div class="icon">📚</div>
 
-            <h3>
-                Academics
-            </h3>
+            <h3>Academics</h3>
 
             <p>
                 Academic information and resources.
@@ -415,13 +396,9 @@ body {
 
         <div class="quick-card" data-page="events">
 
-            <div class="icon">
-                📅
-            </div>
+            <div class="icon">📅</div>
 
-            <h3>
-                Events
-            </h3>
+            <h3>Events</h3>
 
             <p>
                 Upcoming student activities.
@@ -432,13 +409,9 @@ body {
 
         <div class="quick-card" data-page="sports">
 
-            <div class="icon">
-                ⚽
-            </div>
+            <div class="icon">⚽</div>
 
-            <h3>
-                Sports
-            </h3>
+            <h3>Sports</h3>
 
             <p>
                 Fixtures, scores and sports news.
@@ -678,10 +651,7 @@ body {
 
     <div class="nav-item active" data-page="home">
 
-        <span>
-            🏠
-        </span>
-
+        <span>🏠</span>
         Home
 
     </div>
@@ -689,10 +659,7 @@ body {
 
     <div class="nav-item" data-page="news">
 
-        <span>
-            📰
-        </span>
-
+        <span>📰</span>
         News
 
     </div>
@@ -700,10 +667,7 @@ body {
 
     <div class="nav-item" data-page="sports">
 
-        <span>
-            ⚽
-        </span>
-
+        <span>⚽</span>
         Sports
 
     </div>
@@ -711,10 +675,7 @@ body {
 
     <div class="nav-item" data-page="alerts">
 
-        <span>
-            🔔
-        </span>
-
+        <span>🔔</span>
         Alerts
 
     </div>
@@ -722,10 +683,7 @@ body {
 
     <div class="nav-item" data-page="profile">
 
-        <span>
-            👤
-        </span>
-
+        <span>👤</span>
         Profile
 
     </div>
@@ -739,16 +697,13 @@ body {
 
 import {
     initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
     getDatabase,
     ref,
     onValue
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -780,17 +735,12 @@ const firebaseConfig = {
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
 
 
-const db =
-    getDatabase(app);
-
-
-/* ===============================
-   SAFE HTML
-================================ */
+/* ================= SAFE HTML ================= */
 
 function escapeHTML(value) {
 
@@ -804,88 +754,66 @@ function escapeHTML(value) {
 }
 
 
-/* ===============================
-   FORMAT DATE
-================================ */
+/* ================= DATE ================= */
 
 function formatDate(timestamp) {
 
     if (!timestamp) {
-
         return "";
-
     }
 
-    const date =
-        new Date(timestamp);
+    const date = new Date(timestamp);
+
+    if (isNaN(date.getTime())) {
+        return "";
+    }
 
     return date.toLocaleString();
 
 }
 
 
-/* ===============================
-   CREATE NEWS CARD
-================================ */
+/* ================= NEWS CARD ================= */
 
 function createNewsCard(item) {
 
     return `
-
         <article class="news-card">
 
             <div class="news-label">
-
                 ${escapeHTML(
                     item.category ||
                     "DEBRYNE UPDATE"
                 )}
-
             </div>
 
-
             <h3>
-
                 ${escapeHTML(
                     item.title ||
                     "Untitled"
                 )}
-
             </h3>
 
-
             <p>
-
                 ${escapeHTML(
                     item.content ||
                     ""
                 )}
-
             </p>
 
-
             <div class="news-time">
-
-                ${formatDate(
-                    item.createdAt
-                )}
-
+                ${formatDate(item.createdAt)}
             </div>
 
         </article>
-
     `;
 
 }
 
 
-/* ===============================
-   LOAD NEWS
-================================ */
+/* ================= LOAD NEWS ================= */
 
-const newsRef =
-    ref(db, "news");
-
+const newsRef = ref(db, "news");
 
 onValue(
 
@@ -893,96 +821,58 @@ onValue(
 
     function(snapshot) {
 
-        const data =
-            snapshot.val();
-
+        const data = snapshot.val();
 
         const homeList =
-            document.getElementById(
-                "homeNewsList"
-            );
-
+            document.getElementById("homeNewsList");
 
         const newsList =
-            document.getElementById(
-                "newsList"
-            );
-
+            document.getElementById("newsList");
 
         const sportsList =
-            document.getElementById(
-                "sportsNewsList"
-            );
-
+            document.getElementById("sportsNewsList");
 
         const academicList =
-            document.getElementById(
-                "academicNewsList"
-            );
-
+            document.getElementById("academicNewsList");
 
         const eventList =
-            document.getElementById(
-                "eventNewsList"
-            );
+            document.getElementById("eventNewsList");
 
 
         if (!data) {
 
             const emptyMessage =
-
                 `<div class="empty">
                     No updates published yet.
-                 </div>`;
+                </div>`;
 
-
-            homeList.innerHTML =
-                emptyMessage;
-
-
-            newsList.innerHTML =
-                emptyMessage;
-
-
-            sportsList.innerHTML =
-                emptyMessage;
-
-
-            academicList.innerHTML =
-                emptyMessage;
-
-
-            eventList.innerHTML =
-                emptyMessage;
-
+            homeList.innerHTML = emptyMessage;
+            newsList.innerHTML = emptyMessage;
+            sportsList.innerHTML = emptyMessage;
+            academicList.innerHTML = emptyMessage;
+            eventList.innerHTML = emptyMessage;
 
             return;
-
         }
 
 
-        const items =
-
-            Object.keys(data)
+        const items = Object.keys(data)
 
             .map(function(key) {
 
                 return {
-
                     id: key,
-
                     ...data[key]
-
                 };
 
             })
 
-
             .sort(function(a, b) {
 
-                return
-                    (b.createdAt || 0) -
-                    (a.createdAt || 0);
+                return (
+                    Number(b.createdAt || 0) -
+                    Number(a.createdAt || 0)
+                );
 
             });
 
@@ -990,17 +880,15 @@ onValue(
         /* HOME */
 
         homeList.innerHTML =
-
             items
                 .slice(0, 5)
                 .map(createNewsCard)
                 .join("");
 
 
-        /* ALL NEWS */
+        /* NEWS */
 
         newsList.innerHTML =
-
             items
                 .map(createNewsCard)
                 .join("");
@@ -1009,7 +897,6 @@ onValue(
         /* SPORTS */
 
         const sports =
-
             items.filter(function(item) {
 
                 return String(
@@ -1022,7 +909,6 @@ onValue(
 
 
         sportsList.innerHTML =
-
             sports.length
 
             ? sports
@@ -1037,7 +923,6 @@ onValue(
         /* ACADEMICS */
 
         const academics =
-
             items.filter(function(item) {
 
                 return String(
@@ -1050,7 +935,6 @@ onValue(
 
 
         academicList.innerHTML =
-
             academics.length
 
             ? academics
@@ -1065,25 +949,18 @@ onValue(
         /* EVENTS */
 
         const events =
-
             items.filter(function(item) {
 
-                const category =
-
-                    String(
-                        item.category || ""
-                    )
-                    .toLowerCase();
-
-
-                return category
-                    .includes("event");
+                return String(
+                    item.category || ""
+                )
+                .toLowerCase()
+                .includes("event");
 
             });
 
 
         eventList.innerHTML =
-
             events.length
 
             ? events
@@ -1096,7 +973,6 @@ onValue(
 
     },
 
-
     function(error) {
 
         console.error(
@@ -1104,18 +980,14 @@ onValue(
             error
         );
 
-
         const message =
-
             `<div class="empty">
                 Unable to load updates.
-             </div>`;
-
+            </div>`;
 
         document.getElementById(
             "homeNewsList"
         ).innerHTML = message;
-
 
         document.getElementById(
             "newsList"
@@ -1128,179 +1000,264 @@ onValue(
 </script>
 
 
-<!-- ===============================
-     PAGE NAVIGATION
-================================ -->
+<!-- ================= NAVIGATION ================= -->
 
 <script>
 
-function openPage(page) {
-
-    const pages = [
-
-        "home",
-        "news",
-        "sports",
-        "alerts",
-        "profile",
-        "academics",
-        "events"
-
-    ];
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
 
-    pages.forEach(function(name) {
+        function openPage(page) {
 
-        const pageElement =
-            document.getElementById(
-                name + "Page"
+            const pages = [
+                "home",
+                "news",
+                "sports",
+                "alerts",
+                "profile",
+                "academics",
+                "events"
+            ];
+
+
+            pages.forEach(function(name) {
+
+                const element =
+                    document.getElementById(
+                        name + "Page"
+                    );
+
+                if (element) {
+
+                    element.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+
+            const selected =
+                document.getElementById(
+                    page + "Page"
+                );
+
+
+            if (selected) {
+
+                selected.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            document
+                .querySelectorAll(".nav-item")
+                .forEach(function(item) {
+
+                    item.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+            document
+                .querySelectorAll(
+                    '.nav-item[data-page="' +
+                    page +
+                    '"]'
+                )
+                .forEach(function(item) {
+
+                    item.classList.add(
+                        "active"
+                    );
+
+                });
+
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+        /* BOTTOM NAV */
+
+        const navItems =
+            document.querySelectorAll(
+                ".nav-item"
             );
 
 
-        if (pageElement) {
+        navItems.forEach(function(item) {
 
-            pageElement.classList.remove(
-                "active"
+            item.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const page =
+                        item.getAttribute(
+                            "data-page"
+                        );
+
+                    if (page) {
+
+                        openPage(page);
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* HOME CARDS */
+
+        const quickCards =
+            document.querySelectorAll(
+                ".quick-card"
+            );
+
+
+        quickCards.forEach(function(card) {
+
+            card.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const page =
+                        card.getAttribute(
+                            "data-page"
+                        );
+
+                    if (page) {
+
+                        openPage(page);
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* NOTIFICATIONS */
+
+        const notificationButton =
+            document.getElementById(
+                "enableNotificationsButton"
+            );
+
+
+        const notificationStatus =
+            document.getElementById(
+                "notificationStatus"
+            );
+
+
+        if (notificationButton) {
+
+            notificationButton.addEventListener(
+                "click",
+                async function() {
+
+                    if (!("Notification" in window)) {
+
+                        notificationStatus.textContent =
+                            "This browser does not support notifications.";
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        const permission =
+                            await Notification.requestPermission();
+
+
+                        if (
+                            permission ===
+                            "granted"
+                        ) {
+
+                            notificationStatus.textContent =
+                                "🔔 Notifications enabled successfully!";
+
+                        }
+
+                        else {
+
+                            notificationStatus.textContent =
+                                "Notification permission was not granted.";
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(error);
+
+                        notificationStatus.textContent =
+                            "Unable to enable notifications.";
+
+                    }
+
+                }
             );
 
         }
 
-    });
 
+        /* SERVICE WORKER */
 
-    const selectedPage =
-        document.getElementById(
-            page + "Page"
-        );
+        if (
+            "serviceWorker" in
+            navigator
+        ) {
 
+            navigator.serviceWorker
+                .register(
+                    "./firebase-messaging-sw.js"
+                )
+                .then(function(registration) {
 
-    if (selectedPage) {
+                    console.log(
+                        "Service worker registered:",
+                        registration.scope
+                    );
 
-        selectedPage.classList.add(
-            "active"
-        );
+                })
+                .catch(function(error) {
+
+                    console.error(
+                        "Service worker registration error:",
+                        error
+                    );
+
+                });
+
+        }
 
     }
 
+);
 
-    document
-        .querySelectorAll(".nav-item")
-        .forEach(function(item) {
-
-            item.classList.remove(
-                "active"
-            );
-
-        });
+</script>
 
 
-    document
-        .querySelectorAll(
-            '.nav-item[data-page="' +
-            page +
-            '"]'
-        )
-        .forEach(function(item) {
-
-            item.classList.add(
-                "active"
-            );
-
-        });
-
-
-    window.scrollTo(
-        0,
-        0
-    );
-
-}
-
-
-/* ===============================
-   BOTTOM NAV
-================================ */
-
-document
-    .querySelectorAll(".nav-item")
-    .forEach(function(item) {
-
-        item.addEventListener(
-            "click",
-            function() {
-
-                const page =
-                    item.getAttribute(
-                        "data-page"
-                    );
-
-
-                openPage(page);
-
-            }
-        );
-
-    });
-
-
-/* ===============================
-   HOME SERVICE BUTTONS
-================================ */
-
-document
-    .querySelectorAll(".quick-card")
-    .forEach(function(card) {
-
-        card.addEventListener(
-            "click",
-            function() {
-
-                const page =
-                    card.getAttribute(
-                        "data-page"
-                    );
-
-
-                openPage(page);
-
-            }
-        );
-
-    });
-
-
-/* ===============================
-   NOTIFICATIONS
-================================ */
-
-const notificationButton =
-    document.getElementById(
-        "enableNotificationsButton"
-    );
-
-
-const notificationStatus =
-    document.getElementById(
-        "notificationStatus"
-    );
-
-
-notificationButton.addEventListener(
-
-    "click",
-
-    async function() {
-
-        if (!("Notification" in window)) {
-
-            notificationStatus.textContent =
-                "This browser does not support notifications.";
-
-            return;
-
-        }
-
-
-        try {
-
-   
+</body>
+</html>
