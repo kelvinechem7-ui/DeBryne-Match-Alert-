@@ -1,2 +1,2 @@
-# DeBryne-Match-Alert-
-To give live match update 
+DeBryne Update 
+to update students on information surrounding the school 
