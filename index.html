@@ -7,7 +7,6 @@
 
 <title>DeBryne Update</title>
 
-<!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 
 <meta name="theme-color" content="#111827">
@@ -18,12 +17,12 @@
 <link
     rel="icon"
     type="image/png"
-    href="./icon-192.png"
+    href="./file_000000008e5c71f4a9d057362a556762.png"
 >
 
 <link
     rel="apple-touch-icon"
-    href="./icon-192.png"
+    href="./file_000000008e5c71f4a9d057362a556762.png"
 >
 
 <style>
@@ -322,7 +321,7 @@ body {
         <div class="logo">
 
             <img
-                src="./icon-192.png"
+                src="./file_000000008e5c71f4a9d057362a556762.png"
                 alt="DeBryne Update"
             >
 
@@ -368,34 +367,63 @@ body {
     <div class="quick-menu">
 
         <div class="quick-card" data-page="news">
+
             <div class="icon">📰</div>
+
             <h3>Campus News</h3>
-            <p>Latest student and campus updates.</p>
+
+            <p>
+                Latest student and campus updates.
+            </p>
+
         </div>
+
 
         <div class="quick-card" data-page="academics">
+
             <div class="icon">📚</div>
+
             <h3>Academics</h3>
-            <p>Academic information and resources.</p>
+
+            <p>
+                Academic information and resources.
+            </p>
+
         </div>
+
 
         <div class="quick-card" data-page="events">
+
             <div class="icon">📅</div>
+
             <h3>Events</h3>
-            <p>Upcoming student activities.</p>
+
+            <p>
+                Upcoming student activities.
+            </p>
+
         </div>
 
+
         <div class="quick-card" data-page="sports">
+
             <div class="icon">⚽</div>
+
             <h3>Sports</h3>
-            <p>Fixtures, scores and sports news.</p>
+
+            <p>
+                Fixtures, scores and sports news.
+            </p>
+
         </div>
 
     </div>
 
+
     <h2 class="section-title">
         Latest Updates
     </h2>
+
 
     <div id="homeNewsList">
 
@@ -425,6 +453,7 @@ body {
         student announcements and important information.
     </p>
 
+
     <div id="newsList">
 
         <div class="loading">
@@ -452,6 +481,7 @@ body {
         Follow fixtures, results and other student
         sports activities.
     </p>
+
 
     <div id="sportsNewsList">
 
@@ -481,6 +511,7 @@ body {
         DeBryne Update.
     </p>
 
+
     <div class="alert-card">
 
         <h3>
@@ -493,6 +524,7 @@ body {
             updates.
         </p>
 
+
         <button
             class="action-button"
             id="enableNotificationsButton">
@@ -500,6 +532,7 @@ body {
             Enable Notifications
 
         </button>
+
 
         <div
             class="notification-status"
@@ -529,6 +562,7 @@ body {
     <p class="page-description">
         Your DeBryne Update profile.
     </p>
+
 
     <div class="profile-card">
 
@@ -566,6 +600,7 @@ body {
         and educational updates.
     </p>
 
+
     <div id="academicNewsList">
 
         <div class="loading">
@@ -594,6 +629,7 @@ body {
         and activities.
     </p>
 
+
     <div id="eventNewsList">
 
         <div class="loading">
@@ -607,33 +643,52 @@ body {
 </section>
 
 
-<!-- NAVIGATION -->
+<!-- BOTTOM NAVIGATION -->
 
 <nav class="bottom-nav">
 
     <div class="nav-item active" data-page="home">
+
         <span>🏠</span>
+
         Home
+
     </div>
+
 
     <div class="nav-item" data-page="news">
+
         <span>📰</span>
+
         News
+
     </div>
+
 
     <div class="nav-item" data-page="sports">
+
         <span>⚽</span>
+
         Sports
+
     </div>
+
 
     <div class="nav-item" data-page="alerts">
+
         <span>🔔</span>
+
         Alerts
+
     </div>
 
+
     <div class="nav-item" data-page="profile">
+
         <span>👤</span>
+
         Profile
+
     </div>
 
 </nav>
@@ -646,6 +701,7 @@ body {
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
 
 import {
     getDatabase,
@@ -683,9 +739,14 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(
+    firebaseConfig
+);
 
-const db = getDatabase(app);
+
+const db = getDatabase(
+    app
+);
 
 
 function escapeHTML(value) {
@@ -703,14 +764,22 @@ function escapeHTML(value) {
 function formatDate(timestamp) {
 
     if (!timestamp) {
+
         return "";
+
     }
 
-    const date = new Date(timestamp);
+
+    const date =
+        new Date(timestamp);
+
 
     if (isNaN(date.getTime())) {
+
         return "";
+
     }
+
 
     return date.toLocaleString();
 
@@ -720,40 +789,59 @@ function formatDate(timestamp) {
 function createNewsCard(item) {
 
     return `
+
         <article class="news-card">
 
             <div class="news-label">
+
                 ${escapeHTML(
                     item.category ||
                     "DEBRYNE UPDATE"
                 )}
+
             </div>
 
+
             <h3>
+
                 ${escapeHTML(
                     item.title ||
                     "Untitled"
                 )}
+
             </h3>
 
+
             <p>
+
                 ${escapeHTML(
                     item.content ||
                     ""
                 )}
+
             </p>
 
+
             <div class="news-time">
-                ${formatDate(item.createdAt)}
+
+                ${formatDate(
+                    item.createdAt
+                )}
+
             </div>
 
         </article>
+
     `;
 
 }
 
 
-const newsRef = ref(db, "news");
+const newsRef =
+    ref(
+        db,
+        "news"
+    );
 
 
 onValue(
@@ -762,27 +850,33 @@ onValue(
 
     function(snapshot) {
 
-        const data = snapshot.val();
+        const data =
+            snapshot.val();
+
 
         const homeList =
             document.getElementById(
                 "homeNewsList"
             );
 
+
         const newsList =
             document.getElementById(
                 "newsList"
             );
+
 
         const sportsList =
             document.getElementById(
                 "sportsNewsList"
             );
 
+
         const academicList =
             document.getElementById(
                 "academicNewsList"
             );
+
 
         const eventList =
             document.getElementById(
@@ -792,57 +886,99 @@ onValue(
 
         if (!data) {
 
-            const empty =
-                `<div class="empty">
-                    No updates published yet.
-                </div>`;
+            const empty = `
 
-            homeList.innerHTML = empty;
-            newsList.innerHTML = empty;
-            sportsList.innerHTML = empty;
-            academicList.innerHTML = empty;
-            eventList.innerHTML = empty;
+                <div class="empty">
+
+                    No updates published yet.
+
+                </div>
+
+            `;
+
+
+            homeList.innerHTML =
+                empty;
+
+            newsList.innerHTML =
+                empty;
+
+            sportsList.innerHTML =
+                empty;
+
+            academicList.innerHTML =
+                empty;
+
+            eventList.innerHTML =
+                empty;
 
             return;
 
         }
 
 
-        const items = Object.keys(data)
+        const items =
 
-            .map(function(key) {
+            Object.keys(data)
 
-                return {
-                    id: key,
-                    ...data[key]
-                };
+                .map(function(key) {
 
-            })
+                    return {
 
-            .sort(function(a, b) {
+                        id: key,
 
-                return (
-                    Number(b.createdAt || 0) -
-                    Number(a.createdAt || 0)
-                );
+                        ...data[key]
 
-            });
+                    };
+
+                })
+
+
+                .sort(function(a, b) {
+
+                    return (
+
+                        Number(
+                            b.createdAt || 0
+                        )
+
+                        -
+
+                        Number(
+                            a.createdAt || 0
+                        )
+
+                    );
+
+                });
 
 
         homeList.innerHTML =
+
             items
+
                 .slice(0, 5)
-                .map(createNewsCard)
+
+                .map(
+                    createNewsCard
+                )
+
                 .join("");
 
 
         newsList.innerHTML =
+
             items
-                .map(createNewsCard)
+
+                .map(
+                    createNewsCard
+                )
+
                 .join("");
 
 
         const sports =
+
             items.filter(function(item) {
 
                 return String(
@@ -855,14 +991,26 @@ onValue(
 
 
         sportsList.innerHTML =
+
             sports.length
-            ? sports.map(createNewsCard).join("")
-            : `<div class="empty">
-                No sports updates yet.
-              </div>`;
+
+                ? sports
+                    .map(createNewsCard)
+                    .join("")
+
+                : `
+
+                    <div class="empty">
+
+                        No sports updates yet.
+
+                    </div>
+
+                `;
 
 
         const academics =
+
             items.filter(function(item) {
 
                 return String(
@@ -875,14 +1023,26 @@ onValue(
 
 
         academicList.innerHTML =
+
             academics.length
-            ? academics.map(createNewsCard).join("")
-            : `<div class="empty">
-                No academic updates yet.
-              </div>`;
+
+                ? academics
+                    .map(createNewsCard)
+                    .join("")
+
+                : `
+
+                    <div class="empty">
+
+                        No academic updates yet.
+
+                    </div>
+
+                `;
 
 
         const events =
+
             items.filter(function(item) {
 
                 return String(
@@ -895,13 +1055,25 @@ onValue(
 
 
         eventList.innerHTML =
+
             events.length
-            ? events.map(createNewsCard).join("")
-            : `<div class="empty">
-                No event updates yet.
-              </div>`;
+
+                ? events
+                    .map(createNewsCard)
+                    .join("")
+
+                : `
+
+                    <div class="empty">
+
+                        No event updates yet.
+
+                    </div>
+
+                `;
 
     },
+
 
     function(error) {
 
@@ -910,17 +1082,40 @@ onValue(
             error
         );
 
-        const message =
-            `<div class="empty">
+
+        const message = `
+
+            <div class="empty">
+
                 Unable to load updates.
-            </div>`;
+
+            </div>
+
+        `;
+
 
         document.getElementById(
             "homeNewsList"
         ).innerHTML = message;
 
+
         document.getElementById(
             "newsList"
+        ).innerHTML = message;
+
+
+        document.getElementById(
+            "sportsNewsList"
+        ).innerHTML = message;
+
+
+        document.getElementById(
+            "academicNewsList"
+        ).innerHTML = message;
+
+
+        document.getElementById(
+            "eventNewsList"
         ).innerHTML = message;
 
     }
@@ -930,7 +1125,7 @@ onValue(
 </script>
 
 
-<!-- NAVIGATION + PWA SCRIPT -->
+<!-- NAVIGATION / NOTIFICATION / PWA -->
 
 <script>
 
@@ -938,8 +1133,6 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-
-        /* PAGE NAVIGATION */
 
         function openPage(page) {
 
@@ -995,10 +1188,15 @@ document.addEventListener(
                 });
 
 
-            window.scrollTo(0, 0);
+            window.scrollTo(
+                0,
+                0
+            );
 
         }
 
+
+        /* BOTTOM NAVIGATION */
 
         document
             .querySelectorAll(".nav-item")
@@ -1017,6 +1215,8 @@ document.addEventListener(
 
             });
 
+
+        /* HOME QUICK CARDS */
 
         document
             .querySelectorAll(".quick-card")
@@ -1071,7 +1271,8 @@ document.addEventListener(
                     try {
 
                         const permission =
-                            await Notification.requestPermission();
+                            await Notification
+                                .requestPermission();
 
 
                         if (
@@ -1110,6 +1311,7 @@ document.addEventListener(
                             error
                         );
 
+
                         notificationStatus.textContent =
                             "Unable to enable notifications.";
 
@@ -1121,7 +1323,7 @@ document.addEventListener(
         }
 
 
-        /* FIREBASE MESSAGING SERVICE WORKER */
+        /* SERVICE WORKER */
 
         if (
             "serviceWorker" in
@@ -1133,4 +1335,85 @@ document.addEventListener(
                     "./firebase-messaging-sw.js",
                     {
                         scope: "./"
-      
+                    }
+                )
+
+                .then(function(registration) {
+
+                    console.log(
+                        "Firebase service worker ready:",
+                        registration.scope
+                    );
+
+                })
+
+                .catch(function(error) {
+
+                    console.error(
+                        "Service worker error:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+        /* PWA SERVICE WORKER FALLBACK */
+
+        if (
+            "serviceWorker" in
+            navigator
+        ) {
+
+            navigator.serviceWorker
+                .getRegistrations()
+                .then(function(registrations) {
+
+                    console.log(
+                        "Service workers:",
+                        registrations.length
+                    );
+
+                });
+
+        }
+
+
+        /* CHECK NOTIFICATION STATUS */
+
+        if (
+            "Notification" in
+            window
+        ) {
+
+            if (
+                Notification.permission ===
+                "granted"
+            ) {
+
+                notificationStatus.textContent =
+                    "🔔 Notifications are already enabled.";
+
+            }
+
+            else if (
+                Notification.permission ===
+                "denied"
+            ) {
+
+                notificationStatus.textContent =
+                    "Notifications are blocked in browser settings.";
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
