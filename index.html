@@ -9,28 +9,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
-<title>DeBryne Update</title>
-
-<link
-rel="manifest"
-href="./manifest.json"
->
-
-<meta
-name="theme-color"
-content="#111827"
->
-
-<link
-rel="icon"
-type="image/png"
-href="./file_000000008e5c71f4a9d057362a556762.png"
->
-
-<link
-rel="apple-touch-icon"
-href="./file_000000008e5c71f4a9d057362a556762.png"
->
+<title>DeBryne Update - Admin</title>
 
 <style>
 
@@ -42,205 +21,112 @@ padding:0;
 
 body{
 font-family:Arial,sans-serif;
-background:#f5f7fa;
+background:#f4f6f8;
 color:#172033;
-padding-bottom:80px;
 }
 
-header{
+.header{
 background:#111827;
 color:white;
-padding:18px;
+padding:20px;
 }
 
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.logo{
-width:48px;
-height:48px;
-background:white;
-border-radius:12px;
-overflow:hidden;
-}
-
-.logo img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.brand h1{
+.header h1{
 font-size:22px;
 }
 
-.brand p{
-font-size:12px;
+.header p{
 color:#cbd5e1;
-margin-top:3px;
-}
-
-.page{
-display:none;
-}
-
-.page.active{
-display:block;
+font-size:13px;
+margin-top:5px;
 }
 
 .container{
 padding:18px;
+max-width:700px;
+margin:auto;
 }
 
-.welcome,
-.card,
-.news{
+.card{
 background:white;
+padding:20px;
 border-radius:15px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 3px 10px rgba(0,0,0,.05);
+margin-bottom:18px;
+box-shadow:0 3px 12px rgba(0,0,0,0.06);
 }
 
-.welcome h2{
-margin-bottom:7px;
+.card h2{
+margin-bottom:15px;
+font-size:19px;
 }
 
-.muted{
-color:#64748b;
-font-size:14px;
-line-height:1.5;
-}
-
-.title{
-margin:20px 0 12px;
-}
-
-.quick{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.quick .card{
-cursor:pointer;
-}
-
-.icon{
-font-size:26px;
-margin-bottom:8px;
-}
-
-.news h3{
-margin:7px 0;
-}
-
-.label{
-font-size:11px;
-font-weight:bold;
-color:#64748b;
-text-transform:uppercase;
-}
-
-.time{
-font-size:11px;
-color:#94a3b8;
-margin-top:9px;
-}
-
-.bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:70px;
-background:white;
-border-top:1px solid #ddd;
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:9999;
-}
-
-.nav{
-text-align:center;
-font-size:11px;
-color:#64748b;
-cursor:pointer;
-padding:8px 10px;
-}
-
-.nav span{
+label{
 display:block;
-font-size:20px;
-margin-bottom:3px;
+margin-top:14px;
+margin-bottom:6px;
+font-size:13px;
+font-weight:bold;
 }
 
-.nav.active{
-color:#111827;
-font-weight:bold;
+input,
+textarea,
+select{
+width:100%;
+padding:13px;
+border:1px solid #d1d5db;
+border-radius:9px;
+font-family:Arial,sans-serif;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:140px;
+resize:vertical;
 }
 
 button{
 width:100%;
 padding:14px;
-border:0;
-border-radius:10px;
+margin-top:18px;
+border:none;
+border-radius:9px;
 background:#111827;
 color:white;
 font-size:15px;
-margin-top:15px;
+font-weight:bold;
 cursor:pointer;
 }
 
 button:disabled{
-opacity:.65;
+opacity:.6;
 cursor:not-allowed;
 }
 
+.logout{
+background:#dc2626;
+}
+
+#adminPanel{
+display:none;
+}
+
 .status{
-margin-top:12px;
+margin-top:15px;
+padding:12px;
 background:#f1f5f9;
-padding:10px;
-border-radius:8px;
-font-size:12px;
+border-radius:9px;
+font-size:13px;
 color:#475569;
 line-height:1.5;
-word-break:break-word;
 }
 
-.tokenBox{
-display:none;
-margin-top:12px;
-background:#ecfdf5;
-padding:12px;
-border-radius:8px;
-font-size:11px;
-color:#065f46;
-word-break:break-all;
+.success{
+color:#15803d;
 }
 
-.empty{
-text-align:center;
-padding:25px;
-background:white;
-border-radius:14px;
-color:#64748b;
-}
-
-@media(max-width:350px){
-
-.quick{
-grid-template-columns:1fr;
-}
-
-.nav{
-padding:8px 5px;
-}
-
+.error{
+color:#b91c1c;
 }
 
 </style>
@@ -249,288 +135,80 @@ padding:8px 5px;
 
 <body>
 
-<header>
+<header class="header">
 
-<div class="brand">
-
-<div class="logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
-alt="DeBryne Update"
->
-
-</div>
-
-<div>
-
-<h1>DeBryne Update</h1>
+<h1>
+DeBryne Update
+</h1>
 
 <p>
-Student News • Education • Sports
+Private Admin Panel
 </p>
-
-</div>
-
-</div>
 
 </header>
 
 
-<!-- HOME -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<section
-id="homePage"
-class="page active"
->
-
-<main class="container">
-
-<div class="welcome">
-
-<h2>
-Welcome 👋
-</h2>
-
-<p class="muted">
-Stay informed with the latest student news,
-academic information, campus announcements
-and sports updates.
-</p>
-
-</div>
-
-
-<h2 class="title">
-Student Services
-</h2>
-
-
-<div class="quick">
-
-<div
-class="card"
-data-page="news"
->
-
-<div class="icon">
-📰
-</div>
-
-<h3>
-Campus News
-</h3>
-
-<p class="muted">
-Latest student and campus updates.
-</p>
-
-</div>
-
-
-<div
-class="card"
-data-page="academics"
->
-
-<div class="icon">
-📚
-</div>
-
-<h3>
-Academics
-</h3>
-
-<p class="muted">
-Academic information and resources.
-</p>
-
-</div>
-
-
-<div
-class="card"
-data-page="events"
->
-
-<div class="icon">
-📅
-</div>
-
-<h3>
-Events
-</h3>
-
-<p class="muted">
-Upcoming student activities.
-</p>
-
-</div>
-
-
-<div
-class="card"
-data-page="sports"
->
-
-<div class="icon">
-⚽
-</div>
-
-<h3>
-Sports
-</h3>
-
-<p class="muted">
-Fixtures, scores and sports news.
-</p>
-
-</div>
-
-</div>
-
-
-<h2 class="title">
-Latest Updates
-</h2>
-
-
-<div id="homeNews">
-
-<div class="empty">
-Loading updates...
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- NEWS -->
-
-<section
-id="newsPage"
-class="page"
->
+<div id="loginPage">
 
 <main class="container">
 
-<h2>
-📰 Campus News
-</h2>
-
-<p class="muted">
-Latest campus news and announcements.
-</p>
-
-<div
-id="newsList"
-style="margin-top:18px"
->
-
-<div class="empty">
-Loading news...
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- SPORTS -->
-
-<section
-id="sportsPage"
-class="page"
->
-
-<main class="container">
+<div class="card">
 
 <h2>
-⚽ Sports
+🔐 Admin Login
 </h2>
 
-<p class="muted">
-Fixtures, results and sports updates.
-</p>
+<p
+style="
+color:#64748b;
+font-size:14px;
+line-height:1.5;
+">
 
-<div
-id="sportsList"
-style="margin-top:18px"
->
+Sign in to manage
+DeBryne Update.
 
-<div class="empty">
-Loading sports...
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- ALERTS -->
-
-<section
-id="alertsPage"
-class="page"
->
-
-<main class="container">
-
-<h2>
-🔔 Alerts
-</h2>
-
-<p class="muted">
-Receive important DeBryne Update notifications.
 </p>
 
 
-<div
-class="card"
-style="margin-top:18px"
+<label>
+Email
+</label>
+
+<input
+type="email"
+id="email"
+value="kelvinechem7@gmail.com"
+autocomplete="email"
 >
 
-<h3>
-🔔 Notifications
-</h3>
 
-<p class="muted">
-Enable notifications to receive breaking news,
-academic announcements and important updates.
-</p>
+<label>
+Password
+</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+autocomplete="current-password"
+>
 
 
-<button id="notifyBtn">
-Enable Notifications
+<button id="loginButton">
+LOGIN
 </button>
 
 
 <div
 class="status"
-id="notifyStatus"
->
-Checking notification status...
-</div>
+id="loginStatus">
 
-
-<div
-class="tokenBox"
-id="tokenBox"
->
-
-FCM token:
-
-<div
-id="tokenText"
-style="margin-top:7px"
-></div>
+Enter your password to continue.
 
 </div>
 
@@ -538,213 +216,186 @@ style="margin-top:7px"
 
 </main>
 
-</section>
+</div>
 
 
-<!-- PROFILE -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
-<section
-id="profilePage"
-class="page"
->
+<div id="adminPanel">
 
 <main class="container">
 
+
+<div class="card">
+
 <h2>
-👤 Profile
+👋 Admin Dashboard
 </h2>
 
-<p class="muted">
-Your DeBryne Update profile.
+<p
+id="userEmail"
+style="
+color:#64748b;
+font-size:13px;
+">
+
 </p>
 
 
-<div
-class="card"
-style="text-align:center;margin-top:18px"
->
+<button
+class="logout"
+id="logoutButton">
 
-<div style="font-size:55px">
-👤
+LOG OUT
+
+</button>
+
 </div>
+
+
+<!-- =========================
+     PUBLISH NEWS
+========================= -->
+
+<div class="card">
 
 <h2>
-Student
+📰 Publish News
 </h2>
 
-<p class="muted">
-DeBryne Update
-</p>
 
-</div>
+<label>
+News Category
+</label>
 
-</main>
+<select id="category">
 
-</section>
+<option value="Campus News">
+Campus News
+</option>
 
+<option value="Academics">
+Academics
+</option>
 
-<!-- ACADEMICS -->
+<option value="Announcement">
+Announcement
+</option>
 
-<section
-id="academicsPage"
-class="page"
->
-
-<main class="container">
-
-<h2>
-📚 Academics
-</h2>
-
-<p class="muted">
-Academic information and educational updates.
-</p>
-
-
-<div
-id="academicList"
-style="margin-top:18px"
->
-
-<div class="empty">
-Loading academic updates...
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- EVENTS -->
-
-<section
-id="eventsPage"
-class="page"
->
-
-<main class="container">
-
-<h2>
-📅 Events
-</h2>
-
-<p class="muted">
-Upcoming student events and activities.
-</p>
-
-
-<div
-id="eventList"
-style="margin-top:18px"
->
-
-<div class="empty">
-Loading events...
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- BOTTOM NAVIGATION -->
-
-<nav class="bottom">
-
-<div
-class="nav active"
-data-page="home"
->
-
-<span>🏠</span>
-
-Home
-
-</div>
-
-
-<div
-class="nav"
-data-page="news"
->
-
-<span>📰</span>
-
-News
-
-</div>
-
-
-<div
-class="nav"
-data-page="sports"
->
-
-<span>⚽</span>
-
+<option value="Sports">
 Sports
+</option>
 
-</div>
+<option value="Breaking News">
+Breaking News
+</option>
+
+</select>
+
+
+<label>
+News Title
+</label>
+
+<input
+type="text"
+id="title"
+placeholder="Enter news title"
+>
+
+
+<label>
+News Content
+</label>
+
+<textarea
+id="content"
+placeholder="Write your news here..."
+></textarea>
+
+
+<button id="publishButton">
+
+PUBLISH NEWS
+
+</button>
 
 
 <div
-class="nav"
-data-page="alerts"
->
+class="status"
+id="publishStatus">
 
-<span>🔔</span>
+Ready to publish.
 
-Alerts
+</div>
 
 </div>
 
 
-<div
-class="nav"
-data-page="profile"
->
-
-<span>👤</span>
-
-Profile
+</main>
 
 </div>
 
-</nav>
-
-
-<!-- FIREBASE -->
 
 <script type="module">
 
+
+/* =========================================
+   FIREBASE APP
+========================================= */
+
 import {
+
 initializeApp
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
+/* =========================================
+   FIREBASE AUTH
+========================================= */
+
 import {
+
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+/* =========================================
+   FIREBASE DATABASE
+========================================= */
+
+import {
+
 getDatabase,
 ref,
-onValue
+push,
+set
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
-import {
-getMessaging,
-getToken,
-onMessage
-}
-from
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
-
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
 
@@ -775,464 +426,235 @@ measurementId:
 };
 
 
-const VAPID_KEY =
-"BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
-
+/* =========================================
+   GOOGLE APPS SCRIPT PUSH SERVER
+========================================= */
 
 const PUSH_SERVER_URL =
+
 "https://script.google.com/macros/s/AKfycbzRFFTaLRFk3PPvbYPTH7FH9QAzYXbx-S16o5b-4FYcOhwSKSXKHlKdsAQENImEpmlqyA/exec";
 
 
+/* =========================================
+   INITIALIZE FIREBASE
+========================================= */
+
 const app =
 initializeApp(firebaseConfig);
+
+
+const auth =
+getAuth(app);
 
 
 const db =
 getDatabase(app);
 
 
-const messaging =
-getMessaging(app);
+/* =========================================
+   AUTH STATE
+========================================= */
+
+onAuthStateChanged(
+
+auth,
+
+function(user){
+
+const loginPage =
+document.getElementById(
+"loginPage"
+);
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
+const adminPanel =
+document.getElementById(
+"adminPanel"
+);
 
-function escapeHTML(value){
 
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+if(user){
+
+loginPage.style.display =
+"none";
+
+adminPanel.style.display =
+"block";
+
+
+document.getElementById(
+"userEmail"
+).textContent =
+
+"Signed in as: " +
+user.email;
 
 }
 
+else{
 
-/* =========================
-   NEWS CARD
-========================= */
+loginPage.style.display =
+"block";
 
-function createNewsCard(item){
-
-return `
-
-<article class="news">
-
-<div class="label">
-
-${escapeHTML(
-item.category ||
-"DEBRYNE UPDATE"
-)}
-
-</div>
-
-<h3>
-
-${escapeHTML(
-item.title ||
-"Untitled"
-)}
-
-</h3>
-
-<p class="muted">
-
-${escapeHTML(
-item.content ||
-""
-)}
-
-</p>
-
-<div class="time">
-
-${
-item.createdAt
-?
-new Date(item.createdAt).toLocaleString()
-:
-""
-}
-
-</div>
-
-</article>
-
-`;
+adminPanel.style.display =
+"none";
 
 }
 
+}
 
-/* =========================
-   LOAD NEWS
-========================= */
-
-onValue(
-
-ref(db,"news"),
-
-snapshot => {
-
-const data =
-snapshot.val();
-
-
-const home =
-document.getElementById(
-"homeNews"
 );
 
 
-const news =
+/* =========================================
+   LOGIN
+========================================= */
+
+document
+.getElementById("loginButton")
+.addEventListener(
+
+"click",
+
+async function(){
+
+const email =
+document
+.getElementById("email")
+.value
+.trim();
+
+
+const password =
+document
+.getElementById("password")
+.value;
+
+
+const status =
 document.getElementById(
-"newsList"
+"loginStatus"
 );
 
 
-const sports =
-document.getElementById(
-"sportsList"
-);
+if(!email || !password){
 
+status.textContent =
+"Please enter your email and password.";
 
-const academic =
-document.getElementById(
-"academicList"
-);
-
-
-const events =
-document.getElementById(
-"eventList"
-);
-
-
-if(!data){
-
-const message =
-'<div class="empty">No updates published yet.</div>';
-
-home.innerHTML =
-message;
-
-news.innerHTML =
-message;
-
-sports.innerHTML =
-message;
-
-academic.innerHTML =
-message;
-
-events.innerHTML =
-message;
+status.className =
+"status error";
 
 return;
 
 }
 
 
-const items =
+status.textContent =
+"Signing in...";
 
-Object.keys(data)
+status.className =
+"status";
 
-.map(key => ({
 
-id:key,
-...data[key]
+try{
 
-}))
+await signInWithEmailAndPassword(
 
-.sort((a,b) =>
+auth,
 
-Number(b.createdAt || 0)
--
-Number(a.createdAt || 0)
+email,
+
+password
 
 );
 
 
-home.innerHTML =
+status.textContent =
+"Login successful.";
 
-items
-.slice(0,5)
-.map(createNewsCard)
-.join("");
+status.className =
+"status success";
+
+}
+
+catch(error){
+
+console.error(error);
+
+status.textContent =
+"Login failed: " +
+error.message;
+
+status.className =
+"status error";
+
+}
+
+}
+
+);
 
 
-news.innerHTML =
+/* =========================================
+   LOGOUT
+========================================= */
 
-items
-.map(createNewsCard)
-.join("");
+document
+.getElementById("logoutButton")
+.addEventListener(
+
+"click",
+
+async function(){
+
+await signOut(auth);
+
+}
+
+);
 
 
-function filterNews(
-word,
-element,
-message
+/* =========================================
+   SEND PUSH NOTIFICATION
+========================================= */
+
+async function sendPushNotification(
+title,
+content
 ){
 
-const result =
-
-items.filter(item =>
-
-String(
-item.category || ""
-)
-.toLowerCase()
-.includes(word)
-
-);
-
-
-document.getElementById(
-element
-).innerHTML =
-
-result.length
-
-?
-
-result
-.map(createNewsCard)
-.join("")
-
-:
-
-`<div class="empty">
-${message}
-</div>`;
-
-}
-
-
-filterNews(
-"sport",
-"sportsList",
-"No sports updates yet."
-);
-
-
-filterNews(
-"academic",
-"academicList",
-"No academic updates yet."
-);
-
-
-filterNews(
-"event",
-"eventList",
-"No event updates yet."
-);
-
-},
-
-error => {
-
-console.error(
-"Firebase error:",
-error
-);
-
-const message =
-'<div class="empty">Unable to load updates.</div>';
-
-document
-.querySelectorAll(
-"#homeNews,#newsList,#sportsList,#academicList,#eventList"
-)
-.forEach(element => {
-
-element.innerHTML =
-message;
-
-});
-
-}
-
-);
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function openPage(page){
-
-document
-.querySelectorAll(".page")
-.forEach(pageElement => {
-
-pageElement.classList.remove(
-"active"
-);
-
-});
-
-
-const target =
-document.getElementById(
-page + "Page"
-);
-
-
-if(target){
-
-target.classList.add(
-"active"
-);
-
-}
-
-
-document
-.querySelectorAll(".nav")
-.forEach(nav => {
-
-nav.classList.remove(
-"active"
-);
-
-});
-
-
-document
-.querySelectorAll(
-'[data-page="' + page + '"]'
-)
-.forEach(nav => {
-
-nav.classList.add(
-"active"
-);
-
-});
-
-
-window.scrollTo(
-0,
-0
-);
-
-}
-
-
-document
-.querySelectorAll(
-"[data-page]"
-)
-.forEach(element => {
-
-element.addEventListener(
-"click",
-function(){
-
-openPage(
-element.dataset.page
-);
-
-}
-);
-
-});
-
-
-/* =========================
-   NOTIFICATION ELEMENTS
-========================= */
-
-const notifyBtn =
-document.getElementById(
-"notifyBtn"
-);
-
-
-const notifyStatus =
-document.getElementById(
-"notifyStatus"
-);
-
-
-const tokenBox =
-document.getElementById(
-"tokenBox"
-);
-
-
-const tokenText =
-document.getElementById(
-"tokenText"
-);
-
-
-/* =========================
-   FIREBASE MESSAGING WORKER
-========================= */
-
-let messagingRegistration = null;
-
-
-async function prepareMessagingServiceWorker(){
-
-if(!("serviceWorker" in navigator)){
-
-throw new Error(
-"Service workers are not supported."
-);
-
-}
-
-
-messagingRegistration =
-await navigator.serviceWorker.register(
-"./firebase-messaging-sw.js",
-{
-scope:"./"
-}
-);
-
-
-await navigator.serviceWorker.ready;
-
-
-return messagingRegistration;
-
-}
-
-
-/* =========================
-   REGISTER TOKEN WITH
-   PUSH SERVER
-========================= */
-
-async function registerTokenWithPushServer(token){
-
 const response =
+
 await fetch(
+
 PUSH_SERVER_URL,
+
 {
 
 method:"POST",
 
 headers:{
-"Content-Type":"text/plain;charset=utf-8"
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
 },
 
-body:JSON.stringify({
+body:
 
-action:"register",
+JSON.stringify({
 
-token:token
+action:"send",
+
+title:title,
+
+body:content
 
 })
 
 }
+
 );
 
 
@@ -1246,412 +668,292 @@ text
 );
 
 
-return text;
-
-}
-
-
-/* =========================
-   GET FCM TOKEN
-========================= */
-
-async function getFCMToken(){
-
-const registration =
-messagingRegistration ||
-await prepareMessagingServiceWorker();
-
-
-const currentToken =
-await getToken(
-messaging,
-{
-
-vapidKey:
-VAPID_KEY,
-
-serviceWorkerRegistration:
-registration
-
-}
-);
-
-
-if(!currentToken){
-
-throw new Error(
-"Firebase did not return an FCM token."
-);
-
-}
-
-
-/* Show token for testing */
-
-tokenText.textContent =
-currentToken;
-
-tokenBox.style.display =
-"block";
-
-
-console.log(
-"FCM TOKEN:",
-currentToken
-);
-
-
-/* Register token with our push server */
-
-await registerTokenWithPushServer(
-currentToken
-);
-
-
-return currentToken;
-
-}
-
-
-/* =========================
-   NOTIFICATION STATUS
-========================= */
-
-function setNotificationStatus(){
-
-if(!window.isSecureContext){
-
-notifyStatus.textContent =
-"❌ Notifications require HTTPS.";
-
-return;
-
-}
-
-
-if(!("Notification" in window)){
-
-notifyStatus.textContent =
-"❌ This browser does not support notifications.";
-
-return;
-
-}
-
-
-if(
-Notification.permission ===
-"granted"
-){
-
-notifyStatus.textContent =
-"🔄 Notifications are allowed. Connecting to Firebase...";
-
-notifyBtn.textContent =
-"Notifications Enabled";
-
-return;
-
-}
-
-
-if(
-Notification.permission ===
-"denied"
-){
-
-notifyStatus.textContent =
-"❌ Notifications are blocked. Allow notifications for this site in Chrome settings.";
-
-notifyBtn.textContent =
-"Notifications Blocked";
-
-return;
-
-}
-
-
-notifyStatus.textContent =
-"Notifications are not enabled yet.";
-
-notifyBtn.textContent =
-"Enable Notifications";
-
-}
-
-
-/* =========================
-   ENABLE NOTIFICATIONS
-========================= */
-
-async function enableNotifications(){
-
-if(!window.isSecureContext){
-
-notifyStatus.textContent =
-"❌ Open the HTTPS GitHub Pages website.";
-
-return;
-
-}
-
-
-if(!("Notification" in window)){
-
-notifyStatus.textContent =
-"❌ This browser does not support notifications.";
-
-return;
-
-}
-
-
-if(
-Notification.permission ===
-"denied"
-){
-
-notifyStatus.textContent =
-"❌ Notifications are blocked. Open Chrome → Site settings → Notifications and allow them.";
-
-return;
-
-}
-
-
-notifyBtn.disabled =
-true;
-
-notifyBtn.textContent =
-"Enabling...";
+let result;
 
 
 try{
 
-const permission =
-await Notification.requestPermission();
-
-
-if(permission !== "granted"){
-
-notifyStatus.textContent =
-"❌ Notification permission was not granted.";
-
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Enable Notifications";
-
-return;
-
-}
-
-
-await prepareMessagingServiceWorker();
-
-
-const token =
-await getFCMToken();
-
-
-if(token){
-
-notifyStatus.textContent =
-"✅ Push notifications are enabled and your device is registered.";
-
-notifyBtn.textContent =
-"Notifications Enabled";
-
-notifyBtn.disabled =
-true;
-
-}
+result =
+JSON.parse(text);
 
 }
 
 catch(error){
 
-console.error(
-"FCM notification error:",
-error
+throw new Error(
+"Push server returned an invalid response: " +
+text
 );
-
-notifyStatus.textContent =
-"❌ Push setup failed: " +
-(error.message || error);
-
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Try Again";
-
-}
 
 }
 
 
-/* =========================
-   FOREGROUND MESSAGE
-========================= */
+if(!result.success){
 
-onMessage(
-messaging,
-payload => {
-
-console.log(
-"Foreground FCM message:",
-payload
+throw new Error(
+result.error ||
+"Notification sending failed."
 );
+
+}
+
+
+return result;
+
+}
+
+
+/* =========================================
+   PUBLISH NEWS
+========================================= */
+
+document
+.getElementById("publishButton")
+.addEventListener(
+
+"click",
+
+async function(){
+
+const user =
+auth.currentUser;
+
+
+const category =
+document
+.getElementById("category")
+.value;
 
 
 const title =
-payload.notification?.title ||
-"DeBryne Update";
+document
+.getElementById("title")
+.value
+.trim();
 
 
-const body =
-payload.notification?.body ||
-"You have a new update from DeBryne Update.";
+const content =
+document
+.getElementById("content")
+.value
+.trim();
 
 
-if(
-Notification.permission ===
-"granted"
-){
-
-new Notification(
-title,
-{
-
-body:
-body,
-
-icon:
-"./file_000000008e5c71f4a9d057362a556762.png",
-
-badge:
-"./file_000000008e5c71f4a9d057362a556762.png"
-
-}
-);
-
-}
-
-}
+const status =
+document.getElementById(
+"publishStatus"
 );
 
 
-/* =========================
-   BUTTON
-========================= */
-
-notifyBtn.addEventListener(
-"click",
-enableNotifications
+const publishButton =
+document.getElementById(
+"publishButton"
 );
 
 
-/* =========================
-   STARTUP
-========================= */
+if(!user){
 
-window.addEventListener(
-"load",
-async function(){
+status.textContent =
+"Please log in first.";
 
-setNotificationStatus();
+status.className =
+"status error";
 
-
-/*
-  Register normal PWA service worker.
-*/
-
-if(
-"serviceWorker"
-in navigator
-){
-
-try{
-
-await navigator.serviceWorker.register(
-"./service-worker.js",
-{
-scope:"./"
-}
-);
-
-console.log(
-"DeBryne PWA service worker registered."
-);
-
-}
-
-catch(error){
-
-console.error(
-"PWA service worker error:",
-error
-);
-
-}
+return;
 
 }
 
 
-/*
-  If notifications were already
-  allowed, register the FCM token.
-*/
+if(!title || !content){
 
-if(
-"Notification"
-in window &&
-Notification.permission ===
-"granted"
-){
+status.textContent =
+"Please enter a title and content.";
 
-try{
+status.className =
+"status error";
 
-await prepareMessagingServiceWorker();
+return;
 
-await getFCMToken();
+}
 
-notifyStatus.textContent =
-"✅ Push notifications are enabled and your device is registered.";
 
-notifyBtn.textContent =
-"Notifications Enabled";
-
-notifyBtn.disabled =
+publishButton.disabled =
 true;
 
+publishButton.textContent =
+"PUBLISHING...";
+
+
+status.textContent =
+"Publishing news...";
+
+status.className =
+"status";
+
+
+try{
+
+
+/* =====================================
+   SAVE NEWS TO FIREBASE
+===================================== */
+
+const newsRef =
+
+push(
+
+ref(
+
+db,
+
+"news"
+
+)
+
+);
+
+
+await set(
+
+newsRef,
+
+{
+
+category:
+category,
+
+title:
+title,
+
+content:
+content,
+
+author:
+user.email,
+
+createdAt:
+Date.now()
+
+}
+
+);
+
+
+/* =====================================
+   SEND PUSH NOTIFICATION
+===================================== */
+
+status.textContent =
+"News published. Sending notification...";
+
+
+let pushResult;
+
+
+try{
+
+pushResult =
+
+await sendPushNotification(
+
+title,
+
+content
+
+);
+
+}
+
+catch(notificationError){
+
+console.error(
+"Notification error:",
+notificationError
+);
+
+
+/*
+   The news was already published,
+   so don't report the whole operation
+   as a publishing failure.
+*/
+
+status.textContent =
+
+"✅ News published successfully, but notification could not be sent: " +
+
+notificationError.message;
+
+status.className =
+"status error";
+
+publishButton.disabled =
+false;
+
+publishButton.textContent =
+"PUBLISH NEWS";
+
+return;
+
+}
+
+
+/* =====================================
+   SUCCESS
+===================================== */
+
+status.textContent =
+
+"✅ News published and notification sent to " +
+
+(
+pushResult.successful || 0
+) +
+
+" registered device(s).";
+
+status.className =
+"status success";
+
+
+document
+.getElementById("title")
+.value = "";
+
+
+document
+.getElementById("content")
+.value = "";
+
+
 }
 
 catch(error){
 
-console.error(
-"Existing FCM setup error:",
-error
+console.error(error);
+
+
+status.textContent =
+"❌ Publishing failed: " +
+error.message;
+
+status.className =
+"status error";
+
+}
+
+
+publishButton.disabled =
+false;
+
+publishButton.textContent =
+"PUBLISH NEWS";
+
+}
+
 );
-
-notifyStatus.textContent =
-"⚠️ Notifications are allowed, but Firebase setup needs attention.";
-
-}
-
-}
-
-else{
-
-setNotificationStatus();
-
-}
-
-});
 
 </script>
 
 </body>
-</html>
+   </html>
