@@ -1,6 +1,10 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>DeBryne Update Admin</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+
+«»
+
+<title>DeBryne Update Admin</title><style>
 
 body{
 font-family:Arial,sans-serif;
@@ -18,7 +22,8 @@ border-radius:15px;
 box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-input,button{
+input,
+button{
 width:100%;
 padding:14px;
 margin-top:12px;
@@ -35,6 +40,11 @@ border:0;
 background:#111827;
 color:white;
 font-weight:bold;
+cursor:pointer;
+}
+
+button:disabled{
+opacity:.6;
 }
 
 #admin{
@@ -65,15 +75,92 @@ placeholder="Password"
 
 «»
 
-<button id="loginBtn" type="button">
+<button
+id="loginBtn"
+type="button"
+
+«»
+
 LOGIN
-</button><div id="loginStatus" class="status">
+</button>
+
+<div
+id="loginStatus"
+class="status"
+>
 Enter your password.
-</div></div><div class="card" id="admin"><h2>👋 Admin Dashboard</h2><p id="account"></p><button id="logoutBtn" type="button">
+</div></div><div
+class="card"
+id="admin"
+><h2>👋 Admin Dashboard</h2><p id="account"></p><button
+id="logoutBtn"
+type="button"
+
+«»
+
 LOG OUT
-</button><div class="status">
+</button>
+
+<div class="status">
 Firebase login is working.
-</div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
+</div></div><script
+src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js">
+</script><script
+src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js">
+</script><script>
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+const loginBtn =
+document.getElementById(
+"loginBtn"
+);
+
+const logoutBtn =
+document.getElementById(
+"logoutBtn"
+);
+
+const loginStatus =
+document.getElementById(
+"loginStatus"
+);
+
+const loginPage =
+document.getElementById(
+"login"
+);
+
+const adminPage =
+document.getElementById(
+"admin"
+);
+
+const account =
+document.getElementById(
+"account"
+);
+
+
+if(
+!loginBtn ||
+!logoutBtn ||
+!loginStatus ||
+!loginPage ||
+!adminPage ||
+!account
+){
+
+console.error(
+"Admin HTML elements are missing."
+);
+
+return;
+
+}
+
 
 const firebaseConfig = {
 
@@ -103,7 +190,11 @@ appId:
 
 try{
 
-firebase.initializeApp(firebaseConfig);
+
+firebase.initializeApp(
+firebaseConfig
+);
+
 
 const auth =
 firebase.auth();
@@ -111,9 +202,8 @@ firebase.auth();
 
 /* LOGIN */
 
-document.getElementById(
-"loginBtn"
-).onclick = async function(){
+loginBtn.onclick =
+async function(){
 
 const email =
 document.getElementById(
@@ -125,15 +215,13 @@ document.getElementById(
 "password"
 ).value;
 
-const status =
-document.getElementById(
-"loginStatus"
-);
 
+if(
+!email ||
+!password
+){
 
-if(!email || !password){
-
-status.textContent =
+loginStatus.textContent =
 "Please enter your email and password.";
 
 return;
@@ -141,8 +229,14 @@ return;
 }
 
 
-status.textContent =
-"Logging in...";
+loginBtn.disabled =
+true;
+
+loginBtn.textContent =
+"LOGGING IN...";
+
+loginStatus.textContent =
+"Signing in...";
 
 
 try{
@@ -152,7 +246,7 @@ email,
 password
 );
 
-status.textContent =
+loginStatus.textContent =
 "✅ Login successful.";
 
 }
@@ -161,9 +255,15 @@ catch(error){
 
 console.error(error);
 
-status.textContent =
+loginStatus.textContent =
 "❌ Login failed: " +
 error.message;
+
+loginBtn.disabled =
+false;
+
+loginBtn.textContent =
+"LOGIN";
 
 }
 
@@ -172,23 +272,18 @@ error.message;
 
 /* AUTH STATE */
 
-auth.onAuthStateChanged(function(user){
+auth.onAuthStateChanged(
+function(user){
 
 if(user){
 
-document.getElementById(
-"login"
-).style.display =
+loginPage.style.display =
 "none";
 
-document.getElementById(
-"admin"
-).style.display =
+adminPage.style.display =
 "block";
 
-document.getElementById(
-"account"
-).textContent =
+account.textContent =
 "Signed in as: " +
 user.email;
 
@@ -196,42 +291,59 @@ user.email;
 
 else{
 
-document.getElementById(
-"login"
-).style.display =
+loginPage.style.display =
 "block";
 
-document.getElementById(
-"admin"
-).style.display =
+adminPage.style.display =
 "none";
+
+loginBtn.disabled =
+false;
+
+loginBtn.textContent =
+"LOGIN";
 
 }
 
-});
+}
+);
 
 
 /* LOGOUT */
 
-document.getElementById(
-"logoutBtn"
-).onclick = function(){
+logoutBtn.onclick =
+async function(){
 
-auth.signOut();
+try{
 
-};
+await auth.signOut();
 
 }
 
 catch(error){
 
-document.getElementById(
-"loginStatus"
-).textContent =
+console.error(error);
+
+}
+
+};
+
+
+}
+
+catch(error){
+
+console.error(
+"Firebase initialization error:",
+error
+);
+
+loginStatus.textContent =
 "Firebase error: " +
 error.message;
 
 }
 
-</script></body>
-</html>
+});
+
+</script></body></html>
