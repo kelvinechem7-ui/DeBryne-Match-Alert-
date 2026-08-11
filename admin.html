@@ -1,261 +1,135 @@
 <!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update Admin</title><style>
-
-*{
-box-sizing:border-box;
-}
-
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeBryne Update Admin</title><style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f4f6f8;
-color:#172033;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    color:#172033;
 }
 
 header{
-background:#111827;
-color:white;
-padding:20px;
+    background:#111827;
+    color:white;
+    padding:20px;
 }
 
 .container{
-max-width:600px;
-margin:auto;
-padding:20px;
+    max-width:600px;
+    margin:auto;
+    padding:20px;
 }
 
 .card{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-box-shadow:0 3px 12px rgba(0,0,0,.07);
-}
-
-input,button{
-width:100%;
-padding:14px;
-margin-top:12px;
-border-radius:9px;
-font-size:15px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
 input{
-border:1px solid #d1d5db;
+    display:block;
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    font-size:15px;
 }
 
 button{
-border:0;
-background:#111827;
-color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:disabled{
-opacity:.6;
-}
-
-#dashboard{
-display:none;
+    display:block;
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:0;
+    border-radius:9px;
+    background:#111827;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
 }
 
 .status{
-margin-top:15px;
-padding:12px;
-border-radius:9px;
-background:#f1f5f9;
-font-size:13px;
-word-break:break-word;
+    margin-top:15px;
+    padding:12px;
+    background:#f1f5f9;
+    border-radius:9px;
+    font-size:14px;
 }
 
-</style></head><body><header><h2>DeBryne Update</h2><p>Private Admin Panel</p></header><div class="container"><div class="card" id="loginBox"><h2>🔐 Admin Login</h2><input
-id="email"
-type="email"
-value="kelvinechem7@gmail.com"
-placeholder="Email"
-
-«»
-
-<input
-id="password"
-type="password"
-placeholder="Enter password"
-
-«»
-
-<button
-id="loginButton"
-type="button"
-onclick="loginAdmin()"
-
-«»
-
-LOGIN
-</button>
-
-<div id="loginStatus" class="status">
-Enter your password to continue.
-</div></div><div class="card" id="dashboard"><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
-type="button"
-onclick="logoutAdmin()"
-
-«»
-
-LOG OUT
-</button>
-
-<div class="status">
-✅ Firebase login is working.
-</div></div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
-
-authDomain:
-"debryne-update.firebaseapp.com",
-
-databaseURL:
-"https://debryne-update-default-rtdb.firebaseio.com",
-
-projectId:
-"debryne-update",
-
-storageBucket:
-"debryne-update.firebasestorage.app",
-
-messagingSenderId:
-"218054789442",
-
-appId:
-"1:218054789442:web:f891b9a9cd22e7938260db"
-
-};
-
-
-let auth = null;
-
-
-/* INITIALIZE FIREBASE */
-
-try{
-
-firebase.initializeApp(firebaseConfig);
-
-auth = firebase.auth();
-
-auth.onAuthStateChanged(function(user){
-
-if(user){
-
-document.getElementById("loginBox").style.display="none";
-
-document.getElementById("dashboard").style.display="block";
-
-document.getElementById("userEmail").textContent=
-"Signed in as: " + user.email;
-
-}else{
-
-document.getElementById("loginBox").style.display="block";
-
-document.getElementById("dashboard").style.display="none";
-
+#dashboard{
+    display:none;
 }
+</style></head><body><header>
+    <h2>DeBryne Update</h2>
+    <p>Private Admin Panel</p>
+</header><div class="container"><div class="card" id="loginBox">
+
+    <h2>🔐 Admin Login</h2>
+
+    <input
+        type="email"
+        id="email"
+        value="kelvinechem7@gmail.com"
+        placeholder="Email"
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+    >
+
+    <button
+        type="button"
+        id="loginButton"
+    >
+        LOGIN
+    </button>
+
+    <div class="status" id="loginStatus">
+        Enter your password to continue.
+    </div>
+
+</div>
+
+<div class="card" id="dashboard">
+
+    <h2>👋 Admin Dashboard</h2>
+
+    <p id="userEmail"></p>
+
+    <button
+        type="button"
+        id="logoutButton"
+    >
+        LOG OUT
+    </button>
+
+</div>
+
+</div><script>
+document.getElementById("loginButton").addEventListener("click",function(){
+
+    var password =
+        document.getElementById("password").value;
+
+    var status =
+        document.getElementById("loginStatus");
+
+    if(!password){
+        status.textContent =
+            "Please enter your password.";
+        return;
+    }
+
+    status.textContent =
+        "Button is working. Firebase login will be added next.";
 
 });
-
-}
-catch(error){
-
-document.getElementById("loginStatus").textContent=
-"Firebase error: " + error.message;
-
-}
-
-
-/* LOGIN */
-
-async function loginAdmin(){
-
-const email =
-document.getElementById("email").value.trim();
-
-const password =
-document.getElementById("password").value;
-
-const status =
-document.getElementById("loginStatus");
-
-const button =
-document.getElementById("loginButton");
-
-
-if(!email || !password){
-
-status.textContent=
-"Please enter your email and password.";
-
-return;
-
-}
-
-if(!auth){
-
-status.textContent=
-"Firebase is not initialized.";
-
-return;
-
-}
-
-button.disabled=true;
-
-button.textContent="LOGGING IN...";
-
-status.textContent="Signing in...";
-
-
-try{
-
-await auth.signInWithEmailAndPassword(
-email,
-password
-);
-
-status.textContent="✅ Login successful.";
-
-}
-catch(error){
-
-console.error(error);
-
-status.textContent=
-"❌ Login failed: " + error.message;
-
-button.disabled=false;
-
-button.textContent="LOGIN";
-
-}
-
-}
-
-
-/* LOGOUT */
-
-async function logoutAdmin(){
-
-if(auth){
-
-await auth.signOut();
-
-}
-
-}
-
 </script></body>
 </html>
