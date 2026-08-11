@@ -1,6 +1,4 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update Admin</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update Admin</title><style>
 
 *{
 box-sizing:border-box;
@@ -151,9 +149,9 @@ class="logout"
 LOG OUT
 </button>
 
-</div><div class="card"><h2>📰 Publish News</h2><label>Category</label>
-
-<select id="category"><option value="Campus News">
+</div><!-- PUBLISH NEWS --><div class="card"><h2>📰 Publish News</h2><label>
+Category
+</label><select id="category"><option value="Campus News">
 Campus News
 </option><option value="Academics">
 Academics
@@ -163,18 +161,18 @@ Announcement
 Sports
 </option><option value="Breaking News">
 Breaking News
-</option></select><label>News Title</label>
-
-<input
+</option></select><label>
+News Title
+</label><input
 id="title"
 type="text"
 placeholder="Enter news title"
 
 «»
 
-<label>News Content</label>
-
-<textarea
+<label>
+News Content
+</label><textarea
 id="content"
 placeholder="Write your news here..."
 ></textarea><button
@@ -219,15 +217,18 @@ appId:
 };
 
 
-let auth;
-let database;
+let auth = null;
+
+let database = null;
 
 
-/* START FIREBASE */
+/* FIREBASE INITIALIZATION */
 
 try{
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(
+firebaseConfig
+);
 
 auth =
 firebase.auth();
@@ -235,21 +236,29 @@ firebase.auth();
 database =
 firebase.database();
 
+console.log(
+"Firebase initialized successfully."
+);
+
 }
 
 catch(error){
 
-console.error(error);
+console.error(
+"Firebase initialization error:",
+error
+);
 
+const status =
 document.getElementById(
 "loginStatus"
-).textContent =
+);
+
+status.textContent =
 "Firebase error: " +
 error.message;
 
-document.getElementById(
-"loginStatus"
-).className =
+status.className =
 "status error";
 
 }
@@ -282,10 +291,36 @@ document.getElementById(
 );
 
 
+if(!email){
+
+status.textContent =
+"Please enter your email.";
+
+status.className =
+"status error";
+
+return;
+
+}
+
+
 if(!password){
 
 status.textContent =
 "Please enter your password.";
+
+status.className =
+"status error";
+
+return;
+
+}
+
+
+if(!auth){
+
+status.textContent =
+"Firebase is not available.";
 
 status.className =
 "status error";
@@ -315,6 +350,12 @@ email,
 password
 );
 
+status.textContent =
+"✅ Login successful.";
+
+status.className =
+"status success";
+
 }
 
 catch(error){
@@ -341,6 +382,8 @@ button.textContent =
 
 /* AUTH STATE */
 
+if(auth){
+
 auth.onAuthStateChanged(
 function(user){
 
@@ -354,6 +397,11 @@ document.getElementById(
 "adminPanel"
 );
 
+const userEmail =
+document.getElementById(
+"userEmail"
+);
+
 
 if(user){
 
@@ -363,9 +411,7 @@ loginPage.style.display =
 adminPanel.style.display =
 "block";
 
-document.getElementById(
-"userEmail"
-).textContent =
+userEmail.textContent =
 "Signed in as: " +
 user.email;
 
@@ -383,6 +429,8 @@ adminPanel.style.display =
 
 });
 
+}
+
 
 /* LOGOUT */
 
@@ -390,7 +438,21 @@ document.getElementById(
 "logoutButton"
 ).onclick = async function(){
 
+if(auth){
+
+try{
+
 await auth.signOut();
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
 
 };
 
@@ -402,7 +464,7 @@ document.getElementById(
 ).onclick = async function(){
 
 const user =
-auth.currentUser;
+auth ? auth.currentUser : null;
 
 const category =
 document.getElementById(
@@ -456,6 +518,19 @@ return;
 }
 
 
+if(!database){
+
+status.textContent =
+"Firebase Database is not available.";
+
+status.className =
+"status error";
+
+return;
+
+}
+
+
 button.disabled =
 true;
 
@@ -472,19 +547,27 @@ status.className =
 try{
 
 const news =
-database.ref("news").push();
+database
+.ref("news")
+.push();
+
 
 await news.set({
 
-category:category,
+category:
+category,
 
-title:title,
+title:
+title,
 
-content:content,
+content:
+content,
 
-author:user.email,
+author:
+user.email,
 
-createdAt:Date.now()
+createdAt:
+Date.now()
 
 });
 
@@ -495,9 +578,11 @@ status.textContent =
 status.className =
 "status success";
 
+
 document.getElementById(
 "title"
 ).value = "";
+
 
 document.getElementById(
 "content"
@@ -527,5 +612,4 @@ button.textContent =
 
 };
 
-</script></body>
-                                                                 </html>
+</script></body></html>
