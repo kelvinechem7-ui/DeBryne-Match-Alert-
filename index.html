@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,10 +10,13 @@
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#111827">
 
-<link rel="icon" type="image/png"
+<link
+rel="icon"
+type="image/png"
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
-<link rel="apple-touch-icon"
+<link
+rel="apple-touch-icon"
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
 <style>
@@ -154,6 +158,8 @@ font-size:11px;
 color:#64748b;
 cursor:pointer;
 padding:8px 10px;
+user-select:none;
+-webkit-tap-highlight-color:transparent;
 }
 
 .nav span{
@@ -214,6 +220,16 @@ border-radius:14px;
 color:#64748b;
 }
 
+.errorBox{
+background:#fee2e2;
+color:#991b1b;
+padding:12px;
+border-radius:10px;
+font-size:12px;
+margin-top:15px;
+display:none;
+}
+
 @media(max-width:350px){
 
 .quick{
@@ -227,6 +243,7 @@ padding:8px 5px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -239,8 +256,7 @@ padding:8px 5px;
 
 <img
 src="./file_000000008e5c71f4a9d057362a556762.png"
-alt="DeBryne Update"
->
+alt="DeBryne Update">
 
 </div>
 
@@ -419,7 +435,7 @@ Enable notifications to receive breaking news,
 academic announcements and important updates.
 </p>
 
-<button id="notifyBtn">
+<button id="notifyBtn" type="button">
 Enable Notifications
 </button>
 
@@ -431,12 +447,11 @@ Checking notification status...
 
 FCM token:
 
-<div
-id="tokenText"
-style="margin-top:7px">
-</div>
+<div id="tokenText" style="margin-top:7px"></div>
 
 </div>
+
+<div id="pushError" class="errorBox"></div>
 
 </div>
 
@@ -532,35 +547,130 @@ Loading events...
 
 <nav class="bottom">
 
-<div class="nav active" data-page="home">
+<div class="nav active" data-page="home" role="button">
+
 <span>🏠</span>
 Home
+
 </div>
 
-<div class="nav" data-page="news">
+<div class="nav" data-page="news" role="button">
+
 <span>📰</span>
 News
+
 </div>
 
-<div class="nav" data-page="sports">
+<div class="nav" data-page="sports" role="button">
+
 <span>⚽</span>
 Sports
+
 </div>
 
-<div class="nav" data-page="alerts">
+<div class="nav" data-page="alerts" role="button">
+
 <span>🔔</span>
 Alerts
+
 </div>
 
-<div class="nav" data-page="profile">
+<div class="nav" data-page="profile" role="button">
+
 <span>👤</span>
 Profile
+
 </div>
 
 </nav>
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- ==================================================
+     IMPORTANT:
+     NAVIGATION IS OUTSIDE FIREBASE MODULE
+     ================================================== -->
+
+<script>
+
+(function(){
+
+function openPage(page){
+
+var pages =
+document.querySelectorAll(".page");
+
+for(var i=0;i<pages.length;i++){
+
+pages[i].classList.remove("active");
+
+}
+
+
+var target =
+document.getElementById(page + "Page");
+
+if(target){
+
+target.classList.add("active");
+
+}
+
+
+var navs =
+document.querySelectorAll(".nav");
+
+for(var j=0;j<navs.length;j++){
+
+navs[j].classList.remove("active");
+
+}
+
+
+var activeNavs =
+document.querySelectorAll(
+'[data-page="' + page + '"]'
+);
+
+for(var k=0;k<activeNavs.length;k++){
+
+activeNavs[k].classList.add("active");
+
+}
+
+
+window.scrollTo(0,0);
+
+}
+
+
+/* HOME CARDS + BOTTOM NAV */
+
+var clickable =
+document.querySelectorAll("[data-page]");
+
+for(var i=0;i<clickable.length;i++){
+
+clickable[i].addEventListener(
+"click",
+function(){
+
+openPage(
+this.getAttribute("data-page")
+);
+
+}
+);
+
+}
+
+})();
+
+</script>
+
+
+<!-- ==================================================
+     FIREBASE
+     ================================================== -->
 
 <script type="module">
 
@@ -631,7 +741,7 @@ const VAPID_KEY =
 
 
 /* =========================================
-   PUSH SERVER
+   GOOGLE APPS SCRIPT PUSH SERVER
 ========================================= */
 
 const PUSH_SERVER_URL =
@@ -639,17 +749,44 @@ const PUSH_SERVER_URL =
 
 
 /* =========================================
-   INITIALIZE FIREBASE
+   FIREBASE INITIALIZATION
 ========================================= */
 
-const app =
+let app;
+
+let db;
+
+let messaging;
+
+try{
+
+app =
 initializeApp(firebaseConfig);
 
-const db =
+db =
 getDatabase(app);
 
-const messaging =
+messaging =
 getMessaging(app);
+
+console.log(
+"Firebase initialized successfully."
+);
+
+}
+catch(error){
+
+console.error(
+"Firebase initialization error:",
+error
+);
+
+document.getElementById(
+"notifyStatus"
+).textContent =
+"⚠️ Firebase could not initialize. Navigation still works.";
+
+}
 
 
 /* =========================================
@@ -669,7 +806,7 @@ return String(value || "")
 
 
 /* =========================================
-   CREATE NEWS CARD
+   NEWS CARD
 ========================================= */
 
 function createNewsCard(item){
@@ -727,12 +864,14 @@ item.createdAt
 
 
 /* =========================================
-   LOAD NEWS FROM FIREBASE
+   LOAD NEWS
 ========================================= */
+
+if(db){
 
 onValue(
 
-ref(db, "news"),
+ref(db,"news"),
 
 snapshot => {
 
@@ -745,32 +884,26 @@ document.getElementById(
 "homeNews"
 );
 
-
 const news =
 document.getElementById(
 "newsList"
 );
-
 
 const sports =
 document.getElementById(
 "sportsList"
 );
 
-
 const academic =
 document.getElementById(
 "academicList"
 );
-
 
 const events =
 document.getElementById(
 "eventList"
 );
 
-
-/* NO NEWS */
 
 if(!data){
 
@@ -797,32 +930,29 @@ return;
 }
 
 
-/* CONVERT FIREBASE DATA */
-
 const items =
 
 Object.keys(data)
 
-.map(key => ({
+.map(function(key){
+
+return {
 
 id:key,
-
 ...data[key]
 
-}))
+};
 
-.sort(
+})
 
-(a,b) =>
+.sort(function(a,b){
 
-Number(b.createdAt || 0)
+return Number(b.createdAt || 0)
 -
-Number(a.createdAt || 0)
+Number(a.createdAt || 0);
 
-);
+});
 
-
-/* HOME */
 
 home.innerHTML =
 
@@ -832,16 +962,12 @@ items
 .join("");
 
 
-/* ALL NEWS */
-
 news.innerHTML =
 
 items
 .map(createNewsCard)
 .join("");
 
-
-/* CATEGORY FILTER */
 
 function filterNews(
 word,
@@ -851,15 +977,15 @@ emptyMessage
 
 const result =
 
-items.filter(item =>
+items.filter(function(item){
 
-String(
+return String(
 item.category || ""
 )
 .toLowerCase()
-.includes(word)
+.includes(word);
 
-);
+});
 
 
 const element =
@@ -891,8 +1017,6 @@ ${emptyMessage}
 }
 
 
-/* SPORTS */
-
 filterNews(
 "sport",
 "sportsList",
@@ -900,16 +1024,12 @@ filterNews(
 );
 
 
-/* ACADEMICS */
-
 filterNews(
 "academic",
 "academicList",
 "No academic updates yet."
 );
 
-
-/* EVENTS */
 
 filterNews(
 "event",
@@ -919,10 +1039,10 @@ filterNews(
 
 },
 
-error => {
+function(error){
 
 console.error(
-"Firebase error:",
+"Firebase database error:",
 error
 );
 
@@ -930,12 +1050,11 @@ error
 const message =
 '<div class="empty">Unable to load updates.</div>';
 
-
 document
 .querySelectorAll(
 "#homeNews,#newsList,#sportsList,#academicList,#eventList"
 )
-.forEach(element => {
+.forEach(function(element){
 
 element.innerHTML =
 message;
@@ -946,91 +1065,7 @@ message;
 
 );
 
-
-/* =========================================
-   NAVIGATION
-========================================= */
-
-function openPage(page){
-
-document
-.querySelectorAll(".page")
-.forEach(pageElement => {
-
-pageElement.classList.remove(
-"active"
-);
-
-});
-
-
-const target =
-document.getElementById(
-page + "Page"
-);
-
-
-if(target){
-
-target.classList.add(
-"active"
-);
-
 }
-
-
-document
-.querySelectorAll(".nav")
-.forEach(nav => {
-
-nav.classList.remove(
-"active"
-);
-
-});
-
-
-document
-.querySelectorAll(
-'[data-page="' + page + '"]'
-)
-.forEach(nav => {
-
-nav.classList.add(
-"active"
-);
-
-});
-
-
-window.scrollTo(
-0,
-0
-);
-
-}
-
-
-/* BUTTONS AND NAVIGATION */
-
-document
-.querySelectorAll(
-"[data-page]"
-)
-.forEach(element => {
-
-element.addEventListener(
-"click",
-function(){
-
-openPage(
-element.dataset.page
-);
-
-}
-);
-
-});
 
 
 /* =========================================
@@ -1057,13 +1092,32 @@ document.getElementById(
 "tokenText"
 );
 
+const pushError =
+document.getElementById(
+"pushError"
+);
+
+
+/* =========================================
+   SHOW ERROR
+========================================= */
+
+function showPushError(message){
+
+pushError.style.display =
+"block";
+
+pushError.textContent =
+message;
+
+}
+
 
 /* =========================================
    MESSAGING SERVICE WORKER
 ========================================= */
 
-let messagingRegistration =
-null;
+let messagingRegistration = null;
 
 
 async function prepareMessagingServiceWorker(){
@@ -1078,7 +1132,6 @@ throw new Error(
 
 
 messagingRegistration =
-
 await navigator.serviceWorker.register(
 
 "./firebase-messaging-sw.js",
@@ -1090,16 +1143,13 @@ scope:"./"
 );
 
 
-await navigator.serviceWorker.ready;
-
-
 return messagingRegistration;
 
 }
 
 
 /* =========================================
-   REGISTER TOKEN WITH GOOGLE APPS SCRIPT
+   REGISTER TOKEN
 ========================================= */
 
 async function registerTokenWithPushServer(
@@ -1116,7 +1166,6 @@ throw new Error(
 
 
 const response =
-
 await fetch(
 
 PUSH_SERVER_URL,
@@ -1126,8 +1175,10 @@ PUSH_SERVER_URL,
 method:"POST",
 
 headers:{
+
 "Content-Type":
 "text/plain;charset=utf-8"
+
 },
 
 body:JSON.stringify({
@@ -1154,7 +1205,6 @@ text
 
 
 let result;
-
 
 try{
 
@@ -1193,6 +1243,15 @@ return result;
 
 async function getFCMToken(){
 
+if(!messaging){
+
+throw new Error(
+"Firebase Messaging is not available."
+);
+
+}
+
+
 const registration =
 
 messagingRegistration ||
@@ -1228,8 +1287,6 @@ throw new Error(
 }
 
 
-/* SHOW TOKEN */
-
 tokenText.textContent =
 currentToken;
 
@@ -1242,8 +1299,6 @@ console.log(
 currentToken
 );
 
-
-/* REGISTER TOKEN */
 
 await registerTokenWithPushServer(
 currentToken
@@ -1287,7 +1342,7 @@ Notification.permission ===
 ){
 
 notifyStatus.textContent =
-"🔄 Notifications are allowed. Checking device registration...";
+"🔄 Notifications are allowed. Device registration will be checked.";
 
 notifyBtn.textContent =
 "Notifications Enabled";
@@ -1327,6 +1382,9 @@ notifyBtn.textContent =
 ========================================= */
 
 async function enableNotifications(){
+
+pushError.style.display =
+"none";
 
 if(!window.isSecureContext){
 
@@ -1371,8 +1429,6 @@ notifyBtn.textContent =
 try{
 
 
-/* REQUEST PERMISSION */
-
 const permission =
 await Notification.requestPermission();
 
@@ -1393,12 +1449,12 @@ return;
 }
 
 
-/* PREPARE WORKER */
+notifyStatus.textContent =
+"🔄 Registering this device...";
+
 
 await prepareMessagingServiceWorker();
 
-
-/* GET TOKEN AND REGISTER IT */
 
 const token =
 await getFCMToken();
@@ -1407,7 +1463,7 @@ await getFCMToken();
 if(token){
 
 notifyStatus.textContent =
-"✅ Push notifications are allowed and your device is registered.";
+"✅ Notifications enabled and device registered.";
 
 notifyBtn.textContent =
 "Notifications Enabled";
@@ -1428,8 +1484,12 @@ error
 
 
 notifyStatus.textContent =
-"❌ Push setup failed: " +
-(error.message || error);
+"❌ Push setup failed.";
+
+showPushError(
+error.message ||
+String(error)
+);
 
 
 notifyBtn.disabled =
@@ -1444,14 +1504,26 @@ notifyBtn.textContent =
 
 
 /* =========================================
-   FOREGROUND MESSAGE
+   NOTIFICATION BUTTON
 ========================================= */
+
+notifyBtn.addEventListener(
+"click",
+enableNotifications
+);
+
+
+/* =========================================
+   FOREGROUND FCM MESSAGE
+========================================= */
+
+if(messaging){
 
 onMessage(
 
 messaging,
 
-payload => {
+function(payload){
 
 console.log(
 "Foreground FCM message:",
@@ -1460,22 +1532,18 @@ payload
 
 
 const title =
-
 payload.notification?.title ||
-
 "DeBryne Update";
 
 
 const body =
-
 payload.notification?.body ||
-
 "You have a new update from DeBryne Update.";
 
 
 if(
-Notification.permission ===
-"granted"
+"Notification" in window &&
+Notification.permission === "granted"
 ){
 
 new Notification(
@@ -1499,20 +1567,10 @@ badge:
 }
 
 }
-);
-
-
-/* =========================================
-   NOTIFICATION BUTTON
-========================================= */
-
-notifyBtn.addEventListener(
-
-"click",
-
-enableNotifications
 
 );
+
+}
 
 
 /* =========================================
@@ -1520,15 +1578,15 @@ enableNotifications
 ========================================= */
 
 window.addEventListener(
-
 "load",
-
 async function(){
 
 setNotificationStatus();
 
 
-/* REGISTER PWA SERVICE WORKER */
+/*
+   PWA SERVICE WORKER
+*/
 
 if(
 "serviceWorker" in navigator
@@ -1564,7 +1622,9 @@ error
 }
 
 
-/* IF ALREADY ALLOWED */
+/*
+   IF NOTIFICATIONS ARE ALREADY ALLOWED
+*/
 
 if(
 
@@ -1583,7 +1643,7 @@ await getFCMToken();
 
 
 notifyStatus.textContent =
-"✅ Push notifications are allowed and your device is registered.";
+"✅ Notifications are enabled and device is registered.";
 
 notifyBtn.textContent =
 "Notifications Enabled";
@@ -1596,13 +1656,18 @@ true;
 catch(error){
 
 console.error(
-"Existing FCM setup error:",
+"Existing notification setup error:",
 error
 );
 
 
 notifyStatus.textContent =
 "⚠️ Notifications are allowed, but device registration needs attention.";
+
+showPushError(
+error.message ||
+String(error)
+);
 
 notifyBtn.disabled =
 false;
@@ -1614,15 +1679,9 @@ notifyBtn.textContent =
 
 }
 
-else{
-
-setNotificationStatus();
-
-}
-
 });
 
 </script>
 
 </body>
-</html>
+   </html>
