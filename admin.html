@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-
-<meta
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
->
 
-<title>DeBryne Update - Admin</title>
+«»
 
-<style>
+<title>DeBryne Update - Admin</title><style>
 
 *{
 box-sizing:border-box;
@@ -119,6 +113,7 @@ border-radius:9px;
 font-size:13px;
 color:#475569;
 line-height:1.5;
+word-break:break-word;
 }
 
 .success{
@@ -129,217 +124,100 @@ color:#15803d;
 color:#b91c1c;
 }
 
-</style>
-
-</head>
-
-<body>
-
-<header class="header">
-
-<h1>
+</style></head><body><header class="header"><h1>
 DeBryne Update
-</h1>
-
-<p>
+</h1><p>
 Private Admin Panel
-</p>
-
-</header>
-
-
-<!-- =========================
+</p></header><!-- =========================
      LOGIN
-========================= -->
-
-<div id="loginPage">
-
-<main class="container">
-
-<div class="card">
-
-<h2>
+========================= --><div id="loginPage"><main class="container"><div class="card"><h2>
 🔐 Admin Login
-</h2>
-
-<p
+</h2><p
 style="
 color:#64748b;
 font-size:14px;
 line-height:1.5;
-">
-
-Sign in to manage
+">Sign in to manage
 DeBryne Update.
 
-</p>
-
-
-<label>
+</p><label>
 Email
-</label>
-
-<input
+</label><input
 type="email"
 id="email"
 value="kelvinechem7@gmail.com"
 autocomplete="email"
->
 
+«»
 
 <label>
 Password
-</label>
-
-<input
+</label><input
 type="password"
 id="password"
 placeholder="Enter your password"
 autocomplete="current-password"
->
 
+«»
 
 <button id="loginButton">
 LOGIN
-</button>
-
-
-<div
+</button><div
 class="status"
-id="loginStatus">
+id="loginStatus">Enter your password to continue.
 
-Enter your password to continue.
-
-</div>
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- =========================
+</div></div></main></div><!-- =========================
      ADMIN PANEL
-========================= -->
-
-<div id="adminPanel">
-
-<main class="container">
-
-
-<div class="card">
-
-<h2>
+========================= --><div id="adminPanel"><main class="container"><div class="card"><h2>
 👋 Admin Dashboard
-</h2>
-
-<p
+</h2><p
 id="userEmail"
 style="
 color:#64748b;
 font-size:13px;
-">
-
-</p>
-
-
-<button
+"></p><button
 class="logout"
 id="logoutButton">
 
 LOG OUT
 
-</button>
-
-</div>
-
-
-<!-- =========================
+</button></div><!-- =========================
      PUBLISH NEWS
-========================= -->
-
-<div class="card">
-
-<h2>
+========================= --><div class="card"><h2>
 📰 Publish News
-</h2>
-
-
-<label>
+</h2><label>
 News Category
-</label>
-
-<select id="category">
-
-<option value="Campus News">
+</label><select id="category"><option value="Campus News">
 Campus News
-</option>
-
-<option value="Academics">
+</option><option value="Academics">
 Academics
-</option>
-
-<option value="Announcement">
+</option><option value="Announcement">
 Announcement
-</option>
-
-<option value="Sports">
+</option><option value="Sports">
 Sports
-</option>
-
-<option value="Breaking News">
+</option><option value="Breaking News">
 Breaking News
-</option>
-
-</select>
-
-
-<label>
+</option></select><label>
 News Title
-</label>
-
-<input
+</label><input
 type="text"
 id="title"
 placeholder="Enter news title"
->
 
+«»
 
 <label>
 News Content
-</label>
-
-<textarea
+</label><textarea
 id="content"
 placeholder="Write your news here..."
-></textarea>
+></textarea><button id="publishButton">PUBLISH NEWS
 
-
-<button id="publishButton">
-
-PUBLISH NEWS
-
-</button>
-
-
-<div
+</button><div
 class="status"
-id="publishStatus">
+id="publishStatus">Ready to publish.
 
-Ready to publish.
-
-</div>
-
-</div>
-
-
-</main>
-
-</div>
-
-
-<script type="module">
+</div></div></main></div><script type="module">
 
 
 /* =========================================
@@ -427,12 +305,12 @@ measurementId:
 
 
 /* =========================================
-   GOOGLE APPS SCRIPT PUSH SERVER
+   SAME PUSH SERVER USED BY INDEX.HTML
 ========================================= */
 
 const PUSH_SERVER_URL =
 
-"https://script.google.com/macros/s/AKfycbzRFFTaLRFk3PPvbYPTH7FH9QAzYXbx-S16o5b-4FYcOhwSKSXKHlKdsAQENImEpmlqyA/exec";
+"https://script.google.com/macros/s/AKfycbwQVk4bcaaUuErxlsh8UZLyQA19FDpkgYQOp6WF-81vtOtdHC0CnclgIaJ-yULitmtJDA/exec";
 
 
 /* =========================================
@@ -442,10 +320,8 @@ const PUSH_SERVER_URL =
 const app =
 initializeApp(firebaseConfig);
 
-
 const auth =
 getAuth(app);
-
 
 const db =
 getDatabase(app);
@@ -466,7 +342,6 @@ document.getElementById(
 "loginPage"
 );
 
-
 const adminPanel =
 document.getElementById(
 "adminPanel"
@@ -480,7 +355,6 @@ loginPage.style.display =
 
 adminPanel.style.display =
 "block";
-
 
 document.getElementById(
 "userEmail"
@@ -524,12 +398,10 @@ document
 .value
 .trim();
 
-
 const password =
 document
 .getElementById("password")
 .value;
-
 
 const status =
 document.getElementById(
@@ -668,6 +540,15 @@ text
 );
 
 
+if(!text){
+
+throw new Error(
+"Push server returned an empty response."
+);
+
+}
+
+
 let result;
 
 
@@ -718,12 +599,10 @@ async function(){
 const user =
 auth.currentUser;
 
-
 const category =
 document
 .getElementById("category")
 .value;
-
 
 const title =
 document
@@ -731,19 +610,16 @@ document
 .value
 .trim();
 
-
 const content =
 document
 .getElementById("content")
 .value
 .trim();
 
-
 const status =
 document.getElementById(
 "publishStatus"
 );
-
 
 const publishButton =
 document.getElementById(
@@ -782,7 +658,6 @@ true;
 
 publishButton.textContent =
 "PUBLISHING...";
-
 
 status.textContent =
 "Publishing news...";
@@ -872,12 +747,6 @@ notificationError
 );
 
 
-/*
-   The news was already published,
-   so don't report the whole operation
-   as a publishing failure.
-*/
-
 status.textContent =
 
 "✅ News published successfully, but notification could not be sent: " +
@@ -925,13 +794,11 @@ document
 .getElementById("content")
 .value = "";
 
-
 }
 
 catch(error){
 
 console.error(error);
-
 
 status.textContent =
 "❌ Publishing failed: " +
@@ -953,7 +820,5 @@ publishButton.textContent =
 
 );
 
-</script>
-
-</body>
-    </html>
+</script></body>
+</html>
