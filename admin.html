@@ -1,685 +1,959 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
 name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0"
+>
 
-<title>DeBryne Update - Admin</title><style>
+<title>DeBryne Update - Admin</title>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #172033;
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+color:#172033;
 }
 
-.header {
-    background: #111827;
-    color: white;
-    padding: 20px;
+.header{
+background:#111827;
+color:white;
+padding:20px;
 }
 
-.header h1 {
-    font-size: 22px;
+.header h1{
+font-size:22px;
 }
 
-.header p {
-    color: #cbd5e1;
-    font-size: 13px;
-    margin-top: 5px;
+.header p{
+color:#cbd5e1;
+font-size:13px;
+margin-top:5px;
 }
 
-.container {
-    padding: 18px;
-    max-width: 700px;
-    margin: auto;
+.container{
+padding:18px;
+max-width:700px;
+margin:auto;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 18px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+margin-bottom:18px;
+box-shadow:0 3px 12px rgba(0,0,0,0.06);
 }
 
-.card h2 {
-    margin-bottom: 15px;
-    font-size: 19px;
+.card h2{
+margin-bottom:15px;
+font-size:19px;
 }
 
-label {
-    display: block;
-    margin-top: 14px;
-    margin-bottom: 6px;
-    font-size: 13px;
-    font-weight: bold;
+label{
+display:block;
+margin-top:14px;
+margin-bottom:6px;
+font-size:13px;
+font-weight:bold;
 }
 
 input,
 textarea,
-select {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    outline: none;
+select{
+width:100%;
+padding:13px;
+border:1px solid #d1d5db;
+border-radius:9px;
+font-family:Arial,sans-serif;
+font-size:14px;
+outline:none;
 }
 
-textarea {
-    min-height: 140px;
-    resize: vertical;
+textarea{
+min-height:140px;
+resize:vertical;
 }
 
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 18px;
-    border: none;
-    border-radius: 9px;
-    background: #111827;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
+button{
+width:100%;
+padding:14px;
+margin-top:18px;
+border:none;
+border-radius:9px;
+background:#111827;
+color:white;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.logout {
-    background: #dc2626;
+button:disabled{
+opacity:.6;
+cursor:not-allowed;
 }
 
-#adminPanel {
-    display: none;
+.logout{
+background:#dc2626;
 }
 
-.status {
-    margin-top: 15px;
-    padding: 12px;
-    background: #f1f5f9;
-    border-radius: 9px;
-    font-size: 13px;
-    color: #475569;
+#adminPanel{
+display:none;
 }
 
-.success {
-    color: #15803d;
+.status{
+margin-top:15px;
+padding:12px;
+background:#f1f5f9;
+border-radius:9px;
+font-size:13px;
+color:#475569;
+line-height:1.5;
 }
 
-.error {
-    color: #b91c1c;
+.success{
+color:#15803d;
 }
 
-</style></head><body><header class="header"><h1>
-    DeBryne Update
+.error{
+color:#b91c1c;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<h1>
+DeBryne Update
 </h1>
 
 <p>
-    Private Admin Panel
+Private Admin Panel
 </p>
 
-</header><!-- LOGIN --><div id="loginPage"><main class="container">
-
-    <div class="card">
-
-        <h2>
-            🔐 Admin Login
-        </h2>
-
-        <p
-            style="
-            color:#64748b;
-            font-size:14px;
-            line-height:1.5;
-            ">
-
-            Sign in to manage
-            DeBryne Update.
-
-        </p>
+</header>
 
 
-        <label>
-            Email
-        </label>
+<!-- =========================
+     LOGIN
+========================= -->
 
-        <input
-            type="email"
-            id="email"
-            value="kelvinechem7@gmail.com"
-            autocomplete="email"
-        >
+<div id="loginPage">
 
+<main class="container">
 
-        <label>
-            Password
-        </label>
+<div class="card">
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-        >
+<h2>
+🔐 Admin Login
+</h2>
 
+<p
+style="
+color:#64748b;
+font-size:14px;
+line-height:1.5;
+">
 
-        <button id="loginButton">
-            LOGIN
-        </button>
+Sign in to manage
+DeBryne Update.
+
+</p>
 
 
-        <div
-            class="status"
-            id="loginStatus">
+<label>
+Email
+</label>
 
-            Enter your password to continue.
-
-        </div>
-
-    </div>
-
-</main>
-
-</div><!-- ADMIN PANEL --><div id="adminPanel"><main class="container">
+<input
+type="email"
+id="email"
+value="kelvinechem7@gmail.com"
+autocomplete="email"
+>
 
 
-    <div class="card">
+<label>
+Password
+</label>
 
-        <h2>
-            👋 Admin Dashboard
-        </h2>
-
-        <p
-            id="userEmail"
-            style="
-            color:#64748b;
-            font-size:13px;
-            ">
-
-        </p>
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+autocomplete="current-password"
+>
 
 
-        <button
-            class="logout"
-            id="logoutButton">
-
-            LOG OUT
-
-        </button>
-
-    </div>
+<button id="loginButton">
+LOGIN
+</button>
 
 
+<div
+class="status"
+id="loginStatus">
 
-    <!-- PUBLISH NEWS -->
+Enter your password to continue.
 
-    <div class="card">
+</div>
 
-        <h2>
-            📰 Publish News
-        </h2>
-
-
-        <label>
-            News Category
-        </label>
-
-        <select id="category">
-
-            <option value="Campus News">
-                Campus News
-            </option>
-
-            <option value="Academics">
-                Academics
-            </option>
-
-            <option value="Announcement">
-                Announcement
-            </option>
-
-            <option value="Sports">
-                Sports
-            </option>
-
-            <option value="Breaking News">
-                Breaking News
-            </option>
-
-        </select>
-
-
-        <label>
-            News Title
-        </label>
-
-        <input
-            type="text"
-            id="title"
-            placeholder="Enter news title"
-        >
-
-
-        <label>
-            News Content
-        </label>
-
-        <textarea
-            id="content"
-            placeholder="Write your news here..."
-        ></textarea>
-
-
-        <button id="publishButton">
-
-            PUBLISH NEWS
-
-        </button>
-
-
-        <div
-            class="status"
-            id="publishStatus">
-
-            Ready to publish.
-
-        </div>
-
-    </div>
-
+</div>
 
 </main>
 
-</div><script type="module">
+</div>
 
 
-/* =========================
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
+<div id="adminPanel">
+
+<main class="container">
+
+
+<div class="card">
+
+<h2>
+👋 Admin Dashboard
+</h2>
+
+<p
+id="userEmail"
+style="
+color:#64748b;
+font-size:13px;
+">
+
+</p>
+
+
+<button
+class="logout"
+id="logoutButton">
+
+LOG OUT
+
+</button>
+
+</div>
+
+
+<!-- =========================
+     PUBLISH NEWS
+========================= -->
+
+<div class="card">
+
+<h2>
+📰 Publish News
+</h2>
+
+
+<label>
+News Category
+</label>
+
+<select id="category">
+
+<option value="Campus News">
+Campus News
+</option>
+
+<option value="Academics">
+Academics
+</option>
+
+<option value="Announcement">
+Announcement
+</option>
+
+<option value="Sports">
+Sports
+</option>
+
+<option value="Breaking News">
+Breaking News
+</option>
+
+</select>
+
+
+<label>
+News Title
+</label>
+
+<input
+type="text"
+id="title"
+placeholder="Enter news title"
+>
+
+
+<label>
+News Content
+</label>
+
+<textarea
+id="content"
+placeholder="Write your news here..."
+></textarea>
+
+
+<button id="publishButton">
+
+PUBLISH NEWS
+
+</button>
+
+
+<div
+class="status"
+id="publishStatus">
+
+Ready to publish.
+
+</div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<script type="module">
+
+
+/* =========================================
    FIREBASE APP
-========================= */
+========================================= */
 
 import {
-    initializeApp
-} from
+
+initializeApp
+
+}
+
+from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE AUTH
-========================= */
+========================================= */
 
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-} from
+
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+
+}
+
+from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
-/* =========================
-   REALTIME DATABASE
-========================= */
+/* =========================================
+   FIREBASE DATABASE
+========================================= */
 
 import {
-    getDatabase,
-    ref,
-    push,
-    set
-} from
+
+getDatabase,
+ref,
+push,
+set
+
+}
+
+from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
-
-/* =========================
-   YOUR NEW FIREBASE CONFIG
-========================= */
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
+apiKey:
+"AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
 
-    authDomain:
-    "debryne-update.firebaseapp.com",
+authDomain:
+"debryne-update.firebaseapp.com",
 
-    databaseURL:
-    "https://debryne-update-default-rtdb.firebaseio.com",
+databaseURL:
+"https://debryne-update-default-rtdb.firebaseio.com",
 
-    projectId:
-    "debryne-update",
+projectId:
+"debryne-update",
 
-    storageBucket:
-    "debryne-update.firebasestorage.app",
+storageBucket:
+"debryne-update.firebasestorage.app",
 
-    messagingSenderId:
-    "218054789442",
+messagingSenderId:
+"218054789442",
 
-    appId:
-    "1:218054789442:web:f891b9a9cd22e7938260db",
+appId:
+"1:218054789442:web:f891b9a9cd22e7938260db",
 
-    measurementId:
-    "G-1LNK265F45"
+measurementId:
+"G-1LNK265F45"
 
 };
 
 
+/* =========================================
+   GOOGLE APPS SCRIPT PUSH SERVER
+========================================= */
 
-/* =========================
-   INITIALIZE
-========================= */
+const PUSH_SERVER_URL =
+
+"https://script.google.com/macros/s/AKfycbzRFFTaLRFk3PPvbYPTH7FH9QAzYXbx-S16o5b-4FYcOhwSKSXKHlKdsAQENImEpmlqyA/exec";
+
+
+/* =========================================
+   INITIALIZE FIREBASE
+========================================= */
 
 const app =
-    initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 
 const auth =
-    getAuth(app);
+getAuth(app);
 
 
 const db =
-    getDatabase(app);
+getDatabase(app);
 
 
-
-/* =========================
+/* =========================================
    AUTH STATE
-========================= */
+========================================= */
 
 onAuthStateChanged(
-    auth,
-    function(user) {
 
-        const loginPage =
-            document.getElementById(
-                "loginPage"
-            );
+auth,
 
-        const adminPanel =
-            document.getElementById(
-                "adminPanel"
-            );
+function(user){
 
-
-        if (user) {
-
-            loginPage.style.display =
-                "none";
-
-            adminPanel.style.display =
-                "block";
-
-
-            document.getElementById(
-                "userEmail"
-            ).textContent =
-                "Signed in as: " +
-                user.email;
-
-        }
-
-        else {
-
-            loginPage.style.display =
-                "block";
-
-            adminPanel.style.display =
-                "none";
-
-        }
-
-    }
+const loginPage =
+document.getElementById(
+"loginPage"
 );
 
 
+const adminPanel =
+document.getElementById(
+"adminPanel"
+);
 
-/* =========================
+
+if(user){
+
+loginPage.style.display =
+"none";
+
+adminPanel.style.display =
+"block";
+
+
+document.getElementById(
+"userEmail"
+).textContent =
+
+"Signed in as: " +
+user.email;
+
+}
+
+else{
+
+loginPage.style.display =
+"block";
+
+adminPanel.style.display =
+"none";
+
+}
+
+}
+
+);
+
+
+/* =========================================
    LOGIN
-========================= */
+========================================= */
 
 document
-    .getElementById("loginButton")
-    .addEventListener(
-        "click",
-        async function() {
+.getElementById("loginButton")
+.addEventListener(
+
+"click",
+
+async function(){
+
+const email =
+document
+.getElementById("email")
+.value
+.trim();
 
 
-            const email =
-                document
-                .getElementById("email")
-                .value
-                .trim();
+const password =
+document
+.getElementById("password")
+.value;
 
 
-            const password =
-                document
-                .getElementById("password")
-                .value;
+const status =
+document.getElementById(
+"loginStatus"
+);
 
 
-            const status =
-                document
-                .getElementById("loginStatus");
+if(!email || !password){
+
+status.textContent =
+"Please enter your email and password.";
+
+status.className =
+"status error";
+
+return;
+
+}
 
 
-            if (!email || !password) {
+status.textContent =
+"Signing in...";
 
-                status.textContent =
-                    "Please enter your email and password.";
-
-                status.className =
-                    "status error";
-
-                return;
-
-            }
+status.className =
+"status";
 
 
-            status.textContent =
-                "Signing in...";
+try{
 
-            status.className =
-                "status";
+await signInWithEmailAndPassword(
 
+auth,
 
-            try {
+email,
 
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+password
+
+);
 
 
-                status.textContent =
-                    "Login successful.";
+status.textContent =
+"Login successful.";
 
-                status.className =
-                    "status success";
+status.className =
+"status success";
 
-            }
+}
 
-            catch (error) {
+catch(error){
 
-                console.error(error);
+console.error(error);
 
-                status.textContent =
-                    "Login failed: " +
-                    error.message;
+status.textContent =
+"Login failed: " +
+error.message;
 
-                status.className =
-                    "status error";
+status.className =
+"status error";
 
-            }
+}
 
-        }
-    );
+}
+
+);
 
 
-
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
 document
-    .getElementById("logoutButton")
-    .addEventListener(
-        "click",
-        async function() {
+.getElementById("logoutButton")
+.addEventListener(
 
-            await signOut(auth);
+"click",
 
-        }
-    );
+async function(){
+
+await signOut(auth);
+
+}
+
+);
 
 
+/* =========================================
+   SEND PUSH NOTIFICATION
+========================================= */
 
-/* =========================
+async function sendPushNotification(
+title,
+content
+){
+
+const response =
+
+await fetch(
+
+PUSH_SERVER_URL,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+},
+
+body:
+
+JSON.stringify({
+
+action:"send",
+
+title:title,
+
+body:content
+
+})
+
+}
+
+);
+
+
+const text =
+await response.text();
+
+
+console.log(
+"Push server response:",
+text
+);
+
+
+let result;
+
+
+try{
+
+result =
+JSON.parse(text);
+
+}
+
+catch(error){
+
+throw new Error(
+"Push server returned an invalid response: " +
+text
+);
+
+}
+
+
+if(!result.success){
+
+throw new Error(
+result.error ||
+"Notification sending failed."
+);
+
+}
+
+
+return result;
+
+}
+
+
+/* =========================================
    PUBLISH NEWS
-========================= */
+========================================= */
 
 document
-    .getElementById("publishButton")
-    .addEventListener(
-        "click",
-        async function() {
+.getElementById("publishButton")
+.addEventListener(
+
+"click",
+
+async function(){
+
+const user =
+auth.currentUser;
 
 
-            const user =
-                auth.currentUser;
+const category =
+document
+.getElementById("category")
+.value;
 
 
-            const category =
-                document
-                .getElementById("category")
-                .value;
+const title =
+document
+.getElementById("title")
+.value
+.trim();
 
 
-            const title =
-                document
-                .getElementById("title")
-                .value
-                .trim();
+const content =
+document
+.getElementById("content")
+.value
+.trim();
 
 
-            const content =
-                document
-                .getElementById("content")
-                .value
-                .trim();
+const status =
+document.getElementById(
+"publishStatus"
+);
 
 
-            const status =
-                document
-                .getElementById("publishStatus");
+const publishButton =
+document.getElementById(
+"publishButton"
+);
 
 
-            if (!user) {
+if(!user){
 
-                status.textContent =
-                    "Please log in first.";
+status.textContent =
+"Please log in first.";
 
-                status.className =
-                    "status error";
+status.className =
+"status error";
 
-                return;
+return;
 
-            }
-
-
-            if (!title || !content) {
-
-                status.textContent =
-                    "Please enter a title and content.";
-
-                status.className =
-                    "status error";
-
-                return;
-
-            }
+}
 
 
-            status.textContent =
-                "Publishing...";
+if(!title || !content){
 
-            status.className =
-                "status";
+status.textContent =
+"Please enter a title and content.";
 
+status.className =
+"status error";
 
-            try {
+return;
 
-
-                const newsRef =
-                    push(
-                        ref(
-                            db,
-                            "news"
-                        )
-                    );
+}
 
 
-                await set(
-                    newsRef,
-                    {
+publishButton.disabled =
+true;
 
-                        category:
-                            category,
-
-                        title:
-                            title,
-
-                        content:
-                            content,
-
-                        author:
-                            user.email,
-
-                        createdAt:
-                            Date.now()
-
-                    }
-                );
+publishButton.textContent =
+"PUBLISHING...";
 
 
-                status.textContent =
-                    "✅ News published successfully.";
+status.textContent =
+"Publishing news...";
 
-                status.className =
-                    "status success";
-
-
-                document
-                    .getElementById("title")
-                    .value = "";
+status.className =
+"status";
 
 
-                document
-                    .getElementById("content")
-                    .value = "";
+try{
 
 
-            }
+/* =====================================
+   SAVE NEWS TO FIREBASE
+===================================== */
 
-            catch (error) {
+const newsRef =
 
-                console.error(error);
+push(
 
+ref(
 
-                status.textContent =
-                    "❌ Publishing failed: " +
-                    error.message;
+db,
 
-                status.className =
-                    "status error";
+"news"
 
-            }
+)
 
-        }
-    );
+);
 
 
-</script></body></html>
+await set(
+
+newsRef,
+
+{
+
+category:
+category,
+
+title:
+title,
+
+content:
+content,
+
+author:
+user.email,
+
+createdAt:
+Date.now()
+
+}
+
+);
+
+
+/* =====================================
+   SEND PUSH NOTIFICATION
+===================================== */
+
+status.textContent =
+"News published. Sending notification...";
+
+
+let pushResult;
+
+
+try{
+
+pushResult =
+
+await sendPushNotification(
+
+title,
+
+content
+
+);
+
+}
+
+catch(notificationError){
+
+console.error(
+"Notification error:",
+notificationError
+);
+
+
+/*
+   The news was already published,
+   so don't report the whole operation
+   as a publishing failure.
+*/
+
+status.textContent =
+
+"✅ News published successfully, but notification could not be sent: " +
+
+notificationError.message;
+
+status.className =
+"status error";
+
+publishButton.disabled =
+false;
+
+publishButton.textContent =
+"PUBLISH NEWS";
+
+return;
+
+}
+
+
+/* =====================================
+   SUCCESS
+===================================== */
+
+status.textContent =
+
+"✅ News published and notification sent to " +
+
+(
+pushResult.successful || 0
+) +
+
+" registered device(s).";
+
+status.className =
+"status success";
+
+
+document
+.getElementById("title")
+.value = "";
+
+
+document
+.getElementById("content")
+.value = "";
+
+
+}
+
+catch(error){
+
+console.error(error);
+
+
+status.textContent =
+"❌ Publishing failed: " +
+error.message;
+
+status.className =
+"status error";
+
+}
+
+
+publishButton.disabled =
+false;
+
+publishButton.textContent =
+"PUBLISH NEWS";
+
+}
+
+);
+
+</script>
+
+</body>
+    </html>
