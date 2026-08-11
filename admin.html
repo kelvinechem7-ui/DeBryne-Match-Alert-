@@ -1,11 +1,6 @@
 <!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-«»
-
-<title>DeBryne Update - Admin</title><style>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update - Admin</title><style>
 
 *{
 box-sizing:border-box;
@@ -46,7 +41,7 @@ background:white;
 padding:20px;
 border-radius:15px;
 margin-bottom:18px;
-box-shadow:0 3px 12px rgba(0,0,0,0.06);
+box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
 .card h2{
@@ -92,6 +87,10 @@ font-weight:bold;
 cursor:pointer;
 }
 
+button:active{
+transform:scale(.98);
+}
+
 button:disabled{
 opacity:.6;
 cursor:not-allowed;
@@ -124,25 +123,16 @@ color:#15803d;
 color:#b91c1c;
 }
 
-</style></head><body><header class="header"><h1>
-DeBryne Update
-</h1><p>
-Private Admin Panel
-</p></header><!-- =========================
-     LOGIN
-========================= --><div id="loginPage"><main class="container"><div class="card"><h2>
-🔐 Admin Login
-</h2><p
+</style></head><body><header class="header"><h1>DeBryne Update</h1><p>Private Admin Panel</p></header><!-- LOGIN --><div id="loginPage"><main class="container"><div class="card"><h2>🔐 Admin Login</h2><p
 style="
 color:#64748b;
 font-size:14px;
 line-height:1.5;
-">Sign in to manage
-DeBryne Update.
+">Sign in to manage DeBryne Update.
 
-</p><label>
-Email
-</label><input
+</p><label>Email</label>
+
+<input
 type="email"
 id="email"
 value="kelvinechem7@gmail.com"
@@ -150,9 +140,9 @@ autocomplete="email"
 
 «»
 
-<label>
-Password
-</label><input
+<label>Password</label>
+
+<input
 type="password"
 id="password"
 placeholder="Enter your password"
@@ -160,34 +150,31 @@ autocomplete="current-password"
 
 «»
 
-<button id="loginButton">
+<button
+id="loginButton"
+type="button">
+
 LOGIN
+
 </button><div
 class="status"
 id="loginStatus">Enter your password to continue.
 
-</div></div></main></div><!-- =========================
-     ADMIN PANEL
-========================= --><div id="adminPanel"><main class="container"><div class="card"><h2>
-👋 Admin Dashboard
-</h2><p
+</div></div></main></div><!-- ADMIN PANEL --><div id="adminPanel"><main class="container"><div class="card"><h2>👋 Admin Dashboard</h2><p
 id="userEmail"
 style="
 color:#64748b;
 font-size:13px;
 "></p><button
 class="logout"
-id="logoutButton">
+id="logoutButton"
+type="button">
 
 LOG OUT
 
-</button></div><!-- =========================
-     PUBLISH NEWS
-========================= --><div class="card"><h2>
-📰 Publish News
-</h2><label>
-News Category
-</label><select id="category"><option value="Campus News">
+</button></div><!-- PUBLISH NEWS --><div class="card"><h2>📰 Publish News</h2><label>News Category</label>
+
+<select id="category"><option value="Campus News">
 Campus News
 </option><option value="Academics">
 Academics
@@ -197,21 +184,25 @@ Announcement
 Sports
 </option><option value="Breaking News">
 Breaking News
-</option></select><label>
-News Title
-</label><input
+</option></select><label>News Title</label>
+
+<input
 type="text"
 id="title"
 placeholder="Enter news title"
 
 «»
 
-<label>
-News Content
-</label><textarea
+<label>News Content</label>
+
+<textarea
 id="content"
 placeholder="Write your news here..."
-></textarea><button id="publishButton">PUBLISH NEWS
+></textarea><button
+id="publishButton"
+type="button">
+
+PUBLISH NEWS
 
 </button><div
 class="status"
@@ -219,55 +210,34 @@ id="publishStatus">Ready to publish.
 
 </div></div></main></div><script type="module">
 
-
 /* =========================================
-   FIREBASE APP
+   FIREBASE IMPORTS
 ========================================= */
 
 import {
-
 initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
-/* =========================================
-   FIREBASE AUTH
-========================================= */
-
 import {
-
 getAuth,
 signInWithEmailAndPassword,
 onAuthStateChanged,
 signOut
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
-/* =========================================
-   FIREBASE DATABASE
-========================================= */
-
 import {
-
 getDatabase,
 ref,
 push,
 set
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
@@ -305,7 +275,7 @@ measurementId:
 
 
 /* =========================================
-   SAME PUSH SERVER USED BY INDEX.HTML
+   PUSH SERVER
 ========================================= */
 
 const PUSH_SERVER_URL =
@@ -317,25 +287,47 @@ const PUSH_SERVER_URL =
    INITIALIZE FIREBASE
 ========================================= */
 
-const app =
+let app;
+
+let auth;
+
+let db;
+
+try{
+
+app =
 initializeApp(firebaseConfig);
 
-const auth =
+auth =
 getAuth(app);
 
-const db =
+db =
 getDatabase(app);
+
+console.log(
+"Firebase Admin initialized."
+);
+
+}
+
+catch(error){
+
+console.error(
+"Firebase initialization error:",
+error
+);
+
+document.getElementById(
+"loginStatus"
+).textContent =
+"Firebase error: " + error.message;
+
+}
 
 
 /* =========================================
-   AUTH STATE
+   ELEMENTS
 ========================================= */
-
-onAuthStateChanged(
-
-auth,
-
-function(user){
 
 const loginPage =
 document.getElementById(
@@ -347,6 +339,43 @@ document.getElementById(
 "adminPanel"
 );
 
+const loginButton =
+document.getElementById(
+"loginButton"
+);
+
+const logoutButton =
+document.getElementById(
+"logoutButton"
+);
+
+const publishButton =
+document.getElementById(
+"publishButton"
+);
+
+const loginStatus =
+document.getElementById(
+"loginStatus"
+);
+
+const publishStatus =
+document.getElementById(
+"publishStatus"
+);
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+if(auth){
+
+onAuthStateChanged(
+
+auth,
+
+function(user){
 
 if(user){
 
@@ -359,9 +388,8 @@ adminPanel.style.display =
 document.getElementById(
 "userEmail"
 ).textContent =
-
 "Signed in as: " +
-user.email;
+(user.email || "Admin");
 
 }
 
@@ -379,14 +407,14 @@ adminPanel.style.display =
 
 );
 
+}
+
 
 /* =========================================
    LOGIN
 ========================================= */
 
-document
-.getElementById("loginButton")
-.addEventListener(
+loginButton.addEventListener(
 
 "click",
 
@@ -403,18 +431,13 @@ document
 .getElementById("password")
 .value;
 
-const status =
-document.getElementById(
-"loginStatus"
-);
-
 
 if(!email || !password){
 
-status.textContent =
+loginStatus.textContent =
 "Please enter your email and password.";
 
-status.className =
+loginStatus.className =
 "status error";
 
 return;
@@ -422,10 +445,16 @@ return;
 }
 
 
-status.textContent =
+loginButton.disabled =
+true;
+
+loginButton.textContent =
+"LOGGING IN...";
+
+loginStatus.textContent =
 "Signing in...";
 
-status.className =
+loginStatus.className =
 "status";
 
 
@@ -442,10 +471,10 @@ password
 );
 
 
-status.textContent =
-"Login successful.";
+loginStatus.textContent =
+"✅ Login successful.";
 
-status.className =
+loginStatus.className =
 "status success";
 
 }
@@ -454,12 +483,22 @@ catch(error){
 
 console.error(error);
 
-status.textContent =
-"Login failed: " +
+loginStatus.textContent =
+"❌ Login failed: " +
 error.message;
 
-status.className =
+loginStatus.className =
 "status error";
+
+}
+
+finally{
+
+loginButton.disabled =
+false;
+
+loginButton.textContent =
+"LOGIN";
 
 }
 
@@ -472,15 +511,23 @@ status.className =
    LOGOUT
 ========================================= */
 
-document
-.getElementById("logoutButton")
-.addEventListener(
+logoutButton.addEventListener(
 
 "click",
 
 async function(){
 
+try{
+
 await signOut(auth);
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
 
 }
 
@@ -488,16 +535,15 @@ await signOut(auth);
 
 
 /* =========================================
-   SEND PUSH NOTIFICATION
+   SEND PUSH
 ========================================= */
 
-async function sendPushNotification(
+async function sendPush(
 title,
-content
+body
 ){
 
 const response =
-
 await fetch(
 
 PUSH_SERVER_URL,
@@ -507,21 +553,17 @@ PUSH_SERVER_URL,
 method:"POST",
 
 headers:{
-
 "Content-Type":
 "text/plain;charset=utf-8"
-
 },
 
-body:
-
-JSON.stringify({
+body:JSON.stringify({
 
 action:"send",
 
 title:title,
 
-body:content
+body:body
 
 })
 
@@ -535,7 +577,7 @@ await response.text();
 
 
 console.log(
-"Push server response:",
+"Push response:",
 text
 );
 
@@ -543,14 +585,13 @@ text
 if(!text){
 
 throw new Error(
-"Push server returned an empty response."
+"Push server returned no response."
 );
 
 }
 
 
 let result;
-
 
 try{
 
@@ -562,8 +603,7 @@ JSON.parse(text);
 catch(error){
 
 throw new Error(
-"Push server returned an invalid response: " +
-text
+"Push server returned an invalid response."
 );
 
 }
@@ -573,7 +613,7 @@ if(!result.success){
 
 throw new Error(
 result.error ||
-"Notification sending failed."
+"Notification could not be sent."
 );
 
 }
@@ -588,9 +628,7 @@ return result;
    PUBLISH NEWS
 ========================================= */
 
-document
-.getElementById("publishButton")
-.addEventListener(
+publishButton.addEventListener(
 
 "click",
 
@@ -616,23 +654,13 @@ document
 .value
 .trim();
 
-const status =
-document.getElementById(
-"publishStatus"
-);
-
-const publishButton =
-document.getElementById(
-"publishButton"
-);
-
 
 if(!user){
 
-status.textContent =
-"Please log in first.";
+publishStatus.textContent =
+"❌ Please log in first.";
 
-status.className =
+publishStatus.className =
 "status error";
 
 return;
@@ -640,12 +668,25 @@ return;
 }
 
 
-if(!title || !content){
+if(!title){
 
-status.textContent =
-"Please enter a title and content.";
+publishStatus.textContent =
+"❌ Please enter a news title.";
 
-status.className =
+publishStatus.className =
+"status error";
+
+return;
+
+}
+
+
+if(!content){
+
+publishStatus.textContent =
+"❌ Please enter news content.";
+
+publishStatus.className =
 "status error";
 
 return;
@@ -659,32 +700,21 @@ true;
 publishButton.textContent =
 "PUBLISHING...";
 
-status.textContent =
+publishStatus.textContent =
 "Publishing news...";
 
-status.className =
+publishStatus.className =
 "status";
 
 
 try{
 
 
-/* =====================================
-   SAVE NEWS TO FIREBASE
-===================================== */
+/* SAVE NEWS */
 
 const newsRef =
-
 push(
-
-ref(
-
-db,
-
-"news"
-
-)
-
+ref(db,"news")
 );
 
 
@@ -694,105 +724,73 @@ newsRef,
 
 {
 
-category:
-category,
+category:category,
 
-title:
-title,
+title:title,
 
-content:
-content,
+content:content,
 
-author:
-user.email,
+author:user.email,
 
-createdAt:
-Date.now()
+createdAt:Date.now()
 
 }
 
 );
 
 
-/* =====================================
-   SEND PUSH NOTIFICATION
-===================================== */
-
-status.textContent =
+publishStatus.textContent =
 "News published. Sending notification...";
 
 
-let pushResult;
-
+/* SEND NOTIFICATION */
 
 try{
 
-pushResult =
-
-await sendPushNotification(
-
+const result =
+await sendPush(
 title,
-
 content
-
 );
+
+
+publishStatus.textContent =
+
+"✅ News published and notification sent to " +
+(result.successful || 0) +
+" device(s).";
+
+publishStatus.className =
+"status success";
 
 }
 
 catch(notificationError){
 
 console.error(
-"Notification error:",
 notificationError
 );
 
+publishStatus.textContent =
 
-status.textContent =
-
-"✅ News published successfully, but notification could not be sent: " +
-
+"✅ News published, but notification failed: " +
 notificationError.message;
 
-status.className =
+publishStatus.className =
 "status error";
-
-publishButton.disabled =
-false;
-
-publishButton.textContent =
-"PUBLISH NEWS";
-
-return;
 
 }
 
 
-/* =====================================
-   SUCCESS
-===================================== */
+/* CLEAR FORM */
 
-status.textContent =
+document.getElementById(
+"title"
+).value = "";
 
-"✅ News published and notification sent to " +
-
-(
-pushResult.successful || 0
-) +
-
-" registered device(s).";
-
-status.className =
-"status success";
-
-
-document
-.getElementById("title")
-.value = "";
-
-
-document
-.getElementById("content")
-.value = "";
+document.getElementById(
+"content"
+).value = "";
 
 }
 
@@ -800,15 +798,16 @@ catch(error){
 
 console.error(error);
 
-status.textContent =
+publishStatus.textContent =
 "❌ Publishing failed: " +
 error.message;
 
-status.className =
+publishStatus.className =
 "status error";
 
 }
 
+finally{
 
 publishButton.disabled =
 false;
@@ -818,7 +817,9 @@ publishButton.textContent =
 
 }
 
+}
+
 );
 
 </script></body>
-</html>
+     </html>
