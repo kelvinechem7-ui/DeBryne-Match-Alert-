@@ -52,10 +52,6 @@ font-size:15px;
 font-weight:bold;
 }
 
-button:disabled{
-opacity:.6;
-}
-
 .status{
 margin-top:15px;
 padding:12px;
@@ -69,7 +65,7 @@ word-break:break-word;
 display:none;
 }
 
-</style></head><body><header><h2>DeBryne Update</h2><p>Private Admin Panel</p></header><div class="container"><!-- LOGIN --><div class="card" id="loginBox"><h2>🔐 Admin Login</h2><input
+</style></head><body><header><h2>DeBryne Update</h2><p>Private Admin Panel</p></header><div class="container"><div class="card" id="loginBox"><h2>🔐 Admin Login</h2><input
 type="email"
 id="email"
 value="kelvinechem7@gmail.com"
@@ -98,7 +94,7 @@ class="status"
 id="loginStatus"
 >
 Enter your password to continue.
-</div></div><!-- DASHBOARD --><div
+</div></div><div
 class="card"
 id="dashboard"
 ><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
@@ -112,7 +108,7 @@ LOG OUT
 
 <div class="status">
 ✅ You are logged in.
-</div></div></div><!-- FIREBASE --><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
+</div></div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
 
 const firebaseConfig = {
 
@@ -140,53 +136,86 @@ appId:
 };
 
 
-let auth;
+let auth = null;
 
+
+/* FIREBASE */
 
 try{
 
-firebase.initializeApp(
-firebaseConfig
-);
+firebase.initializeApp(firebaseConfig);
 
-auth =
-firebase.auth();
+auth = firebase.auth();
+
+console.log("Firebase initialized successfully.");
+
+}
+
+catch(error){
+
+console.error(error);
+
+document.getElementById("loginStatus").textContent =
+"Firebase initialization error: " + error.message;
+
+}
 
 
-console.log(
-"Firebase initialized."
-);
+/* AUTH STATE */
+
+if(auth){
+
+auth.onAuthStateChanged(function(user){
+
+const loginBox =
+document.getElementById("loginBox");
+
+const dashboard =
+document.getElementById("dashboard");
+
+const userEmail =
+document.getElementById("userEmail");
+
+if(user){
+
+loginBox.style.display = "none";
+
+dashboard.style.display = "block";
+
+userEmail.textContent =
+"Signed in as: " + user.email;
+
+}
+
+else{
+
+loginBox.style.display = "block";
+
+dashboard.style.display = "none";
+
+}
+
+});
+
+}
 
 
-/* ==============================
-   LOGIN BUTTON
-============================== */
+/* ALL BUTTONS */
 
-document
-.getElementById("loginButton")
-.addEventListener(
-"click",
-async function(){
+document.addEventListener("click", async function(event){
+
+/* LOGIN */
+
+if(event.target.id === "loginButton"){
 
 const email =
-document
-.getElementById("email")
-.value
-.trim();
+document.getElementById("email").value.trim();
 
 const password =
-document
-.getElementById("password")
-.value;
+document.getElementById("password").value;
 
 const status =
-document
-.getElementById("loginStatus");
-
-const button =
-document
-.getElementById("loginButton");
-
+document.getElementById("loginStatus");
 
 if(!email || !password){
 
@@ -197,16 +226,22 @@ return;
 
 }
 
+if(!auth){
 
-button.disabled =
-true;
+status.textContent =
+"Firebase is not available.";
 
-button.textContent =
+return;
+
+}
+
+event.target.disabled = true;
+
+event.target.textContent =
 "LOGGING IN...";
 
 status.textContent =
 "Signing in...";
-
 
 try{
 
@@ -225,100 +260,41 @@ catch(error){
 console.error(error);
 
 status.textContent =
-"❌ Login failed: " +
-error.message;
+"❌ Login failed: " + error.message;
 
-button.disabled =
-false;
+event.target.disabled = false;
 
-button.textContent =
+event.target.textContent =
 "LOGIN";
 
 }
 
-});
-
-
-/* ==============================
-   AUTH STATE
-============================== */
-
-auth.onAuthStateChanged(
-function(user){
-
-const loginBox =
-document.getElementById(
-"loginBox"
-);
-
-const dashboard =
-document.getElementById(
-"dashboard"
-);
-
-const userEmail =
-document.getElementById(
-"userEmail"
-);
-
-
-if(user){
-
-loginBox.style.display =
-"none";
-
-dashboard.style.display =
-"block";
-
-userEmail.textContent =
-"Signed in as: " +
-user.email;
-
 }
 
-else{
 
-loginBox.style.display =
-"block";
+/* LOGOUT */
 
-dashboard.style.display =
-"none";
+if(event.target.id === "logoutButton"){
 
-}
+if(auth){
 
-});
-
-
-/* ==============================
-   LOGOUT
-============================== */
-
-document
-.getElementById("logoutButton")
-.addEventListener(
-"click",
-async function(){
+try{
 
 await auth.signOut();
-
-});
 
 }
 
 catch(error){
 
-console.error(
-"Firebase initialization error:",
-error
-);
-
-document
-.getElementById("loginStatus")
-.textContent =
-"Firebase error: " +
-error.message;
+console.error(error);
 
 }
 
+}
+
+}
+
+});
+
 </script></body>
-    </html>
+</html>
