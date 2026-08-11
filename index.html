@@ -295,11 +295,9 @@ Welcome 👋
 </h2>
 
 <p class="muted">
-
 Stay informed with the latest student news,
 academic information, campus announcements
 and sports updates.
-
 </p>
 
 </div>
@@ -429,7 +427,6 @@ class="page"
 Latest campus news and announcements.
 </p>
 
-
 <div
 id="newsList"
 style="margin-top:18px"
@@ -462,7 +459,6 @@ class="page"
 <p class="muted">
 Fixtures, results and sports updates.
 </p>
-
 
 <div
 id="sportsList"
@@ -508,10 +504,8 @@ style="margin-top:18px"
 </h3>
 
 <p class="muted">
-
 Enable notifications to receive breaking news,
 academic announcements and important updates.
-
 </p>
 
 
@@ -524,9 +518,7 @@ Enable Notifications
 class="status"
 id="notifyStatus"
 >
-
 Checking notification status...
-
 </div>
 
 
@@ -789,12 +781,12 @@ const VAPID_KEY =
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
 
 
-/* =========================
-   GOOGLE APPS SCRIPT
-========================= */
+/* =========================================
+   NEW PUSH SERVER URL
+========================================= */
 
 const PUSH_SERVER_URL =
-"https://script.google.com/macros/s/AKfycbzRFFTaLRFk3PPvbYPTH7FH9QAzYXbx-S16o5b-4FYcOhwSKSXKHlKdsAQENImEpmlqyA/exec";
+"https://script.google.com/macros/s/AKfycbwQVk4bcaaUuErxlsh8UZLyQA19FDpkgYQOp6WF-81vtOtdHC0CnclgIaJ-yULitmtJDA/exec";
 
 
 const app =
@@ -809,9 +801,9 @@ const messaging =
 getMessaging(app);
 
 
-/* =========================
+/* =========================================
    ESCAPE HTML
-========================= */
+========================================= */
 
 function escapeHTML(value){
 
@@ -825,9 +817,9 @@ return String(value || "")
 }
 
 
-/* =========================
+/* =========================================
    NEWS CARD
-========================= */
+========================================= */
 
 function createNewsCard(item){
 
@@ -881,9 +873,9 @@ new Date(item.createdAt).toLocaleString()
 }
 
 
-/* =========================
+/* =========================================
    LOAD NEWS
-========================= */
+========================================= */
 
 onValue(
 
@@ -1073,9 +1065,9 @@ message;
 );
 
 
-/* =========================
+/* =========================================
    NAVIGATION
-========================= */
+========================================= */
 
 function openPage(page){
 
@@ -1157,9 +1149,9 @@ element.dataset.page
 });
 
 
-/* =========================
+/* =========================================
    NOTIFICATION ELEMENTS
-========================= */
+========================================= */
 
 const notifyBtn =
 document.getElementById(
@@ -1185,11 +1177,12 @@ document.getElementById(
 );
 
 
-/* =========================
-   FIREBASE MESSAGING WORKER
-========================= */
+/* =========================================
+   FIREBASE MESSAGING SERVICE WORKER
+========================================= */
 
-let messagingRegistration = null;
+let messagingRegistration =
+null;
 
 
 async function prepareMessagingServiceWorker(){
@@ -1220,11 +1213,20 @@ return messagingRegistration;
 }
 
 
-/* =========================
-   SEND TOKEN TO PUSH SERVER
-========================= */
+/* =========================================
+   REGISTER TOKEN WITH PUSH SERVER
+========================================= */
 
 async function registerTokenWithPushServer(token){
+
+if(!token){
+
+throw new Error(
+"FCM token is missing."
+);
+
+}
+
 
 const response =
 await fetch(
@@ -1254,28 +1256,60 @@ await response.text();
 
 
 console.log(
-"Push server response:",
+"Push server registration response:",
 text
 );
 
 
-return text;
+let result;
+
+try{
+
+result =
+JSON.parse(text);
+
+}
+
+catch(error){
+
+throw new Error(
+"Push server returned an invalid response: " +
+text
+);
 
 }
 
 
-/* =========================
+if(!result.success){
+
+throw new Error(
+result.error ||
+"Device registration failed."
+);
+
+}
+
+
+return result;
+
+}
+
+
+/* =========================================
    GET FCM TOKEN
-========================= */
+========================================= */
 
 async function getFCMToken(){
 
 const registration =
+
 messagingRegistration ||
+
 await prepareMessagingServiceWorker();
 
 
 const currentToken =
+
 await getToken(
 messaging,
 {
@@ -1299,7 +1333,7 @@ throw new Error(
 }
 
 
-/* Show token */
+/* Show token for testing */
 
 tokenText.textContent =
 currentToken;
@@ -1314,12 +1348,19 @@ currentToken
 );
 
 
-/* IMPORTANT:
-   SEND TOKEN TO GOOGLE APPS SCRIPT
-*/
+/* =========================================
+   SEND TOKEN TO PUSH SERVER
+========================================= */
 
+const registrationResult =
 await registerTokenWithPushServer(
 currentToken
+);
+
+
+console.log(
+"Device registration:",
+registrationResult
 );
 
 
@@ -1328,9 +1369,9 @@ return currentToken;
 }
 
 
-/* =========================
+/* =========================================
    NOTIFICATION STATUS
-========================= */
+========================================= */
 
 function setNotificationStatus(){
 
@@ -1395,9 +1436,9 @@ notifyBtn.textContent =
 }
 
 
-/* =========================
+/* =========================================
    ENABLE NOTIFICATIONS
-========================= */
+========================================= */
 
 async function enableNotifications(){
 
@@ -1425,249 +1466,3 @@ if(
 Notification.permission ===
 "denied"
 ){
-
-notifyStatus.textContent =
-"❌ Notifications are blocked. Open Chrome → Site settings → Notifications and allow them.";
-
-return;
-
-}
-
-
-notifyBtn.disabled =
-true;
-
-notifyBtn.textContent =
-"Enabling...";
-
-
-try{
-
-const permission =
-await Notification.requestPermission();
-
-
-if(permission !== "granted"){
-
-notifyStatus.textContent =
-"❌ Notification permission was not granted.";
-
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Enable Notifications";
-
-return;
-
-}
-
-
-await prepareMessagingServiceWorker();
-
-
-const token =
-await getFCMToken();
-
-
-if(token){
-
-notifyStatus.textContent =
-"✅ Push notifications are allowed and your device is registered.";
-
-notifyBtn.textContent =
-"Notifications Enabled";
-
-notifyBtn.disabled =
-true;
-
-}
-
-}
-
-catch(error){
-
-console.error(
-"FCM notification error:",
-error
-);
-
-
-notifyStatus.textContent =
-"❌ Push setup failed: " +
-(error.message || error);
-
-
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Try Again";
-
-}
-
-}
-
-
-/* =========================
-   FOREGROUND MESSAGE
-========================= */
-
-onMessage(
-messaging,
-payload => {
-
-console.log(
-"Foreground FCM message:",
-payload
-);
-
-
-const title =
-payload.notification?.title ||
-"DeBryne Update";
-
-
-const body =
-payload.notification?.body ||
-"You have a new update from DeBryne Update.";
-
-
-if(
-Notification.permission ===
-"granted"
-){
-
-new Notification(
-title,
-{
-
-body:
-body,
-
-icon:
-"./file_000000008e5c71f4a9d057362a556762.png",
-
-badge:
-"./file_000000008e5c71f4a9d057362a556762.png"
-
-}
-);
-
-}
-
-}
-);
-
-
-/* =========================
-   BUTTON
-========================= */
-
-notifyBtn.addEventListener(
-"click",
-enableNotifications
-);
-
-
-/* =========================
-   STARTUP
-========================= */
-
-window.addEventListener(
-"load",
-async function(){
-
-setNotificationStatus();
-
-
-/* Register normal PWA service worker */
-
-if(
-"serviceWorker"
-in navigator
-){
-
-try{
-
-await navigator.serviceWorker.register(
-"./service-worker.js",
-{
-scope:"./"
-}
-);
-
-console.log(
-"DeBryne PWA service worker registered."
-);
-
-}
-
-catch(error){
-
-console.error(
-"PWA service worker error:",
-error
-);
-
-}
-
-}
-
-
-/* If notifications are already allowed,
-   register the FCM token again.
-*/
-
-if(
-"Notification"
-in window &&
-Notification.permission ===
-"granted"
-){
-
-try{
-
-await prepareMessagingServiceWorker();
-
-await getFCMToken();
-
-
-notifyStatus.textContent =
-"✅ Push notifications are allowed and your device is registered.";
-
-notifyBtn.textContent =
-"Notifications Enabled";
-
-notifyBtn.disabled =
-true;
-
-}
-
-catch(error){
-
-console.error(
-"Existing FCM setup error:",
-error
-);
-
-
-notifyStatus.textContent =
-"⚠️ Notifications are allowed, but Firebase setup needs attention.";
-
-}
-
-}
-
-else{
-
-setNotificationStatus();
-
-}
-
-});
-
-</script>
-
-</body>
-   </html>
