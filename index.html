@@ -215,17 +215,6 @@ border-radius:10px;
 font-size:12px;
 margin-top:15px;
 display:none;
-word-break:break-word;
-}
-
-.successBox{
-background:#ecfdf5;
-color:#065f46;
-padding:12px;
-border-radius:10px;
-font-size:12px;
-margin-top:15px;
-display:none;
 }
 
 @media(max-width:350px){
@@ -274,10 +263,10 @@ academic announcements and important updates.
 </p><button id="notifyBtn" type="button">
 Enable Notifications
 </button><div class="status" id="notifyStatus">
-Checking notification status...
-</div><div class="tokenBox" id="tokenBox"><strong>FCM device token:</strong>
+Notifications are ready. Tap the button above to enable them.
+</div><div class="tokenBox" id="tokenBox">FCM token:
 
-<div id="tokenText" style="margin-top:7px"></div></div><div id="pushError" class="errorBox"></div><div id="pushSuccess" class="successBox"></div></div></main></section><!-- ================= PROFILE ================= --><section id="profilePage" class="page"><main class="container"><h2>👤 Profile</h2><p class="muted">
+<div id="tokenText" style="margin-top:7px"></div></div><div id="pushError" class="errorBox"></div></div></main></section><!-- ================= PROFILE ================= --><section id="profilePage" class="page"><main class="container"><h2>👤 Profile</h2><p class="muted">
 Your DeBryne Update profile.
 </p><div
 class="card"
@@ -293,77 +282,76 @@ Loading academic updates...
 Upcoming student events and activities.
 </p><div id="eventList" style="margin-top:18px"><div class="empty">
 Loading events...
-</div></div></main></section><!-- ================= BOTTOM NAVIGATION ================= --><nav class="bottom"><div class="nav active" data-page="home" role="button"><span>🏠</span>
+</div></div></main></section><!-- ================= BOTTOM NAV ================= --><nav class="bottom"><div class="nav active" data-page="home">
+<span>🏠</span>
 Home
-
-</div><div class="nav" data-page="news" role="button"><span>📰</span>
+</div><div class="nav" data-page="news">
+<span>📰</span>
 News
-
-</div><div class="nav" data-page="sports" role="button"><span>⚽</span>
+</div><div class="nav" data-page="sports">
+<span>⚽</span>
 Sports
-
-</div><div class="nav" data-page="alerts" role="button"><span>🔔</span>
+</div><div class="nav" data-page="alerts">
+<span>🔔</span>
 Alerts
-
-</div><div class="nav" data-page="profile" role="button"><span>👤</span>
+</div><div class="nav" data-page="profile">
+<span>👤</span>
 Profile
-
-</div></nav><!-- ==================================================
-     NAVIGATION
-================================================== --><script>
+</div></nav><!-- ================= NAVIGATION ================= --><script>
 
 (function(){
 
 function openPage(page){
 
-var pages =
-document.querySelectorAll(".page");
+document
+.querySelectorAll(".page")
+.forEach(function(item){
 
-for(var i=0;i<pages.length;i++){
+item.classList.remove("active");
 
-pages[i].classList.remove("active");
+});
 
-}
 
-var target =
-document.getElementById(page + "Page");
-
-if(target){
-
-target.classList.add("active");
-
-}
-
-var navs =
-document.querySelectorAll(".nav");
-
-for(var j=0;j<navs.length;j++){
-
-navs[j].classList.remove("active");
-
-}
-
-var activeNavs =
-document.querySelectorAll(
-'[data-page="' + page + '"]'
+const target =
+document.getElementById(
+page + "Page"
 );
 
-for(var k=0;k<activeNavs.length;k++){
-
-activeNavs[k].classList.add("active");
-
+if(target){
+target.classList.add("active");
 }
+
+
+document
+.querySelectorAll(".nav")
+.forEach(function(item){
+
+item.classList.remove("active");
+
+});
+
+
+document
+.querySelectorAll(
+'[data-page="' + page + '"]'
+)
+.forEach(function(item){
+
+item.classList.add("active");
+
+});
+
 
 window.scrollTo(0,0);
 
 }
 
-var clickable =
-document.querySelectorAll("[data-page]");
 
-for(var i=0;i<clickable.length;i++){
+document
+.querySelectorAll("[data-page]")
+.forEach(function(item){
 
-clickable[i].addEventListener(
+item.addEventListener(
 "click",
 function(){
 
@@ -371,22 +359,20 @@ openPage(
 this.getAttribute("data-page")
 );
 
-}
-);
+});
 
-}
+});
 
 })();
 
-</script><!-- ==================================================
-     FIREBASE
-================================================== --><script type="module">
+</script><!-- ================= FIREBASE ================= --><script type="module">
 
 import {
 initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
 
 import {
 getDatabase,
@@ -396,10 +382,10 @@ onValue
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
+
 import {
 getMessaging,
-getToken,
-onMessage
+getToken
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
@@ -455,12 +441,13 @@ const PUSH_SERVER_URL =
 
 
 /* =========================================
-   FIREBASE INITIALIZATION
+   INITIALIZE FIREBASE
 ========================================= */
 
 let app = null;
 let db = null;
 let messaging = null;
+
 
 try{
 
@@ -474,7 +461,7 @@ messaging =
 getMessaging(app);
 
 console.log(
-"Firebase initialized successfully."
+"Firebase initialized."
 );
 
 }
@@ -486,21 +473,11 @@ console.error(
 error
 );
 
-const status =
-document.getElementById("notifyStatus");
-
-if(status){
-
-status.textContent =
-"⚠️ Firebase initialization failed.";
-
-}
-
 }
 
 
 /* =========================================
-   ESCAPE HTML
+   HTML ESCAPE
 ========================================= */
 
 function escapeHTML(value){
@@ -516,7 +493,7 @@ return String(value || "")
 
 
 /* =========================================
-   CREATE NEWS CARD
+   NEWS CARD
 ========================================= */
 
 function createNewsCard(item){
@@ -583,25 +560,36 @@ onValue(
 
 ref(db,"news"),
 
-snapshot => {
+function(snapshot){
 
 const data =
 snapshot.val();
 
+
 const home =
-document.getElementById("homeNews");
+document.getElementById(
+"homeNews"
+);
 
 const news =
-document.getElementById("newsList");
+document.getElementById(
+"newsList"
+);
 
 const sports =
-document.getElementById("sportsList");
+document.getElementById(
+"sportsList"
+);
 
 const academic =
-document.getElementById("academicList");
+document.getElementById(
+"academicList"
+);
 
 const events =
-document.getElementById("eventList");
+document.getElementById(
+"eventList"
+);
 
 
 if(!data){
@@ -609,20 +597,11 @@ if(!data){
 const message =
 '<div class="empty">No updates published yet.</div>';
 
-home.innerHTML =
-message;
-
-news.innerHTML =
-message;
-
-sports.innerHTML =
-message;
-
-academic.innerHTML =
-message;
-
-events.innerHTML =
-message;
+home.innerHTML = message;
+news.innerHTML = message;
+sports.innerHTML = message;
+academic.innerHTML = message;
+events.innerHTML = message;
 
 return;
 
@@ -636,10 +615,8 @@ Object.keys(data)
 .map(function(key){
 
 return {
-
 id:key,
 ...data[key]
-
 };
 
 })
@@ -686,13 +663,16 @@ item.category || ""
 
 });
 
+
 const element =
-document.getElementById(elementId);
+document.getElementById(
+elementId
+);
+
 
 if(result.length){
 
 element.innerHTML =
-
 result
 .map(createNewsCard)
 .join("");
@@ -702,7 +682,6 @@ result
 else{
 
 element.innerHTML =
-
 `<div class="empty">
 ${emptyMessage}
 </div>`;
@@ -732,10 +711,10 @@ filterNews(
 
 },
 
-error => {
+function(error){
 
 console.error(
-"Firebase database error:",
+"Database error:",
 error
 );
 
@@ -765,35 +744,39 @@ message;
 ========================================= */
 
 const notifyBtn =
-document.getElementById("notifyBtn");
+document.getElementById(
+"notifyBtn"
+);
 
 const notifyStatus =
-document.getElementById("notifyStatus");
+document.getElementById(
+"notifyStatus"
+);
 
 const tokenBox =
-document.getElementById("tokenBox");
+document.getElementById(
+"tokenBox"
+);
 
 const tokenText =
-document.getElementById("tokenText");
+document.getElementById(
+"tokenText"
+);
 
 const pushError =
-document.getElementById("pushError");
-
-const pushSuccess =
-document.getElementById("pushSuccess");
+document.getElementById(
+"pushError"
+);
 
 
 /* =========================================
    SHOW ERROR
 ========================================= */
 
-function showPushError(message){
+function showError(message){
 
 pushError.style.display =
 "block";
-
-pushSuccess.style.display =
-"none";
 
 pushError.textContent =
 message;
@@ -802,31 +785,10 @@ message;
 
 
 /* =========================================
-   SHOW SUCCESS
+   REGISTER FCM SERVICE WORKER
 ========================================= */
 
-function showPushSuccess(message){
-
-pushSuccess.style.display =
-"block";
-
-pushError.style.display =
-"none";
-
-pushSuccess.textContent =
-message;
-
-}
-
-
-/* =========================================
-   SERVICE WORKER
-========================================= */
-
-let messagingRegistration = null;
-
-
-async function prepareMessagingServiceWorker(){
+async function registerFCMServiceWorker(){
 
 if(!("serviceWorker" in navigator)){
 
@@ -837,12 +799,7 @@ throw new Error(
 }
 
 
-/*
-   Register the Firebase Messaging
-   service worker first.
-*/
-
-messagingRegistration =
+const registration =
 
 await navigator.serviceWorker.register(
 
@@ -857,22 +814,16 @@ scope:"./"
 
 await navigator.serviceWorker.ready;
 
-
-console.log(
-"Firebase Messaging service worker ready."
-);
-
-
-return messagingRegistration;
+return registration;
 
 }
 
 
 /* =========================================
-   REGISTER TOKEN WITH PUSH SERVER
+   REGISTER TOKEN ON APPS SCRIPT
 ========================================= */
 
-async function registerTokenWithPushServer(token){
+async function saveToken(token){
 
 if(!token){
 
@@ -881,10 +832,6 @@ throw new Error(
 );
 
 }
-
-console.log(
-"Sending FCM token to push server..."
-);
 
 
 const response =
@@ -898,21 +845,15 @@ PUSH_SERVER_URL,
 method:"POST",
 
 headers:{
-
 "Content-Type":
 "text/plain;charset=utf-8"
-
 },
 
 body:JSON.stringify({
 
 action:"register",
 
-token:token,
-
-platform:"web",
-
-source:"debryne-update"
+token:token
 
 })
 
@@ -926,7 +867,7 @@ await response.text();
 
 
 console.log(
-"Push server response:",
+"Registration response:",
 text
 );
 
@@ -951,29 +892,6 @@ JSON.parse(text);
 
 catch(error){
 
-console.warn(
-"Server response was not JSON:",
-text
-);
-
-
-/*
-   Some Apps Script deployments return
-   plain text even when registration worked.
-*/
-
-if(
-text.toLowerCase().includes("success")
-){
-
-return {
-
-success:true
-
-};
-
-}
-
 throw new Error(
 "Push server returned an invalid response."
 );
@@ -981,9 +899,7 @@ throw new Error(
 }
 
 
-if(
-result.success === false
-){
+if(!result.success){
 
 throw new Error(
 result.error ||
@@ -999,33 +915,96 @@ return result;
 
 
 /* =========================================
-   GET FCM TOKEN
+   ENABLE NOTIFICATIONS
 ========================================= */
 
-async function getFCMToken(){
+async function enableNotifications(){
 
-if(!messaging){
+pushError.style.display =
+"none";
+
+notifyBtn.disabled =
+true;
+
+notifyBtn.textContent =
+"Enabling...";
+
+try{
+
+
+if(!window.isSecureContext){
 
 throw new Error(
-"Firebase Messaging is not available."
+"Please open the HTTPS GitHub Pages website."
 );
 
 }
 
 
-const registration =
+if(!("Notification" in window)){
 
-messagingRegistration ||
-
-await prepareMessagingServiceWorker();
-
-
-console.log(
-"Requesting FCM token..."
+throw new Error(
+"This browser does not support notifications."
 );
 
+}
 
-const currentToken =
+
+if(!messaging){
+
+throw new Error(
+"Firebase Messaging could not initialize."
+);
+
+}
+
+
+let permission =
+Notification.permission;
+
+
+if(permission === "denied"){
+
+throw new Error(
+"Notifications are blocked for this site. Allow them in Chrome site settings."
+);
+
+}
+
+
+if(permission !== "granted"){
+
+notifyStatus.textContent =
+"Requesting notification permission...";
+
+permission =
+await Notification.requestPermission();
+
+}
+
+
+if(permission !== "granted"){
+
+throw new Error(
+"Notification permission was not granted."
+);
+
+}
+
+
+notifyStatus.textContent =
+"Registering notification service...";
+
+
+const registration =
+await registerFCMServiceWorker();
+
+
+notifyStatus.textContent =
+"Getting your device notification token...";
+
+
+const token =
 
 await getToken(
 
@@ -1044,7 +1023,7 @@ registration
 );
 
 
-if(!currentToken){
+if(!token){
 
 throw new Error(
 "Firebase did not return an FCM token."
@@ -1053,211 +1032,24 @@ throw new Error(
 }
 
 
-console.log(
-"FCM token generated successfully."
-);
-
-
 tokenText.textContent =
-currentToken;
+token;
 
 tokenBox.style.display =
 "block";
 
 
-/*
-   Send token to your Apps Script
-   notification server.
-*/
-
-await registerTokenWithPushServer(
-currentToken
-);
-
-
-return currentToken;
-
-}
-
-
-/* =========================================
-   NOTIFICATION STATUS
-========================================= */
-
-function setNotificationStatus(){
-
-if(!window.isSecureContext){
-
 notifyStatus.textContent =
-"❌ Notifications require HTTPS. Open the GitHub Pages website.";
-
-return;
-
-}
+"Registering your device...";
 
 
-if(!("Notification" in window)){
-
-notifyStatus.textContent =
-"❌ This browser does not support notifications.";
-
-return;
-
-}
-
-
-if(
-Notification.permission === "granted"
-){
-
-notifyStatus.textContent =
-"🔄 Notifications are allowed. Checking device registration...";
-
-notifyBtn.textContent =
-"Checking...";
-
-return;
-
-}
-
-
-if(
-Notification.permission === "denied"
-){
-
-notifyStatus.textContent =
-"❌ Notifications are blocked for this site.";
-
-notifyBtn.textContent =
-"Notifications Blocked";
-
-return;
-
-}
+const result =
+await saveToken(token);
 
 
 notifyStatus.textContent =
-"Notifications are not enabled yet.";
 
-notifyBtn.textContent =
-"Enable Notifications";
-
-}
-
-
-/* =========================================
-   ENABLE NOTIFICATIONS
-========================================= */
-
-async function enableNotifications(){
-
-pushError.style.display =
-"none";
-
-pushSuccess.style.display =
-"none";
-
-
-if(!window.isSecureContext){
-
-notifyStatus.textContent =
-"❌ Open the HTTPS GitHub Pages version of DeBryne Update.";
-
-return;
-
-}
-
-
-if(!("Notification" in window)){
-
-notifyStatus.textContent =
-"❌ This browser does not support notifications.";
-
-return;
-
-}
-
-
-if(
-Notification.permission === "denied"
-){
-
-notifyStatus.textContent =
-"❌ Notifications are blocked. Open Chrome → Site settings → Notifications → Allow.";
-
-return;
-
-}
-
-
-notifyBtn.disabled =
-true;
-
-notifyBtn.textContent =
-"Enabling...";
-
-
-try{
-
-/*
-   Ask the user for permission.
-*/
-
-const permission =
-await Notification.requestPermission();
-
-
-if(permission !== "granted"){
-
-notifyStatus.textContent =
-"❌ Notification permission was not granted.";
-
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Enable Notifications";
-
-return;
-
-}
-
-
-notifyStatus.textContent =
-"🔄 Notification permission granted. Preparing FCM...";
-
-
-/*
-   Prepare the Firebase Messaging
-   service worker.
-*/
-
-await prepareMessagingServiceWorker();
-
-
-notifyStatus.textContent =
-"🔄 Generating device notification token...";
-
-
-/*
-   Generate and register FCM token.
-*/
-
-const token =
-await getFCMToken();
-
-
-if(!token){
-
-throw new Error(
-"FCM token was not generated."
-);
-
-}
-
-
-notifyStatus.textContent =
-"✅ Notifications enabled successfully.";
+"✅ Notifications enabled. Device registered successfully.";
 
 notifyBtn.textContent =
 "Notifications Enabled";
@@ -1265,8 +1057,10 @@ notifyBtn.textContent =
 notifyBtn.disabled =
 true;
 
-showPushSuccess(
-"Your device is registered. You can now receive DeBryne Update notifications."
+
+console.log(
+"Registered devices:",
+result.totalDevices
 );
 
 }
@@ -1274,14 +1068,14 @@ showPushSuccess(
 catch(error){
 
 console.error(
-"FCM setup error:",
+"Notification setup error:",
 error
 );
 
 notifyStatus.textContent =
 "❌ Notification setup failed.";
 
-showPushError(
+showError(
 error.message ||
 String(error)
 );
@@ -1308,58 +1102,93 @@ enableNotifications
 
 
 /* =========================================
-   FOREGROUND FCM MESSAGE
+   INITIAL STATUS
 ========================================= */
 
-if(messaging){
-
-onMessage(
-
-messaging,
-
-function(payload){
-
-console.log(
-"Foreground FCM message:",
-payload
-);
-
-
-const title =
-
-payload.notification?.title ||
-
-payload.data?.title ||
-
-"DeBryne Update";
-
-
-const body =
-
-payload.notification?.body ||
-
-payload.data?.body ||
-
-"You have a new update from DeBryne Update.";
-
+if(
+"Notification" in window
+){
 
 if(
-"Notification" in window &&
 Notification.permission === "granted"
 ){
 
-try{
+notifyStatus.textContent =
+"Notifications are already allowed. Tap the button to register this device.";
 
-new Notification(
+}
 
-title,
+else if(
+Notification.permission === "denied"
+){
+
+notifyStatus.textContent =
+"❌ Notifications are blocked for this site.";
+
+}
+
+else{
+
+notifyStatus.textContent =
+"Notifications are ready. Tap the button above to enable them.";
+
+}
+
+}
+
+else{
+
+notifyStatus.textContent =
+"❌ This browser does not support notifications.";
+
+notifyBtn.disabled =
+true;
+
+}
+
+
+/* =========================================
+   PWA SERVICE WORKER
+========================================= */
+
+window.addEventListener(
+"load",
+function(){
+
+if(
+"serviceWorker" in navigator
+){
+
+navigator.serviceWorker.register(
+
+"./service-worker.js",
 
 {
+scope:"./"
+}
 
-body:body,
+)
 
-icon:
-"./file_000000008e5c71f4a9d057362a556762.png",
+.then(function(){
 
-badge:
-"
+console.log(
+"DeBryne PWA service worker registered."
+);
+
+})
+
+.catch(function(error){
+
+console.error(
+"PWA service worker error:",
+error
+);
+
+});
+
+}
+
+});
+
+</script></body>
+                                                     </html>
