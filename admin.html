@@ -106,7 +106,7 @@ color:#991b1b;
 display:none;
 }
 
-</style></head><body><header><h1>DeBryne Update</h1><p>Private Admin Panel</p></header><div class="container"><!-- LOGIN --><div class="card" id="loginPage"><h2>🔐 Admin Login</h2><p>
+</style></head><body><header><h1>DeBryne Update</h1><p>Private Admin Panel</p></header><div class="container"><div class="card" id="loginPage"><h2>🔐 Admin Login</h2><p>
 Sign in to manage DeBryne Update.
 </p><input
 id="email"
@@ -137,9 +137,7 @@ id="loginStatus"
 class="status"
 >
 Enter your password to continue.
-</div></div><!-- ADMIN PANEL --><div
-id="adminPanel"
-><div class="card"><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
+</div></div><div id="adminPanel"><div class="card"><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
 id="logoutButton"
 type="button"
 class="logout"
@@ -149,7 +147,7 @@ class="logout"
 LOG OUT
 </button>
 
-</div><!-- PUBLISH NEWS --><div class="card"><h2>📰 Publish News</h2><label>
+</div><div class="card"><h2>📰 Publish News</h2><label>
 Category
 </label><select id="category"><option value="Campus News">
 Campus News
@@ -189,7 +187,7 @@ id="publishStatus"
 class="status"
 >
 Ready to publish.
-</div></div></div></div><!-- FIREBASE --><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-database-compat.js"></script><script>
+</div></div></div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-database-compat.js"></script><script>
 
 const firebaseConfig = {
 
@@ -222,41 +220,25 @@ let auth = null;
 let database = null;
 
 
-/* FIREBASE INITIALIZATION */
-
 try{
 
-firebase.initializeApp(
-firebaseConfig
-);
+firebase.initializeApp(firebaseConfig);
 
-auth =
-firebase.auth();
+auth = firebase.auth();
 
-database =
-firebase.database();
-
-console.log(
-"Firebase initialized successfully."
-);
+database = firebase.database();
 
 }
 
 catch(error){
 
-console.error(
-"Firebase initialization error:",
-error
-);
+console.error(error);
 
 const status =
-document.getElementById(
-"loginStatus"
-);
+document.getElementById("loginStatus");
 
 status.textContent =
-"Firebase error: " +
-error.message;
+"Firebase error: " + error.message;
 
 status.className =
 "status error";
@@ -266,29 +248,20 @@ status.className =
 
 /* LOGIN */
 
-document.getElementById(
-"loginButton"
-).onclick = async function(){
+document.getElementById("loginButton").onclick =
+async function(){
 
 const email =
-document.getElementById(
-"email"
-).value.trim();
+document.getElementById("email").value.trim();
 
 const password =
-document.getElementById(
-"password"
-).value;
+document.getElementById("password").value;
 
 const status =
-document.getElementById(
-"loginStatus"
-);
+document.getElementById("loginStatus");
 
 const button =
-document.getElementById(
-"loginButton"
-);
+document.getElementById("loginButton");
 
 
 if(!email){
@@ -330,17 +303,13 @@ return;
 }
 
 
-button.disabled =
-true;
+button.disabled = true;
 
-button.textContent =
-"LOGGING IN...";
+button.textContent = "LOGGING IN...";
 
-status.textContent =
-"Signing in...";
+status.textContent = "Signing in...";
 
-status.className =
-"status";
+status.className = "status";
 
 
 try{
@@ -363,17 +332,14 @@ catch(error){
 console.error(error);
 
 status.textContent =
-"❌ Login failed: " +
-error.message;
+"❌ Login failed: " + error.message;
 
 status.className =
 "status error";
 
-button.disabled =
-false;
+button.disabled = false;
 
-button.textContent =
-"LOGIN";
+button.textContent = "LOGIN";
 
 }
 
@@ -384,46 +350,34 @@ button.textContent =
 
 if(auth){
 
-auth.onAuthStateChanged(
-function(user){
+auth.onAuthStateChanged(function(user){
 
 const loginPage =
-document.getElementById(
-"loginPage"
-);
+document.getElementById("loginPage");
 
 const adminPanel =
-document.getElementById(
-"adminPanel"
-);
+document.getElementById("adminPanel");
 
 const userEmail =
-document.getElementById(
-"userEmail"
-);
+document.getElementById("userEmail");
 
 
 if(user){
 
-loginPage.style.display =
-"none";
+loginPage.style.display = "none";
 
-adminPanel.style.display =
-"block";
+adminPanel.style.display = "block";
 
 userEmail.textContent =
-"Signed in as: " +
-user.email;
+"Signed in as: " + user.email;
 
 }
 
 else{
 
-loginPage.style.display =
-"block";
+loginPage.style.display = "block";
 
-adminPanel.style.display =
-"none";
+adminPanel.style.display = "none";
 
 }
 
@@ -434,9 +388,8 @@ adminPanel.style.display =
 
 /* LOGOUT */
 
-document.getElementById(
-"logoutButton"
-).onclick = async function(){
+document.getElementById("logoutButton").onclick =
+async function(){
 
 if(auth){
 
@@ -459,37 +412,26 @@ console.error(error);
 
 /* PUBLISH NEWS */
 
-document.getElementById(
-"publishButton"
-).onclick = async function(){
+document.getElementById("publishButton").onclick =
+async function(){
 
 const user =
 auth ? auth.currentUser : null;
 
 const category =
-document.getElementById(
-"category"
-).value;
+document.getElementById("category").value;
 
 const title =
-document.getElementById(
-"title"
-).value.trim();
+document.getElementById("title").value.trim();
 
 const content =
-document.getElementById(
-"content"
-).value.trim();
+document.getElementById("content").value.trim();
 
 const status =
-document.getElementById(
-"publishStatus"
-);
+document.getElementById("publishStatus");
 
 const button =
-document.getElementById(
-"publishButton"
-);
+document.getElementById("publishButton");
 
 
 if(!user){
@@ -531,43 +473,31 @@ return;
 }
 
 
-button.disabled =
-true;
+button.disabled = true;
 
-button.textContent =
-"PUBLISHING...";
+button.textContent = "PUBLISHING...";
 
-status.textContent =
-"Publishing news...";
+status.textContent = "Publishing news...";
 
-status.className =
-"status";
+status.className = "status";
 
 
 try{
 
 const news =
-database
-.ref("news")
-.push();
-
+database.ref("news").push();
 
 await news.set({
 
-category:
-category,
+category: category,
 
-title:
-title,
+title: title,
 
-content:
-content,
+content: content,
 
-author:
-user.email,
+author: user.email,
 
-createdAt:
-Date.now()
+createdAt: Date.now()
 
 });
 
@@ -579,14 +509,9 @@ status.className =
 "status success";
 
 
-document.getElementById(
-"title"
-).value = "";
+document.getElementById("title").value = "";
 
-
-document.getElementById(
-"content"
-).value = "";
+document.getElementById("content").value = "";
 
 }
 
@@ -595,8 +520,7 @@ catch(error){
 console.error(error);
 
 status.textContent =
-"❌ Publishing failed: " +
-error.message;
+"❌ Publishing failed: " + error.message;
 
 status.className =
 "status error";
@@ -604,11 +528,9 @@ status.className =
 }
 
 
-button.disabled =
-false;
+button.disabled = false;
 
-button.textContent =
-"PUBLISH NEWS";
+button.textContent = "PUBLISH NEWS";
 
 };
 
