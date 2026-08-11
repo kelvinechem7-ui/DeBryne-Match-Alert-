@@ -1,6 +1,14 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update</title><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#111827"><link
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>DeBryne Update</title><link
+rel="manifest"
+href="./manifest.json"><meta
+name="theme-color"
+content="#111827">
+
+<link
 rel="icon"
 type="image/png"
 href="./file_000000008e5c71f4a9d057362a556762.png"><link
@@ -169,6 +177,11 @@ margin-top:15px;
 cursor:pointer;
 }
 
+button:disabled{
+opacity:.65;
+cursor:not-allowed;
+}
+
 .status{
 margin-top:12px;
 background:#f1f5f9;
@@ -177,6 +190,18 @@ border-radius:8px;
 font-size:12px;
 color:#475569;
 line-height:1.5;
+word-break:break-word;
+}
+
+.tokenBox{
+display:none;
+margin-top:12px;
+background:#ecfdf5;
+padding:12px;
+border-radius:8px;
+font-size:11px;
+color:#065f46;
+word-break:break-all;
 }
 
 .empty{
@@ -203,85 +228,113 @@ padding:8px 5px;
 src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
 
-</div><div><h1>DeBryne Update</h1><p>Student News • Education • Sports</p></div></div></header><!-- HOME --><section id="homePage" class="page active"><main class="container"><div class="welcome"><h2>Welcome 👋</h2><p class="muted">
-Stay informed with the latest student news,
+</div><div><h1>DeBryne Update</h1><p>Student News • Education • Sports</p></div></div></header><!-- HOME --><section
+id="homePage"
+class="page active"><main class="container"><div class="welcome"><h2>Welcome 👋</h2><p class="muted">Stay informed with the latest student news,
 academic information, campus announcements
 and sports updates.
-</p></div><h2 class="title">
-Student Services
-</h2><div class="quick"><div class="card" data-page="news"><div class="icon">📰</div><h3>Campus News</h3><p class="muted">
-Latest student and campus updates.
-</p></div><div class="card" data-page="academics"><div class="icon">📚</div><h3>Academics</h3><p class="muted">
-Academic information and resources.
-</p></div><div class="card" data-page="events"><div class="icon">📅</div><h3>Events</h3><p class="muted">
-Upcoming student activities.
-</p></div><div class="card" data-page="sports"><div class="icon">⚽</div><h3>Sports</h3><p class="muted">
-Fixtures, scores and sports news.
-</p></div></div><h2 class="title">
-Latest Updates
-</h2><div id="homeNews"><div class="empty">
-Loading updates...
-</div></div></main></section><!-- NEWS --><section id="newsPage" class="page"><main class="container"><h2>
+
+</p></div><h2 class="title">Student Services
+
+</h2><div class="quick"><div
+class="card"
+data-page="news"><div class="icon">📰</div><h3>Campus News</h3><p class="muted">Latest student and campus updates.
+
+</p></div><div
+class="card"
+data-page="academics"><div class="icon">📚</div><h3>Academics</h3><p class="muted">Academic information and resources.
+
+</p></div><div
+class="card"
+data-page="events"><div class="icon">📅</div><h3>Events</h3><p class="muted">Upcoming student activities.
+
+</p></div><div
+class="card"
+data-page="sports"><div class="icon">⚽</div><h3>Sports</h3><p class="muted">Fixtures, scores and sports news.
+
+</p></div></div><h2 class="title">Latest Updates
+
+</h2><div id="homeNews"><div class="empty">Loading updates...
+
+</div></div></main></section><!-- NEWS --><section
+id="newsPage"
+class="page"><main class="container"><h2>
 📰 Campus News
-</h2><p class="muted">
-Latest campus news and announcements.
+</h2><p class="muted">Latest campus news and announcements.
+
 </p><div
 id="newsList"
-style="margin-top:18px"><div class="empty">
-Loading news...
-</div></div></main></section><!-- SPORTS --><section id="sportsPage" class="page"><main class="container"><h2>
+style="margin-top:18px"><div class="empty">Loading news...
+
+</div></div></main></section><!-- SPORTS --><section
+id="sportsPage"
+class="page"><main class="container"><h2>
 ⚽ Sports
-</h2><p class="muted">
-Fixtures, results and sports updates.
+</h2><p class="muted">Fixtures, results and sports updates.
+
 </p><div
 id="sportsList"
-style="margin-top:18px"><div class="empty">
-Loading sports...
-</div></div></main></section><!-- ALERTS --><section id="alertsPage" class="page"><main class="container"><h2>
+style="margin-top:18px"><div class="empty">Loading sports...
+
+</div></div></main></section><!-- ALERTS --><section
+id="alertsPage"
+class="page"><main class="container"><h2>
 🔔 Alerts
-</h2><p class="muted">
-Receive important DeBryne Update notifications.
+</h2><p class="muted">Receive important DeBryne Update notifications.
+
 </p><div
 class="card"
 style="margin-top:18px"><h3>
 🔔 Notifications
-</h3><p class="muted">
-Enable notifications to receive breaking news,
+</h3><p class="muted">Enable notifications to receive breaking news,
 academic announcements and important updates.
-</p><button id="notifyBtn">
-Enable Notifications
+
+</p><button id="notifyBtn">Enable Notifications
+
 </button><div
 class="status"
 id="notifyStatus">Checking notification status...
 
-</div></div></main></section><!-- PROFILE --><section id="profilePage" class="page"><main class="container"><h2>
+</div><div
+class="tokenBox"
+id="tokenBox">FCM token:
+
+<div
+id="tokenText"
+style="margin-top:7px"></div></div></div></main></section><!-- PROFILE --><section
+id="profilePage"
+class="page"><main class="container"><h2>
 👤 Profile
-</h2><p class="muted">
-Your DeBryne Update profile.
+</h2><p class="muted">Your DeBryne Update profile.
+
 </p><div
 class="card"
-style="text-align:center;margin-top:18px"><div style="font-size:55px">
-👤
-</div><h2>
-Student
-</h2><p class="muted">
-DeBryne Update
-</p></div></main></section><!-- ACADEMICS --><section id="academicsPage" class="page"><main class="container"><h2>
+style="text-align:center;margin-top:18px"><div style="font-size:55px">👤
+
+</div><h2>Student
+
+</h2><p class="muted">DeBryne Update
+
+</p></div></main></section><!-- ACADEMICS --><section
+id="academicsPage"
+class="page"><main class="container"><h2>
 📚 Academics
-</h2><p class="muted">
-Academic information and educational updates.
+</h2><p class="muted">Academic information and educational updates.
+
 </p><div
 id="academicList"
-style="margin-top:18px"><div class="empty">
-Loading academic updates...
-</div></div></main></section><!-- EVENTS --><section id="eventsPage" class="page"><main class="container"><h2>
+style="margin-top:18px"><div class="empty">Loading academic updates...
+
+</div></div></main></section><!-- EVENTS --><section
+id="eventsPage"
+class="page"><main class="container"><h2>
 📅 Events
-</h2><p class="muted">
-Upcoming student events and activities.
+</h2><p class="muted">Upcoming student events and activities.
+
 </p><div
 id="eventList"
-style="margin-top:18px"><div class="empty">
-Loading events...
+style="margin-top:18px"><div class="empty">Loading events...
+
 </div></div></main></section><!-- BOTTOM NAVIGATION --><nav class="bottom"><div
 class="nav active"
 data-page="home"><span>🏠</span>
@@ -312,22 +365,46 @@ data-page="profile"><span>👤</span>
 
 Profile
 
-</div></nav><!-- FIREBASE --><script type="module">
+</div></nav><!-- FIREBASE DATABASE + FCM --><script type="module">
+
 
 import {
+
 initializeApp
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
 import {
+
 getDatabase,
 ref,
-onValue
+onValue,
+push,
+set
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+import {
+
+getMessaging,
+getToken,
+onMessage
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
 
 
 const firebaseConfig = {
@@ -359,12 +436,20 @@ measurementId:
 };
 
 
+const VAPID_KEY =
+"BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
+
+
 const app =
 initializeApp(firebaseConfig);
 
 
 const db =
 getDatabase(app);
+
+
+const messaging =
+getMessaging(app);
 
 
 function escapeHTML(value){
@@ -480,9 +565,13 @@ const message =
 '<div class="empty">No updates published yet.</div>';
 
 home.innerHTML = message;
+
 news.innerHTML = message;
+
 sports.innerHTML = message;
+
 academic.innerHTML = message;
+
 events.innerHTML = message;
 
 return;
@@ -611,10 +700,10 @@ element.innerHTML = message;
 
 );
 
-</script><!-- NAVIGATION + NOTIFICATIONS + SERVICE WORKER --><script>
 
-let serviceWorkerRegistration = null;
-
+/* --------------------------------
+   NAVIGATION
+-------------------------------- */
 
 function openPage(page){
 
@@ -696,6 +785,10 @@ element.dataset.page
 });
 
 
+/* --------------------------------
+   NOTIFICATION ELEMENTS
+-------------------------------- */
+
 const notifyBtn =
 document.getElementById(
 "notifyBtn"
@@ -708,12 +801,145 @@ document.getElementById(
 );
 
 
+const tokenBox =
+document.getElementById(
+"tokenBox"
+);
+
+
+const tokenText =
+document.getElementById(
+"tokenText"
+);
+
+
+/* --------------------------------
+   FIREBASE MESSAGING SERVICE WORKER
+-------------------------------- */
+
+let messagingRegistration = null;
+
+
+async function prepareMessagingServiceWorker(){
+
+if(!("serviceWorker" in navigator)){
+
+throw new Error(
+"Service workers are not supported."
+);
+
+}
+
+
+messagingRegistration =
+await navigator.serviceWorker.register(
+"./firebase-messaging-sw.js",
+{
+scope:"./"
+}
+);
+
+
+return messagingRegistration;
+
+}
+
+
+/* --------------------------------
+   GET FCM TOKEN
+-------------------------------- */
+
+async function getFCMToken(){
+
+const registration =
+messagingRegistration ||
+await prepareMessagingServiceWorker();
+
+
+const currentToken =
+await getToken(
+messaging,
+{
+vapidKey:VAPID_KEY,
+serviceWorkerRegistration:registration
+}
+);
+
+
+if(!currentToken){
+
+throw new Error(
+"Firebase did not return an FCM token."
+);
+
+}
+
+
+/* Show token on screen for testing */
+
+tokenText.textContent =
+currentToken;
+
+tokenBox.style.display =
+"block";
+
+
+/* Save token to Realtime Database */
+
+try{
+
+const tokenRef =
+push(
+ref(db,"fcmTokens")
+);
+
+
+await set(
+tokenRef,
+{
+token:currentToken,
+createdAt:Date.now(),
+platform:"web"
+}
+);
+
+console.log(
+"FCM token saved to Firebase Database."
+);
+
+}
+
+catch(databaseError){
+
+console.warn(
+"FCM token was created but could not be saved to Realtime Database:",
+databaseError
+);
+
+}
+
+
+console.log(
+"FCM TOKEN:",
+currentToken
+);
+
+
+return currentToken;
+
+}
+
+
+/* --------------------------------
+   NOTIFICATION STATUS
+-------------------------------- */
+
 function setNotificationStatus(){
 
 if(!window.isSecureContext){
 
 notifyStatus.textContent =
-"❌ Notifications require a secure HTTPS connection.";
+"❌ Notifications require HTTPS.";
 
 return;
 
@@ -733,12 +959,10 @@ return;
 if(Notification.permission === "granted"){
 
 notifyStatus.textContent =
-"✅ Notifications are enabled.";
+"🔄 Notifications are allowed. Connecting to Firebase...";
 
 notifyBtn.textContent =
 "Notifications Enabled";
-
-notifyBtn.disabled = true;
 
 return;
 
@@ -748,7 +972,7 @@ return;
 if(Notification.permission === "denied"){
 
 notifyStatus.textContent =
-"❌ Notifications are blocked. Open Chrome site settings and allow notifications.";
+"❌ Notifications are blocked. Allow notifications for this site in Chrome settings.";
 
 notifyBtn.textContent =
 "Notifications Blocked";
@@ -759,7 +983,7 @@ return;
 
 
 notifyStatus.textContent =
-"Notifications have not been enabled yet.";
+"Notifications are not enabled yet.";
 
 notifyBtn.textContent =
 "Enable Notifications";
@@ -767,58 +991,16 @@ notifyBtn.textContent =
 }
 
 
-async function prepareServiceWorker(){
-
-if(!("serviceWorker" in navigator)){
-
-return null;
-
-}
-
-
-try{
-
-serviceWorkerRegistration =
-await navigator.serviceWorker.register(
-"./service-worker.js",
-{
-scope:"./"
-}
-);
-
-
-await navigator.serviceWorker.ready;
-
-
-console.log(
-"DeBryne Update service worker ready."
-);
-
-
-return serviceWorkerRegistration;
-
-}
-
-catch(error){
-
-console.error(
-"Service worker error:",
-error
-);
-
-return null;
-
-}
-
-}
-
+/* --------------------------------
+   ENABLE PUSH NOTIFICATIONS
+-------------------------------- */
 
 async function enableNotifications(){
 
 if(!window.isSecureContext){
 
 notifyStatus.textContent =
-"❌ Open the HTTPS GitHub Pages website to enable notifications.";
+"❌ Open the HTTPS GitHub Pages website.";
 
 return;
 
@@ -828,20 +1010,7 @@ return;
 if(!("Notification" in window)){
 
 notifyStatus.textContent =
-"❌ Chrome on this device does not support notifications.";
-
-return;
-
-}
-
-
-if(Notification.permission === "granted"){
-
-notifyStatus.textContent =
-"✅ Notifications are already enabled.";
-
-notifyBtn.textContent =
-"Notifications Enabled";
+"❌ This browser does not support notifications.";
 
 return;
 
@@ -851,14 +1020,15 @@ return;
 if(Notification.permission === "denied"){
 
 notifyStatus.textContent =
-"❌ Notifications are blocked. Go to Chrome → Site settings → Notifications and allow them.";
+"❌ Notifications are blocked. Open Chrome → Site settings → Notifications and allow them.";
 
 return;
 
 }
 
 
-notifyBtn.disabled = true;
+notifyBtn.disabled =
+true;
 
 notifyBtn.textContent =
 "Enabling...";
@@ -866,81 +1036,50 @@ notifyBtn.textContent =
 
 try{
 
-const registration =
-await prepareServiceWorker();
 
-
-if(!registration){
-
-throw new Error(
-"Service worker could not be registered."
-);
-
-}
-
+/* Request permission */
 
 const permission =
 await Notification.requestPermission();
 
 
-if(permission === "granted"){
+if(permission !== "granted"){
 
 notifyStatus.textContent =
-"✅ Notifications are now enabled!";
+"❌ Notification permission was not granted.";
+
+notifyBtn.disabled =
+false;
+
+notifyBtn.textContent =
+"Enable Notifications";
+
+return;
+
+}
+
+
+/* Register Firebase messaging worker */
+
+await prepareMessagingServiceWorker();
+
+
+/* Get FCM registration token */
+
+const token =
+await getFCMToken();
+
+
+if(token){
+
+notifyStatus.textContent =
+"✅ Push notifications are enabled successfully!";
 
 notifyBtn.textContent =
 "Notifications Enabled";
 
-
-await registration.showNotification(
-"DeBryne Update",
-{
-
-body:
-"Notifications have been enabled successfully.",
-
-icon:
-"./file_000000008e5c71f4a9d057362a556762.png",
-
-badge:
-"./file_000000008e5c71f4a9d057362a556762.png",
-
-tag:
-"debryne-test-notification",
-
-data:{
-url:"./"
-}
-
-}
-);
-
-
-notifyBtn.disabled = true;
-
-}
-
-else if(permission === "denied"){
-
-notifyStatus.textContent =
-"❌ Notification permission was denied.";
-
-notifyBtn.disabled = false;
-
-notifyBtn.textContent =
-"Notifications Blocked";
-
-}
-
-else{
-
-notifyStatus.textContent =
-"Notification permission was dismissed.";
-
-notifyBtn.disabled = false;
-
-notifyBtn.textContent =
-"Enable Notifications";
+notifyBtn.disabled =
+true;
 
 }
 
@@ -949,14 +1088,16 @@ notifyBtn.textContent =
 catch(error){
 
 console.error(
-"Notification error:",
+"FCM notification error:",
 error
 );
 
 notifyStatus.textContent =
-"❌ Unable to enable notifications. Check Chrome site notification settings.";
+"❌ Push setup failed: " +
+(error.message || error);
 
-notifyBtn.disabled = false;
+notifyBtn.disabled =
+false;
 
 notifyBtn.textContent =
 "Try Again";
@@ -966,11 +1107,78 @@ notifyBtn.textContent =
 }
 
 
+/* --------------------------------
+   FOREGROUND FCM MESSAGES
+-------------------------------- */
+
+onMessage(
+messaging,
+payload => {
+
+console.log(
+"Foreground FCM message received:",
+payload
+);
+
+
+const title =
+payload.notification?.title ||
+"DeBryne Update";
+
+
+const body =
+payload.notification?.body ||
+"You have a new update from DeBryne Update.";
+
+
+/* Display notification while page is open */
+
+if(
+Notification.permission === "granted"
+){
+
+new Notification(
+title,
+{
+
+body:body,
+
+icon:
+"./file_000000008e5c71f4a9d057362a556762.png",
+
+badge:
+"./file_000000008e5c71f4a9d057362a556762.png"
+
+}
+);
+
+}
+
+else{
+
+alert(
+title + "\n\n" + body
+);
+
+}
+
+}
+);
+
+
+/* --------------------------------
+   BUTTON
+-------------------------------- */
+
 notifyBtn.addEventListener(
 "click",
 enableNotifications
 );
 
+
+/* --------------------------------
+   STARTUP
+-------------------------------- */
 
 window.addEventListener(
 "load",
@@ -978,13 +1186,92 @@ async function(){
 
 setNotificationStatus();
 
-await prepareServiceWorker();
+
+/*
+  Register the normal PWA service worker.
+  This is separate from Firebase Messaging.
+*/
+
+if(
+"serviceWorker"
+in navigator
+){
+
+try{
+
+await navigator.serviceWorker.register(
+"./service-worker.js",
+{
+scope:"./"
+}
+);
+
+console.log(
+"DeBryne PWA service worker registered."
+);
+
+}
+
+catch(error){
+
+console.error(
+"PWA service worker error:",
+error
+);
+
+}
+
+}
+
+
+/*
+  If permission was already granted,
+  prepare Firebase Messaging automatically.
+*/
+
+if(
+"Notification"
+in window &&
+Notification.permission === "granted"
+){
+
+try{
+
+await prepareMessagingServiceWorker();
+
+await getFCMToken();
+
+notifyStatus.textContent =
+"✅ Push notifications are enabled.";
+
+notifyBtn.textContent =
+"Notifications Enabled";
+
+notifyBtn.disabled =
+true;
+
+}
+
+catch(error){
+
+console.error(
+"Existing FCM setup error:",
+error
+);
+
+notifyStatus.textContent =
+"⚠️ Notifications are allowed, but Firebase setup needs attention.";
+
+}
+
+}
+
+else{
 
 setNotificationStatus();
 
 }
 
-);
+});
 
-</script></body>
-    </html>
+</script></body></html>
