@@ -1,32 +1,237 @@
 <!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeBryne Update Admin Test</title>
-</head><body style="font-family:Arial,sans-serif;padding:30px;"><h1>DeBryne Update Admin</h1><p id="message">
-Test page loaded successfully.
-</p><button
-id="testButton"
-type="button"
-style="
-padding:15px;
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>DeBryne Update Admin</title><style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+padding:20px;
+color:#172033;
+}
+
+.card{
+max-width:500px;
+margin:30px auto;
+background:white;
+padding:22px;
+border-radius:15px;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+input,button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border-radius:9px;
+font-size:15px;
+}
+
+input{
+border:1px solid #ccc;
+}
+
+button{
+border:0;
 background:#111827;
 color:white;
-border:0;
+font-weight:bold;
+}
+
+#admin{
+display:none;
+}
+
+.status{
+margin-top:15px;
+padding:12px;
+background:#f1f5f9;
 border-radius:8px;
-font-size:16px;
-">
+font-size:14px;
+word-break:break-word;
+}
 
-TEST BUTTON
+</style></head><body><div class="card" id="login"><h2>🔐 DeBryne Admin</h2><input
+id="email"
+type="email"
+value="kelvinechem7@gmail.com"
+placeholder="Email"
 
-</button><script>
+«»
 
-document.getElementById("testButton").onclick = function(){
+<input
+id="password"
+type="password"
+placeholder="Password"
 
-document.getElementById("message").textContent =
-"✅ BUTTON WORKS — JAVASCRIPT IS RUNNING!";
+«»
+
+<button id="loginBtn" type="button">
+LOGIN
+</button><div id="loginStatus" class="status">
+Enter your password.
+</div></div><div class="card" id="admin"><h2>👋 Admin Dashboard</h2><p id="account"></p><button id="logoutBtn" type="button">
+LOG OUT
+</button><div class="status">
+Firebase login is working.
+</div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
+
+authDomain:
+"debryne-update.firebaseapp.com",
+
+databaseURL:
+"https://debryne-update-default-rtdb.firebaseio.com",
+
+projectId:
+"debryne-update",
+
+storageBucket:
+"debryne-update.firebasestorage.app",
+
+messagingSenderId:
+"218054789442",
+
+appId:
+"1:218054789442:web:f891b9a9cd22e7938260db"
 
 };
+
+
+try{
+
+firebase.initializeApp(firebaseConfig);
+
+const auth =
+firebase.auth();
+
+
+/* LOGIN */
+
+document.getElementById(
+"loginBtn"
+).onclick = async function(){
+
+const email =
+document.getElementById(
+"email"
+).value.trim();
+
+const password =
+document.getElementById(
+"password"
+).value;
+
+const status =
+document.getElementById(
+"loginStatus"
+);
+
+
+if(!email || !password){
+
+status.textContent =
+"Please enter your email and password.";
+
+return;
+
+}
+
+
+status.textContent =
+"Logging in...";
+
+
+try{
+
+await auth.signInWithEmailAndPassword(
+email,
+password
+);
+
+status.textContent =
+"✅ Login successful.";
+
+}
+
+catch(error){
+
+console.error(error);
+
+status.textContent =
+"❌ Login failed: " +
+error.message;
+
+}
+
+};
+
+
+/* AUTH STATE */
+
+auth.onAuthStateChanged(function(user){
+
+if(user){
+
+document.getElementById(
+"login"
+).style.display =
+"none";
+
+document.getElementById(
+"admin"
+).style.display =
+"block";
+
+document.getElementById(
+"account"
+).textContent =
+"Signed in as: " +
+user.email;
+
+}
+
+else{
+
+document.getElementById(
+"login"
+).style.display =
+"block";
+
+document.getElementById(
+"admin"
+).style.display =
+"none";
+
+}
+
+});
+
+
+/* LOGOUT */
+
+document.getElementById(
+"logoutBtn"
+).onclick = function(){
+
+auth.signOut();
+
+};
+
+}
+
+catch(error){
+
+document.getElementById(
+"loginStatus"
+).textContent =
+"Firebase error: " +
+error.message;
+
+}
 
 </script></body>
 </html>
