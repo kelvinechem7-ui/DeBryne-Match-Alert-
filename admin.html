@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en">
 <head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update - Admin</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DeBryne Update Admin</title><style>
 
 *{
 box-sizing:border-box;
@@ -33,8 +33,7 @@ margin-top:20px;
 box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-input,
-button{
+input,button{
 width:100%;
 padding:14px;
 margin-top:12px;
@@ -51,6 +50,7 @@ border:0;
 background:#111827;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
 button:disabled{
@@ -70,7 +70,7 @@ font-size:13px;
 word-break:break-word;
 }
 
-</style></head><body><header><h2>DeBryne Update</h2><p>Private Admin Panel</p></header><div class="container"><!-- LOGIN --><div class="card" id="loginBox"><h2>🔐 Admin Login</h2><input
+</style></head><body><header><h2>DeBryne Update</h2><p>Private Admin Panel</p></header><div class="container"><div class="card" id="loginBox"><h2>🔐 Admin Login</h2><input
 id="email"
 type="email"
 value="kelvinechem7@gmail.com"
@@ -88,20 +88,18 @@ placeholder="Enter password"
 <button
 id="loginButton"
 type="button"
+onclick="loginAdmin()"
 
 «»
 
 LOGIN
 </button>
 
-<div
-id="loginStatus"
-class="status"
->
+<div id="loginStatus" class="status">
 Enter your password to continue.
-</div></div><!-- DASHBOARD --><div class="card" id="dashboard"><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
-id="logoutButton"
+</div></div><div class="card" id="dashboard"><h2>👋 Admin Dashboard</h2><p id="userEmail"></p><button
 type="button"
+onclick="logoutAdmin()"
 
 «»
 
@@ -111,41 +109,6 @@ LOG OUT
 <div class="status">
 ✅ Firebase login is working.
 </div></div></div><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script><script>
-
-window.addEventListener(
-"DOMContentLoaded",
-function(){
-
-const loginButton =
-document.getElementById(
-"loginButton"
-);
-
-const logoutButton =
-document.getElementById(
-"logoutButton"
-);
-
-const loginStatus =
-document.getElementById(
-"loginStatus"
-);
-
-const loginBox =
-document.getElementById(
-"loginBox"
-);
-
-const dashboard =
-document.getElementById(
-"dashboard"
-);
-
-const userEmail =
-document.getElementById(
-"userEmail"
-);
-
 
 const firebaseConfig = {
 
@@ -173,50 +136,87 @@ appId:
 };
 
 
+let auth = null;
+
+
+/* INITIALIZE FIREBASE */
+
 try{
 
-firebase.initializeApp(
-firebaseConfig
-);
+firebase.initializeApp(firebaseConfig);
 
-const auth =
-firebase.auth();
+auth = firebase.auth();
+
+auth.onAuthStateChanged(function(user){
+
+if(user){
+
+document.getElementById("loginBox").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+document.getElementById("userEmail").textContent=
+"Signed in as: " + user.email;
+
+}else{
+
+document.getElementById("loginBox").style.display="block";
+
+document.getElementById("dashboard").style.display="none";
+
+}
+
+});
+
+}
+catch(error){
+
+document.getElementById("loginStatus").textContent=
+"Firebase error: " + error.message;
+
+}
 
 
 /* LOGIN */
 
-loginButton.onclick =
-async function(){
+async function loginAdmin(){
 
 const email =
-document.getElementById(
-"email"
-).value.trim();
+document.getElementById("email").value.trim();
 
 const password =
-document.getElementById(
-"password"
-).value;
+document.getElementById("password").value;
+
+const status =
+document.getElementById("loginStatus");
+
+const button =
+document.getElementById("loginButton");
 
 
 if(!email || !password){
 
-loginStatus.textContent =
+status.textContent=
 "Please enter your email and password.";
 
 return;
 
 }
 
+if(!auth){
 
-loginButton.disabled =
-true;
+status.textContent=
+"Firebase is not initialized.";
 
-loginButton.textContent =
-"LOGGING IN...";
+return;
 
-loginStatus.textContent =
-"Signing in...";
+}
+
+button.disabled=true;
+
+button.textContent="LOGGING IN...";
+
+status.textContent="Signing in...";
 
 
 try{
@@ -226,91 +226,36 @@ email,
 password
 );
 
-loginStatus.textContent =
-"✅ Login successful.";
+status.textContent="✅ Login successful.";
 
 }
-
 catch(error){
 
 console.error(error);
 
-loginStatus.textContent =
-"❌ Login failed: " +
-error.message;
+status.textContent=
+"❌ Login failed: " + error.message;
 
-loginButton.disabled =
-false;
+button.disabled=false;
 
-loginButton.textContent =
-"LOGIN";
-
-}
-
-};
-
-
-/* AUTH STATE */
-
-auth.onAuthStateChanged(
-function(user){
-
-if(user){
-
-loginBox.style.display =
-"none";
-
-dashboard.style.display =
-"block";
-
-userEmail.textContent =
-"Signed in as: " +
-user.email;
-
-}
-
-else{
-
-loginBox.style.display =
-"block";
-
-dashboard.style.display =
-"none";
-
-loginButton.disabled =
-false;
-
-loginButton.textContent =
-"LOGIN";
+button.textContent="LOGIN";
 
 }
 
 }
-);
 
 
 /* LOGOUT */
 
-logoutButton.onclick =
-async function(){
+async function logoutAdmin(){
+
+if(auth){
 
 await auth.signOut();
 
-};
-
 }
 
-catch(error){
-
-console.error(error);
-
-loginStatus.textContent =
-"Firebase error: " +
-error.message;
-
 }
-
-});
 
 </script></body>
-                                                                                                                                                                                    </html>
+</html>
