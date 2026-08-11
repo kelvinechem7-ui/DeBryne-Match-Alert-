@@ -786,8 +786,15 @@ measurementId:
 
 
 const VAPID_KEY =
-
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
+
+
+/* =========================
+   GOOGLE APPS SCRIPT
+========================= */
+
+const PUSH_SERVER_URL =
+"https://script.google.com/macros/s/AKfycbzRFFTaLRFk3PPvbYPTH7FH9QAzYXbx-S16o5b-4FYcOhwSKSXKHlKdsAQENImEpmlqyA/exec";
 
 
 const app =
@@ -921,9 +928,7 @@ document.getElementById(
 if(!data){
 
 const message =
-
 '<div class="empty">No updates published yet.</div>';
-
 
 home.innerHTML =
 message;
@@ -1049,11 +1054,8 @@ console.error(
 error
 );
 
-
 const message =
-
 '<div class="empty">Unable to load updates.</div>';
-
 
 document
 .querySelectorAll(
@@ -1187,8 +1189,7 @@ document.getElementById(
    FIREBASE MESSAGING WORKER
 ========================= */
 
-let messagingRegistration =
-null;
+let messagingRegistration = null;
 
 
 async function prepareMessagingServiceWorker(){
@@ -1203,15 +1204,11 @@ throw new Error(
 
 
 messagingRegistration =
-
 await navigator.serviceWorker.register(
-
 "./firebase-messaging-sw.js",
-
 {
 scope:"./"
 }
-
 );
 
 
@@ -1224,24 +1221,63 @@ return messagingRegistration;
 
 
 /* =========================
+   SEND TOKEN TO PUSH SERVER
+========================= */
+
+async function registerTokenWithPushServer(token){
+
+const response =
+await fetch(
+PUSH_SERVER_URL,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+
+body:JSON.stringify({
+
+action:"register",
+
+token:token
+
+})
+
+}
+);
+
+
+const text =
+await response.text();
+
+
+console.log(
+"Push server response:",
+text
+);
+
+
+return text;
+
+}
+
+
+/* =========================
    GET FCM TOKEN
 ========================= */
 
 async function getFCMToken(){
 
 const registration =
-
 messagingRegistration ||
-
 await prepareMessagingServiceWorker();
 
 
 const currentToken =
-
 await getToken(
-
 messaging,
-
 {
 
 vapidKey:
@@ -1251,7 +1287,6 @@ serviceWorkerRegistration:
 registration
 
 }
-
 );
 
 
@@ -1275,6 +1310,15 @@ tokenBox.style.display =
 
 console.log(
 "FCM TOKEN:",
+currentToken
+);
+
+
+/* IMPORTANT:
+   SEND TOKEN TO GOOGLE APPS SCRIPT
+*/
+
+await registerTokenWithPushServer(
 currentToken
 );
 
@@ -1400,7 +1444,6 @@ notifyBtn.textContent =
 try{
 
 const permission =
-
 await Notification.requestPermission();
 
 
@@ -1471,9 +1514,7 @@ notifyBtn.textContent =
 ========================= */
 
 onMessage(
-
 messaging,
-
 payload => {
 
 console.log(
@@ -1483,16 +1524,12 @@ payload
 
 
 const title =
-
 payload.notification?.title ||
-
 "DeBryne Update";
 
 
 const body =
-
 payload.notification?.body ||
-
 "You have a new update from DeBryne Update.";
 
 
@@ -1502,12 +1539,11 @@ Notification.permission ===
 ){
 
 new Notification(
-
 title,
-
 {
 
-body:body,
+body:
+body,
 
 icon:
 "./file_000000008e5c71f4a9d057362a556762.png",
@@ -1516,7 +1552,6 @@ badge:
 "./file_000000008e5c71f4a9d057362a556762.png"
 
 }
-
 );
 
 }
@@ -1530,11 +1565,8 @@ badge:
 ========================= */
 
 notifyBtn.addEventListener(
-
 "click",
-
 enableNotifications
-
 );
 
 
@@ -1543,15 +1575,13 @@ enableNotifications
 ========================= */
 
 window.addEventListener(
-
 "load",
-
 async function(){
 
 setNotificationStatus();
 
 
-/* Register PWA service worker */
+/* Register normal PWA service worker */
 
 if(
 "serviceWorker"
@@ -1561,13 +1591,10 @@ in navigator
 try{
 
 await navigator.serviceWorker.register(
-
 "./service-worker.js",
-
 {
 scope:"./"
 }
-
 );
 
 console.log(
@@ -1588,16 +1615,15 @@ error
 }
 
 
-/* Existing permission */
+/* If notifications are already allowed,
+   register the FCM token again.
+*/
 
 if(
-
 "Notification"
 in window &&
-
 Notification.permission ===
 "granted"
-
 ){
 
 try{
@@ -1644,4 +1670,4 @@ setNotificationStatus();
 </script>
 
 </body>
-</html>
+   </html>
