@@ -1,136 +1,190 @@
 importScripts(
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"
+  "https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"
 );
 
 importScripts(
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging-compat.js"
+  "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging-compat.js"
 );
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 firebase.initializeApp({
 
-apiKey:
-"AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
+  apiKey:
+    "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
 
-authDomain:
-"debryne-update.firebaseapp.com",
+  authDomain:
+    "debryne-update.firebaseapp.com",
 
-databaseURL:
-"https://debryne-update-default-rtdb.firebaseio.com",
+  databaseURL:
+    "https://debryne-update-default-rtdb.firebaseio.com",
 
-projectId:
-"debryne-update",
+  projectId:
+    "debryne-update",
 
-storageBucket:
-"debryne-update.firebasestorage.app",
+  storageBucket:
+    "debryne-update.firebasestorage.app",
 
-messagingSenderId:
-"218054789442",
+  messagingSenderId:
+    "218054789442",
 
-appId:
-"1:218054789442:web:f891b9a9cd22e7938260db"
+  appId:
+    "1:218054789442:web:f891b9a9cd22e7938260db"
 
 });
 
+
 const messaging =
-firebase.messaging();
+  firebase.messaging();
+
+
+/* =========================
+   BACKGROUND NOTIFICATIONS
+========================= */
 
 messaging.onBackgroundMessage(
-function(payload) {
+  function(payload) {
 
-console.log(
-  "Background FCM message:",
-  payload
-);
-
-
-const title =
-  payload.notification?.title ||
-  payload.data?.title ||
-  "DeBryne Update";
+    console.log(
+      "Background FCM message:",
+      payload
+    );
 
 
-const body =
-  payload.notification?.body ||
-  payload.data?.body ||
-  "You have a new update from DeBryne Update.";
+    const notification =
+      payload.notification || {};
+
+    const data =
+      payload.data || {};
 
 
-const options = {
-
-  body: body,
-
-  icon:
-    "./file_000000008e5c71f4a9d057362a556762.png",
-
-  badge:
-    "./file_000000008e5c71f4a9d057362a556762.png",
-
-  data:
-    payload.data || {}
-
-};
+    const title =
+      notification.title ||
+      data.title ||
+      "DeBryne Update";
 
 
-return self.registration.showNotification(
-  title,
-  options
-);
-
-}
-);
-
-/*
-When the user taps the notification,
-open the DeBryne Update website.
-*/
-
-self.addEventListener(
-"notificationclick",
-function(event) {
-
-event.notification.close();
+    const body =
+      notification.body ||
+      data.body ||
+      "You have a new update from DeBryne Update.";
 
 
-event.waitUntil(
+    const options = {
 
-  clients.matchAll({
+      body: body,
 
-    type: "window",
+      icon:
+        "./file_000000008e5c71f4a9d057362a556762.png",
 
-    includeUncontrolled: true
+      badge:
+        "./file_000000008e5c71f4a9d057362a556762.png",
 
-  })
+      data: {
 
-  .then(function(clientList) {
+        ...data,
 
-    for(
-      const client of clientList
-    ){
-
-      if(
-        "focus" in client
-      ){
-
-        return client.focus();
+        url:
+          data.url ||
+          "./"
 
       }
 
-    }
+    };
 
 
-    if(
-      clients.openWindow
-    ){
+    return self.registration.showNotification(
+      title,
+      options
+    );
 
-      return clients.openWindow(
-        "./"
-      );
-
-    }
-
-  })
-
+  }
 );
 
-}
+
+/* =========================
+   NOTIFICATION CLICK
+========================= */
+
+self.addEventListener(
+  "notificationclick",
+  function(event) {
+
+    console.log(
+      "Notification clicked."
+    );
+
+
+    event.notification.close();
+
+
+    const notificationData =
+      event.notification.data || {};
+
+
+    const targetUrl =
+      notificationData.url ||
+      "./";
+
+
+    event.waitUntil(
+
+      clients.matchAll({
+
+        type: "window",
+
+        includeUncontrolled: true
+
+      })
+
+      .then(function(clientList) {
+
+
+        /*
+
+        If DeBryne Update is
+        already open, focus it.
+
+        */
+
+        for(
+          const client of clientList
+        ) {
+
+          if(
+            "focus" in client
+          ) {
+
+            return client.focus();
+
+          }
+
+        }
+
+
+        /*
+
+        Otherwise open
+        DeBryne Update.
+
+        */
+
+        if(
+          clients.openWindow
+        ) {
+
+          return clients.openWindow(
+            targetUrl
+          );
+
+        }
+
+      })
+
+    );
+
+  }
 );
