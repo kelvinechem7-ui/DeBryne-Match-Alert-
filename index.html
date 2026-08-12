@@ -159,7 +159,9 @@ background:#eff6ff;
 color:#1d4ed8;
 }
 
-/* APP */
+/* =========================
+   APP
+========================= */
 
 #appContent{
 display:none;
@@ -183,6 +185,7 @@ height:48px;
 background:white;
 border-radius:12px;
 overflow:hidden;
+flex-shrink:0;
 }
 
 .logo img{
@@ -199,6 +202,13 @@ font-size:22px;
 font-size:12px;
 color:#cbd5e1;
 margin-top:3px;
+}
+
+.user-greeting{
+font-size:12px;
+color:#e2e8f0;
+margin-top:5px;
+font-weight:bold;
 }
 
 .page{
@@ -449,7 +459,7 @@ events and sports updates.
 <input
 id="registerName"
 type="text"
-placeholder="Full Name"
+placeholder="Full Name or Nickname"
 autocomplete="name">
 
 <input
@@ -562,6 +572,11 @@ alt="DeBryne Update">
 <h1>DeBryne Update</h1>
 
 <p>Student News • Education • Sports</p>
+
+<p
+id="headerUserName"
+class="user-greeting">
+</p>
 
 </div>
 
@@ -773,7 +788,6 @@ style="margin-top:7px">
 <p class="muted">
 Your DeBryne Update profile.
 </p>
-
 
 <div
 class="card"
@@ -1083,12 +1097,6 @@ console.error(
 error
 );
 
-showAuthStatus(
-"Firebase initialization failed: " +
-error.message,
-"error"
-);
-
 }
 
 
@@ -1235,7 +1243,7 @@ document.getElementById(
 if(!name){
 
 showAuthStatus(
-"Please enter your full name.",
+"Please enter your full name or nickname.",
 "error"
 );
 
@@ -1308,10 +1316,7 @@ const user =
 userCredential.user;
 
 
-/*
- * Save user profile in
- * Realtime Database.
- */
+/* SAVE USER PROFILE */
 
 await set(
 ref(
@@ -1345,10 +1350,6 @@ showAuthStatus(
 );
 
 
-/*
- * Clear password fields.
- */
-
 document
 .getElementById("registerPassword")
 .value = "";
@@ -1356,13 +1357,6 @@ document
 document
 .getElementById("registerConfirm")
 .value = "";
-
-
-/*
- * Firebase Auth will automatically
- * trigger onAuthStateChanged and
- * open the app.
- */
 
 
 }
@@ -1379,24 +1373,30 @@ let message =
 "Registration failed.";
 
 
-if(error.code ===
-"auth/email-already-in-use"){
+if(
+error.code ===
+"auth/email-already-in-use"
+){
 
 message =
 "This email is already registered. Please login instead.";
 
 }
 
-else if(error.code ===
-"auth/invalid-email"){
+else if(
+error.code ===
+"auth/invalid-email"
+){
 
 message =
 "Please enter a valid email address.";
 
 }
 
-else if(error.code ===
-"auth/weak-password"){
+else if(
+error.code ===
+"auth/weak-password"
+){
 
 message =
 "Password is too weak. Use at least 6 characters.";
@@ -1595,32 +1595,16 @@ async function(user){
 
 if(user){
 
-/*
- * User is logged in.
- * Hide registration screen.
- */
-
 authScreen.style.display =
 "none";
 
 appContent.style.display =
 "block";
 
-
-/*
- * Load user profile.
- */
-
 await loadUserProfile(user);
-
 
 }
 else{
-
-/*
- * User is logged out.
- * Show registration/login.
- */
 
 authScreen.style.display =
 "flex";
@@ -1678,11 +1662,23 @@ const email =
 user.email || "";
 
 
+/* HOME WELCOME */
+
 document
 .getElementById("welcomeName")
 textContent =
 "Welcome, " + name + " 👋";
 
+
+/* HEADER NAME */
+
+document
+.getElementById("headerUserName")
+textContent =
+"👋 " + name;
+
+
+/* PROFILE */
 
 document
 .getElementById("profileName")
@@ -1734,6 +1730,12 @@ document
 .getElementById("welcomeName")
 textContent =
 "Welcome 👋";
+
+
+document
+.getElementById("headerUserName")
+textContent =
+"";
 
 
 document
@@ -1956,6 +1958,8 @@ Number(a.createdAt || 0);
 });
 
 
+/* HOME */
+
 home.innerHTML =
 
 items
@@ -1964,12 +1968,16 @@ items
 .join("");
 
 
+/* NEWS */
+
 news.innerHTML =
 
 items
 .map(createNewsCard)
 .join("");
 
+
+/* FILTER */
 
 function filterNews(
 word,
@@ -2372,6 +2380,8 @@ notifyBtn.addEventListener(
 enableNotifications
 );
 
+
+/* NOTIFICATION STATUS */
 
 if(
 "Notification" in window
