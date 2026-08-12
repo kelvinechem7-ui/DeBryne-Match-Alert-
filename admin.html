@@ -110,6 +110,14 @@ button:disabled {
     background: #059669;
 }
 
+.image-btn {
+    background: #7c3aed;
+}
+
+.change-image-btn {
+    background: #0891b2;
+}
+
 .status {
     margin-top: 15px;
     padding: 12px;
@@ -176,6 +184,14 @@ button:disabled {
     margin-top: 10px;
 }
 
+.news-image {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
 .button-row {
     display: flex;
     gap: 10px;
@@ -200,6 +216,38 @@ button:disabled {
     font-size: 13px;
     color: #6b7280;
     line-height: 1.5;
+}
+
+.image-preview-box {
+    margin-top: 15px;
+    display: none;
+}
+
+.image-preview {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.file-name {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #64748b;
+    word-break: break-word;
+}
+
+.current-image {
+    margin-top: 15px;
+    display: none;
+}
+
+.current-image img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .loading {
@@ -234,223 +282,181 @@ button:disabled {
 
 <div class="container">
 
-    <!-- LOGIN -->
-    <div class="card" id="loginBox">
+<!-- LOGIN -->
 
-        <h2>🔐 Admin Login</h2>
+<div class="card" id="loginBox">
 
-        <p>Sign in to manage DeBryne Update.</p>
+    <h2>🔐 Admin Login</h2>
 
-        <input
-            id="email"
-            type="email"
-            value="kelvinechem7@gmail.com"
-            placeholder="Email"
+    <p>Sign in to manage DeBryne Update.</p>
+
+    <input
+        id="email"
+        type="email"
+        value="kelvinechem7@gmail.com"
+        placeholder="Email"
+    >
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+    >
+
+    <button id="loginButton" type="button">
+        LOGIN
+    </button>
+
+    <div id="loginStatus" class="status">
+        Enter your password to continue.
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="card" id="dashboard">
+
+    <h2>👋 Admin Dashboard</h2>
+
+    <p id="userEmail"></p>
+
+    <button
+        id="logoutButton"
+        type="button"
+        class="logout"
+    >
+        LOG OUT
+    </button>
+
+</div>
+
+
+<!-- PUBLISH -->
+
+<div class="card" id="publishCard">
+
+    <h2 class="section-title">📰 Publish News</h2>
+
+    <select id="category">
+
+        <option value="Campus News">
+            Campus News
+        </option>
+
+        <option value="Academics">
+            Academics
+        </option>
+
+        <option value="Announcement">
+            Announcement
+        </option>
+
+        <option value="Sports">
+            Sports
+        </option>
+
+        <option value="Breaking News">
+            Breaking News
+        </option>
+
+        <option value="Events">
+            Events
+        </option>
+
+    </select>
+
+    <input
+        id="title"
+        type="text"
+        placeholder="Enter news title"
+    >
+
+    <textarea
+        id="content"
+        placeholder="Write your news here..."
+    ></textarea>
+
+
+    <!-- PICTURE -->
+
+    <input
+        id="imageInput"
+        type="file"
+        accept="image/*"
+        style="display:none"
+    >
+
+    <button
+        id="chooseImageButton"
+        type="button"
+        class="image-btn"
+    >
+        🖼️ CHOOSE PICTURE FROM GALLERY
+    </button>
+
+
+    <div
+        id="imagePreviewBox"
+        class="image-preview-box"
+    >
+
+        <img
+            id="imagePreview"
+            class="image-preview"
+            alt="Selected picture"
         >
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-        >
-
-        <button
-            id="loginButton"
-            type="button"
-        >
-            LOGIN
-        </button>
 
         <div
-            id="loginStatus"
-            class="status"
-        >
-            Enter your password to continue.
-        </div>
+            id="imageFileName"
+            class="file-name"
+        ></div>
 
     </div>
 
 
-    <!-- DASHBOARD -->
-    <div
-        class="card"
-        id="dashboard"
+    <button
+        id="publishButton"
+        type="button"
     >
+        PUBLISH NEWS
+    </button>
 
-        <h2>👋 Admin Dashboard</h2>
-
-        <p id="userEmail"></p>
-
-        <button
-            id="logoutButton"
-            type="button"
-            class="logout"
-        >
-            LOG OUT
-        </button>
-
+    <div
+        id="publishStatus"
+        class="status"
+    >
+        Ready to publish.
     </div>
 
+</div>
 
-    <!-- PUBLISH NEWS -->
-    <div
-        class="card"
-        id="publishCard"
+
+<!-- MANAGE -->
+
+<div class="card" id="manageCard">
+
+    <h2 class="section-title">
+        📋 Manage Published Updates
+    </h2>
+
+    <p class="small-note">
+        View, edit, or permanently delete published updates.
+    </p>
+
+    <button
+        id="refreshButton"
+        type="button"
+        class="refresh-btn"
     >
+        🔄 REFRESH UPDATES
+    </button>
 
-        <h2 class="section-title">📰 Publish News</h2>
+    <div id="newsList">
 
-        <select id="category">
-
-            <option value="Campus News">
-                Campus News
-            </option>
-
-            <option value="Academics">
-                Academics
-            </option>
-
-            <option value="Announcement">
-                Announcement
-            </option>
-
-            <option value="Sports">
-                Sports
-            </option>
-
-            <option value="Breaking News">
-                Breaking News
-            </option>
-
-        </select>
-
-        <input
-            id="title"
-            type="text"
-            placeholder="Enter news title"
-        >
-
-        <textarea
-            id="content"
-            placeholder="Write your news here..."
-        ></textarea>
-
-        <button
-            id="publishButton"
-            type="button"
-        >
-            PUBLISH NEWS
-        </button>
-
-        <div
-            id="publishStatus"
-            class="status"
-        >
-            Ready to publish.
-        </div>
-
-    </div>
-
-
-    <!-- MANAGE NEWS -->
-    <div
-        class="card"
-        id="manageCard"
-    >
-
-        <h2 class="section-title">
-            📋 Manage Published Updates
-        </h2>
-
-        <p class="small-note">
-            From here you can view, edit, or permanently delete
-            published updates.
-        </p>
-
-        <button
-            id="refreshButton"
-            type="button"
-            class="refresh-btn"
-        >
-            🔄 REFRESH UPDATES
-        </button>
-
-        <div id="newsList">
-
-            <div class="loading">
-                Loading updates...
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- EDIT NEWS -->
-    <div
-        class="card"
-        id="editCard"
-    >
-
-        <h2 class="section-title">
-            ✏️ Edit Update
-        </h2>
-
-        <input
-            id="editTitle"
-            type="text"
-            placeholder="News title"
-        >
-
-        <select id="editCategory">
-
-            <option value="Campus News">
-                Campus News
-            </option>
-
-            <option value="Academics">
-                Academics
-            </option>
-
-            <option value="Announcement">
-                Announcement
-            </option>
-
-            <option value="Sports">
-                Sports
-            </option>
-
-            <option value="Breaking News">
-                Breaking News
-            </option>
-
-        </select>
-
-        <textarea
-            id="editContent"
-            placeholder="News content"
-        ></textarea>
-
-        <button
-            id="saveEditButton"
-            type="button"
-        >
-            💾 SAVE CHANGES
-        </button>
-
-        <button
-            id="cancelEditButton"
-            type="button"
-            class="cancel-btn"
-        >
-            CANCEL
-        </button>
-
-        <div
-            id="editStatus"
-            class="status"
-        >
-            Edit the update and save your changes.
+        <div class="loading">
+            Loading updates...
         </div>
 
     </div>
@@ -458,7 +464,135 @@ button:disabled {
 </div>
 
 
+<!-- EDIT -->
+
+<div class="card" id="editCard">
+
+    <h2 class="section-title">
+        ✏️ Edit Update
+    </h2>
+
+    <input
+        id="editTitle"
+        type="text"
+        placeholder="News title"
+    >
+
+    <select id="editCategory">
+
+        <option value="Campus News">
+            Campus News
+        </option>
+
+        <option value="Academics">
+            Academics
+        </option>
+
+        <option value="Announcement">
+            Announcement
+        </option>
+
+        <option value="Sports">
+            Sports
+        </option>
+
+        <option value="Breaking News">
+            Breaking News
+        </option>
+
+        <option value="Events">
+            Events
+        </option>
+
+    </select>
+
+    <textarea
+        id="editContent"
+        placeholder="News content"
+    ></textarea>
+
+
+    <div
+        id="currentImageBox"
+        class="current-image"
+    >
+
+        <p class="small-note">
+            Current picture:
+        </p>
+
+        <img
+            id="currentImage"
+            alt="Current news picture"
+        >
+
+    </div>
+
+
+    <input
+        id="editImageInput"
+        type="file"
+        accept="image/*"
+        style="display:none"
+    >
+
+    <button
+        id="chooseEditImageButton"
+        type="button"
+        class="change-image-btn"
+    >
+        🖼️ CHANGE PICTURE
+    </button>
+
+
+    <div
+        id="editImagePreviewBox"
+        class="image-preview-box"
+    >
+
+        <img
+            id="editImagePreview"
+            class="image-preview"
+            alt="New picture"
+        >
+
+        <div
+            id="editImageFileName"
+            class="file-name"
+        ></div>
+
+    </div>
+
+
+    <button
+        id="saveEditButton"
+        type="button"
+    >
+        💾 SAVE CHANGES
+    </button>
+
+    <button
+        id="cancelEditButton"
+        type="button"
+        class="cancel-btn"
+    >
+        CANCEL
+    </button>
+
+    <div
+        id="editStatus"
+        class="status"
+    >
+        Edit the update and save your changes.
+    </div>
+
+</div>
+
+</div>
+
+
 <!-- FIREBASE -->
+
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-database-compat.js"></script>
@@ -492,10 +626,17 @@ const firebaseConfig = {
 };
 
 
+const GOOGLE_DRIVE_UPLOAD_URL =
+"https://script.google.com/macros/s/AKfycbylD8C6_wDdXh9bkpoY-YNJsaJgRp7ImXHsnuXaY5vVpbM4UqHGiq7T5B6PSBJ7NzcoBA/exec";
+
+
 let auth = null;
 let database = null;
 
 let editingNewsId = null;
+
+let selectedImage = null;
+let selectedEditImage = null;
 
 
 /* INITIALIZE FIREBASE */
@@ -512,14 +653,12 @@ try {
 
     console.error(error);
 
-    const status =
-        document.getElementById("loginStatus");
-
-    status.textContent =
+    document.getElementById("loginStatus").textContent =
         "Firebase error: " + error.message;
 
-    status.className =
+    document.getElementById("loginStatus").className =
         "status error";
+
 }
 
 
@@ -530,15 +669,10 @@ document
 .addEventListener("click", async function() {
 
     const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
+        document.getElementById("email").value.trim();
 
     const password =
-        document
-        .getElementById("password")
-        .value;
+        document.getElementById("password").value;
 
     const status =
         document.getElementById("loginStatus");
@@ -556,6 +690,7 @@ document
             "status error";
 
         return;
+
     }
 
 
@@ -568,18 +703,7 @@ document
             "status error";
 
         return;
-    }
 
-
-    if (!auth) {
-
-        status.textContent =
-            "Firebase is not available.";
-
-        status.className =
-            "status error";
-
-        return;
     }
 
 
@@ -602,13 +726,11 @@ document
             password
         );
 
-
         status.textContent =
             "Login successful.";
 
         status.className =
             "status success";
-
 
     } catch (error) {
 
@@ -632,76 +754,69 @@ document
 
 /* AUTH STATE */
 
-if (auth) {
+auth.onAuthStateChanged(function(user) {
 
-    auth.onAuthStateChanged(function(user) {
+    const loginBox =
+        document.getElementById("loginBox");
 
-        const loginBox =
-            document.getElementById("loginBox");
+    const dashboard =
+        document.getElementById("dashboard");
 
-        const dashboard =
-            document.getElementById("dashboard");
+    const publishCard =
+        document.getElementById("publishCard");
 
-        const publishCard =
-            document.getElementById("publishCard");
+    const manageCard =
+        document.getElementById("manageCard");
 
-        const manageCard =
-            document.getElementById("manageCard");
+    const editCard =
+        document.getElementById("editCard");
 
-        const editCard =
-            document.getElementById("editCard");
-
-        const userEmail =
-            document.getElementById("userEmail");
+    const userEmail =
+        document.getElementById("userEmail");
 
 
-        if (user) {
+    if (user) {
 
-            loginBox.style.display =
-                "none";
+        loginBox.style.display =
+            "none";
 
-            dashboard.style.display =
-                "block";
+        dashboard.style.display =
+            "block";
 
-            publishCard.style.display =
-                "block";
+        publishCard.style.display =
+            "block";
 
-            manageCard.style.display =
-                "block";
+        manageCard.style.display =
+            "block";
 
-            editCard.style.display =
-                "none";
+        editCard.style.display =
+            "none";
 
+        userEmail.textContent =
+            "Signed in as: " + user.email;
 
-            userEmail.textContent =
-                "Signed in as: " + user.email;
+        loadNews();
 
+    } else {
 
-            loadNews();
+        loginBox.style.display =
+            "block";
 
+        dashboard.style.display =
+            "none";
 
-        } else {
+        publishCard.style.display =
+            "none";
 
-            loginBox.style.display =
-                "block";
+        manageCard.style.display =
+            "none";
 
-            dashboard.style.display =
-                "none";
+        editCard.style.display =
+            "none";
 
-            publishCard.style.display =
-                "none";
+    }
 
-            manageCard.style.display =
-                "none";
-
-            editCard.style.display =
-                "none";
-
-        }
-
-    });
-
-}
+});
 
 
 /* LOGOUT */
@@ -710,11 +825,363 @@ document
 .getElementById("logoutButton")
 .addEventListener("click", async function() {
 
-    if (auth) {
+    await auth.signOut();
 
-        await auth.signOut();
+});
+
+
+/* IMAGE RESIZE */
+
+function resizeImage(file) {
+
+    return new Promise(function(resolve, reject) {
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function(event) {
+
+                const img =
+                    new Image();
+
+                img.onload =
+                    function() {
+
+                        const MAX_WIDTH = 1200;
+                        const MAX_HEIGHT = 1200;
+
+                        let width =
+                            img.width;
+
+                        let height =
+                            img.height;
+
+
+                        if (
+                            width > MAX_WIDTH ||
+                            height > MAX_HEIGHT
+                        ) {
+
+                            const ratio =
+                                Math.min(
+                                    MAX_WIDTH / width,
+                                    MAX_HEIGHT / height
+                                );
+
+                            width =
+                                Math.round(width * ratio);
+
+                            height =
+                                Math.round(height * ratio);
+
+                        }
+
+
+                        const canvas =
+                            document.createElement("canvas");
+
+                        canvas.width =
+                            width;
+
+                        canvas.height =
+                            height;
+
+
+                        const ctx =
+                            canvas.getContext("2d");
+
+                        ctx.drawImage(
+                            img,
+                            0,
+                            0,
+                            width,
+                            height
+                        );
+
+
+                        canvas.toBlob(
+                            function(blob) {
+
+                                if (!blob) {
+
+                                    reject(
+                                        new Error(
+                                            "Could not process image."
+                                        )
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                resolve(blob);
+
+                            },
+                            "image/jpeg",
+                            0.82
+                        );
+
+                    };
+
+
+                img.onerror =
+                    function() {
+
+                        reject(
+                            new Error(
+                                "Could not read selected image."
+                            )
+                        );
+
+                    };
+
+
+                img.src =
+                    event.target.result;
+
+            };
+
+
+        reader.onerror =
+            function() {
+
+                reject(
+                    new Error(
+                        "Could not read image file."
+                    )
+                );
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* BLOB TO BASE64 */
+
+function blobToBase64(blob) {
+
+    return new Promise(function(resolve, reject) {
+
+        const reader =
+            new FileReader();
+
+        reader.onloadend =
+            function() {
+
+                resolve(
+                    reader.result
+                );
+
+            };
+
+        reader.onerror =
+            function() {
+
+                reject(
+                    new Error(
+                        "Could not convert image."
+                    )
+                );
+
+            };
+
+        reader.readAsDataURL(blob);
+
+    });
+
+}
+
+
+/* UPLOAD IMAGE TO GOOGLE DRIVE */
+
+async function uploadImageToDrive(
+    file,
+    statusElement
+) {
+
+    statusElement.textContent =
+        "🖼️ Preparing picture...";
+
+    statusElement.className =
+        "status";
+
+
+    const resizedBlob =
+        await resizeImage(file);
+
+
+    statusElement.textContent =
+        "⬆️ Uploading picture to Google Drive...";
+
+
+    const base64 =
+        await blobToBase64(
+            resizedBlob
+        );
+
+
+    const payload = {
+
+        action:
+            "uploadImage",
+
+        image:
+            base64,
+
+        mimeType:
+            "image/jpeg",
+
+        fileName:
+            "DeBryne_" +
+            Date.now() +
+            ".jpg"
+
+    };
+
+
+    const response =
+        await fetch(
+            GOOGLE_DRIVE_UPLOAD_URL,
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(payload)
+
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    console.log(
+        "Google Drive response:",
+        text
+    );
+
+
+    let result;
+
+    try {
+
+        result =
+            JSON.parse(text);
+
+    } catch (error) {
+
+        throw new Error(
+            "Google Drive server returned an invalid response."
+        );
 
     }
+
+
+    if (!result.success) {
+
+        throw new Error(
+            result.error ||
+            "Image upload failed."
+        );
+
+    }
+
+
+    return result.imageUrl;
+
+}
+
+
+/* CHOOSE PICTURE */
+
+document
+.getElementById("chooseImageButton")
+.addEventListener("click", function() {
+
+    document
+    .getElementById("imageInput")
+    .click();
+
+});
+
+
+/* SELECTED PICTURE */
+
+document
+.getElementById("imageInput")
+.addEventListener("change", function() {
+
+    const file =
+        this.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+        alert(
+            "Please select an image."
+        );
+
+        this.value = "";
+
+        return;
+
+    }
+
+
+    selectedImage =
+        file;
+
+
+    const preview =
+        document.getElementById(
+            "imagePreview"
+        );
+
+
+    const previewBox =
+        document.getElementById(
+            "imagePreviewBox"
+        );
+
+
+    const fileName =
+        document.getElementById(
+            "imageFileName"
+        );
+
+
+    preview.src =
+        URL.createObjectURL(file);
+
+
+    fileName.textContent =
+        file.name;
+
+
+    previewBox.style.display =
+        "block";
 
 });
 
@@ -726,35 +1193,37 @@ document
 .addEventListener("click", async function() {
 
     const user =
-        auth ? auth.currentUser : null;
+        auth.currentUser;
 
 
     const category =
-        document
-        .getElementById("category")
-        .value;
+        document.getElementById(
+            "category"
+        ).value;
 
 
     const title =
-        document
-        .getElementById("title")
-        .value
-        .trim();
+        document.getElementById(
+            "title"
+        ).value.trim();
 
 
     const content =
-        document
-        .getElementById("content")
-        .value
-        .trim();
+        document.getElementById(
+            "content"
+        ).value.trim();
 
 
     const status =
-        document.getElementById("publishStatus");
+        document.getElementById(
+            "publishStatus"
+        );
 
 
     const button =
-        document.getElementById("publishButton");
+        document.getElementById(
+            "publishButton"
+        );
 
 
     if (!user) {
@@ -783,32 +1252,31 @@ document
     }
 
 
-    if (!database) {
-
-        status.textContent =
-            "Firebase database is not available.";
-
-        status.className =
-            "status error";
-
-        return;
-
-    }
-
-
     button.disabled = true;
 
     button.textContent =
         "PUBLISHING...";
 
-    status.textContent =
-        "Publishing...";
-
-    status.className =
-        "status";
-
 
     try {
+
+        let imageUrl = "";
+
+
+        if (selectedImage) {
+
+            imageUrl =
+                await uploadImageToDrive(
+                    selectedImage,
+                    status
+                );
+
+        }
+
+
+        status.textContent =
+            "📰 Saving news...";
+
 
         const news =
             database
@@ -818,15 +1286,23 @@ document
 
         await news.set({
 
-            category: category,
+            category:
+                category,
 
-            title: title,
+            title:
+                title,
 
-            content: content,
+            content:
+                content,
 
-            author: user.email,
+            author:
+                user.email,
 
-            createdAt: Date.now()
+            createdAt:
+                Date.now(),
+
+            imageUrl:
+                imageUrl
 
         });
 
@@ -846,6 +1322,21 @@ document
         document
         .getElementById("content")
         .value = "";
+
+
+        document
+        .getElementById("imageInput")
+        .value = "";
+
+
+        document
+        .getElementById("imagePreviewBox")
+        .style.display =
+            "none";
+
+
+        selectedImage =
+            null;
 
 
         loadNews();
@@ -878,25 +1369,13 @@ document
 async function loadNews() {
 
     const newsList =
-        document.getElementById("newsList");
-
-
-    if (!database) {
-
-        newsList.innerHTML =
-            '<div class="status error">' +
-            'Firebase database is not available.' +
-            '</div>';
-
-        return;
-
-    }
+        document.getElementById(
+            "newsList"
+        );
 
 
     newsList.innerHTML =
-        '<div class="loading">' +
-        'Loading updates...' +
-        '</div>';
+        '<div class="loading">Loading updates...</div>';
 
 
     try {
@@ -917,9 +1396,7 @@ async function loadNews() {
         if (!data) {
 
             newsList.innerHTML =
-                '<div class="empty">' +
-                '📭 No published updates yet.' +
-                '</div>';
+                '<div class="empty">📭 No published updates yet.</div>';
 
             return;
 
@@ -930,173 +1407,207 @@ async function loadNews() {
             Object.entries(data);
 
 
-        newsArray.sort(function(a, b) {
+        newsArray.sort(
+            function(a,b) {
 
-            const timeA =
-                a[1].createdAt || 0;
+                return (
+                    (b[1].createdAt || 0) -
+                    (a[1].createdAt || 0)
+                );
 
-            const timeB =
-                b[1].createdAt || 0;
-
-            return timeB - timeA;
-
-        });
-
-
-        newsArray.forEach(function(item) {
-
-            const id =
-                item[0];
-
-            const news =
-                item[1];
+            }
+        );
 
 
-            const article =
-                document.createElement("div");
+        newsArray.forEach(
+            function(item) {
 
-            article.className =
-                "news-item";
+                const id =
+                    item[0];
 
-
-            const category =
-                document.createElement("span");
-
-            category.className =
-                "news-category";
-
-            category.textContent =
-                news.category || "News";
+                const news =
+                    item[1];
 
 
-            const title =
-                document.createElement("h3");
+                const article =
+                    document.createElement(
+                        "div"
+                    );
 
-            title.textContent =
-                news.title || "Untitled";
-
-
-            const content =
-                document.createElement("div");
-
-            content.className =
-                "news-content";
-
-            content.textContent =
-                news.content || "";
+                article.className =
+                    "news-item";
 
 
-            const date =
-                document.createElement("div");
+                const category =
+                    document.createElement(
+                        "span"
+                    );
 
-            date.className =
-                "news-date";
+                category.className =
+                    "news-category";
+
+                category.textContent =
+                    news.category ||
+                    "News";
 
 
-            if (news.createdAt) {
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+                title.textContent =
+                    news.title ||
+                    "Untitled";
+
+
+                if (news.imageUrl) {
+
+                    const image =
+                        document.createElement(
+                            "img"
+                        );
+
+                    image.className =
+                        "news-image";
+
+                    image.src =
+                        news.imageUrl;
+
+                    image.alt =
+                        news.title ||
+                        "News picture";
+
+                    article.appendChild(
+                        image
+                    );
+
+                }
+
+
+                const content =
+                    document.createElement(
+                        "div"
+                    );
+
+                content.className =
+                    "news-content";
+
+                content.textContent =
+                    news.content ||
+                    "";
+
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+                date.className =
+                    "news-date";
 
                 date.textContent =
+                    news.createdAt
+                    ?
                     "Published: " +
                     new Date(
                         news.createdAt
-                    ).toLocaleString();
+                    ).toLocaleString()
+                    :
+                    "";
 
-            } else {
 
-                date.textContent =
-                    "Publication date unavailable.";
+                const buttonRow =
+                    document.createElement(
+                        "div"
+                    );
+
+                buttonRow.className =
+                    "button-row";
+
+
+                const editButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                editButton.className =
+                    "edit-btn";
+
+                editButton.textContent =
+                    "✏️ EDIT";
+
+
+                editButton.onclick =
+                    function() {
+
+                        startEdit(
+                            id,
+                            news
+                        );
+
+                    };
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.className =
+                    "delete-btn";
+
+                deleteButton.textContent =
+                    "🗑️ DELETE";
+
+
+                deleteButton.onclick =
+                    function() {
+
+                        deleteNews(
+                            id,
+                            news.title
+                        );
+
+                    };
+
+
+                buttonRow.appendChild(
+                    editButton
+                );
+
+                buttonRow.appendChild(
+                    deleteButton
+                );
+
+
+                article.appendChild(
+                    category
+                );
+
+                article.appendChild(
+                    title
+                );
+
+                article.appendChild(
+                    content
+                );
+
+                article.appendChild(
+                    date
+                );
+
+                article.appendChild(
+                    buttonRow
+                );
+
+
+                newsList.appendChild(
+                    article
+                );
 
             }
-
-
-            const buttonRow =
-                document.createElement("div");
-
-            buttonRow.className =
-                "button-row";
-
-
-            const editButton =
-                document.createElement("button");
-
-            editButton.className =
-                "edit-btn";
-
-            editButton.textContent =
-                "✏️ EDIT";
-
-
-            editButton.addEventListener(
-                "click",
-                function() {
-
-                    startEdit(
-                        id,
-                        news
-                    );
-
-                }
-            );
-
-
-            const deleteButton =
-                document.createElement("button");
-
-            deleteButton.className =
-                "delete-btn";
-
-            deleteButton.textContent =
-                "🗑️ DELETE";
-
-
-            deleteButton.addEventListener(
-                "click",
-                function() {
-
-                    deleteNews(
-                        id,
-                        news.title
-                    );
-
-                }
-            );
-
-
-            buttonRow.appendChild(
-                editButton
-            );
-
-            buttonRow.appendChild(
-                deleteButton
-            );
-
-
-            article.appendChild(
-                category
-            );
-
-            article.appendChild(
-                title
-            );
-
-            article.appendChild(
-                content
-            );
-
-            article.appendChild(
-                date
-            );
-
-            article.appendChild(
-                buttonRow
-            );
-
-
-            newsList.appendChild(
-                article
-            );
-
-        });
+        );
 
 
     } catch (error) {
@@ -1105,9 +1616,9 @@ async function loadNews() {
 
         newsList.innerHTML =
             '<div class="status error">' +
-            '❌ Could not load updates: ' +
+            "Could not load updates: " +
             error.message +
-            '</div>';
+            "</div>";
 
     }
 
@@ -1118,11 +1629,10 @@ async function loadNews() {
 
 document
 .getElementById("refreshButton")
-.addEventListener("click", function() {
-
-    loadNews();
-
-});
+.addEventListener(
+    "click",
+    loadNews
+);
 
 
 /* START EDIT */
@@ -1148,7 +1658,53 @@ function startEdit(id, news) {
     document
     .getElementById("editCategory")
     .value =
-        news.category || "Campus News";
+        news.category ||
+        "Campus News";
+
+
+    const currentImageBox =
+        document.getElementById(
+            "currentImageBox"
+        );
+
+
+    const currentImage =
+        document.getElementById(
+            "currentImage"
+        );
+
+
+    if (news.imageUrl) {
+
+        currentImage.src =
+            news.imageUrl;
+
+        currentImageBox.style.display =
+            "block";
+
+    } else {
+
+        currentImageBox.style.display =
+            "none";
+
+    }
+
+
+    selectedEditImage =
+        null;
+
+
+    document
+    .getElementById("editImageInput")
+    .value = "";
+
+
+    document
+    .getElementById(
+        "editImagePreviewBox"
+    )
+    .style.display =
+        "none";
 
 
     document
@@ -1173,215 +1729,319 @@ function startEdit(id, news) {
     document
     .getElementById("editCard")
     .scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+        behavior:"smooth",
+        block:"start"
     });
 
 }
+
+
+/* CHOOSE EDIT IMAGE */
+
+document
+.getElementById(
+    "chooseEditImageButton"
+)
+.addEventListener(
+    "click",
+    function() {
+
+        document
+        .getElementById(
+            "editImageInput"
+        )
+        .click();
+
+    }
+);
+
+
+/* EDIT IMAGE SELECTED */
+
+document
+.getElementById(
+    "editImageInput"
+)
+.addEventListener(
+    "change",
+    function() {
+
+        const file =
+            this.files[0];
+
+
+        if (!file) {
+
+            return;
+
+        }
+
+
+        if (!file.type.startsWith("image/")) {
+
+            alert(
+                "Please select an image."
+            );
+
+            this.value = "";
+
+            return;
+
+        }
+
+
+        selectedEditImage =
+            file;
+
+
+        const preview =
+            document.getElementById(
+                "editImagePreview"
+            );
+
+
+        const box =
+            document.getElementById(
+                "editImagePreviewBox"
+            );
+
+
+        const name =
+            document.getElementById(
+                "editImageFileName"
+            );
+
+
+        preview.src =
+            URL.createObjectURL(file);
+
+
+        name.textContent =
+            file.name;
+
+
+        box.style.display =
+            "block";
+
+    }
+);
 
 
 /* SAVE EDIT */
 
 document
 .getElementById("saveEditButton")
-.addEventListener("click", async function() {
+.addEventListener(
+    "click",
+    async function() {
 
-    const status =
-        document.getElementById("editStatus");
+        const status =
+            document.getElementById(
+                "editStatus"
+            );
 
-    const button =
-        document.getElementById("saveEditButton");
+
+        const button =
+            document.getElementById(
+                "saveEditButton"
+            );
 
 
-    if (!editingNewsId) {
+        if (!editingNewsId) {
 
-        status.textContent =
-            "No update selected for editing.";
+            status.textContent =
+                "No update selected.";
 
-        status.className =
-            "status error";
+            status.className =
+                "status error";
 
-        return;
+            return;
+
+        }
+
+
+        const title =
+            document.getElementById(
+                "editTitle"
+            ).value.trim();
+
+
+        const category =
+            document.getElementById(
+                "editCategory"
+            ).value;
+
+
+        const content =
+            document.getElementById(
+                "editContent"
+            ).value.trim();
+
+
+        if (!title || !content) {
+
+            status.textContent =
+                "Please enter title and content.";
+
+            status.className =
+                "status error";
+
+            return;
+
+        }
+
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "SAVING...";
+
+
+        try {
+
+            const oldSnapshot =
+                await database
+                .ref(
+                    "news/" +
+                    editingNewsId
+                )
+                .once("value");
+
+
+            const oldNews =
+                oldSnapshot.val() || {};
+
+
+            let imageUrl =
+                oldNews.imageUrl ||
+                "";
+
+
+            if (selectedEditImage) {
+
+                imageUrl =
+                    await uploadImageToDrive(
+                        selectedEditImage,
+                        status
+                    );
+
+            }
+
+
+            status.textContent =
+                "💾 Saving changes...";
+
+
+            await database
+            .ref(
+                "news/" +
+                editingNewsId
+            )
+            .update({
+
+                category:
+                    category,
+
+                title:
+                    title,
+
+                content:
+                    content,
+
+                imageUrl:
+                    imageUrl,
+
+                updatedAt:
+                    Date.now(),
+
+                updatedBy:
+                    auth.currentUser.email
+
+            });
+
+
+            status.textContent =
+                "✅ Update edited successfully.";
+
+            status.className =
+                "status success";
+
+
+            editingNewsId =
+                null;
+
+            selectedEditImage =
+                null;
+
+
+            document
+            .getElementById(
+                "editCard"
+            )
+            .style.display =
+                "none";
+
+
+            loadNews();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.textContent =
+                "❌ Could not save changes: " +
+                error.message;
+
+            status.className =
+                "status error";
+
+        }
+
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "💾 SAVE CHANGES";
 
     }
-
-
-    const title =
-        document
-        .getElementById("editTitle")
-        .value
-        .trim();
-
-
-    const category =
-        document
-        .getElementById("editCategory")
-        .value;
-
-
-    const content =
-        document
-        .getElementById("editContent")
-        .value
-        .trim();
-
-
-    if (!title || !content) {
-
-        status.textContent =
-            "Please enter both title and content.";
-
-        status.className =
-            "status error";
-
-        return;
-
-    }
-
-
-    const user =
-        auth ? auth.currentUser : null;
-
-
-    if (!user) {
-
-        status.textContent =
-            "Please login first.";
-
-        status.className =
-            "status error";
-
-        return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "SAVING...";
-
-
-    try {
-
-        const updateData = {
-
-            category: category,
-
-            title: title,
-
-            content: content,
-
-            updatedAt: Date.now(),
-
-            updatedBy: user.email
-
-        };
-
-
-        await database
-        .ref("news/" + editingNewsId)
-        .update(updateData);
-
-
-        status.textContent =
-            "✅ Update edited successfully.";
-
-        status.className =
-            "status success";
-
-
-        editingNewsId =
-            null;
-
-
-        document
-        .getElementById("editTitle")
-        .value = "";
-
-
-        document
-        .getElementById("editContent")
-        .value = "";
-
-
-        document
-        .getElementById("editCard")
-        .style.display =
-            "none";
-
-
-        loadNews();
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        status.textContent =
-            "❌ Could not save changes: " +
-            error.message;
-
-        status.className =
-            "status error";
-
-    }
-
-
-    button.disabled = false;
-
-    button.textContent =
-        "💾 SAVE CHANGES";
-
-});
+);
 
 
 /* CANCEL EDIT */
 
 document
 .getElementById("cancelEditButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function() {
 
-    editingNewsId =
-        null;
+        editingNewsId =
+            null;
 
-
-    document
-    .getElementById("editCard")
-    .style.display =
-        "none";
-
-
-    document
-    .getElementById("editTitle")
-    .value = "";
+        selectedEditImage =
+            null;
 
 
-    document
-    .getElementById("editContent")
-    .value = "";
-
-});
-
-
-/* DELETE NEWS */
-
-async function deleteNews(id, title) {
-
-    const user =
-        auth ? auth.currentUser : null;
-
-
-    if (!user) {
-
-        alert(
-            "Please login first."
-        );
-
-        return;
+        document
+        .getElementById(
+            "editCard"
+        )
+        .style.display =
+            "none";
 
     }
+);
 
+
+/* DELETE */
+
+async function deleteNews(
+    id,
+    title
+) {
 
     const confirmed =
         confirm(
@@ -1389,9 +2049,9 @@ async function deleteNews(id, title) {
             "Title: " +
             title +
             "\n\n" +
-            "This action will permanently remove " +
-            "this update from Firebase.\n\n" +
-            "Do you want to continue?"
+            "This will permanently remove " +
+            "the update from Firebase.\n\n" +
+            "Continue?"
         );
 
 
@@ -1405,7 +2065,10 @@ async function deleteNews(id, title) {
     try {
 
         await database
-        .ref("news/" + id)
+        .ref(
+            "news/" +
+            id
+        )
         .remove();
 
 
@@ -1420,7 +2083,6 @@ async function deleteNews(id, title) {
     } catch (error) {
 
         console.error(error);
-
 
         alert(
             "❌ Delete failed:\n\n" +
