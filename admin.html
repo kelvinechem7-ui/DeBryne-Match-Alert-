@@ -125,6 +125,7 @@ button:disabled {
     background: #f1f5f9;
     font-size: 14px;
     line-height: 1.5;
+    word-break: break-word;
 }
 
 .success {
@@ -254,6 +255,32 @@ button:disabled {
     text-align: center;
     padding: 20px;
     color: #64748b;
+}
+
+.upload-progress {
+    display: none;
+    margin-top: 12px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #7c3aed;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 6px;
 }
 
 @media (max-width: 500px) {
@@ -412,6 +439,30 @@ button:disabled {
             id="imageFileName"
             class="file-name"
         ></div>
+
+    </div>
+
+
+    <div
+        id="uploadProgress"
+        class="upload-progress"
+    >
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill"
+            ></div>
+
+        </div>
+
+        <div
+            id="progressText"
+            class="progress-text"
+        >
+            Preparing picture...
+        </div>
 
     </div>
 
@@ -626,6 +677,12 @@ const firebaseConfig = {
 };
 
 
+/*
+==================================================
+GOOGLE APPS SCRIPT IMAGE UPLOAD URL
+==================================================
+*/
+
 const GOOGLE_DRIVE_UPLOAD_URL =
 "https://script.google.com/macros/s/AKfycbylD8C6_wDdXh9bkpoY-YNJsaJgRp7ImXHsnuXaY5vVpbM4UqHGiq7T5B6PSBJ7NzcoBA/exec";
 
@@ -639,7 +696,11 @@ let selectedImage = null;
 let selectedEditImage = null;
 
 
-/* INITIALIZE FIREBASE */
+/*
+==================================================
+INITIALIZE FIREBASE
+==================================================
+*/
 
 try {
 
@@ -662,7 +723,11 @@ try {
 }
 
 
-/* LOGIN */
+/*
+==================================================
+LOGIN
+==================================================
+*/
 
 document
 .getElementById("loginButton")
@@ -698,6 +763,19 @@ document
 
         status.textContent =
             "Please enter your password.";
+
+        status.className =
+            "status error";
+
+        return;
+
+    }
+
+
+    if (!auth) {
+
+        status.textContent =
+            "Firebase is not available.";
 
         status.className =
             "status error";
@@ -752,85 +830,105 @@ document
 });
 
 
-/* AUTH STATE */
+/*
+==================================================
+AUTH STATE
+==================================================
+*/
 
-auth.onAuthStateChanged(function(user) {
+if (auth) {
 
-    const loginBox =
-        document.getElementById("loginBox");
+    auth.onAuthStateChanged(function(user) {
 
-    const dashboard =
-        document.getElementById("dashboard");
+        const loginBox =
+            document.getElementById("loginBox");
 
-    const publishCard =
-        document.getElementById("publishCard");
+        const dashboard =
+            document.getElementById("dashboard");
 
-    const manageCard =
-        document.getElementById("manageCard");
+        const publishCard =
+            document.getElementById("publishCard");
 
-    const editCard =
-        document.getElementById("editCard");
+        const manageCard =
+            document.getElementById("manageCard");
 
-    const userEmail =
-        document.getElementById("userEmail");
+        const editCard =
+            document.getElementById("editCard");
+
+        const userEmail =
+            document.getElementById("userEmail");
 
 
-    if (user) {
+        if (user) {
 
-        loginBox.style.display =
-            "none";
+            loginBox.style.display =
+                "none";
 
-        dashboard.style.display =
-            "block";
+            dashboard.style.display =
+                "block";
 
-        publishCard.style.display =
-            "block";
+            publishCard.style.display =
+                "block";
 
-        manageCard.style.display =
-            "block";
+            manageCard.style.display =
+                "block";
 
-        editCard.style.display =
-            "none";
+            editCard.style.display =
+                "none";
 
-        userEmail.textContent =
-            "Signed in as: " + user.email;
+            userEmail.textContent =
+                "Signed in as: " + user.email;
 
-        loadNews();
+            loadNews();
 
-    } else {
+        } else {
 
-        loginBox.style.display =
-            "block";
+            loginBox.style.display =
+                "block";
 
-        dashboard.style.display =
-            "none";
+            dashboard.style.display =
+                "none";
 
-        publishCard.style.display =
-            "none";
+            publishCard.style.display =
+                "none";
 
-        manageCard.style.display =
-            "none";
+            manageCard.style.display =
+                "none";
 
-        editCard.style.display =
-            "none";
+            editCard.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/*
+==================================================
+LOGOUT
+==================================================
+*/
+
+document
+.getElementById("logoutButton")
+.addEventListener("click", async function() {
+
+    if (auth) {
+
+        await auth.signOut();
 
     }
 
 });
 
 
-/* LOGOUT */
-
-document
-.getElementById("logoutButton")
-.addEventListener("click", async function() {
-
-    await auth.signOut();
-
-});
-
-
-/* IMAGE RESIZE */
+/*
+==================================================
+IMAGE RESIZE
+==================================================
+*/
 
 function resizeImage(file) {
 
@@ -839,11 +937,13 @@ function resizeImage(file) {
         const reader =
             new FileReader();
 
+
         reader.onload =
             function(event) {
 
                 const img =
                     new Image();
+
 
                 img.onload =
                     function() {
@@ -890,6 +990,7 @@ function resizeImage(file) {
 
                         const ctx =
                             canvas.getContext("2d");
+
 
                         ctx.drawImage(
                             img,
@@ -963,7 +1064,11 @@ function resizeImage(file) {
 }
 
 
-/* BLOB TO BASE64 */
+/*
+==================================================
+BLOB TO BASE64
+==================================================
+*/
 
 function blobToBase64(blob) {
 
@@ -971,6 +1076,7 @@ function blobToBase64(blob) {
 
         const reader =
             new FileReader();
+
 
         reader.onloadend =
             function() {
@@ -980,6 +1086,7 @@ function blobToBase64(blob) {
                 );
 
             };
+
 
         reader.onerror =
             function() {
@@ -992,6 +1099,7 @@ function blobToBase64(blob) {
 
             };
 
+
         reader.readAsDataURL(blob);
 
     });
@@ -999,115 +1107,362 @@ function blobToBase64(blob) {
 }
 
 
-/* UPLOAD IMAGE TO GOOGLE DRIVE */
+/*
+==================================================
+PROGRESS
+==================================================
+*/
+
+function showUploadProgress(
+    percent,
+    text
+) {
+
+    const box =
+        document.getElementById(
+            "uploadProgress"
+        );
+
+    const fill =
+        document.getElementById(
+            "progressFill"
+        );
+
+    const progressText =
+        document.getElementById(
+            "progressText"
+        );
+
+
+    box.style.display =
+        "block";
+
+    fill.style.width =
+        percent + "%";
+
+    progressText.textContent =
+        text;
+
+}
+
+
+function hideUploadProgress() {
+
+    document.getElementById(
+        "uploadProgress"
+    ).style.display =
+        "none";
+
+}
+
+
+/*
+==================================================
+GET IMAGE URL FROM APPS SCRIPT RESPONSE
+==================================================
+*/
+
+function extractImageUrl(result) {
+
+    if (!result) {
+
+        return "";
+
+    }
+
+
+    /*
+    Accept different names in case
+    the Apps Script returns a slightly
+    different property name.
+    */
+
+    const possibleUrls = [
+
+        result.imageUrl,
+
+        result.fileUrl,
+
+        result.url,
+
+        result.downloadUrl,
+
+        result.webViewLink,
+
+        result.webContentLink
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < possibleUrls.length;
+        i++
+    ) {
+
+        if (
+            typeof possibleUrls[i] === "string" &&
+            possibleUrls[i].trim() !== ""
+        ) {
+
+            return possibleUrls[i].trim();
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/*
+==================================================
+UPLOAD IMAGE TO GOOGLE DRIVE
+==================================================
+*/
 
 async function uploadImageToDrive(
     file,
     statusElement
 ) {
 
-    statusElement.textContent =
-        "🖼️ Preparing picture...";
+    if (!file) {
 
-    statusElement.className =
-        "status";
+        return "";
 
-
-    const resizedBlob =
-        await resizeImage(file);
+    }
 
 
-    statusElement.textContent =
-        "⬆️ Uploading picture to Google Drive...";
+    if (
+        !file.type ||
+        !file.type.startsWith("image/")
+    ) {
 
-
-    const base64 =
-        await blobToBase64(
-            resizedBlob
+        throw new Error(
+            "The selected file is not an image."
         );
 
+    }
 
-    const payload = {
-
-        action:
-            "uploadImage",
-
-        image:
-            base64,
-
-        mimeType:
-            "image/jpeg",
-
-        fileName:
-            "DeBryne_" +
-            Date.now() +
-            ".jpg"
-
-    };
-
-
-    const response =
-        await fetch(
-            GOOGLE_DRIVE_UPLOAD_URL,
-            {
-
-                method:
-                    "POST",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify(payload)
-
-            }
-        );
-
-
-    const text =
-        await response.text();
-
-
-    console.log(
-        "Google Drive response:",
-        text
-    );
-
-
-    let result;
 
     try {
 
-        result =
-            JSON.parse(text);
+        showUploadProgress(
+            10,
+            "Preparing picture..."
+        );
+
+
+        statusElement.textContent =
+            "🖼️ Preparing picture...";
+
+        statusElement.className =
+            "status";
+
+
+        const resizedBlob =
+            await resizeImage(file);
+
+
+        showUploadProgress(
+            35,
+            "Processing picture..."
+        );
+
+
+        const base64 =
+            await blobToBase64(
+                resizedBlob
+            );
+
+
+        showUploadProgress(
+            55,
+            "Uploading picture to Google Drive..."
+        );
+
+
+        statusElement.textContent =
+            "⬆️ Uploading picture to Google Drive...";
+
+
+        const payload = {
+
+            action:
+                "uploadImage",
+
+            image:
+                base64,
+
+            mimeType:
+                "image/jpeg",
+
+            fileName:
+                "DeBryne_" +
+                Date.now() +
+                ".jpg"
+
+        };
+
+
+        const response =
+            await fetch(
+                GOOGLE_DRIVE_UPLOAD_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+
+                    },
+
+                    body:
+                        JSON.stringify(payload)
+
+                }
+            );
+
+
+        showUploadProgress(
+            80,
+            "Waiting for Google Drive..."
+        );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "Google Drive raw response:",
+            text
+        );
+
+
+        if (!text || !text.trim()) {
+
+            throw new Error(
+                "Google Drive server returned an empty response."
+            );
+
+        }
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(text);
+
+        } catch (error) {
+
+            console.error(
+                "Invalid Apps Script response:",
+                text
+            );
+
+            throw new Error(
+                "Google Drive server returned an invalid response."
+            );
+
+        }
+
+
+        console.log(
+            "Google Drive parsed response:",
+            result
+        );
+
+
+        if (
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.error ||
+                "Google Drive rejected the upload."
+            );
+
+        }
+
+
+        const imageUrl =
+            extractImageUrl(result);
+
+
+        /*
+        IMPORTANT:
+        Never allow undefined to reach Firebase.
+        */
+
+        if (
+            typeof imageUrl !== "string" ||
+            imageUrl.trim() === ""
+        ) {
+
+            console.error(
+                "Apps Script response does not contain an image URL:",
+                result
+            );
+
+            throw new Error(
+                "Picture uploaded, but Google Drive did not return a usable picture URL."
+            );
+
+        }
+
+
+        showUploadProgress(
+            100,
+            "Picture uploaded successfully."
+        );
+
+
+        statusElement.textContent =
+            "✅ Picture uploaded successfully.";
+
+        statusElement.className =
+            "status success";
+
+
+        setTimeout(
+            hideUploadProgress,
+            1000
+        );
+
+
+        return imageUrl;
+
 
     } catch (error) {
 
-        throw new Error(
-            "Google Drive server returned an invalid response."
+        hideUploadProgress();
+
+        console.error(
+            "Google Drive upload error:",
+            error
         );
 
-    }
-
-
-    if (!result.success) {
-
-        throw new Error(
-            result.error ||
-            "Image upload failed."
-        );
+        throw error;
 
     }
-
-
-    return result.imageUrl;
 
 }
 
 
-/* CHOOSE PICTURE */
+/*
+==================================================
+CHOOSE PICTURE
+==================================================
+*/
 
 document
 .getElementById("chooseImageButton")
@@ -1120,7 +1475,11 @@ document
 });
 
 
-/* SELECTED PICTURE */
+/*
+==================================================
+SELECT PICTURE
+==================================================
+*/
 
 document
 .getElementById("imageInput")
@@ -1137,13 +1496,20 @@ document
     }
 
 
-    if (!file.type.startsWith("image/")) {
+    if (
+        !file.type ||
+        !file.type.startsWith("image/")
+    ) {
 
         alert(
             "Please select an image."
         );
 
-        this.value = "";
+        this.value =
+            "";
+
+        selectedImage =
+            null;
 
         return;
 
@@ -1172,12 +1538,28 @@ document
         );
 
 
-    preview.src =
+    if (preview.dataset.objectUrl) {
+
+        URL.revokeObjectURL(
+            preview.dataset.objectUrl
+        );
+
+    }
+
+
+    const objectUrl =
         URL.createObjectURL(file);
 
 
+    preview.src =
+        objectUrl;
+
+    preview.dataset.objectUrl =
+        objectUrl;
+
+
     fileName.textContent =
-        file.name;
+        "Selected: " + file.name;
 
 
     previewBox.style.display =
@@ -1186,50 +1568,71 @@ document
 });
 
 
-/* PUBLISH NEWS */
+/*
+==================================================
+PUBLISH NEWS
+==================================================
+*/
 
 document
 .getElementById("publishButton")
 .addEventListener("click", async function() {
 
     const user =
-        auth.currentUser;
+        auth
+        ?
+        auth.currentUser
+        :
+        null;
 
 
     const category =
-        document.getElementById(
-            "category"
-        ).value;
+        document
+        .getElementById("category")
+        .value;
 
 
     const title =
-        document.getElementById(
-            "title"
-        ).value.trim();
+        document
+        .getElementById("title")
+        .value
+        .trim();
 
 
     const content =
-        document.getElementById(
-            "content"
-        ).value.trim();
+        document
+        .getElementById("content")
+        .value
+        .trim();
 
 
     const status =
-        document.getElementById(
-            "publishStatus"
-        );
+        document
+        .getElementById("publishStatus");
 
 
     const button =
-        document.getElementById(
-            "publishButton"
-        );
+        document
+        .getElementById("publishButton");
 
 
     if (!user) {
 
         status.textContent =
             "Please login first.";
+
+        status.className =
+            "status error";
+
+        return;
+
+    }
+
+
+    if (!database) {
+
+        status.textContent =
+            "Firebase database is not available.";
 
         status.className =
             "status error";
@@ -1252,7 +1655,8 @@ document
     }
 
 
-    button.disabled = true;
+    button.disabled =
+        true;
 
     button.textContent =
         "PUBLISHING...";
@@ -1260,8 +1664,18 @@ document
 
     try {
 
-        let imageUrl = "";
+        /*
+        ALWAYS start with an empty string.
+        NEVER use undefined.
+        */
 
+        let imageUrl =
+            "";
+
+
+        /*
+        Upload only when a picture was selected.
+        */
 
         if (selectedImage) {
 
@@ -1271,11 +1685,28 @@ document
                     status
                 );
 
+
+            /*
+            Extra safety check.
+            */
+
+            if (
+                typeof imageUrl !== "string"
+            ) {
+
+                imageUrl =
+                    "";
+
+            }
+
         }
 
 
         status.textContent =
             "📰 Saving news...";
+
+        status.className =
+            "status";
 
 
         const news =
@@ -1284,27 +1715,37 @@ document
             .push();
 
 
-        await news.set({
+        /*
+        imageUrl is GUARANTEED to be
+        a string here.
+        */
+
+        const newsData = {
 
             category:
-                category,
+                category || "",
 
             title:
-                title,
+                title || "",
 
             content:
-                content,
+                content || "",
 
             author:
-                user.email,
+                user.email || "",
 
             createdAt:
                 Date.now(),
 
             imageUrl:
-                imageUrl
+                imageUrl || ""
 
-        });
+        };
+
+
+        await news.set(
+            newsData
+        );
 
 
         status.textContent =
@@ -1316,17 +1757,20 @@ document
 
         document
         .getElementById("title")
-        .value = "";
+        .value =
+            "";
 
 
         document
         .getElementById("content")
-        .value = "";
+        .value =
+            "";
 
 
         document
         .getElementById("imageInput")
-        .value = "";
+        .value =
+            "";
 
 
         document
@@ -1344,11 +1788,18 @@ document
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Publishing error:",
+            error
+        );
+
 
         status.textContent =
             "❌ Publishing failed: " +
-            error.message;
+            (
+                error.message ||
+                String(error)
+            );
 
         status.className =
             "status error";
@@ -1356,7 +1807,8 @@ document
     }
 
 
-    button.disabled = false;
+    button.disabled =
+        false;
 
     button.textContent =
         "PUBLISH NEWS";
@@ -1364,7 +1816,11 @@ document
 });
 
 
-/* LOAD NEWS */
+/*
+==================================================
+LOAD NEWS
+==================================================
+*/
 
 async function loadNews() {
 
@@ -1376,6 +1832,16 @@ async function loadNews() {
 
     newsList.innerHTML =
         '<div class="loading">Loading updates...</div>';
+
+
+    if (!database) {
+
+        newsList.innerHTML =
+            '<div class="status error">Firebase database is not available.</div>';
+
+        return;
+
+    }
 
 
     try {
@@ -1390,7 +1856,8 @@ async function loadNews() {
             snapshot.val();
 
 
-        newsList.innerHTML = "";
+        newsList.innerHTML =
+            "";
 
 
         if (!data) {
@@ -1408,11 +1875,16 @@ async function loadNews() {
 
 
         newsArray.sort(
-            function(a,b) {
+            function(a, b) {
 
                 return (
-                    (b[1].createdAt || 0) -
-                    (a[1].createdAt || 0)
+                    Number(
+                        b[1].createdAt || 0
+                    )
+                    -
+                    Number(
+                        a[1].createdAt || 0
+                    )
                 );
 
             }
@@ -1426,7 +1898,7 @@ async function loadNews() {
                     item[0];
 
                 const news =
-                    item[1];
+                    item[1] || {};
 
 
                 const article =
@@ -1461,7 +1933,24 @@ async function loadNews() {
                     "Untitled";
 
 
-                if (news.imageUrl) {
+                article.appendChild(
+                    category
+                );
+
+
+                article.appendChild(
+                    title
+                );
+
+
+                /*
+                PICTURE
+                */
+
+                if (
+                    typeof news.imageUrl === "string" &&
+                    news.imageUrl.trim() !== ""
+                ) {
 
                     const image =
                         document.createElement(
@@ -1477,6 +1966,19 @@ async function loadNews() {
                     image.alt =
                         news.title ||
                         "News picture";
+
+                    image.loading =
+                        "lazy";
+
+
+                    image.onerror =
+                        function() {
+
+                            this.style.display =
+                                "none";
+
+                        };
+
 
                     article.appendChild(
                         image
@@ -1511,10 +2013,22 @@ async function loadNews() {
                     ?
                     "Published: " +
                     new Date(
-                        news.createdAt
+                        Number(
+                            news.createdAt
+                        )
                     ).toLocaleString()
                     :
                     "";
+
+
+                article.appendChild(
+                    content
+                );
+
+
+                article.appendChild(
+                    date
+                );
 
 
                 const buttonRow =
@@ -1566,7 +2080,8 @@ async function loadNews() {
 
                         deleteNews(
                             id,
-                            news.title
+                            news.title ||
+                            "Untitled"
                         );
 
                     };
@@ -1576,26 +2091,11 @@ async function loadNews() {
                     editButton
                 );
 
+
                 buttonRow.appendChild(
                     deleteButton
                 );
 
-
-                article.appendChild(
-                    category
-                );
-
-                article.appendChild(
-                    title
-                );
-
-                article.appendChild(
-                    content
-                );
-
-                article.appendChild(
-                    date
-                );
 
                 article.appendChild(
                     buttonRow
@@ -1612,12 +2112,19 @@ async function loadNews() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Load news error:",
+            error
+        );
+
 
         newsList.innerHTML =
             '<div class="status error">' +
             "Could not load updates: " +
-            error.message +
+            (
+                error.message ||
+                String(error)
+            ) +
             "</div>";
 
     }
@@ -1625,7 +2132,11 @@ async function loadNews() {
 }
 
 
-/* REFRESH */
+/*
+==================================================
+REFRESH
+==================================================
+*/
 
 document
 .getElementById("refreshButton")
@@ -1635,9 +2146,16 @@ document
 );
 
 
-/* START EDIT */
+/*
+==================================================
+START EDIT
+==================================================
+*/
 
-function startEdit(id, news) {
+function startEdit(
+    id,
+    news
+) {
 
     editingNewsId =
         id;
@@ -1674,7 +2192,10 @@ function startEdit(id, news) {
         );
 
 
-    if (news.imageUrl) {
+    if (
+        typeof news.imageUrl === "string" &&
+        news.imageUrl.trim() !== ""
+    ) {
 
         currentImage.src =
             news.imageUrl;
@@ -1683,6 +2204,9 @@ function startEdit(id, news) {
             "block";
 
     } else {
+
+        currentImage.src =
+            "";
 
         currentImageBox.style.display =
             "none";
@@ -1696,7 +2220,8 @@ function startEdit(id, news) {
 
     document
     .getElementById("editImageInput")
-    .value = "";
+    .value =
+        "";
 
 
     document
@@ -1711,7 +2236,10 @@ function startEdit(id, news) {
     .getElementById("editStatus")
     .textContent =
         "You are editing: " +
-        (news.title || "Untitled");
+        (
+            news.title ||
+            "Untitled"
+        );
 
 
     document
@@ -1729,14 +2257,20 @@ function startEdit(id, news) {
     document
     .getElementById("editCard")
     .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
+        behavior:
+            "smooth",
+        block:
+            "start"
     });
 
 }
 
 
-/* CHOOSE EDIT IMAGE */
+/*
+==================================================
+CHOOSE EDIT IMAGE
+==================================================
+*/
 
 document
 .getElementById(
@@ -1756,7 +2290,11 @@ document
 );
 
 
-/* EDIT IMAGE SELECTED */
+/*
+==================================================
+EDIT IMAGE SELECTED
+==================================================
+*/
 
 document
 .getElementById(
@@ -1777,13 +2315,20 @@ document
         }
 
 
-        if (!file.type.startsWith("image/")) {
+        if (
+            !file.type ||
+            !file.type.startsWith("image/")
+        ) {
 
             alert(
                 "Please select an image."
             );
 
-            this.value = "";
+            this.value =
+                "";
+
+            selectedEditImage =
+                null;
 
             return;
 
@@ -1812,11 +2357,28 @@ document
             );
 
 
-        preview.src =
+        if (preview.dataset.objectUrl) {
+
+            URL.revokeObjectURL(
+                preview.dataset.objectUrl
+            );
+
+        }
+
+
+        const objectUrl =
             URL.createObjectURL(file);
 
 
+        preview.src =
+            objectUrl;
+
+        preview.dataset.objectUrl =
+            objectUrl;
+
+
         name.textContent =
+            "New picture: " +
             file.name;
 
 
@@ -1827,7 +2389,11 @@ document
 );
 
 
-/* SAVE EDIT */
+/*
+==================================================
+SAVE EDIT
+==================================================
+*/
 
 document
 .getElementById("saveEditButton")
@@ -1847,6 +2413,27 @@ document
             );
 
 
+        const user =
+            auth
+            ?
+            auth.currentUser
+            :
+            null;
+
+
+        if (!user) {
+
+            status.textContent =
+                "Please login first.";
+
+            status.className =
+                "status error";
+
+            return;
+
+        }
+
+
         if (!editingNewsId) {
 
             status.textContent =
@@ -1861,21 +2448,29 @@ document
 
 
         const title =
-            document.getElementById(
+            document
+            .getElementById(
                 "editTitle"
-            ).value.trim();
+            )
+            .value
+            .trim();
 
 
         const category =
-            document.getElementById(
+            document
+            .getElementById(
                 "editCategory"
-            ).value;
+            )
+            .value;
 
 
         const content =
-            document.getElementById(
+            document
+            .getElementById(
                 "editContent"
-            ).value.trim();
+            )
+            .value
+            .trim();
 
 
         if (!title || !content) {
@@ -1913,10 +2508,24 @@ document
                 oldSnapshot.val() || {};
 
 
-            let imageUrl =
-                oldNews.imageUrl ||
-                "";
+            /*
+            Always use a string.
+            */
 
+            let imageUrl =
+                (
+                    typeof oldNews.imageUrl === "string"
+                    ?
+                    oldNews.imageUrl
+                    :
+                    ""
+                );
+
+
+            /*
+            If a new picture was selected,
+            upload it and replace the old URL.
+            */
 
             if (selectedEditImage) {
 
@@ -1926,11 +2535,47 @@ document
                         status
                     );
 
+
+                if (
+                    typeof imageUrl !== "string"
+                ) {
+
+                    imageUrl =
+                        "";
+
+                }
+
             }
 
 
             status.textContent =
                 "💾 Saving changes...";
+
+            status.className =
+                "status";
+
+
+            const updateData = {
+
+                category:
+                    category || "",
+
+                title:
+                    title || "",
+
+                content:
+                    content || "",
+
+                imageUrl:
+                    imageUrl || "",
+
+                updatedAt:
+                    Date.now(),
+
+                updatedBy:
+                    user.email || ""
+
+            };
 
 
             await database
@@ -1938,27 +2583,9 @@ document
                 "news/" +
                 editingNewsId
             )
-            .update({
-
-                category:
-                    category,
-
-                title:
-                    title,
-
-                content:
-                    content,
-
-                imageUrl:
-                    imageUrl,
-
-                updatedAt:
-                    Date.now(),
-
-                updatedBy:
-                    auth.currentUser.email
-
-            });
+            .update(
+                updateData
+            );
 
 
             status.textContent =
@@ -1977,6 +2604,22 @@ document
 
             document
             .getElementById(
+                "editImageInput"
+            )
+            .value =
+                "";
+
+
+            document
+            .getElementById(
+                "editImagePreviewBox"
+            )
+            .style.display =
+                "none";
+
+
+            document
+            .getElementById(
                 "editCard"
             )
             .style.display =
@@ -1988,11 +2631,18 @@ document
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Edit error:",
+                error
+            );
+
 
             status.textContent =
                 "❌ Could not save changes: " +
-                error.message;
+                (
+                    error.message ||
+                    String(error)
+                );
 
             status.className =
                 "status error";
@@ -2010,7 +2660,11 @@ document
 );
 
 
-/* CANCEL EDIT */
+/*
+==================================================
+CANCEL EDIT
+==================================================
+*/
 
 document
 .getElementById("cancelEditButton")
@@ -2027,6 +2681,22 @@ document
 
         document
         .getElementById(
+            "editImageInput"
+        )
+        .value =
+            "";
+
+
+        document
+        .getElementById(
+            "editImagePreviewBox"
+        )
+        .style.display =
+            "none";
+
+
+        document
+        .getElementById(
             "editCard"
         )
         .style.display =
@@ -2036,7 +2706,11 @@ document
 );
 
 
-/* DELETE */
+/*
+==================================================
+DELETE
+==================================================
+*/
 
 async function deleteNews(
     id,
@@ -2082,11 +2756,18 @@ async function deleteNews(
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Delete error:",
+            error
+        );
+
 
         alert(
             "❌ Delete failed:\n\n" +
-            error.message
+            (
+                error.message ||
+                String(error)
+            )
         );
 
     }
