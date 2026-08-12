@@ -23,12 +23,141 @@ margin:0;
 padding:0;
 }
 
+html,
+body{
+width:100%;
+min-height:100%;
+}
+
 body{
 font-family:Arial,sans-serif;
 background:#f5f7fa;
 color:#172033;
 padding-bottom:80px;
 }
+
+/* ==================================================
+   PROFESSIONAL APP SPLASH SCREEN
+================================================== */
+
+#appSplash{
+position:fixed;
+inset:0;
+z-index:1000000;
+background:#111827;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+transition:opacity .45s ease,visibility .45s ease;
+}
+
+#appSplash.hide{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+
+.splash-content{
+width:100%;
+max-width:430px;
+padding:30px;
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.splash-logo{
+width:105px;
+height:105px;
+border-radius:26px;
+overflow:hidden;
+background:white;
+box-shadow:0 15px 45px rgba(0,0,0,.35);
+animation:splashLogo .8s ease;
+}
+
+.splash-logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.splash-title{
+color:white;
+font-size:29px;
+font-weight:800;
+margin-top:22px;
+letter-spacing:.2px;
+animation:splashText .8s ease;
+}
+
+.splash-subtitle{
+color:#cbd5e1;
+font-size:13px;
+margin-top:7px;
+animation:splashText 1s ease;
+}
+
+.splash-loader{
+width:180px;
+height:4px;
+background:rgba(255,255,255,.15);
+border-radius:20px;
+overflow:hidden;
+margin-top:30px;
+}
+
+.splash-loader-bar{
+width:45%;
+height:100%;
+background:white;
+border-radius:20px;
+animation:splashLoading 1.15s infinite ease-in-out;
+}
+
+.splash-status{
+color:#94a3b8;
+font-size:11px;
+margin-top:13px;
+}
+
+@keyframes splashLogo{
+from{
+opacity:0;
+transform:scale(.75);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes splashText{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes splashLoading{
+0%{
+transform:translateX(-180%);
+}
+100%{
+transform:translateX(400%);
+}
+}
+
+/* ==================================================
+   AUTH
+================================================== */
 
 #authScreen{
 position:fixed;
@@ -153,6 +282,10 @@ display:block;
 background:#eff6ff;
 color:#1d4ed8;
 }
+
+/* ==================================================
+   APP
+================================================== */
 
 #appContent{
 display:none;
@@ -402,6 +535,22 @@ grid-template-columns:1fr;
 padding:8px 5px;
 }
 
+.splash-title{
+font-size:25px;
+}
+
+}
+
+/* Reduce motion for users who prefer it */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+animation-duration:.01ms !important;
+animation-iteration-count:1 !important;
+transition-duration:.01ms !important;
+}
+
 }
 
 </style>
@@ -409,7 +558,52 @@ padding:8px 5px;
 
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- ==================================================
+     PROFESSIONAL APP SPLASH SCREEN
+================================================== -->
+
+<div id="appSplash">
+
+<div class="splash-content">
+
+<div class="splash-logo">
+
+<img
+src="./file_000000008e5c71f4a9d057362a556762.png"
+alt="DeBryne Update">
+
+</div>
+
+<div class="splash-title">
+DeBryne Update
+</div>
+
+<div class="splash-subtitle">
+Student News • Education • Sports
+</div>
+
+<div class="splash-loader">
+
+<div class="splash-loader-bar"></div>
+
+</div>
+
+<div
+id="splashStatus"
+class="splash-status">
+
+Starting DeBryne Update...
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     AUTH SCREEN
+================================================== -->
 
 <div id="authScreen">
 
@@ -534,7 +728,9 @@ class="auth-status">
 </div>
 
 
-<!-- APP -->
+<!-- ==================================================
+     APP CONTENT
+================================================== -->
 
 <div id="appContent">
 
@@ -891,7 +1087,9 @@ Loading events...
 </section>
 
 
-<!-- BOTTOM NAV -->
+<!-- ==================================================
+     BOTTOM NAV
+================================================== -->
 
 <nav class="bottom">
 
@@ -945,7 +1143,9 @@ Profile
 </div>
 
 
-<!-- NAVIGATION -->
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
 
 <script>
 
@@ -1020,7 +1220,9 @@ this.getAttribute("data-page")
 </script>
 
 
-<!-- FIREBASE -->
+<!-- ==================================================
+     FIREBASE
+================================================== -->
 
 <script type="module">
 
@@ -1104,9 +1306,82 @@ let auth;
 let messaging;
 
 
-/* =========================
+/* ==================================================
+   SPLASH CONTROL
+================================================== */
+
+const appSplash =
+document.getElementById("appSplash");
+
+const splashStatus =
+document.getElementById("splashStatus");
+
+
+function updateSplashStatus(message){
+
+if(splashStatus){
+
+splashStatus.textContent =
+message;
+
+}
+
+}
+
+
+function hideSplash(){
+
+if(!appSplash){
+return;
+}
+
+appSplash.classList.add("hide");
+
+setTimeout(function(){
+
+appSplash.style.display =
+"none";
+
+},500);
+
+}
+
+
+/*
+ * Keep splash visible for a short
+ * professional startup experience.
+ */
+
+const splashStartTime =
+Date.now();
+
+
+function finishSplash(){
+
+const elapsed =
+Date.now() -
+splashStartTime;
+
+const minimumTime =
+1200;
+
+const remaining =
+Math.max(
+0,
+minimumTime - elapsed
+);
+
+setTimeout(
+hideSplash,
+remaining
+);
+
+}
+
+
+/* ==================================================
    ELEMENTS
-========================= */
+================================================== */
 
 const authScreen =
 document.getElementById("authScreen");
@@ -1124,9 +1399,9 @@ const authStatus =
 document.getElementById("authStatus");
 
 
-/* =========================
+/* ==================================================
    AUTH STATUS
-========================= */
+================================================== */
 
 function showAuthStatus(
 message,
@@ -1169,9 +1444,9 @@ authStatus.style.display =
 }
 
 
-/* =========================
+/* ==================================================
    REGISTER / LOGIN SWITCH
-========================= */
+================================================== */
 
 function showRegister(){
 
@@ -1217,11 +1492,16 @@ showRegister
 );
 
 
-/* =========================
+/* ==================================================
    INITIALIZE FIREBASE
-========================= */
+================================================== */
 
 try{
+
+updateSplashStatus(
+"Connecting to DeBryne Update..."
+);
+
 
 app =
 initializeApp(firebaseConfig);
@@ -1234,6 +1514,12 @@ getAuth(app);
 
 messaging =
 getMessaging(app);
+
+
+updateSplashStatus(
+"Firebase connected..."
+);
+
 
 console.log(
 "Firebase initialized successfully."
@@ -1248,18 +1534,24 @@ console.error(
 error
 );
 
+updateSplashStatus(
+"Firebase connection failed."
+);
+
 showAuthStatus(
 "Firebase initialization failed: " +
 error.message,
 "error"
 );
 
+finishSplash();
+
 }
 
 
-/* =========================
+/* ==================================================
    REGISTER
-========================= */
+================================================== */
 
 document
 .getElementById("registerButton")
@@ -1370,10 +1662,6 @@ const user =
 userCredential.user;
 
 
-/*
- * SAVE NAME TO FIREBASE AUTH
- */
-
 await updateProfile(
 user,
 {
@@ -1381,10 +1669,6 @@ displayName:name
 }
 );
 
-
-/*
- * SAVE NAME TO DATABASE
- */
 
 await set(
 ref(
@@ -1426,12 +1710,6 @@ document
 .getElementById("registerConfirm")
 .value = "";
 
-
-/*
- * Refresh the current user
- * so displayName is immediately
- * available.
- */
 
 await user.reload();
 
@@ -1503,9 +1781,9 @@ button.textContent =
 );
 
 
-/* =========================
+/* ==================================================
    LOGIN
-========================= */
+================================================== */
 
 document
 .getElementById("loginButton")
@@ -1665,9 +1943,9 @@ button.textContent =
 );
 
 
-/* =========================
+/* ==================================================
    RECOVER OLD USER NAME
-========================= */
+================================================== */
 
 async function recoverUserName(
 user,
@@ -1700,23 +1978,12 @@ user.displayName
 }
 
 
-/*
- * If the old account already
- * has a name, use it.
- */
-
 if(currentName){
 
 return currentName;
 
 }
 
-
-/*
- * OLD ACCOUNT HAS NO NAME.
- *
- * Ask the user for the name.
- */
 
 let enteredName = "";
 
@@ -1732,11 +1999,6 @@ window.prompt(
 if(
 enteredName === null
 ){
-
-/*
- * User cancelled.
- * Keep Student temporarily.
- */
 
 return "Student";
 
@@ -1755,11 +2017,6 @@ window.alert(
 
 }
 
-
-/*
- * Save the recovered name
- * to Firebase Authentication.
- */
 
 try{
 
@@ -1781,11 +2038,6 @@ error
 
 }
 
-
-/*
- * Save / update the user
- * profile in Realtime Database.
- */
 
 try{
 
@@ -1837,9 +2089,9 @@ return enteredName;
 }
 
 
-/* =========================
+/* ==================================================
    AUTH STATE
-========================= */
+================================================== */
 
 onAuthStateChanged(
 auth,
@@ -1847,20 +2099,27 @@ async function(user){
 
 if(!user){
 
+updateSplashStatus(
+"Ready. Please login or create an account."
+);
+
 authScreen.style.display =
 "flex";
 
 appContent.style.display =
 "none";
 
+finishSplash();
+
 return;
 
 }
 
 
-/*
- * User is logged in.
- */
+updateSplashStatus(
+"Loading your DeBryne Update profile..."
+);
+
 
 authScreen.style.display =
 "none";
@@ -1871,13 +2130,20 @@ appContent.style.display =
 
 await loadUserProfile(user);
 
+updateSplashStatus(
+"Loading latest updates..."
+);
+
+
+finishSplash();
+
 }
 );
 
 
-/* =========================
+/* ==================================================
    LOAD USER PROFILE
-========================= */
+================================================== */
 
 async function loadUserProfile(
 user
@@ -1888,11 +2154,6 @@ let profile = null;
 let name =
 user.displayName || "";
 
-
-/*
- * First read Firebase
- * Realtime Database.
- */
 
 try{
 
@@ -1942,14 +2203,6 @@ error
 }
 
 
-/*
- * NAME RECOVERY
- *
- * If both Firebase Auth
- * and Database have no name,
- * ask the user for it.
- */
-
 if(!name){
 
 name =
@@ -1961,10 +2214,6 @@ profile
 }
 
 
-/*
- * Final safety fallback.
- */
-
 if(!name){
 
 name =
@@ -1972,10 +2221,6 @@ name =
 
 }
 
-
-/*
- * DISPLAY NAME
- */
 
 document
 .getElementById("welcomeName")
@@ -1996,10 +2241,6 @@ document
 .textContent =
 user.email || "";
 
-
-/*
- * JOIN DATE
- */
 
 if(
 profile &&
@@ -2027,12 +2268,6 @@ document
 }
 
 
-/*
- * If the name was recovered,
- * refresh the page's Firebase
- * user object.
- */
-
 try{
 
 await user.reload();
@@ -2050,9 +2285,9 @@ error
 }
 
 
-/* =========================
+/* ==================================================
    LOGOUT
-========================= */
+================================================== */
 
 document
 .getElementById("logoutButton")
@@ -2078,9 +2313,9 @@ error
 );
 
 
-/* =========================
+/* ==================================================
    ESCAPE HTML
-========================= */
+================================================== */
 
 function escapeHTML(
 value
@@ -2118,9 +2353,9 @@ value || ""
 }
 
 
-/* =========================
+/* ==================================================
    CREATE NEWS CARD
-========================= */
+================================================== */
 
 function createNewsCard(
 item
@@ -2208,9 +2443,9 @@ item.createdAt
 }
 
 
-/* =========================
+/* ==================================================
    LOAD NEWS
-========================= */
+================================================== */
 
 if(db){
 
@@ -2405,9 +2640,9 @@ error
 }
 
 
-/* =========================
+/* ==================================================
    NOTIFICATIONS
-========================= */
+================================================== */
 
 const notifyBtn =
 document.getElementById(
@@ -2759,9 +2994,9 @@ notifyStatus.textContent =
 }
 
 
-/* =========================
+/* ==================================================
    PWA SERVICE WORKER
-========================= */
+================================================== */
 
 window.addEventListener(
 "load",
