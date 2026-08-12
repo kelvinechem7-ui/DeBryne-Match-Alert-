@@ -31,6 +31,140 @@ color:#172033;
 padding-bottom:80px;
 }
 
+/* =========================
+   REGISTRATION SCREEN
+========================= */
+
+#authScreen{
+position:fixed;
+inset:0;
+z-index:99999;
+background:#111827;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+overflow-y:auto;
+}
+
+.auth-box{
+width:100%;
+max-width:430px;
+background:white;
+border-radius:20px;
+padding:25px;
+box-shadow:0 10px 40px rgba(0,0,0,.3);
+}
+
+.auth-logo{
+width:75px;
+height:75px;
+border-radius:18px;
+overflow:hidden;
+margin:0 auto 15px;
+background:white;
+}
+
+.auth-logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.auth-box h1{
+text-align:center;
+font-size:25px;
+margin-bottom:6px;
+}
+
+.auth-subtitle{
+text-align:center;
+color:#64748b;
+font-size:14px;
+line-height:1.5;
+margin-bottom:20px;
+}
+
+.auth-box input{
+width:100%;
+padding:14px;
+border:1px solid #d1d5db;
+border-radius:10px;
+margin-top:11px;
+font-size:15px;
+outline:none;
+}
+
+.auth-box input:focus{
+border-color:#111827;
+}
+
+.auth-button{
+width:100%;
+padding:15px;
+border:0;
+border-radius:10px;
+background:#111827;
+color:white;
+font-size:15px;
+font-weight:bold;
+margin-top:16px;
+cursor:pointer;
+}
+
+.auth-button:disabled{
+opacity:.6;
+}
+
+.auth-switch{
+text-align:center;
+margin-top:18px;
+font-size:14px;
+color:#64748b;
+}
+
+.auth-switch button{
+width:auto;
+padding:0;
+margin:0;
+background:none;
+color:#2563eb;
+font-size:14px;
+}
+
+.auth-status{
+display:none;
+margin-top:13px;
+padding:11px;
+border-radius:9px;
+font-size:13px;
+line-height:1.5;
+}
+
+.auth-success{
+display:block;
+background:#ecfdf5;
+color:#166534;
+}
+
+.auth-error{
+display:block;
+background:#fef2f2;
+color:#991b1b;
+}
+
+.auth-info{
+display:block;
+background:#eff6ff;
+color:#1d4ed8;
+}
+
+/* APP */
+
+#appContent{
+display:none;
+}
+
 header{
 background:#111827;
 color:white;
@@ -204,6 +338,10 @@ opacity:.65;
 cursor:not-allowed;
 }
 
+.logout-button{
+background:#dc2626;
+}
+
 .status{
 margin-top:12px;
 background:#f1f5f9;
@@ -244,6 +382,23 @@ margin-top:15px;
 display:none;
 }
 
+.profile-name{
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.profile-email{
+font-size:14px;
+color:#64748b;
+margin-top:5px;
+word-break:break-word;
+}
+
+.profile-icon{
+font-size:60px;
+}
+
 @media(max-width:350px){
 
 .quick{
@@ -260,6 +415,135 @@ padding:8px 5px;
 </head>
 
 <body>
+
+
+<!-- =========================
+     AUTH SCREEN
+========================= -->
+
+<div id="authScreen">
+
+<div class="auth-box">
+
+<div class="auth-logo">
+
+<img
+src="./file_000000008e5c71f4a9d057362a556762.png"
+alt="DeBryne Update">
+
+</div>
+
+<h1>DeBryne Update</h1>
+
+<p class="auth-subtitle">
+Welcome to DeBryne Update.<br>
+Register to access student news, academics,
+events and sports updates.
+</p>
+
+
+<!-- REGISTER -->
+
+<div id="registerForm">
+
+<input
+id="registerName"
+type="text"
+placeholder="Full Name"
+autocomplete="name">
+
+<input
+id="registerEmail"
+type="email"
+placeholder="Email Address"
+autocomplete="email">
+
+<input
+id="registerPassword"
+type="password"
+placeholder="Create Password"
+autocomplete="new-password">
+
+<input
+id="registerConfirm"
+type="password"
+placeholder="Confirm Password"
+autocomplete="new-password">
+
+<button
+id="registerButton"
+class="auth-button"
+type="button">
+
+CREATE ACCOUNT
+
+</button>
+
+<p class="auth-switch">
+Already have an account?
+<button
+id="showLoginButton"
+type="button">
+Login
+</button>
+</p>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginForm" style="display:none">
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Email Address"
+autocomplete="email">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+autocomplete="current-password">
+
+<button
+id="loginButton"
+class="auth-button"
+type="button">
+
+LOGIN
+
+</button>
+
+<p class="auth-switch">
+Don't have an account?
+<button
+id="showRegisterButton"
+type="button">
+Create Account
+</button>
+</p>
+
+</div>
+
+
+<div
+id="authStatus"
+class="auth-status">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     APP CONTENT
+========================= -->
+
+<div id="appContent">
+
 
 <header>
 
@@ -294,7 +578,9 @@ alt="DeBryne Update">
 
 <div class="welcome">
 
-<h2>Welcome 👋</h2>
+<h2 id="welcomeName">
+Welcome 👋
+</h2>
 
 <p class="muted">
 Stay informed with the latest student news,
@@ -488,19 +774,40 @@ style="margin-top:7px">
 Your DeBryne Update profile.
 </p>
 
+
 <div
 class="card"
 style="text-align:center;margin-top:18px">
 
-<div style="font-size:55px">
+<div class="profile-icon">
 👤
 </div>
 
-<h2>Student</h2>
+<div
+id="profileName"
+class="profile-name">
+Student
+</div>
 
-<p class="muted">
-DeBryne Update
+<div
+id="profileEmail"
+class="profile-email">
+</div>
+
+<p
+id="profileJoined"
+class="muted"
+style="margin-top:12px">
 </p>
+
+<button
+id="logoutButton"
+class="logout-button"
+type="button">
+
+LOG OUT
+
+</button>
 
 </div>
 
@@ -590,8 +897,12 @@ Profile
 
 </nav>
 
+</div>
 
-<!-- NAVIGATION -->
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <script>
 
@@ -660,7 +971,9 @@ this.getAttribute("data-page")
 </script>
 
 
-<!-- FIREBASE -->
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
@@ -674,10 +987,22 @@ from
 import {
 getDatabase,
 ref,
-onValue
+onValue,
+set
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
 import {
@@ -727,6 +1052,7 @@ const PUSH_SERVER_URL =
 
 let app;
 let db;
+let auth;
 let messaging;
 
 
@@ -737,6 +1063,9 @@ initializeApp(firebaseConfig);
 
 db =
 getDatabase(app);
+
+auth =
+getAuth(app);
 
 messaging =
 getMessaging(app);
@@ -754,10 +1083,707 @@ console.error(
 error
 );
 
+showAuthStatus(
+"Firebase initialization failed: " +
+error.message,
+"error"
+);
+
 }
 
 
-/* ESCAPE HTML */
+/* =========================
+   AUTH UI
+========================= */
+
+const authScreen =
+document.getElementById("authScreen");
+
+const appContent =
+document.getElementById("appContent");
+
+const registerForm =
+document.getElementById("registerForm");
+
+const loginForm =
+document.getElementById("loginForm");
+
+const authStatus =
+document.getElementById("authStatus");
+
+
+function showAuthStatus(
+message,
+type
+){
+
+authStatus.textContent =
+message;
+
+authStatus.className =
+"auth-status";
+
+if(type === "success"){
+
+authStatus.classList.add(
+"auth-success"
+);
+
+}
+
+else if(type === "error"){
+
+authStatus.classList.add(
+"auth-error"
+);
+
+}
+
+else{
+
+authStatus.classList.add(
+"auth-info"
+);
+
+}
+
+}
+
+
+function showRegister(){
+
+registerForm.style.display =
+"block";
+
+loginForm.style.display =
+"none";
+
+authStatus.style.display =
+"none";
+
+}
+
+
+function showLogin(){
+
+registerForm.style.display =
+"none";
+
+loginForm.style.display =
+"block";
+
+authStatus.style.display =
+"none";
+
+}
+
+
+document
+.getElementById("showLoginButton")
+.addEventListener(
+"click",
+showLogin
+);
+
+
+document
+.getElementById("showRegisterButton")
+.addEventListener(
+"click",
+showRegister
+);
+
+
+/* =========================
+   REGISTER
+========================= */
+
+document
+.getElementById("registerButton")
+.addEventListener(
+"click",
+async function(){
+
+const name =
+document
+.getElementById("registerName")
+.value
+.trim();
+
+const email =
+document
+.getElementById("registerEmail")
+.value
+.trim();
+
+const password =
+document
+.getElementById("registerPassword")
+.value;
+
+const confirmPassword =
+document
+.getElementById("registerConfirm")
+.value;
+
+const button =
+document.getElementById(
+"registerButton"
+);
+
+
+if(!name){
+
+showAuthStatus(
+"Please enter your full name.",
+"error"
+);
+
+return;
+
+}
+
+
+if(!email){
+
+showAuthStatus(
+"Please enter your email address.",
+"error"
+);
+
+return;
+
+}
+
+
+if(password.length < 6){
+
+showAuthStatus(
+"Password must be at least 6 characters.",
+"error"
+);
+
+return;
+
+}
+
+
+if(password !== confirmPassword){
+
+showAuthStatus(
+"Passwords do not match.",
+"error"
+);
+
+return;
+
+}
+
+
+button.disabled =
+true;
+
+button.textContent =
+"CREATING ACCOUNT...";
+
+
+try{
+
+showAuthStatus(
+"Creating your DeBryne Update account...",
+"info"
+);
+
+
+const userCredential =
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+const user =
+userCredential.user;
+
+
+/*
+ * Save user profile in
+ * Realtime Database.
+ */
+
+await set(
+ref(
+db,
+"users/" + user.uid
+),
+{
+
+uid:
+user.uid,
+
+fullName:
+name,
+
+email:
+user.email,
+
+createdAt:
+Date.now(),
+
+status:
+"active"
+
+}
+);
+
+
+showAuthStatus(
+"✅ Account created successfully. Welcome to DeBryne Update!",
+"success"
+);
+
+
+/*
+ * Clear password fields.
+ */
+
+document
+.getElementById("registerPassword")
+.value = "";
+
+document
+.getElementById("registerConfirm")
+.value = "";
+
+
+/*
+ * Firebase Auth will automatically
+ * trigger onAuthStateChanged and
+ * open the app.
+ */
+
+
+}
+
+catch(error){
+
+console.error(
+"Registration error:",
+error
+);
+
+
+let message =
+"Registration failed.";
+
+
+if(error.code ===
+"auth/email-already-in-use"){
+
+message =
+"This email is already registered. Please login instead.";
+
+}
+
+else if(error.code ===
+"auth/invalid-email"){
+
+message =
+"Please enter a valid email address.";
+
+}
+
+else if(error.code ===
+"auth/weak-password"){
+
+message =
+"Password is too weak. Use at least 6 characters.";
+
+}
+
+else{
+
+message =
+error.message;
+
+}
+
+
+showAuthStatus(
+"❌ " + message,
+"error"
+);
+
+button.disabled =
+false;
+
+button.textContent =
+"CREATE ACCOUNT";
+
+}
+
+}
+);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+.getElementById("loginButton")
+.addEventListener(
+"click",
+async function(){
+
+const email =
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
+const password =
+document
+.getElementById("loginPassword")
+.value;
+
+const button =
+document.getElementById(
+"loginButton"
+);
+
+
+if(!email){
+
+showAuthStatus(
+"Please enter your email address.",
+"error"
+);
+
+return;
+
+}
+
+
+if(!password){
+
+showAuthStatus(
+"Please enter your password.",
+"error"
+);
+
+return;
+
+}
+
+
+button.disabled =
+true;
+
+button.textContent =
+"LOGGING IN...";
+
+
+try{
+
+showAuthStatus(
+"Signing you in...",
+"info"
+);
+
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+showAuthStatus(
+"✅ Login successful.",
+"success"
+);
+
+}
+
+catch(error){
+
+console.error(
+"Login error:",
+error
+);
+
+
+let message =
+"Login failed.";
+
+
+if(
+error.code ===
+"auth/invalid-credential"
+){
+
+message =
+"Incorrect email or password.";
+
+}
+
+else if(
+error.code ===
+"auth/user-not-found"
+){
+
+message =
+"No account was found with this email.";
+
+}
+
+else if(
+error.code ===
+"auth/wrong-password"
+){
+
+message =
+"Incorrect password.";
+
+}
+
+else if(
+error.code ===
+"auth/invalid-email"
+){
+
+message =
+"Please enter a valid email address.";
+
+}
+
+else{
+
+message =
+error.message;
+
+}
+
+
+showAuthStatus(
+"❌ " + message,
+"error"
+);
+
+button.disabled =
+false;
+
+button.textContent =
+"LOGIN";
+
+}
+
+}
+);
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+auth,
+async function(user){
+
+if(user){
+
+/*
+ * User is logged in.
+ * Hide registration screen.
+ */
+
+authScreen.style.display =
+"none";
+
+appContent.style.display =
+"block";
+
+
+/*
+ * Load user profile.
+ */
+
+await loadUserProfile(user);
+
+
+}
+else{
+
+/*
+ * User is logged out.
+ * Show registration/login.
+ */
+
+authScreen.style.display =
+"flex";
+
+appContent.style.display =
+"none";
+
+}
+
+}
+);
+
+
+/* =========================
+   LOAD USER PROFILE
+========================= */
+
+async function loadUserProfile(user){
+
+try{
+
+const snapshot =
+await new Promise(
+function(resolve,reject){
+
+onValue(
+ref(
+db,
+"users/" + user.uid
+),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+}
+);
+
+
+const profile =
+snapshot.val();
+
+
+const name =
+profile &&
+profile.fullName
+?
+profile.fullName
+:
+"Student";
+
+
+const email =
+user.email || "";
+
+
+document
+.getElementById("welcomeName")
+textContent =
+"Welcome, " + name + " 👋";
+
+
+document
+.getElementById("profileName")
+textContent =
+name;
+
+
+document
+.getElementById("profileEmail")
+textContent =
+email;
+
+
+if(
+profile &&
+profile.createdAt
+){
+
+document
+.getElementById("profileJoined")
+textContent =
+"Member since: " +
+new Date(
+profile.createdAt
+).toLocaleDateString();
+
+}
+
+else{
+
+document
+.getElementById("profileJoined")
+textContent =
+"DeBryne Update member";
+
+}
+
+}
+
+catch(error){
+
+console.error(
+"Could not load user profile:",
+error
+);
+
+
+document
+.getElementById("welcomeName")
+textContent =
+"Welcome 👋";
+
+
+document
+.getElementById("profileName")
+textContent =
+"Student";
+
+
+document
+.getElementById("profileEmail")
+textContent =
+user.email || "";
+
+}
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+"click",
+async function(){
+
+try{
+
+await signOut(auth);
+
+}
+
+catch(error){
+
+console.error(
+"Logout error:",
+error
+);
+
+}
+
+}
+);
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHTML(value){
 
@@ -771,7 +1797,9 @@ return String(value || "")
 }
 
 
-/* CREATE NEWS CARD */
+/* =========================
+   CREATE NEWS CARD
+========================= */
 
 function createNewsCard(item){
 
@@ -782,21 +1810,16 @@ String(item.imageUrl || "").trim();
 let imageHTML = "";
 
 
-/*
- * Only show the picture when
- * Firebase contains imageUrl.
- */
-
 if(imageUrl){
 
 imageHTML = `
 
 <img
-    class="news-image"
-    src="${escapeHTML(imageUrl)}"
-    alt="${escapeHTML(item.title || "News picture")}"
-    loading="lazy"
-    onerror="this.style.display='none';"
+class="news-image"
+src="${escapeHTML(imageUrl)}"
+alt="${escapeHTML(item.title || "News picture")}"
+loading="lazy"
+onerror="this.style.display='none';"
 >
 
 `;
@@ -817,7 +1840,6 @@ item.category ||
 
 </div>
 
-
 <h3>
 
 ${escapeHTML(
@@ -827,9 +1849,7 @@ item.title ||
 
 </h3>
 
-
 ${imageHTML}
-
 
 <p class="muted">
 
@@ -839,7 +1859,6 @@ item.content ||
 )}
 
 </p>
-
 
 <div class="time">
 
@@ -860,7 +1879,9 @@ new Date(item.createdAt).toLocaleString()
 }
 
 
-/* LOAD NEWS */
+/* =========================
+   LOAD NEWS
+========================= */
 
 if(db){
 
@@ -893,11 +1914,20 @@ if(!data){
 const message =
 '<div class="empty">No updates published yet.</div>';
 
-home.innerHTML = message;
-news.innerHTML = message;
-sports.innerHTML = message;
-academic.innerHTML = message;
-events.innerHTML = message;
+home.innerHTML =
+message;
+
+news.innerHTML =
+message;
+
+sports.innerHTML =
+message;
+
+academic.innerHTML =
+message;
+
+events.innerHTML =
+message;
 
 return;
 
@@ -910,8 +1940,10 @@ Object.keys(data)
 .map(function(key){
 
 return {
+
 id:key,
 ...data[key]
+
 };
 
 })
@@ -924,8 +1956,6 @@ Number(a.createdAt || 0);
 });
 
 
-/* HOME */
-
 home.innerHTML =
 
 items
@@ -934,16 +1964,12 @@ items
 .join("");
 
 
-/* ALL NEWS */
-
 news.innerHTML =
 
 items
 .map(createNewsCard)
 .join("");
 
-
-/* FILTER */
 
 function filterNews(
 word,
@@ -965,13 +1991,17 @@ item.category || ""
 
 
 const element =
-document.getElementById(elementId);
+document.getElementById(
+elementId
+);
 
 
 if(result.length){
 
 element.innerHTML =
-result.map(createNewsCard).join("");
+result
+.map(createNewsCard)
+.join("");
 
 }
 
@@ -987,8 +2017,6 @@ emptyMessage +
 }
 
 
-/* SPORTS */
-
 filterNews(
 "sport",
 "sportsList",
@@ -996,16 +2024,12 @@ filterNews(
 );
 
 
-/* ACADEMICS */
-
 filterNews(
 "academic",
 "academicList",
 "No academic updates yet."
 );
 
-
-/* EVENTS */
 
 filterNews(
 "event",
@@ -1029,22 +2053,34 @@ error
 }
 
 
-/* NOTIFICATION ELEMENTS */
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 const notifyBtn =
-document.getElementById("notifyBtn");
+document.getElementById(
+"notifyBtn"
+);
 
 const notifyStatus =
-document.getElementById("notifyStatus");
+document.getElementById(
+"notifyStatus"
+);
 
 const tokenBox =
-document.getElementById("tokenBox");
+document.getElementById(
+"tokenBox"
+);
 
 const tokenText =
-document.getElementById("tokenText");
+document.getElementById(
+"tokenText"
+);
 
 const pushError =
-document.getElementById("pushError");
+document.getElementById(
+"pushError"
+);
 
 
 function showError(message){
@@ -1058,11 +2094,11 @@ message;
 }
 
 
-/* FCM SERVICE WORKER */
-
 async function getFCMServiceWorker(){
 
-if(!("serviceWorker" in navigator)){
+if(
+!("serviceWorker" in navigator)
+){
 
 throw new Error(
 "Your browser does not support service workers."
@@ -1086,8 +2122,6 @@ return registration;
 }
 
 
-/* SAVE TOKEN */
-
 async function saveToken(token){
 
 const response =
@@ -1095,21 +2129,29 @@ const response =
 await fetch(
 PUSH_SERVER_URL,
 {
+
 method:"POST",
+
 headers:{
 "Content-Type":
 "text/plain;charset=utf-8"
 },
+
 body:JSON.stringify({
+
 action:"register",
+
 token:token
+
 })
+
 }
 );
 
 
 const text =
 await response.text();
+
 
 console.log(
 "Push server response:",
@@ -1127,6 +2169,7 @@ throw new Error(
 
 
 let result;
+
 
 try{
 
@@ -1158,8 +2201,6 @@ return result;
 
 }
 
-
-/* ENABLE NOTIFICATIONS */
 
 async function enableNotifications(){
 
@@ -1202,7 +2243,10 @@ throw new Error(
 }
 
 
-if(Notification.permission === "denied"){
+if(
+Notification.permission ===
+"denied"
+){
 
 throw new Error(
 "Notifications are blocked for this site. Allow them in Chrome site settings."
@@ -1252,8 +2296,13 @@ const token =
 await getToken(
 messaging,
 {
-vapidKey:VAPID_KEY,
-serviceWorkerRegistration:registration
+
+vapidKey:
+VAPID_KEY,
+
+serviceWorkerRegistration:
+registration
+
 }
 );
 
@@ -1290,7 +2339,6 @@ notifyBtn.textContent =
 notifyBtn.disabled =
 true;
 
-
 }
 
 catch(error){
@@ -1319,18 +2367,19 @@ notifyBtn.textContent =
 }
 
 
-/* BUTTON */
-
 notifyBtn.addEventListener(
 "click",
 enableNotifications
 );
 
 
-/* INITIAL STATUS */
+if(
+"Notification" in window
+){
 
 if(
-Notification.permission === "granted"
+Notification.permission ===
+"granted"
 ){
 
 notifyStatus.textContent =
@@ -1339,13 +2388,15 @@ notifyStatus.textContent =
 }
 
 else if(
-Notification.permission === "denied"
+Notification.permission ===
+"denied"
 ){
 
 notifyStatus.textContent =
 "❌ Notifications are blocked for this site.";
 
 }
+
 else{
 
 notifyStatus.textContent =
@@ -1353,8 +2404,12 @@ notifyStatus.textContent =
 
 }
 
+}
 
-/* PWA SERVICE WORKER */
+
+/* =========================
+   PWA SERVICE WORKER
+========================= */
 
 window.addEventListener(
 "load",
@@ -1395,4 +2450,4 @@ error
 </script>
 
 </body>
-  </html>
+</html>
