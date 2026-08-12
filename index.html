@@ -9,15 +9,13 @@
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#111827">
 
-<link rel="icon"
-type="image/png"
+<link rel="icon" type="image/png"
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
 <link rel="apple-touch-icon"
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
 <style>
-
 *{
 box-sizing:border-box;
 margin:0;
@@ -30,10 +28,6 @@ background:#f5f7fa;
 color:#172033;
 padding-bottom:80px;
 }
-
-/* =========================
-   REGISTRATION SCREEN
-========================= */
 
 #authScreen{
 position:fixed;
@@ -159,10 +153,6 @@ background:#eff6ff;
 color:#1d4ed8;
 }
 
-/* =========================
-   APP
-========================= */
-
 #appContent{
 display:none;
 }
@@ -185,7 +175,6 @@ height:48px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-flex-shrink:0;
 }
 
 .logo img{
@@ -202,13 +191,6 @@ font-size:22px;
 font-size:12px;
 color:#cbd5e1;
 margin-top:3px;
-}
-
-.user-greeting{
-font-size:12px;
-color:#e2e8f0;
-margin-top:5px;
-font-weight:bold;
 }
 
 .page{
@@ -410,7 +392,6 @@ font-size:60px;
 }
 
 @media(max-width:350px){
-
 .quick{
 grid-template-columns:1fr;
 }
@@ -418,29 +399,18 @@ grid-template-columns:1fr;
 .nav{
 padding:8px 5px;
 }
-
 }
-
 </style>
 </head>
 
 <body>
 
-
-<!-- =========================
-     AUTH SCREEN
-========================= -->
-
 <div id="authScreen">
-
 <div class="auth-box">
 
 <div class="auth-logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
-
 </div>
 
 <h1>DeBryne Update</h1>
@@ -451,158 +421,102 @@ Register to access student news, academics,
 events and sports updates.
 </p>
 
-
-<!-- REGISTER -->
-
 <div id="registerForm">
 
-<input
-id="registerName"
+<input id="registerName"
 type="text"
-placeholder="Full Name or Nickname"
+placeholder="Full Name"
 autocomplete="name">
 
-<input
-id="registerEmail"
+<input id="registerEmail"
 type="email"
 placeholder="Email Address"
 autocomplete="email">
 
-<input
-id="registerPassword"
+<input id="registerPassword"
 type="password"
 placeholder="Create Password"
 autocomplete="new-password">
 
-<input
-id="registerConfirm"
+<input id="registerConfirm"
 type="password"
 placeholder="Confirm Password"
 autocomplete="new-password">
 
-<button
-id="registerButton"
+<button id="registerButton"
 class="auth-button"
 type="button">
-
 CREATE ACCOUNT
-
 </button>
 
 <p class="auth-switch">
 Already have an account?
-<button
-id="showLoginButton"
-type="button">
-Login
-</button>
+<button id="showLoginButton" type="button">Login</button>
 </p>
 
 </div>
 
-
-<!-- LOGIN -->
-
 <div id="loginForm" style="display:none">
 
-<input
-id="loginEmail"
+<input id="loginEmail"
 type="email"
 placeholder="Email Address"
 autocomplete="email">
 
-<input
-id="loginPassword"
+<input id="loginPassword"
 type="password"
 placeholder="Password"
 autocomplete="current-password">
 
-<button
-id="loginButton"
+<button id="loginButton"
 class="auth-button"
 type="button">
-
 LOGIN
-
 </button>
 
 <p class="auth-switch">
 Don't have an account?
-<button
-id="showRegisterButton"
-type="button">
+<button id="showRegisterButton" type="button">
 Create Account
 </button>
 </p>
 
 </div>
 
-
-<div
-id="authStatus"
-class="auth-status">
-</div>
+<div id="authStatus" class="auth-status"></div>
 
 </div>
-
 </div>
-
-
-<!-- =========================
-     APP CONTENT
-========================= -->
 
 <div id="appContent">
 
-
 <header>
-
 <div class="brand">
 
 <div class="logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
-
 </div>
 
 <div>
-
 <h1>DeBryne Update</h1>
-
 <p>Student News • Education • Sports</p>
-
-<p
-id="headerUserName"
-class="user-greeting">
-</p>
-
 </div>
 
 </div>
-
 </header>
 
-
-<!-- HOME -->
-
 <section id="homePage" class="page active">
-
 <main class="container">
 
 <div class="welcome">
-
-<h2 id="welcomeName">
-Welcome 👋
-</h2>
+<h2 id="welcomeName">Welcome 👋</h2>
 
 <p class="muted">
 Stay informed with the latest student news,
 academic information, campus announcements
 and sports updates.
 </p>
-
 </div>
 
 <h2 class="title">Student Services</h2>
@@ -610,132 +524,66 @@ and sports updates.
 <div class="quick">
 
 <div class="card" data-page="news">
-
 <div class="icon">📰</div>
-
 <h3>Campus News</h3>
-
-<p class="muted">
-Latest student and campus updates.
-</p>
-
+<p class="muted">Latest student and campus updates.</p>
 </div>
-
 
 <div class="card" data-page="academics">
-
 <div class="icon">📚</div>
-
 <h3>Academics</h3>
-
-<p class="muted">
-Academic information and resources.
-</p>
-
+<p class="muted">Academic information and resources.</p>
 </div>
-
 
 <div class="card" data-page="events">
-
 <div class="icon">📅</div>
-
 <h3>Events</h3>
-
-<p class="muted">
-Upcoming student activities.
-</p>
-
+<p class="muted">Upcoming student activities.</p>
 </div>
-
 
 <div class="card" data-page="sports">
-
 <div class="icon">⚽</div>
-
 <h3>Sports</h3>
-
-<p class="muted">
-Fixtures, scores and sports news.
-</p>
-
+<p class="muted">Fixtures, scores and sports news.</p>
 </div>
 
 </div>
-
 
 <h2 class="title">Latest Updates</h2>
 
 <div id="homeNews">
-
-<div class="empty">
-Loading updates...
-</div>
-
+<div class="empty">Loading updates...</div>
 </div>
 
 </main>
-
 </section>
-
-
-<!-- NEWS -->
 
 <section id="newsPage" class="page">
-
 <main class="container">
-
 <h2>📰 Campus News</h2>
-
-<p class="muted">
-Latest campus news and announcements.
-</p>
+<p class="muted">Latest campus news and announcements.</p>
 
 <div id="newsList" style="margin-top:18px">
-
-<div class="empty">
-Loading news...
+<div class="empty">Loading news...</div>
 </div>
-
-</div>
-
 </main>
-
 </section>
-
-
-<!-- SPORTS -->
 
 <section id="sportsPage" class="page">
-
 <main class="container">
-
 <h2>⚽ Sports</h2>
-
-<p class="muted">
-Fixtures, results and sports updates.
-</p>
+<p class="muted">Fixtures, results and sports updates.</p>
 
 <div id="sportsList" style="margin-top:18px">
-
-<div class="empty">
-Loading sports...
+<div class="empty">Loading sports...</div>
 </div>
-
-</div>
-
 </main>
-
 </section>
 
-
-<!-- ALERTS -->
-
 <section id="alertsPage" class="page">
-
 <main class="container">
 
 <h2>🔔 Alerts</h2>
-
 <p class="muted">
 Receive important DeBryne Update notifications.
 </p>
@@ -758,129 +606,76 @@ Notifications are ready. Tap the button above to enable them.
 </div>
 
 <div class="tokenBox" id="tokenBox">
-
 FCM token:
-
-<div
-id="tokenText"
-style="margin-top:7px">
-</div>
-
+<div id="tokenText" style="margin-top:7px"></div>
 </div>
 
 <div id="pushError" class="errorBox"></div>
 
 </div>
-
 </main>
-
 </section>
 
-
-<!-- PROFILE -->
-
 <section id="profilePage" class="page">
-
 <main class="container">
 
 <h2>👤 Profile</h2>
+<p class="muted">Your DeBryne Update profile.</p>
 
-<p class="muted">
-Your DeBryne Update profile.
-</p>
+<div class="card" style="text-align:center;margin-top:18px">
 
-<div
-class="card"
-style="text-align:center;margin-top:18px">
+<div class="profile-icon">👤</div>
 
-<div class="profile-icon">
-👤
-</div>
-
-<div
-id="profileName"
-class="profile-name">
+<div id="profileName" class="profile-name">
 Student
 </div>
 
-<div
-id="profileEmail"
-class="profile-email">
-</div>
+<div id="profileEmail" class="profile-email"></div>
 
-<p
-id="profileJoined"
+<p id="profileJoined"
 class="muted"
 style="margin-top:12px">
 </p>
 
-<button
-id="logoutButton"
+<button id="logoutButton"
 class="logout-button"
 type="button">
-
 LOG OUT
-
 </button>
 
 </div>
-
 </main>
-
 </section>
 
-
-<!-- ACADEMICS -->
-
 <section id="academicsPage" class="page">
-
 <main class="container">
 
 <h2>📚 Academics</h2>
-
 <p class="muted">
 Academic information and educational updates.
 </p>
 
 <div id="academicList" style="margin-top:18px">
-
-<div class="empty">
-Loading academic updates...
-</div>
-
+<div class="empty">Loading academic updates...</div>
 </div>
 
 </main>
-
 </section>
 
-
-<!-- EVENTS -->
-
 <section id="eventsPage" class="page">
-
 <main class="container">
 
 <h2>📅 Events</h2>
-
 <p class="muted">
 Upcoming student events and activities.
 </p>
 
 <div id="eventList" style="margin-top:18px">
-
-<div class="empty">
-Loading events...
-</div>
-
+<div class="empty">Loading events...</div>
 </div>
 
 </main>
-
 </section>
-
-
-<!-- BOTTOM NAV -->
 
 <nav class="bottom">
 
@@ -913,81 +708,42 @@ Profile
 
 </div>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <script>
-
 (function(){
 
 function openPage(page){
 
-document
-.querySelectorAll(".page")
-.forEach(function(item){
-
+document.querySelectorAll(".page").forEach(function(item){
 item.classList.remove("active");
-
 });
 
-
-const target =
-document.getElementById(page + "Page");
+const target=document.getElementById(page+"Page");
 
 if(target){
-
 target.classList.add("active");
-
 }
 
-
-document
-.querySelectorAll(".nav")
-.forEach(function(item){
-
+document.querySelectorAll(".nav").forEach(function(item){
 item.classList.remove("active");
-
 });
 
-
-document
-.querySelectorAll('[data-page="' + page + '"]')
-.forEach(function(item){
-
+document.querySelectorAll('[data-page="'+page+'"]').forEach(function(item){
 item.classList.add("active");
-
 });
-
 
 window.scrollTo(0,0);
-
 }
 
-
-document
-.querySelectorAll("[data-page]")
-.forEach(function(item){
+document.querySelectorAll("[data-page]").forEach(function(item){
 
 item.addEventListener("click",function(){
-
-openPage(
-this.getAttribute("data-page")
-);
-
+openPage(this.getAttribute("data-page"));
 });
 
 });
 
 })();
-
 </script>
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
 
 <script type="module">
 
@@ -996,7 +752,6 @@ initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-
 
 import {
 getDatabase,
@@ -1007,17 +762,16 @@ set
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
-
 import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 onAuthStateChanged,
-signOut
+signOut,
+updateProfile
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
 
 import {
 getMessaging,
@@ -1027,7 +781,7 @@ from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
 
 
-const firebaseConfig = {
+const firebaseConfig={
 
 apiKey:
 "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
@@ -1052,107 +806,39 @@ appId:
 
 measurementId:
 "G-1LNK265F45"
-
 };
 
-
-const VAPID_KEY =
+const VAPID_KEY=
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
 
-
-const PUSH_SERVER_URL =
+const PUSH_SERVER_URL=
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
-
 
 let app;
 let db;
 let auth;
 let messaging;
 
+const authScreen=document.getElementById("authScreen");
+const appContent=document.getElementById("appContent");
+const registerForm=document.getElementById("registerForm");
+const loginForm=document.getElementById("loginForm");
+const authStatus=document.getElementById("authStatus");
 
-try{
 
-app =
-initializeApp(firebaseConfig);
+function showAuthStatus(message,type){
 
-db =
-getDatabase(app);
+authStatus.textContent=message;
+authStatus.className="auth-status";
 
-auth =
-getAuth(app);
-
-messaging =
-getMessaging(app);
-
-console.log(
-"Firebase initialized successfully."
-);
-
+if(type==="success"){
+authStatus.classList.add("auth-success");
 }
-
-catch(error){
-
-console.error(
-"Firebase initialization error:",
-error
-);
-
+else if(type==="error"){
+authStatus.classList.add("auth-error");
 }
-
-
-/* =========================
-   AUTH UI
-========================= */
-
-const authScreen =
-document.getElementById("authScreen");
-
-const appContent =
-document.getElementById("appContent");
-
-const registerForm =
-document.getElementById("registerForm");
-
-const loginForm =
-document.getElementById("loginForm");
-
-const authStatus =
-document.getElementById("authStatus");
-
-
-function showAuthStatus(
-message,
-type
-){
-
-authStatus.textContent =
-message;
-
-authStatus.className =
-"auth-status";
-
-if(type === "success"){
-
-authStatus.classList.add(
-"auth-success"
-);
-
-}
-
-else if(type === "error"){
-
-authStatus.classList.add(
-"auth-error"
-);
-
-}
-
 else{
-
-authStatus.classList.add(
-"auth-info"
-);
-
+authStatus.classList.add("auth-info");
 }
 
 }
@@ -1160,111 +846,81 @@ authStatus.classList.add(
 
 function showRegister(){
 
-registerForm.style.display =
-"block";
-
-loginForm.style.display =
-"none";
-
-authStatus.style.display =
-"none";
+registerForm.style.display="block";
+loginForm.style.display="none";
+authStatus.style.display="none";
 
 }
 
 
 function showLogin(){
 
-registerForm.style.display =
-"none";
-
-loginForm.style.display =
-"block";
-
-authStatus.style.display =
-"none";
+registerForm.style.display="none";
+loginForm.style.display="block";
+authStatus.style.display="none";
 
 }
 
 
-document
-.getElementById("showLoginButton")
-.addEventListener(
-"click",
-showLogin
-);
+document.getElementById("showLoginButton")
+.addEventListener("click",showLogin);
+
+document.getElementById("showRegisterButton")
+.addEventListener("click",showRegister);
 
 
-document
-.getElementById("showRegisterButton")
-.addEventListener(
-"click",
-showRegister
+try{
+
+app=initializeApp(firebaseConfig);
+db=getDatabase(app);
+auth=getAuth(app);
+messaging=getMessaging(app);
+
+console.log("Firebase initialized successfully.");
+
+}
+catch(error){
+
+console.error("Firebase initialization error:",error);
+
+showAuthStatus(
+"Firebase initialization failed: "+error.message,
+"error"
 );
+
+}
 
 
 /* =========================
    REGISTER
 ========================= */
 
-document
-.getElementById("registerButton")
-.addEventListener(
-"click",
-async function(){
+document.getElementById("registerButton")
+.addEventListener("click",async function(){
 
-const name =
-document
-.getElementById("registerName")
-.value
-.trim();
+const name=document.getElementById("registerName").value.trim();
+const email=document.getElementById("registerEmail").value.trim();
+const password=document.getElementById("registerPassword").value;
+const confirmPassword=document.getElementById("registerConfirm").value;
 
-const email =
-document
-.getElementById("registerEmail")
-.value
-.trim();
-
-const password =
-document
-.getElementById("registerPassword")
-.value;
-
-const confirmPassword =
-document
-.getElementById("registerConfirm")
-.value;
-
-const button =
-document.getElementById(
-"registerButton"
-);
+const button=document.getElementById("registerButton");
 
 
 if(!name){
 
-showAuthStatus(
-"Please enter your full name or nickname.",
-"error"
-);
-
+showAuthStatus("Please enter your full name.","error");
 return;
 
 }
-
 
 if(!email){
 
-showAuthStatus(
-"Please enter your email address.",
-"error"
-);
-
+showAuthStatus("Please enter your email address.","error");
 return;
 
 }
 
-
-if(password.length < 6){
+if(password.length<6){
 
 showAuthStatus(
 "Password must be at least 6 characters.",
@@ -1275,8 +931,7 @@ return;
 
 }
 
-
-if(password !== confirmPassword){
+if(password!==confirmPassword){
 
 showAuthStatus(
 "Passwords do not match.",
@@ -1288,11 +943,8 @@ return;
 }
 
 
-button.disabled =
-true;
-
-button.textContent =
-"CREATING ACCOUNT...";
+button.disabled=true;
+button.textContent="CREATING ACCOUNT...";
 
 
 try{
@@ -1303,8 +955,7 @@ showAuthStatus(
 );
 
 
-const userCredential =
-
+const userCredential=
 await createUserWithEmailAndPassword(
 auth,
 email,
@@ -1312,33 +963,38 @@ password
 );
 
 
-const user =
-userCredential.user;
+const user=userCredential.user;
 
 
-/* SAVE USER PROFILE */
+/*
+ * IMPORTANT FIX:
+ * Save the user's name directly
+ * to Firebase Authentication.
+ */
+
+await updateProfile(user,{
+displayName:name
+});
+
+
+/*
+ * Also save the profile in
+ * Realtime Database.
+ */
 
 await set(
-ref(
-db,
-"users/" + user.uid
-),
+ref(db,"users/"+user.uid),
 {
 
-uid:
-user.uid,
+uid:user.uid,
 
-fullName:
-name,
+fullName:name,
 
-email:
-user.email,
+email:user.email,
 
-createdAt:
-Date.now(),
+createdAt:Date.now(),
 
-status:
-"active"
+status:"active"
 
 }
 );
@@ -1350,109 +1006,51 @@ showAuthStatus(
 );
 
 
-document
-.getElementById("registerPassword")
-.value = "";
-
-document
-.getElementById("registerConfirm")
-.value = "";
+document.getElementById("registerPassword").value="";
+document.getElementById("registerConfirm").value="";
 
 
 }
-
 catch(error){
 
-console.error(
-"Registration error:",
-error
-);
+console.error("Registration error:",error);
 
+let message="Registration failed.";
 
-let message =
-"Registration failed.";
-
-
-if(
-error.code ===
-"auth/email-already-in-use"
-){
-
-message =
-"This email is already registered. Please login instead.";
-
+if(error.code==="auth/email-already-in-use"){
+message="This email is already registered. Please login instead.";
 }
-
-else if(
-error.code ===
-"auth/invalid-email"
-){
-
-message =
-"Please enter a valid email address.";
-
+else if(error.code==="auth/invalid-email"){
+message="Please enter a valid email address.";
 }
-
-else if(
-error.code ===
-"auth/weak-password"
-){
-
-message =
-"Password is too weak. Use at least 6 characters.";
-
+else if(error.code==="auth/weak-password"){
+message="Password is too weak. Use at least 6 characters.";
 }
-
 else{
+message=error.message;
+}
 
-message =
-error.message;
+showAuthStatus("❌ "+message,"error");
+
+button.disabled=false;
+button.textContent="CREATE ACCOUNT";
 
 }
 
-
-showAuthStatus(
-"❌ " + message,
-"error"
-);
-
-button.disabled =
-false;
-
-button.textContent =
-"CREATE ACCOUNT";
-
-}
-
-}
-);
+});
 
 
 /* =========================
    LOGIN
 ========================= */
 
-document
-.getElementById("loginButton")
-.addEventListener(
-"click",
-async function(){
+document.getElementById("loginButton")
+.addEventListener("click",async function(){
 
-const email =
-document
-.getElementById("loginEmail")
-.value
-.trim();
+const email=document.getElementById("loginEmail").value.trim();
+const password=document.getElementById("loginPassword").value;
 
-const password =
-document
-.getElementById("loginPassword")
-.value;
-
-const button =
-document.getElementById(
-"loginButton"
-);
+const button=document.getElementById("loginButton");
 
 
 if(!email){
@@ -1465,7 +1063,6 @@ showAuthStatus(
 return;
 
 }
-
 
 if(!password){
 
@@ -1479,11 +1076,8 @@ return;
 }
 
 
-button.disabled =
-true;
-
-button.textContent =
-"LOGGING IN...";
+button.disabled=true;
+button.textContent="LOGGING IN...";
 
 
 try{
@@ -1493,13 +1087,11 @@ showAuthStatus(
 "info"
 );
 
-
 await signInWithEmailAndPassword(
 auth,
 email,
 password
 );
-
 
 showAuthStatus(
 "✅ Login successful.",
@@ -1507,115 +1099,60 @@ showAuthStatus(
 );
 
 }
-
 catch(error){
 
-console.error(
-"Login error:",
-error
-);
+console.error("Login error:",error);
 
+let message="Login failed.";
 
-let message =
-"Login failed.";
-
-
-if(
-error.code ===
-"auth/invalid-credential"
-){
-
-message =
-"Incorrect email or password.";
-
+if(error.code==="auth/invalid-credential"){
+message="Incorrect email or password.";
 }
-
-else if(
-error.code ===
-"auth/user-not-found"
-){
-
-message =
-"No account was found with this email.";
-
+else if(error.code==="auth/user-not-found"){
+message="No account was found with this email.";
 }
-
-else if(
-error.code ===
-"auth/wrong-password"
-){
-
-message =
-"Incorrect password.";
-
+else if(error.code==="auth/wrong-password"){
+message="Incorrect password.";
 }
-
-else if(
-error.code ===
-"auth/invalid-email"
-){
-
-message =
-"Please enter a valid email address.";
-
+else if(error.code==="auth/invalid-email"){
+message="Please enter a valid email address.";
 }
-
 else{
+message=error.message;
+}
 
-message =
-error.message;
+showAuthStatus("❌ "+message,"error");
+
+button.disabled=false;
+button.textContent="LOGIN";
 
 }
 
-
-showAuthStatus(
-"❌ " + message,
-"error"
-);
-
-button.disabled =
-false;
-
-button.textContent =
-"LOGIN";
-
-}
-
-}
-);
+});
 
 
 /* =========================
    AUTH STATE
 ========================= */
 
-onAuthStateChanged(
-auth,
-async function(user){
+onAuthStateChanged(auth,async function(user){
 
 if(user){
 
-authScreen.style.display =
-"none";
-
-appContent.style.display =
-"block";
+authScreen.style.display="none";
+appContent.style.display="block";
 
 await loadUserProfile(user);
 
 }
 else{
 
-authScreen.style.display =
-"flex";
-
-appContent.style.display =
-"none";
+authScreen.style.display="flex";
+appContent.style.display="none";
 
 }
 
-}
-);
+});
 
 
 /* =========================
@@ -1624,100 +1161,72 @@ appContent.style.display =
 
 async function loadUserProfile(user){
 
+let name=user.displayName || "Student";
+
 try{
 
-const snapshot =
-await new Promise(
-function(resolve,reject){
+const snapshot=await new Promise(function(resolve,reject){
 
 onValue(
-ref(
-db,
-"users/" + user.uid
-),
+ref(db,"users/"+user.uid),
 resolve,
 {
 onlyOnce:true
 }
 );
 
+});
+
+
+const profile=snapshot.val();
+
+
+/*
+ * First choice:
+ * Realtime Database name.
+ *
+ * Backup:
+ * Firebase Auth displayName.
+ */
+
+if(profile && profile.fullName){
+
+name=profile.fullName;
+
 }
-);
+else if(user.displayName){
+
+name=user.displayName;
+
+}
 
 
-const profile =
-snapshot.val();
+document.getElementById("welcomeName").textContent=
+"Welcome, "+name+" 👋";
 
+document.getElementById("profileName").textContent=
+name;
 
-const name =
-profile &&
-profile.fullName
-?
-profile.fullName
-:
-"Student";
-
-
-const email =
+document.getElementById("profileEmail").textContent=
 user.email || "";
 
 
-/* HOME WELCOME */
+if(profile && profile.createdAt){
 
-document
-.getElementById("welcomeName")
-textContent =
-"Welcome, " + name + " 👋";
-
-
-/* HEADER NAME */
-
-document
-.getElementById("headerUserName")
-textContent =
-"👋 " + name;
-
-
-/* PROFILE */
-
-document
-.getElementById("profileName")
-textContent =
-name;
-
-
-document
-.getElementById("profileEmail")
-textContent =
-email;
-
-
-if(
-profile &&
-profile.createdAt
-){
-
-document
-.getElementById("profileJoined")
-textContent =
-"Member since: " +
-new Date(
-profile.createdAt
-).toLocaleDateString();
+document.getElementById("profileJoined").textContent=
+"Member since: "+
+new Date(profile.createdAt).toLocaleDateString();
 
 }
-
 else{
 
-document
-.getElementById("profileJoined")
-textContent =
+document.getElementById("profileJoined").textContent=
 "DeBryne Update member";
 
 }
 
-}
 
+}
 catch(error){
 
 console.error(
@@ -1726,28 +1235,23 @@ error
 );
 
 
-document
-.getElementById("welcomeName")
-textContent =
-"Welcome 👋";
+/*
+ * Even if Database fails,
+ * Firebase Authentication name
+ * will still be displayed.
+ */
 
+document.getElementById("welcomeName").textContent=
+"Welcome, "+(user.displayName || "Student")+" 👋";
 
-document
-.getElementById("headerUserName")
-textContent =
-"";
+document.getElementById("profileName").textContent=
+user.displayName || "Student";
 
-
-document
-.getElementById("profileName")
-textContent =
-"Student";
-
-
-document
-.getElementById("profileEmail")
-textContent =
+document.getElementById("profileEmail").textContent=
 user.email || "";
+
+document.getElementById("profileJoined").textContent=
+"DeBryne Update member";
 
 }
 
@@ -1758,29 +1262,21 @@ user.email || "";
    LOGOUT
 ========================= */
 
-document
-.getElementById("logoutButton")
-.addEventListener(
-"click",
-async function(){
+document.getElementById("logoutButton")
+.addEventListener("click",async function(){
 
 try{
 
 await signOut(auth);
 
 }
-
 catch(error){
 
-console.error(
-"Logout error:",
-error
-);
+console.error("Logout error:",error);
 
 }
 
-}
-);
+});
 
 
 /* =========================
@@ -1789,7 +1285,7 @@ error
 
 function escapeHTML(value){
 
-return String(value || "")
+return String(value||"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -1800,82 +1296,52 @@ return String(value || "")
 
 
 /* =========================
-   CREATE NEWS CARD
+   NEWS CARD
 ========================= */
 
 function createNewsCard(item){
 
-const imageUrl =
-String(item.imageUrl || "").trim();
+const imageUrl=String(item.imageUrl||"").trim();
 
-
-let imageHTML = "";
-
+let imageHTML="";
 
 if(imageUrl){
 
-imageHTML = `
-
+imageHTML=`
 <img
 class="news-image"
 src="${escapeHTML(imageUrl)}"
-alt="${escapeHTML(item.title || "News picture")}"
+alt="${escapeHTML(item.title||"News picture")}"
 loading="lazy"
-onerror="this.style.display='none';"
->
-
+onerror="this.style.display='none';">
 `;
 
 }
 
-
 return `
-
 <article class="news">
 
 <div class="label">
-
-${escapeHTML(
-item.category ||
-"DEBRYNE UPDATE"
-)}
-
+${escapeHTML(item.category||"DEBRYNE UPDATE")}
 </div>
 
 <h3>
-
-${escapeHTML(
-item.title ||
-"Untitled"
-)}
-
+${escapeHTML(item.title||"Untitled")}
 </h3>
 
 ${imageHTML}
 
 <p class="muted">
-
-${escapeHTML(
-item.content ||
-""
-)}
-
+${escapeHTML(item.content||"")}
 </p>
 
 <div class="time">
-
-${
-item.createdAt
-?
-new Date(item.createdAt).toLocaleString()
-:
-""
-}
-
+${item.createdAt
+?new Date(item.createdAt).toLocaleString()
+:""}
 </div>
 
 </article>
-
 `;
 
 }
@@ -1892,132 +1358,82 @@ ref(db,"news"),
 
 function(snapshot){
 
-const data =
-snapshot.val();
+const data=snapshot.val();
 
-const home =
-document.getElementById("homeNews");
-
-const news =
-document.getElementById("newsList");
-
-const sports =
-document.getElementById("sportsList");
-
-const academic =
-document.getElementById("academicList");
-
-const events =
-document.getElementById("eventList");
+const home=document.getElementById("homeNews");
+const news=document.getElementById("newsList");
+const sports=document.getElementById("sportsList");
+const academic=document.getElementById("academicList");
+const events=document.getElementById("eventList");
 
 
 if(!data){
 
-const message =
+const message=
 '<div class="empty">No updates published yet.</div>';
 
-home.innerHTML =
-message;
-
-news.innerHTML =
-message;
-
-sports.innerHTML =
-message;
-
-academic.innerHTML =
-message;
-
-events.innerHTML =
-message;
+home.innerHTML=message;
+news.innerHTML=message;
+sports.innerHTML=message;
+academic.innerHTML=message;
+events.innerHTML=message;
 
 return;
 
 }
 
 
-const items =
-
-Object.keys(data)
+const items=Object.keys(data)
 .map(function(key){
 
-return {
-
+return{
 id:key,
 ...data[key]
-
 };
 
 })
 .sort(function(a,b){
 
-return Number(b.createdAt || 0)
--
-Number(a.createdAt || 0);
+return Number(b.createdAt||0)-
+Number(a.createdAt||0);
 
 });
 
 
-/* HOME */
-
-home.innerHTML =
-
-items
-.slice(0,5)
+home.innerHTML=
+items.slice(0,5)
 .map(createNewsCard)
 .join("");
 
-
-/* NEWS */
-
-news.innerHTML =
-
-items
-.map(createNewsCard)
+news.innerHTML=
+items.map(createNewsCard)
 .join("");
 
 
-/* FILTER */
+function filterNews(word,elementId,emptyMessage){
 
-function filterNews(
-word,
-elementId,
-emptyMessage
-){
+const result=items.filter(function(item){
 
-const result =
-
-items.filter(function(item){
-
-return String(
-item.category || ""
-)
+return String(item.category||"")
 .toLowerCase()
 .includes(word);
 
 });
 
 
-const element =
-document.getElementById(
-elementId
-);
-
+const element=document.getElementById(elementId);
 
 if(result.length){
 
-element.innerHTML =
-result
-.map(createNewsCard)
-.join("");
+element.innerHTML=
+result.map(createNewsCard).join("");
 
 }
-
 else{
 
-element.innerHTML =
-'<div class="empty">' +
-emptyMessage +
+element.innerHTML=
+'<div class="empty">'+
+emptyMessage+
 '</div>';
 
 }
@@ -2031,13 +1447,11 @@ filterNews(
 "No sports updates yet."
 );
 
-
 filterNews(
 "academic",
 "academicList",
 "No academic updates yet."
 );
-
 
 filterNews(
 "event",
@@ -2065,48 +1479,24 @@ error
    NOTIFICATIONS
 ========================= */
 
-const notifyBtn =
-document.getElementById(
-"notifyBtn"
-);
-
-const notifyStatus =
-document.getElementById(
-"notifyStatus"
-);
-
-const tokenBox =
-document.getElementById(
-"tokenBox"
-);
-
-const tokenText =
-document.getElementById(
-"tokenText"
-);
-
-const pushError =
-document.getElementById(
-"pushError"
-);
+const notifyBtn=document.getElementById("notifyBtn");
+const notifyStatus=document.getElementById("notifyStatus");
+const tokenBox=document.getElementById("tokenBox");
+const tokenText=document.getElementById("tokenText");
+const pushError=document.getElementById("pushError");
 
 
 function showError(message){
 
-pushError.style.display =
-"block";
-
-pushError.textContent =
-message;
+pushError.style.display="block";
+pushError.textContent=message;
 
 }
 
 
 async function getFCMServiceWorker(){
 
-if(
-!("serviceWorker" in navigator)
-){
+if(!("serviceWorker" in navigator)){
 
 throw new Error(
 "Your browser does not support service workers."
@@ -2114,27 +1504,19 @@ throw new Error(
 
 }
 
-
-const registration =
-
-await navigator.serviceWorker.register(
+return await navigator.serviceWorker.register(
 "./firebase-messaging-sw.js",
 {
 scope:"./"
 }
 );
 
-
-return registration;
-
 }
 
 
 async function saveToken(token){
 
-const response =
-
-await fetch(
+const response=await fetch(
 PUSH_SERVER_URL,
 {
 
@@ -2146,20 +1528,15 @@ headers:{
 },
 
 body:JSON.stringify({
-
 action:"register",
-
 token:token
-
 })
 
 }
 );
 
 
-const text =
-await response.text();
-
+const text=await response.text();
 
 console.log(
 "Push server response:",
@@ -2178,14 +1555,11 @@ throw new Error(
 
 let result;
 
-
 try{
 
-result =
-JSON.parse(text);
+result=JSON.parse(text);
 
 }
-
 catch(error){
 
 throw new Error(
@@ -2198,12 +1572,11 @@ throw new Error(
 if(!result.success){
 
 throw new Error(
-result.error ||
+result.error||
 "Device registration failed."
 );
 
 }
-
 
 return result;
 
@@ -2212,14 +1585,10 @@ return result;
 
 async function enableNotifications(){
 
-pushError.style.display =
-"none";
+pushError.style.display="none";
 
-notifyBtn.disabled =
-true;
-
-notifyBtn.textContent =
-"Enabling...";
+notifyBtn.disabled=true;
+notifyBtn.textContent="Enabling...";
 
 
 try{
@@ -2232,7 +1601,6 @@ throw new Error(
 
 }
 
-
 if(!("Notification" in window)){
 
 throw new Error(
@@ -2240,7 +1608,6 @@ throw new Error(
 );
 
 }
-
 
 if(!messaging){
 
@@ -2250,11 +1617,7 @@ throw new Error(
 
 }
 
-
-if(
-Notification.permission ===
-"denied"
-){
+if(Notification.permission==="denied"){
 
 throw new Error(
 "Notifications are blocked for this site. Allow them in Chrome site settings."
@@ -2263,22 +1626,21 @@ throw new Error(
 }
 
 
-let permission =
-Notification.permission;
+let permission=Notification.permission;
 
 
-if(permission !== "granted"){
+if(permission!=="granted"){
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Requesting notification permission...";
 
-permission =
+permission=
 await Notification.requestPermission();
 
 }
 
 
-if(permission !== "granted"){
+if(permission!=="granted"){
 
 throw new Error(
 "Notification permission was not granted."
@@ -2287,30 +1649,23 @@ throw new Error(
 }
 
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Registering notification service...";
 
 
-const registration =
+const registration=
 await getFCMServiceWorker();
 
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Getting device token...";
 
 
-const token =
-
-await getToken(
+const token=await getToken(
 messaging,
 {
-
-vapidKey:
-VAPID_KEY,
-
-serviceWorkerRegistration:
-registration
-
+vapidKey:VAPID_KEY,
+serviceWorkerRegistration:registration
 }
 );
 
@@ -2324,31 +1679,26 @@ throw new Error(
 }
 
 
-tokenText.textContent =
-token;
-
-tokenBox.style.display =
-"block";
+tokenText.textContent=token;
+tokenBox.style.display="block";
 
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Registering this device...";
 
 
 await saveToken(token);
 
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "✅ Notifications enabled successfully.";
 
-notifyBtn.textContent =
+notifyBtn.textContent=
 "Notifications Enabled";
 
-notifyBtn.disabled =
-true;
+notifyBtn.disabled=true;
 
 }
-
 catch(error){
 
 console.error(
@@ -2356,19 +1706,15 @@ console.error(
 error
 );
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "❌ Notification setup failed.";
 
 showError(
-error.message ||
-String(error)
+error.message||String(error)
 );
 
-notifyBtn.disabled =
-false;
-
-notifyBtn.textContent =
-"Try Again";
+notifyBtn.disabled=false;
+notifyBtn.textContent="Try Again";
 
 }
 
@@ -2381,35 +1727,23 @@ enableNotifications
 );
 
 
-/* NOTIFICATION STATUS */
+if("Notification" in window){
 
-if(
-"Notification" in window
-){
+if(Notification.permission==="granted"){
 
-if(
-Notification.permission ===
-"granted"
-){
-
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Notifications are already allowed. Tap the button to register this device.";
 
 }
+else if(Notification.permission==="denied"){
 
-else if(
-Notification.permission ===
-"denied"
-){
-
-notifyStatus.textContent =
+notifyStatus.textContent=
 "❌ Notifications are blocked for this site.";
 
 }
-
 else{
 
-notifyStatus.textContent =
+notifyStatus.textContent=
 "Notifications are ready. Tap the button above to enable them.";
 
 }
@@ -2425,9 +1759,7 @@ window.addEventListener(
 "load",
 function(){
 
-if(
-"serviceWorker" in navigator
-){
+if("serviceWorker" in navigator){
 
 navigator.serviceWorker.register(
 "./service-worker.js",
@@ -2435,7 +1767,6 @@ navigator.serviceWorker.register(
 scope:"./"
 }
 )
-
 .then(function(){
 
 console.log(
@@ -2443,7 +1774,6 @@ console.log(
 );
 
 })
-
 .catch(function(error){
 
 console.error(
