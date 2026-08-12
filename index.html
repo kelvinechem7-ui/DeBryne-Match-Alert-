@@ -118,8 +118,14 @@ font-size:26px;
 margin-bottom:8px;
 }
 
+.news{
+overflow:hidden;
+}
+
 .news h3{
-margin:7px 0;
+margin:8px 0;
+font-size:19px;
+line-height:1.35;
 }
 
 .label{
@@ -127,6 +133,17 @@ font-size:11px;
 font-weight:bold;
 color:#64748b;
 text-transform:uppercase;
+}
+
+.news-image{
+width:100%;
+height:auto;
+max-height:320px;
+object-fit:cover;
+border-radius:12px;
+margin:12px 0 10px;
+display:block;
+background:#e5e7eb;
 }
 
 .time{
@@ -422,7 +439,6 @@ Loading sports...
 Receive important DeBryne Update notifications.
 </p>
 
-
 <div class="card" style="margin-top:18px">
 
 <h3>🔔 Notifications</h3>
@@ -432,16 +448,13 @@ Enable notifications to receive breaking news,
 academic announcements and important updates.
 </p>
 
-
 <button id="notifyBtn" type="button">
 Enable Notifications
 </button>
 
-
 <div class="status" id="notifyStatus">
 Notifications are ready. Tap the button above to enable them.
 </div>
-
 
 <div class="tokenBox" id="tokenBox">
 
@@ -453,7 +466,6 @@ style="margin-top:7px">
 </div>
 
 </div>
-
 
 <div id="pushError" class="errorBox"></div>
 
@@ -712,6 +724,7 @@ const VAPID_KEY =
 const PUSH_SERVER_URL =
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
 
+
 let app;
 let db;
 let messaging;
@@ -744,6 +757,8 @@ error
 }
 
 
+/* ESCAPE HTML */
+
 function escapeHTML(value){
 
 return String(value || "")
@@ -756,7 +771,38 @@ return String(value || "")
 }
 
 
+/* CREATE NEWS CARD */
+
 function createNewsCard(item){
+
+const imageUrl =
+String(item.imageUrl || "").trim();
+
+
+let imageHTML = "";
+
+
+/*
+ * Only show the picture when
+ * Firebase contains imageUrl.
+ */
+
+if(imageUrl){
+
+imageHTML = `
+
+<img
+    class="news-image"
+    src="${escapeHTML(imageUrl)}"
+    alt="${escapeHTML(item.title || "News picture")}"
+    loading="lazy"
+    onerror="this.style.display='none';"
+>
+
+`;
+
+}
+
 
 return `
 
@@ -771,6 +817,7 @@ item.category ||
 
 </div>
 
+
 <h3>
 
 ${escapeHTML(
@@ -780,6 +827,10 @@ item.title ||
 
 </h3>
 
+
+${imageHTML}
+
+
 <p class="muted">
 
 ${escapeHTML(
@@ -788,6 +839,7 @@ item.content ||
 )}
 
 </p>
+
 
 <div class="time">
 
@@ -872,6 +924,8 @@ Number(a.createdAt || 0);
 });
 
 
+/* HOME */
+
 home.innerHTML =
 
 items
@@ -880,12 +934,16 @@ items
 .join("");
 
 
+/* ALL NEWS */
+
 news.innerHTML =
 
 items
 .map(createNewsCard)
 .join("");
 
+
+/* FILTER */
 
 function filterNews(
 word,
@@ -929,17 +987,25 @@ emptyMessage +
 }
 
 
+/* SPORTS */
+
 filterNews(
 "sport",
 "sportsList",
 "No sports updates yet."
 );
 
+
+/* ACADEMICS */
+
 filterNews(
 "academic",
 "academicList",
 "No academic updates yet."
 );
+
+
+/* EVENTS */
 
 filterNews(
 "event",
@@ -1329,4 +1395,4 @@ error
 </script>
 
 </body>
-</html>
+  </html>
