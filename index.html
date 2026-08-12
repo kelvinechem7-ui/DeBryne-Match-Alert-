@@ -412,6 +412,71 @@ color:#94a3b8;
 margin-top:9px;
 }
 
+/* ==================================================
+   SEARCH
+================================================== */
+
+.search-box{
+position:relative;
+margin:0 0 18px;
+}
+
+.search-box input{
+width:100%;
+height:52px;
+padding:0 48px 0 45px;
+border:1px solid #d1d5db;
+border-radius:14px;
+background:white;
+font-size:15px;
+outline:none;
+box-shadow:0 3px 10px rgba(0,0,0,.04);
+}
+
+.search-box input:focus{
+border-color:#111827;
+box-shadow:0 0 0 3px rgba(17,24,39,.08);
+}
+
+.search-icon{
+position:absolute;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+font-size:20px;
+pointer-events:none;
+}
+
+.clear-search{
+position:absolute;
+right:12px;
+top:50%;
+transform:translateY(-50%);
+width:30px;
+height:30px;
+padding:0;
+margin:0;
+border:0;
+border-radius:50%;
+background:#e5e7eb;
+color:#374151;
+font-size:16px;
+display:none;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.search-info{
+font-size:13px;
+color:#64748b;
+margin:-5px 0 14px;
+}
+
+.search-results{
+margin-top:5px;
+}
+
 .bottom{
 position:fixed;
 bottom:0;
@@ -541,8 +606,6 @@ font-size:25px;
 
 }
 
-/* Reduce motion for users who prefer it */
-
 @media(prefers-reduced-motion:reduce){
 
 *{
@@ -625,8 +688,6 @@ Register to access student news, academics,
 events and sports updates.
 </p>
 
-<!-- REGISTER -->
-
 <div id="registerForm">
 
 <input
@@ -677,8 +738,6 @@ Login
 </p>
 
 </div>
-
-<!-- LOGIN -->
 
 <div id="loginForm" style="display:none">
 
@@ -781,6 +840,41 @@ and sports updates.
 
 </div>
 
+<!-- SEARCH ON HOME -->
+
+<div class="search-box">
+
+<span class="search-icon">🔍</span>
+
+<input
+id="homeSearchInput"
+type="search"
+placeholder="Search DeBryne Update..."
+autocomplete="off">
+
+<button
+id="homeClearSearch"
+class="clear-search"
+type="button"
+aria-label="Clear search">
+
+×
+</button>
+
+</div>
+
+<div
+id="homeSearchInfo"
+class="search-info"
+style="display:none">
+</div>
+
+<div
+id="homeSearchResults"
+class="search-results"
+style="display:none">
+</div>
+
 <h2 class="title">
 Student Services
 </h2>
@@ -799,7 +893,6 @@ Latest student and campus updates.
 
 </div>
 
-
 <div class="card" data-page="academics">
 
 <div class="icon">📚</div>
@@ -812,7 +905,6 @@ Academic information and resources.
 
 </div>
 
-
 <div class="card" data-page="events">
 
 <div class="icon">📅</div>
@@ -824,7 +916,6 @@ Upcoming student activities.
 </p>
 
 </div>
-
 
 <div class="card" data-page="sports">
 
@@ -839,7 +930,6 @@ Fixtures, scores and sports news.
 </div>
 
 </div>
-
 
 <h2 class="title">
 Latest Updates
@@ -870,9 +960,36 @@ Loading updates...
 Latest campus news and announcements.
 </p>
 
+<div class="search-box" style="margin-top:18px">
+
+<span class="search-icon">🔍</span>
+
+<input
+id="newsSearchInput"
+type="search"
+placeholder="Search campus news..."
+autocomplete="off">
+
+<button
+id="newsClearSearch"
+class="clear-search"
+type="button"
+aria-label="Clear search">
+
+×
+</button>
+
+</div>
+
+<div
+id="newsSearchInfo"
+class="search-info"
+style="display:none">
+</div>
+
 <div
 id="newsList"
-style="margin-top:18px">
+style="margin-top:10px">
 
 <div class="empty">
 Loading news...
@@ -1161,7 +1278,6 @@ item.classList.remove("active");
 
 });
 
-
 const target =
 document.getElementById(
 page + "Page"
@@ -1173,7 +1289,6 @@ target.classList.add("active");
 
 }
 
-
 document
 .querySelectorAll(".nav")
 .forEach(function(item){
@@ -1181,7 +1296,6 @@ document
 item.classList.remove("active");
 
 });
-
 
 document
 .querySelectorAll(
@@ -1193,11 +1307,9 @@ item.classList.add("active");
 
 });
 
-
 window.scrollTo(0,0);
 
 }
-
 
 document
 .querySelectorAll("[data-page]")
@@ -1232,7 +1344,6 @@ initializeApp
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
-
 import {
 getDatabase,
 ref,
@@ -1241,7 +1352,6 @@ set
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
-
 
 import {
 getAuth,
@@ -1253,7 +1363,6 @@ updateProfile
 }
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
 
 import {
 getMessaging,
@@ -1346,11 +1455,6 @@ appSplash.style.display =
 
 }
 
-
-/*
- * Keep splash visible for a short
- * professional startup experience.
- */
 
 const splashStartTime =
 Date.now();
@@ -1502,7 +1606,6 @@ updateSplashStatus(
 "Connecting to DeBryne Update..."
 );
 
-
 app =
 initializeApp(firebaseConfig);
 
@@ -1515,11 +1618,9 @@ getAuth(app);
 messaging =
 getMessaging(app);
 
-
 updateSplashStatus(
 "Firebase connected..."
 );
-
 
 console.log(
 "Firebase initialized successfully."
@@ -1598,7 +1699,6 @@ return;
 
 }
 
-
 if(!email){
 
 showAuthStatus(
@@ -1609,7 +1709,6 @@ showAuthStatus(
 return;
 
 }
-
 
 if(password.length < 6){
 
@@ -1622,7 +1721,6 @@ return;
 
 }
 
-
 if(password !== confirmPassword){
 
 showAuthStatus(
@@ -1633,7 +1731,6 @@ showAuthStatus(
 return;
 
 }
-
 
 button.disabled =
 true;
@@ -1649,7 +1746,6 @@ showAuthStatus(
 "info"
 );
 
-
 const userCredential =
 await createUserWithEmailAndPassword(
 auth,
@@ -1657,10 +1753,8 @@ email,
 password
 );
 
-
 const user =
 userCredential.user;
-
 
 await updateProfile(
 user,
@@ -1668,7 +1762,6 @@ user,
 displayName:name
 }
 );
-
 
 await set(
 ref(
@@ -1695,12 +1788,10 @@ status:
 }
 );
 
-
 showAuthStatus(
 "✅ Account created successfully. Welcome to DeBryne Update!",
 "success"
 );
-
 
 document
 .getElementById("registerPassword")
@@ -1710,9 +1801,7 @@ document
 .getElementById("registerConfirm")
 .value = "";
 
-
 await user.reload();
-
 
 }
 
@@ -1762,7 +1851,6 @@ message =
 error.message;
 
 }
-
 
 showAuthStatus(
 "❌ " + message,
@@ -1819,7 +1907,6 @@ return;
 
 }
 
-
 if(!password){
 
 showAuthStatus(
@@ -1830,7 +1917,6 @@ showAuthStatus(
 return;
 
 }
-
 
 button.disabled =
 true;
@@ -1846,19 +1932,16 @@ showAuthStatus(
 "info"
 );
 
-
 await signInWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-
 showAuthStatus(
 "✅ Login successful.",
 "success"
 );
-
 
 button.disabled =
 false;
@@ -1925,7 +2008,6 @@ error.message;
 
 }
 
-
 showAuthStatus(
 "❌ " + message,
 "error"
@@ -1977,13 +2059,11 @@ user.displayName
 
 }
 
-
 if(currentName){
 
 return currentName;
 
 }
-
 
 let enteredName = "";
 
@@ -2017,7 +2097,6 @@ window.alert(
 
 }
 
-
 try{
 
 await updateProfile(
@@ -2037,7 +2116,6 @@ error
 );
 
 }
-
 
 try{
 
@@ -2083,7 +2161,6 @@ error
 
 }
 
-
 return enteredName;
 
 }
@@ -2115,11 +2192,9 @@ return;
 
 }
 
-
 updateSplashStatus(
 "Loading your DeBryne Update profile..."
 );
-
 
 authScreen.style.display =
 "none";
@@ -2127,13 +2202,11 @@ authScreen.style.display =
 appContent.style.display =
 "block";
 
-
 await loadUserProfile(user);
 
 updateSplashStatus(
 "Loading latest updates..."
 );
-
 
 finishSplash();
 
@@ -2153,7 +2226,6 @@ let profile = null;
 
 let name =
 user.displayName || "";
-
 
 try{
 
@@ -2175,10 +2247,8 @@ onlyOnce:true
 }
 );
 
-
 profile =
 snapshot.val();
-
 
 if(
 profile &&
@@ -2202,7 +2272,6 @@ error
 
 }
 
-
 if(!name){
 
 name =
@@ -2213,14 +2282,12 @@ profile
 
 }
 
-
 if(!name){
 
 name =
 "Student";
 
 }
-
 
 document
 .getElementById("welcomeName")
@@ -2229,18 +2296,15 @@ document
 name +
 " 👋";
 
-
 document
 .getElementById("profileName")
 .textContent =
 name;
 
-
 document
 .getElementById("profileEmail")
 .textContent =
 user.email || "";
-
 
 if(
 profile &&
@@ -2266,7 +2330,6 @@ document
 "DeBryne Update member";
 
 }
-
 
 try{
 
@@ -2369,7 +2432,6 @@ item.imageUrl || ""
 
 let imageHTML = "";
 
-
 if(imageUrl){
 
 imageHTML = `
@@ -2387,7 +2449,6 @@ onerror="this.style.display='none';">
 `;
 
 }
-
 
 return `
 
@@ -2444,6 +2505,250 @@ item.createdAt
 
 
 /* ==================================================
+   SEARCH ENGINE
+================================================== */
+
+let allNewsItems = [];
+
+
+function searchNews(query){
+
+query =
+String(query || "")
+.trim()
+.toLowerCase();
+
+if(!query){
+
+return allNewsItems;
+
+}
+
+const words =
+query
+.split(/\s+/)
+.filter(Boolean);
+
+return allNewsItems.filter(
+function(item){
+
+const searchableText = (
+
+String(item.title || "") +
+" " +
+String(item.content || "") +
+" " +
+String(item.category || "")
+
+)
+.toLowerCase();
+
+return words.every(
+function(word){
+
+return searchableText.includes(word);
+
+});
+
+});
+
+}
+
+
+function renderSearchResults(
+query,
+results,
+container,
+info,
+clearButton
+){
+
+if(!container){
+
+return;
+
+}
+
+const cleanQuery =
+String(query || "").trim();
+
+
+if(!cleanQuery){
+
+container.style.display =
+"none";
+
+if(info){
+
+info.style.display =
+"none";
+
+}
+
+if(clearButton){
+
+clearButton.style.display =
+"none";
+
+}
+
+return;
+
+}
+
+
+container.style.display =
+"block";
+
+if(clearButton){
+
+clearButton.style.display =
+"flex";
+
+}
+
+
+if(info){
+
+info.style.display =
+"block";
+
+info.textContent =
+results.length +
+(
+results.length === 1
+?
+" result found"
+:
+" results found"
+) +
+" for \"" +
+cleanQuery +
+"\"";
+
+}
+
+
+if(!results.length){
+
+container.innerHTML =
+
+'<div class="empty">' +
+'🔍 No results found for "' +
+escapeHTML(cleanQuery) +
+'".<br><br>' +
+'<span style="font-size:12px;">Try another keyword.</span>' +
+'</div>';
+
+return;
+
+}
+
+
+container.innerHTML =
+results
+.map(createNewsCard)
+.join("");
+
+}
+
+
+function setupSearch(
+inputId,
+containerId,
+infoId,
+clearId
+){
+
+const input =
+document.getElementById(
+inputId
+);
+
+const container =
+document.getElementById(
+containerId
+);
+
+const info =
+document.getElementById(
+infoId
+);
+
+const clear =
+document.getElementById(
+clearId
+);
+
+if(!input){
+
+return;
+
+}
+
+
+input.addEventListener(
+"input",
+function(){
+
+const query =
+input.value;
+
+const results =
+searchNews(query);
+
+renderSearchResults(
+query,
+results,
+container,
+info,
+clear
+);
+
+});
+
+
+clear.addEventListener(
+"click",
+function(){
+
+input.value = "";
+
+renderSearchResults(
+"",
+allNewsItems,
+container,
+info,
+clear
+);
+
+input.focus();
+
+});
+
+}
+
+
+/* ==================================================
+   SETUP SEARCH
+================================================== */
+
+setupSearch(
+"homeSearchInput",
+"homeSearchResults",
+"homeSearchInfo",
+"homeClearSearch"
+);
+
+setupSearch(
+"newsSearchInput",
+"newsList",
+"newsSearchInfo",
+"newsClearSearch"
+);
+
+
+/* ==================================================
    LOAD NEWS
 ================================================== */
 
@@ -2488,6 +2793,8 @@ document.getElementById(
 
 if(!data){
 
+allNewsItems = [];
+
 const message =
 '<div class="empty">' +
 'No updates published yet.' +
@@ -2513,7 +2820,7 @@ return;
 }
 
 
-const items =
+allNewsItems =
 
 Object.keys(data)
 
@@ -2544,17 +2851,57 @@ a.createdAt || 0
 
 home.innerHTML =
 
-items
+allNewsItems
 .slice(0,5)
 .map(createNewsCard)
 .join("");
 
 
+const currentNewsQuery =
+document
+.getElementById("newsSearchInput")
+.value
+.trim();
+
+if(currentNewsQuery){
+
+renderSearchResults(
+currentNewsQuery,
+searchNews(currentNewsQuery),
+document.getElementById("newsList"),
+document.getElementById("newsSearchInfo"),
+document.getElementById("newsClearSearch")
+);
+
+}
+else{
+
 news.innerHTML =
 
-items
+allNewsItems
 .map(createNewsCard)
 .join("");
+
+}
+
+
+const currentHomeQuery =
+document
+.getElementById("homeSearchInput")
+.value
+.trim();
+
+if(currentHomeQuery){
+
+renderSearchResults(
+currentHomeQuery,
+searchNews(currentHomeQuery),
+document.getElementById("homeSearchResults"),
+document.getElementById("homeSearchInfo"),
+document.getElementById("homeClearSearch")
+);
+
+}
 
 
 function filterNews(
@@ -2565,7 +2912,7 @@ emptyMessage
 
 const result =
 
-items.filter(
+allNewsItems.filter(
 function(item){
 
 return String(
@@ -2633,6 +2980,21 @@ console.error(
 error
 );
 
+const message =
+'<div class="empty">' +
+'Unable to load updates right now.' +
+'</div>';
+
+document.getElementById(
+"homeNews"
+).innerHTML =
+message;
+
+document.getElementById(
+"newsList"
+).innerHTML =
+message;
+
 }
 
 );
@@ -2695,7 +3057,6 @@ throw new Error(
 
 }
 
-
 return await navigator
 .serviceWorker
 .register(
@@ -2735,16 +3096,13 @@ token:token
 }
 );
 
-
 const text =
 await response.text();
-
 
 console.log(
 "Push server response:",
 text
 );
-
 
 if(!text){
 
@@ -2754,9 +3112,7 @@ throw new Error(
 
 }
 
-
 let result;
-
 
 try{
 
@@ -2772,7 +3128,6 @@ throw new Error(
 
 }
 
-
 if(!result.success){
 
 throw new Error(
@@ -2781,7 +3136,6 @@ result.error ||
 );
 
 }
-
 
 return result;
 
@@ -2810,7 +3164,6 @@ throw new Error(
 
 }
 
-
 if(!("Notification" in window)){
 
 throw new Error(
@@ -2819,7 +3172,6 @@ throw new Error(
 
 }
 
-
 if(!messaging){
 
 throw new Error(
@@ -2827,7 +3179,6 @@ throw new Error(
 );
 
 }
-
 
 if(
 Notification.permission ===
@@ -2839,7 +3190,6 @@ throw new Error(
 );
 
 }
-
 
 let permission =
 Notification.permission;
@@ -2855,7 +3205,6 @@ await Notification.requestPermission();
 
 }
 
-
 if(permission !== "granted"){
 
 throw new Error(
@@ -2863,7 +3212,6 @@ throw new Error(
 );
 
 }
-
 
 notifyStatus.textContent =
 "Registering notification service...";
