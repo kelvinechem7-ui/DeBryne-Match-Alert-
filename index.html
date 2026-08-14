@@ -37,7 +37,7 @@ padding-bottom:80px;
 }
 
 /* ==================================================
-   PROFESSIONAL APP SPLASH SCREEN
+   SPLASH
 ================================================== */
 
 #appSplash{
@@ -91,14 +91,12 @@ font-size:29px;
 font-weight:800;
 margin-top:22px;
 letter-spacing:.2px;
-animation:splashText .8s ease;
 }
 
 .splash-subtitle{
 color:#cbd5e1;
 font-size:13px;
 margin-top:7px;
-animation:splashText 1s ease;
 }
 
 .splash-loader{
@@ -125,34 +123,13 @@ margin-top:13px;
 }
 
 @keyframes splashLogo{
-from{
-opacity:0;
-transform:scale(.75);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-
-@keyframes splashText{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0;transform:scale(.75)}
+to{opacity:1;transform:scale(1)}
 }
 
 @keyframes splashLoading{
-0%{
-transform:translateX(-180%);
-}
-100%{
-transform:translateX(400%);
-}
+0%{transform:translateX(-180%)}
+100%{transform:translateX(400%)}
 }
 
 /* ==================================================
@@ -186,7 +163,6 @@ height:75px;
 border-radius:18px;
 overflow:hidden;
 margin:0 auto 15px;
-background:white;
 }
 
 .auth-logo img{
@@ -217,10 +193,6 @@ border-radius:10px;
 margin-top:11px;
 font-size:15px;
 outline:none;
-}
-
-.auth-box input:focus{
-border-color:#111827;
 }
 
 .auth-button{
@@ -387,7 +359,6 @@ margin:8px 0;
 font-size:21px;
 line-height:1.4;
 font-weight:800;
-letter-spacing:-.2px;
 }
 
 .news p.muted{
@@ -442,11 +413,6 @@ outline:none;
 box-shadow:0 3px 10px rgba(0,0,0,.04);
 }
 
-.search-box input:focus{
-border-color:#111827;
-box-shadow:0 0 0 3px rgba(17,24,39,.08);
-}
-
 .search-icon{
 position:absolute;
 left:15px;
@@ -482,10 +448,6 @@ color:#64748b;
 margin:-5px 0 14px;
 }
 
-.search-results{
-margin-top:5px;
-}
-
 .bottom{
 position:fixed;
 bottom:0;
@@ -507,7 +469,6 @@ color:#64748b;
 cursor:pointer;
 padding:8px 10px;
 user-select:none;
--webkit-tap-highlight-color:transparent;
 }
 
 .nav span{
@@ -600,7 +561,7 @@ font-size:60px;
 }
 
 /* ==================================================
-   VIEWER RATING & SATISFACTION
+   RATING
 ================================================== */
 
 .rating-card{
@@ -609,7 +570,6 @@ border-radius:18px;
 padding:20px;
 margin-top:18px;
 box-shadow:0 4px 14px rgba(0,0,0,.06);
-text-align:left;
 }
 
 .rating-card h3{
@@ -643,11 +603,6 @@ font-size:36px;
 line-height:1;
 color:#cbd5e1;
 cursor:pointer;
-transition:transform .15s ease,color .15s ease;
-}
-
-.star-rating button:hover{
-transform:scale(1.12);
 }
 
 .star-rating button.selected{
@@ -679,11 +634,6 @@ font-size:13px;
 font-weight:600;
 color:#475569;
 cursor:pointer;
-transition:.15s ease;
-}
-
-.satisfaction-option:hover{
-transform:translateY(-1px);
 }
 
 .satisfaction-option.selected{
@@ -704,12 +654,6 @@ font-size:15px;
 line-height:1.65;
 resize:vertical;
 outline:none;
-color:#172033;
-}
-
-.rating-opinion:focus{
-border-color:#2563eb;
-box-shadow:0 0 0 3px rgba(37,99,235,.08);
 }
 
 .rating-submit{
@@ -748,7 +692,6 @@ text-align:center;
 .rating-score{
 font-size:30px;
 font-weight:800;
-color:#111827;
 }
 
 .rating-stars-display{
@@ -773,7 +716,6 @@ margin-top:10px;
 
 .recent-opinion strong{
 font-size:13px;
-color:#111827;
 }
 
 .recent-opinion p{
@@ -789,14 +731,6 @@ margin-top:5px;
 grid-template-columns:1fr;
 }
 
-.nav{
-padding:8px 5px;
-}
-
-.splash-title{
-font-size:25px;
-}
-
 .satisfaction-options{
 grid-template-columns:1fr;
 }
@@ -807,23 +741,13 @@ font-size:32px;
 
 }
 
-@media(prefers-reduced-motion:reduce){
-
-*{
-animation-duration:.01ms !important;
-animation-iteration-count:1 !important;
-transition-duration:.01ms !important;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <!-- ==================================================
-     PROFESSIONAL APP SPLASH SCREEN
+     SPLASH
 ================================================== -->
 
 <div id="appSplash">
@@ -831,11 +755,8 @@ transition-duration:.01ms !important;
 <div class="splash-content">
 
 <div class="splash-logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
-
 </div>
 
 <div class="splash-title">
@@ -847,26 +768,19 @@ Student News • Education • Sports
 </div>
 
 <div class="splash-loader">
-
 <div class="splash-loader-bar"></div>
-
 </div>
 
-<div
-id="splashStatus"
-class="splash-status">
-
+<div id="splashStatus" class="splash-status">
 Starting DeBryne Update...
-
 </div>
 
 </div>
-
 </div>
 
 
 <!-- ==================================================
-     AUTH SCREEN
+     AUTH
 ================================================== -->
 
 <div id="authScreen">
@@ -874,11 +788,8 @@ Starting DeBryne Update...
 <div class="auth-box">
 
 <div class="auth-logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
-
 </div>
 
 <h1>DeBryne Update</h1>
@@ -891,105 +802,76 @@ events and sports updates.
 
 <div id="registerForm">
 
-<input
-id="registerName"
+<input id="registerName"
 type="text"
 placeholder="Full Name"
 autocomplete="name">
 
-<input
-id="registerEmail"
+<input id="registerEmail"
 type="email"
 placeholder="Email Address"
 autocomplete="email">
 
-<input
-id="registerPassword"
+<input id="registerPassword"
 type="password"
 placeholder="Create Password"
 autocomplete="new-password">
 
-<input
-id="registerConfirm"
+<input id="registerConfirm"
 type="password"
 placeholder="Confirm Password"
 autocomplete="new-password">
 
-<button
-id="registerButton"
+<button id="registerButton"
 class="auth-button"
 type="button">
-
 CREATE ACCOUNT
-
 </button>
 
 <p class="auth-switch">
-
 Already have an account?
-
-<button
-id="showLoginButton"
-type="button">
-
+<button id="showLoginButton" type="button">
 Login
-
 </button>
-
 </p>
 
 </div>
 
 <div id="loginForm" style="display:none">
 
-<input
-id="loginEmail"
+<input id="loginEmail"
 type="email"
 placeholder="Email Address"
 autocomplete="email">
 
-<input
-id="loginPassword"
+<input id="loginPassword"
 type="password"
 placeholder="Password"
 autocomplete="current-password">
 
-<button
-id="loginButton"
+<button id="loginButton"
 class="auth-button"
 type="button">
-
 LOGIN
-
 </button>
 
 <p class="auth-switch">
-
 Don't have an account?
-
-<button
-id="showRegisterButton"
-type="button">
-
+<button id="showRegisterButton" type="button">
 Create Account
-
 </button>
-
 </p>
 
 </div>
 
-<div
-id="authStatus"
-class="auth-status">
-</div>
+<div id="authStatus" class="auth-status"></div>
 
 </div>
 </div>
 
 
 <!-- ==================================================
-     APP CONTENT
+     APP
 ================================================== -->
 
 <div id="appContent">
@@ -999,19 +881,13 @@ class="auth-status">
 <div class="brand">
 
 <div class="logo">
-
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
-
 </div>
 
 <div>
-
 <h1>DeBryne Update</h1>
-
 <p>Student News • Education • Sports</p>
-
 </div>
 
 </div>
@@ -1032,11 +908,9 @@ Welcome 👋
 </h2>
 
 <p class="muted">
-
 Stay informed with the latest student news,
 academic information, campus announcements
 and sports updates.
-
 </p>
 
 </div>
@@ -1045,32 +919,25 @@ and sports updates.
 
 <span class="search-icon">🔍</span>
 
-<input
-id="homeSearchInput"
+<input id="homeSearchInput"
 type="search"
 placeholder="Search DeBryne Update..."
 autocomplete="off">
 
-<button
-id="homeClearSearch"
+<button id="homeClearSearch"
 class="clear-search"
-type="button"
-aria-label="Clear search">
-
+type="button">
 ×
 </button>
 
 </div>
 
-<div
-id="homeSearchInfo"
+<div id="homeSearchInfo"
 class="search-info"
 style="display:none">
 </div>
 
-<div
-id="homeSearchResults"
-class="search-results"
+<div id="homeSearchResults"
 style="display:none">
 </div>
 
@@ -1081,51 +948,35 @@ Student Services
 <div class="quick">
 
 <div class="card" data-page="news">
-
 <div class="icon">📰</div>
-
 <h3>Campus News</h3>
-
 <p class="muted">
 Latest student and campus updates.
 </p>
-
 </div>
 
 <div class="card" data-page="academics">
-
 <div class="icon">📚</div>
-
 <h3>Academics</h3>
-
 <p class="muted">
 Academic information and resources.
 </p>
-
 </div>
 
 <div class="card" data-page="events">
-
 <div class="icon">📅</div>
-
 <h3>Events</h3>
-
 <p class="muted">
 Upcoming student activities.
 </p>
-
 </div>
 
 <div class="card" data-page="sports">
-
 <div class="icon">⚽</div>
-
 <h3>Sports</h3>
-
 <p class="muted">
 Fixtures, scores and sports news.
 </p>
-
 </div>
 
 </div>
@@ -1135,15 +986,12 @@ Latest Updates
 </h2>
 
 <div id="homeNews">
-
 <div class="empty">
 Loading updates...
 </div>
-
 </div>
 
 </main>
-
 </section>
 
 
@@ -1163,41 +1011,31 @@ Latest campus news and announcements.
 
 <span class="search-icon">🔍</span>
 
-<input
-id="newsSearchInput"
+<input id="newsSearchInput"
 type="search"
 placeholder="Search campus news..."
 autocomplete="off">
 
-<button
-id="newsClearSearch"
+<button id="newsClearSearch"
 class="clear-search"
-type="button"
-aria-label="Clear search">
-
+type="button">
 ×
 </button>
 
 </div>
 
-<div
-id="newsSearchInfo"
+<div id="newsSearchInfo"
 class="search-info"
 style="display:none">
 </div>
 
-<div
-id="newsList"
-style="margin-top:10px">
-
+<div id="newsList" style="margin-top:10px">
 <div class="empty">
 Loading news...
 </div>
-
 </div>
 
 </main>
-
 </section>
 
 
@@ -1213,18 +1051,13 @@ Loading news...
 Fixtures, results and sports updates.
 </p>
 
-<div
-id="sportsList"
-style="margin-top:18px">
-
+<div id="sportsList" style="margin-top:18px">
 <div class="empty">
 Loading sports...
 </div>
-
 </div>
 
 </main>
-
 </section>
 
 
@@ -1240,57 +1073,36 @@ Loading sports...
 Receive important DeBryne Update notifications.
 </p>
 
-<div
-class="card"
-style="margin-top:18px">
+<div class="card" style="margin-top:18px">
 
 <h3>🔔 Notifications</h3>
 
 <p class="muted">
-
 Enable notifications to receive breaking news,
 academic announcements and important updates.
-
 </p>
 
-<button
-id="notifyBtn"
-type="button">
-
+<button id="notifyBtn" type="button">
 Enable Notifications
-
 </button>
 
-<div
-class="status"
-id="notifyStatus">
-
-Notifications are ready. Tap the button above to enable them.
-
+<div class="status" id="notifyStatus">
+Notifications are ready.
 </div>
 
-<div
-class="tokenBox"
-id="tokenBox">
+<div class="tokenBox" id="tokenBox">
 
 FCM token:
 
-<div
-id="tokenText"
-style="margin-top:7px">
-</div>
+<div id="tokenText" style="margin-top:7px"></div>
 
 </div>
 
-<div
-id="pushError"
-class="errorBox">
-</div>
+<div id="pushError" class="errorBox"></div>
 
 </div>
 
 </main>
-
 </section>
 
 
@@ -1306,47 +1118,38 @@ class="errorBox">
 Your DeBryne Update profile.
 </p>
 
-<div
-class="card"
+<div class="card"
 style="text-align:center;margin-top:18px">
 
 <div class="profile-icon">
 👤
 </div>
 
-<div
-id="profileName"
+<div id="profileName"
 class="profile-name">
-
 Student
-
 </div>
 
-<div
-id="profileEmail"
+<div id="profileEmail"
 class="profile-email">
 </div>
 
-<p
-id="profileJoined"
+<p id="profileJoined"
 class="muted"
 style="margin-top:12px">
 </p>
 
-<button
-id="logoutButton"
+<button id="logoutButton"
 class="logout-button"
 type="button">
-
 LOG OUT
-
 </button>
 
 </div>
 
 
 <!-- ==================================================
-     VIEWER RATING
+     RATING AND SATISFACTION
 ================================================== -->
 
 <div class="rating-card">
@@ -1358,155 +1161,89 @@ How would you rate your experience with DeBryne Update?
 Your feedback helps us improve.
 </p>
 
-<div
-id="starRating"
-class="star-rating">
+<div id="starRating" class="star-rating">
 
-<button
-type="button"
-data-rating="1">
-★
-</button>
-
-<button
-type="button"
-data-rating="2">
-★
-</button>
-
-<button
-type="button"
-data-rating="3">
-★
-</button>
-
-<button
-type="button"
-data-rating="4">
-★
-</button>
-
-<button
-type="button"
-data-rating="5">
-★
-</button>
+<button type="button" data-rating="1">★</button>
+<button type="button" data-rating="2">★</button>
+<button type="button" data-rating="3">★</button>
+<button type="button" data-rating="4">★</button>
+<button type="button" data-rating="5">★</button>
 
 </div>
 
-<div
-id="ratingValue"
-class="rating-value">
-
+<div id="ratingValue" class="rating-value">
 Tap a star to rate
-
 </div>
-
 
 <p class="rating-subtitle">
 How satisfied are you with DeBryne Update?
 </p>
 
-<div
-id="satisfactionOptions"
+<div id="satisfactionOptions"
 class="satisfaction-options">
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Very Satisfied">
-
 😊 Very Satisfied
-
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Satisfied">
-
 🙂 Satisfied
-
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Neutral">
-
 😐 Neutral
-
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Not Satisfied">
-
 🙁 Not Satisfied
-
 </div>
 
 </div>
 
-
-<textarea
-id="ratingOpinion"
+<textarea id="ratingOpinion"
 class="rating-opinion"
 placeholder="Tell us what you think about DeBryne Update..."></textarea>
 
-
-<button
-id="submitRating"
+<button id="submitRating"
 class="rating-submit"
 type="button">
-
 SUBMIT FEEDBACK
-
 </button>
 
-
-<div
-id="ratingStatus"
+<div id="ratingStatus"
 class="rating-status">
 </div>
 
-
 <div class="rating-summary">
 
-<div
-class="rating-score"
-id="overallRating">
-
+<div id="overallRating"
+class="rating-score">
 0.0/5
-
 </div>
 
-<div
-class="rating-stars-display"
-id="overallStars">
-
+<div id="overallStars"
+class="rating-stars-display">
 ☆☆☆☆☆
-
 </div>
 
-<div
-class="rating-count"
-id="ratingCount">
-
+<div id="ratingCount"
+class="rating-count">
 No ratings yet
-
 </div>
 
 </div>
 
-
-<div
-id="recentOpinions"
+<div id="recentOpinions"
 style="margin-top:15px;">
-
 </div>
 
 </div>
 
 </main>
-
 </section>
 
 
@@ -1522,18 +1259,13 @@ style="margin-top:15px;">
 Academic information and educational updates.
 </p>
 
-<div
-id="academicList"
-style="margin-top:18px">
-
+<div id="academicList" style="margin-top:18px">
 <div class="empty">
 Loading academic updates...
 </div>
-
 </div>
 
 </main>
-
 </section>
 
 
@@ -1549,70 +1281,43 @@ Loading academic updates...
 Upcoming student events and activities.
 </p>
 
-<div
-id="eventList"
-style="margin-top:18px">
-
+<div id="eventList" style="margin-top:18px">
 <div class="empty">
 Loading events...
 </div>
-
 </div>
 
 </main>
-
 </section>
 
 
-<!-- ==================================================
-     BOTTOM NAV
-================================================== -->
+<!-- NAV -->
 
 <nav class="bottom">
 
-<div
-class="nav active"
-data-page="home">
-
+<div class="nav active" data-page="home">
 <span>🏠</span>
 Home
-
 </div>
 
-<div
-class="nav"
-data-page="news">
-
+<div class="nav" data-page="news">
 <span>📰</span>
 News
-
 </div>
 
-<div
-class="nav"
-data-page="sports">
-
+<div class="nav" data-page="sports">
 <span>⚽</span>
 Sports
-
 </div>
 
-<div
-class="nav"
-data-page="alerts">
-
+<div class="nav" data-page="alerts">
 <span>🔔</span>
 Alerts
-
 </div>
 
-<div
-class="nav"
-data-page="profile">
-
+<div class="nav" data-page="profile">
 <span>👤</span>
 Profile
-
 </div>
 
 </nav>
@@ -1630,54 +1335,38 @@ Profile
 
 function openPage(page){
 
-document
-.querySelectorAll(".page")
+document.querySelectorAll(".page")
 .forEach(function(item){
-
 item.classList.remove("active");
-
 });
 
 const target =
-document.getElementById(
-page + "Page"
-);
+document.getElementById(page + "Page");
 
 if(target){
-
 target.classList.add("active");
-
 }
 
-document
-.querySelectorAll(".nav")
+document.querySelectorAll(".nav")
 .forEach(function(item){
-
 item.classList.remove("active");
-
 });
 
-document
-.querySelectorAll(
+document.querySelectorAll(
 '[data-page="' + page + '"]'
 )
 .forEach(function(item){
-
 item.classList.add("active");
-
 });
 
 window.scrollTo(0,0);
 
 }
 
-document
-.querySelectorAll("[data-page]")
+document.querySelectorAll("[data-page]")
 .forEach(function(item){
 
-item.addEventListener(
-"click",
-function(){
+item.addEventListener("click",function(){
 
 openPage(
 this.getAttribute("data-page")
@@ -1769,14 +1458,14 @@ const PUSH_SERVER_URL =
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
 
 
-let app;
-let db;
-let auth;
-let messaging;
+let app = null;
+let db = null;
+let auth = null;
+let messaging = null;
 
 
 /* ==================================================
-   SPLASH CONTROL
+   SPLASH
 ================================================== */
 
 const appSplash =
@@ -1785,18 +1474,13 @@ document.getElementById("appSplash");
 const splashStatus =
 document.getElementById("splashStatus");
 
-
 function updateSplashStatus(message){
 
 if(splashStatus){
-
-splashStatus.textContent =
-message;
-
+splashStatus.textContent = message;
 }
 
 }
-
 
 function hideSplash(){
 
@@ -1808,43 +1492,29 @@ appSplash.classList.add("hide");
 
 setTimeout(function(){
 
-appSplash.style.display =
-"none";
+appSplash.style.display = "none";
 
 },500);
 
 }
 
-
-const splashStartTime =
-Date.now();
-
+const splashStartTime = Date.now();
 
 function finishSplash(){
 
 const elapsed =
-Date.now() -
-splashStartTime;
-
-const minimumTime =
-1200;
+Date.now() - splashStartTime;
 
 const remaining =
-Math.max(
-0,
-minimumTime - elapsed
-);
+Math.max(0,1200-elapsed);
 
-setTimeout(
-hideSplash,
-remaining
-);
+setTimeout(hideSplash,remaining);
 
 }
 
 
 /* ==================================================
-   ELEMENTS
+   AUTH ELEMENTS
 ================================================== */
 
 const authScreen =
@@ -1863,101 +1533,58 @@ const authStatus =
 document.getElementById("authStatus");
 
 
-/* ==================================================
-   AUTH STATUS
-================================================== */
+function showAuthStatus(message,type){
 
-function showAuthStatus(
-message,
-type
-){
+authStatus.textContent = message;
 
-authStatus.textContent =
-message;
-
-authStatus.className =
-"auth-status";
+authStatus.className = "auth-status";
 
 if(type === "success"){
-
-authStatus.classList.add(
-"auth-success"
-);
-
+authStatus.classList.add("auth-success");
 }
-
 else if(type === "error"){
-
-authStatus.classList.add(
-"auth-error"
-);
-
+authStatus.classList.add("auth-error");
 }
-
 else{
-
-authStatus.classList.add(
-"auth-info"
-);
-
+authStatus.classList.add("auth-info");
 }
 
-authStatus.style.display =
-"block";
+authStatus.style.display = "block";
 
 }
 
 
 /* ==================================================
-   REGISTER / LOGIN SWITCH
+   LOGIN / REGISTER SWITCH
 ================================================== */
 
 function showRegister(){
 
-registerForm.style.display =
-"block";
-
-loginForm.style.display =
-"none";
-
-authStatus.style.display =
-"none";
+registerForm.style.display = "block";
+loginForm.style.display = "none";
+authStatus.style.display = "none";
 
 }
-
 
 function showLogin(){
 
-registerForm.style.display =
-"none";
-
-loginForm.style.display =
-"block";
-
-authStatus.style.display =
-"none";
+registerForm.style.display = "none";
+loginForm.style.display = "block";
+authStatus.style.display = "none";
 
 }
 
-
 document
 .getElementById("showLoginButton")
-.addEventListener(
-"click",
-showLogin
-);
-
+.addEventListener("click",showLogin);
 
 document
 .getElementById("showRegisterButton")
-.addEventListener(
-"click",
-showRegister
-);
+.addEventListener("click",showRegister);
 
 
 /* ==================================================
-   INITIALIZE FIREBASE
+   FIREBASE INITIALIZATION
 ================================================== */
 
 try{
@@ -1966,17 +1593,40 @@ updateSplashStatus(
 "Connecting to DeBryne Update..."
 );
 
-app =
-initializeApp(firebaseConfig);
+app = initializeApp(firebaseConfig);
 
-db =
-getDatabase(app);
+db = getDatabase(app);
 
-auth =
-getAuth(app);
+auth = getAuth(app);
 
-messaging =
-getMessaging(app);
+
+/*
+   IMPORTANT FIX:
+
+   Firebase Messaging is optional.
+   If Messaging fails, the main application
+   will STILL open normally.
+*/
+
+try{
+
+messaging = getMessaging(app);
+
+console.log(
+"Firebase Messaging initialized."
+);
+
+}
+catch(messagingError){
+
+console.warn(
+"Firebase Messaging unavailable:",
+messagingError
+);
+
+messaging = null;
+
+}
 
 updateSplashStatus(
 "Firebase connected..."
@@ -1987,7 +1637,6 @@ console.log(
 );
 
 }
-
 catch(error){
 
 console.error(
@@ -2016,36 +1665,26 @@ finishSplash();
 
 document
 .getElementById("registerButton")
-.addEventListener(
-"click",
-async function(){
+.addEventListener("click",async function(){
 
 const name =
-document
-.getElementById("registerName")
-.value
-.trim();
+document.getElementById("registerName")
+.value.trim();
 
 const email =
-document
-.getElementById("registerEmail")
-.value
-.trim();
+document.getElementById("registerEmail")
+.value.trim();
 
 const password =
-document
-.getElementById("registerPassword")
+document.getElementById("registerPassword")
 .value;
 
 const confirmPassword =
-document
-.getElementById("registerConfirm")
+document.getElementById("registerConfirm")
 .value;
 
 const button =
-document.getElementById(
-"registerButton"
-);
+document.getElementById("registerButton");
 
 
 if(!name){
@@ -2092,11 +1731,8 @@ return;
 
 }
 
-button.disabled =
-true;
-
-button.textContent =
-"CREATING ACCOUNT...";
+button.disabled = true;
+button.textContent = "CREATING ACCOUNT...";
 
 
 try{
@@ -2124,26 +1760,18 @@ displayName:name
 );
 
 await set(
-ref(
-db,
-"users/" + user.uid
-),
+ref(db,"users/" + user.uid),
 {
 
-uid:
-user.uid,
+uid:user.uid,
 
-fullName:
-name,
+fullName:name,
 
-email:
-user.email,
+email:user.email,
 
-createdAt:
-Date.now(),
+createdAt:Date.now(),
 
-status:
-"active"
+status:"active"
 
 }
 );
@@ -2153,18 +1781,15 @@ showAuthStatus(
 "success"
 );
 
-document
-.getElementById("registerPassword")
-.value = "";
+document.getElementById(
+"registerPassword"
+).value = "";
 
-document
-.getElementById("registerConfirm")
-.value = "";
-
-await user.reload();
+document.getElementById(
+"registerConfirm"
+).value = "";
 
 }
-
 catch(error){
 
 console.error(
@@ -2175,40 +1800,27 @@ error
 let message =
 "Registration failed.";
 
-if(
-error.code ===
-"auth/email-already-in-use"
-){
+if(error.code === "auth/email-already-in-use"){
 
 message =
 "This email is already registered. Please login instead.";
 
 }
-
-else if(
-error.code ===
-"auth/invalid-email"
-){
+else if(error.code === "auth/invalid-email"){
 
 message =
 "Please enter a valid email address.";
 
 }
-
-else if(
-error.code ===
-"auth/weak-password"
-){
+else if(error.code === "auth/weak-password"){
 
 message =
 "Password is too weak. Use at least 6 characters.";
 
 }
-
 else{
 
-message =
-error.message;
+message = error.message;
 
 }
 
@@ -2217,16 +1829,12 @@ showAuthStatus(
 "error"
 );
 
-button.disabled =
-false;
-
-button.textContent =
-"CREATE ACCOUNT";
+button.disabled = false;
+button.textContent = "CREATE ACCOUNT";
 
 }
 
-}
-);
+});
 
 
 /* ==================================================
@@ -2235,25 +1843,18 @@ button.textContent =
 
 document
 .getElementById("loginButton")
-.addEventListener(
-"click",
-async function(){
+.addEventListener("click",async function(){
 
 const email =
-document
-.getElementById("loginEmail")
-.value
-.trim();
+document.getElementById("loginEmail")
+.value.trim();
 
 const password =
-document
-.getElementById("loginPassword")
+document.getElementById("loginPassword")
 .value;
 
 const button =
-document.getElementById(
-"loginButton"
-);
+document.getElementById("loginButton");
 
 
 if(!email){
@@ -2278,11 +1879,8 @@ return;
 
 }
 
-button.disabled =
-true;
-
-button.textContent =
-"LOGGING IN...";
+button.disabled = true;
+button.textContent = "LOGGING IN...";
 
 
 try{
@@ -2303,14 +1901,10 @@ showAuthStatus(
 "success"
 );
 
-button.disabled =
-false;
-
-button.textContent =
-"LOGIN";
+button.disabled = false;
+button.textContent = "LOGIN";
 
 }
-
 catch(error){
 
 console.error(
@@ -2321,46 +1915,30 @@ error
 let message =
 "Login failed.";
 
-if(
-error.code ===
-"auth/invalid-credential"
-){
+if(error.code === "auth/invalid-credential"){
 
 message =
 "Incorrect email or password.";
 
 }
-
-else if(
-error.code ===
-"auth/user-not-found"
-){
+else if(error.code === "auth/user-not-found"){
 
 message =
 "No account was found with this email.";
 
 }
-
-else if(
-error.code ===
-"auth/wrong-password"
-){
+else if(error.code === "auth/wrong-password"){
 
 message =
 "Incorrect password.";
 
 }
-
-else if(
-error.code ===
-"auth/invalid-email"
-){
+else if(error.code === "auth/invalid-email"){
 
 message =
 "Please enter a valid email address.";
 
 }
-
 else{
 
 message =
@@ -2373,56 +1951,31 @@ showAuthStatus(
 "error"
 );
 
-button.disabled =
-false;
-
-button.textContent =
-"LOGIN";
+button.disabled = false;
+button.textContent = "LOGIN";
 
 }
 
-}
-);
+});
 
 
 /* ==================================================
-   RECOVER OLD USER NAME
+   RECOVER USER NAME
 ================================================== */
 
-async function recoverUserName(
-user,
-profile
-){
+async function recoverUserName(user,profile){
 
 let currentName = "";
 
-if(
-profile &&
-profile.fullName
-){
-
-currentName =
-String(
-profile.fullName
-).trim();
-
+if(profile && profile.fullName){
+currentName = String(profile.fullName).trim();
 }
-
-else if(
-user.displayName
-){
-
-currentName =
-String(
-user.displayName
-).trim();
-
+else if(user.displayName){
+currentName = String(user.displayName).trim();
 }
 
 if(currentName){
-
 return currentName;
-
 }
 
 let enteredName = "";
@@ -2436,24 +1989,11 @@ window.prompt(
 "Please enter your full name:"
 );
 
-if(
-enteredName === null
-){
-
+if(enteredName === null){
 return "Student";
-
 }
 
-enteredName =
-enteredName.trim();
-
-if(!enteredName){
-
-window.alert(
-"Please enter your full name."
-);
-
-}
+enteredName = enteredName.trim();
 
 }
 
@@ -2462,8 +2002,7 @@ try{
 await updateProfile(
 user,
 {
-displayName:
-enteredName
+displayName:enteredName
 }
 );
 
@@ -2471,7 +2010,7 @@ enteredName
 catch(error){
 
 console.error(
-"Could not update Firebase Auth name:",
+"Could not update profile:",
 error
 );
 
@@ -2479,34 +2018,25 @@ error
 
 try{
 
-const existingData =
-profile || {};
+const existingData = profile || {};
 
 await set(
-ref(
-db,
-"users/" + user.uid
-),
+ref(db,"users/" + user.uid),
 {
 
 ...existingData,
 
-uid:
-user.uid,
+uid:user.uid,
 
-fullName:
-enteredName,
+fullName:enteredName,
 
-email:
-user.email || "",
+email:user.email || "",
 
 createdAt:
-existingData.createdAt ||
-Date.now(),
+existingData.createdAt || Date.now(),
 
 status:
-existingData.status ||
-"active"
+existingData.status || "active"
 
 }
 );
@@ -2515,7 +2045,7 @@ existingData.status ||
 catch(error){
 
 console.error(
-"Could not save recovered name to database:",
+"Could not save name:",
 error
 );
 
@@ -2540,11 +2070,8 @@ updateSplashStatus(
 "Ready. Please login or create an account."
 );
 
-authScreen.style.display =
-"flex";
-
-appContent.style.display =
-"none";
+authScreen.style.display = "flex";
+appContent.style.display = "none";
 
 finishSplash();
 
@@ -2552,23 +2079,85 @@ return;
 
 }
 
+
+/*
+   IMPORTANT:
+
+   The application is shown BEFORE optional
+   rating/profile loading completes.
+   This prevents the viewer from being
+   trapped on the splash screen.
+*/
+
+authScreen.style.display = "none";
+appContent.style.display = "block";
+
 updateSplashStatus(
-"Loading your DeBryne Update profile..."
+"Loading your profile..."
 );
 
-authScreen.style.display =
-"none";
-
-appContent.style.display =
-"block";
+try{
 
 await loadUserProfile(user);
 
-/* LOAD VIEWER FEEDBACK */
+}
+catch(error){
+
+console.error(
+"Profile loading failed:",
+error
+);
+
+document.getElementById(
+"welcomeName"
+).textContent =
+"Welcome 👋";
+
+document.getElementById(
+"profileName"
+).textContent =
+user.displayName || "Student";
+
+document.getElementById(
+"profileEmail"
+).textContent =
+user.email || "";
+
+}
+
+
+/*
+   Rating loading is OPTIONAL.
+   It can never block the application.
+*/
+
+try{
 
 await loadMyRating(user.uid);
 
+}
+catch(error){
+
+console.error(
+"Rating loading failed:",
+error
+);
+
+}
+
+try{
+
 await loadRatingSummary();
+
+}
+catch(error){
+
+console.error(
+"Rating summary loading failed:",
+error
+);
+
+}
 
 updateSplashStatus(
 "Loading latest updates..."
@@ -2581,12 +2170,10 @@ finishSplash();
 
 
 /* ==================================================
-   LOAD USER PROFILE
+   LOAD PROFILE
 ================================================== */
 
-async function loadUserProfile(
-user
-){
+async function loadUserProfile(user){
 
 let profile = null;
 
@@ -2596,35 +2183,24 @@ user.displayName || "";
 try{
 
 const snapshot =
-await new Promise(
-function(resolve,reject){
+await new Promise(function(resolve,reject){
 
 onValue(
-ref(
-db,
-"users/" + user.uid
-),
+ref(db,"users/" + user.uid),
 resolve,
 {
 onlyOnce:true
 }
 );
 
-}
-);
+});
 
-profile =
-snapshot.val();
+profile = snapshot.val();
 
-if(
-profile &&
-profile.fullName
-){
+if(profile && profile.fullName){
 
 name =
-String(
-profile.fullName
-).trim();
+String(profile.fullName).trim();
 
 }
 
@@ -2650,64 +2226,42 @@ profile
 
 if(!name){
 
-name =
-"Student";
+name = "Student";
 
 }
 
-document
-.getElementById("welcomeName")
-.textContent =
-"Welcome, " +
-name +
-" 👋";
+document.getElementById(
+"welcomeName"
+).textContent =
+"Welcome, " + name + " 👋";
 
-document
-.getElementById("profileName")
-.textContent =
+document.getElementById(
+"profileName"
+).textContent =
 name;
 
-document
-.getElementById("profileEmail")
-.textContent =
+document.getElementById(
+"profileEmail"
+).textContent =
 user.email || "";
 
-if(
-profile &&
-profile.createdAt
-){
+if(profile && profile.createdAt){
 
-document
-.getElementById("profileJoined")
-.textContent =
+document.getElementById(
+"profileJoined"
+).textContent =
 "Member since: " +
 new Date(
 profile.createdAt
-)
-.toLocaleDateString();
+).toLocaleDateString();
 
 }
-
 else{
 
-document
-.getElementById("profileJoined")
-.textContent =
+document.getElementById(
+"profileJoined"
+).textContent =
 "DeBryne Update member";
-
-}
-
-try{
-
-await user.reload();
-
-}
-catch(error){
-
-console.log(
-"User reload skipped:",
-error
-);
 
 }
 
@@ -2720,9 +2274,7 @@ error
 
 document
 .getElementById("logoutButton")
-.addEventListener(
-"click",
-async function(){
+.addEventListener("click",async function(){
 
 try{
 
@@ -2738,63 +2290,34 @@ error
 
 }
 
-}
-);
+});
 
 
 /* ==================================================
    ESCAPE HTML
 ================================================== */
 
-function escapeHTML(
-value
-){
+function escapeHTML(value){
 
-return String(
-value || ""
-)
+return String(value || "")
 
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
 /* ==================================================
-   CREATE NEWS CARD
+   NEWS CARD
 ================================================== */
 
-function createNewsCard(
-item
-){
+function createNewsCard(item){
 
 const imageUrl =
-String(
-item.imageUrl || ""
-)
-.trim();
+String(item.imageUrl || "").trim();
 
 let imageHTML = "";
 
@@ -2806,8 +2329,7 @@ imageHTML = `
 class="news-image"
 src="${escapeHTML(imageUrl)}"
 alt="${escapeHTML(
-item.title ||
-"News picture"
+item.title || "News picture"
 )}"
 loading="lazy"
 onerror="this.style.display='none';">
@@ -2821,36 +2343,26 @@ return `
 <article class="news">
 
 <div class="label">
-
 ${escapeHTML(
-item.category ||
-"DEBRYNE UPDATE"
+item.category || "DEBRYNE UPDATE"
 )}
-
 </div>
 
 <h3>
-
 ${escapeHTML(
-item.title ||
-"Untitled"
+item.title || "Untitled"
 )}
-
 </h3>
 
 ${imageHTML}
 
 <p class="muted">
-
 ${escapeHTML(
-item.content ||
-""
+item.content || ""
 )}
-
 </p>
 
 <div class="time">
-
 ${
 item.createdAt
 ?
@@ -2860,7 +2372,6 @@ item.createdAt
 :
 ""
 }
-
 </div>
 
 </article>
@@ -2871,11 +2382,10 @@ item.createdAt
 
 
 /* ==================================================
-   SEARCH ENGINE
+   SEARCH
 ================================================== */
 
 let allNewsItems = [];
-
 
 function searchNews(query){
 
@@ -2885,18 +2395,13 @@ String(query || "")
 .toLowerCase();
 
 if(!query){
-
 return allNewsItems;
-
 }
 
 const words =
-query
-.split(/\s+/)
-.filter(Boolean);
+query.split(/\s+/).filter(Boolean);
 
-return allNewsItems.filter(
-function(item){
+return allNewsItems.filter(function(item){
 
 const searchableText = (
 
@@ -2906,11 +2411,9 @@ String(item.content || "") +
 " " +
 String(item.category || "")
 
-)
-.toLowerCase();
+).toLowerCase();
 
-return words.every(
-function(word){
+return words.every(function(word){
 
 return searchableText.includes(word);
 
@@ -2930,54 +2433,37 @@ clearButton
 ){
 
 if(!container){
-
 return;
-
 }
 
 const cleanQuery =
 String(query || "").trim();
 
-
 if(!cleanQuery){
 
-container.style.display =
-"none";
+container.style.display = "none";
 
 if(info){
-
-info.style.display =
-"none";
-
+info.style.display = "none";
 }
 
 if(clearButton){
-
-clearButton.style.display =
-"none";
-
+clearButton.style.display = "none";
 }
 
 return;
 
 }
 
-
-container.style.display =
-"block";
+container.style.display = "block";
 
 if(clearButton){
-
-clearButton.style.display =
-"flex";
-
+clearButton.style.display = "flex";
 }
-
 
 if(info){
 
-info.style.display =
-"block";
+info.style.display = "block";
 
 info.textContent =
 results.length +
@@ -2988,17 +2474,15 @@ results.length === 1
 :
 " results found"
 ) +
-" for \"" +
+' for "' +
 cleanQuery +
-"\"";
+'"';
 
 }
-
 
 if(!results.length){
 
 container.innerHTML =
-
 '<div class="empty">' +
 '🔍 No results found for "' +
 escapeHTML(cleanQuery) +
@@ -3010,11 +2494,8 @@ return;
 
 }
 
-
 container.innerHTML =
-results
-.map(createNewsCard)
-.join("");
+results.map(createNewsCard).join("");
 
 }
 
@@ -3027,38 +2508,26 @@ clearId
 ){
 
 const input =
-document.getElementById(
-inputId
-);
+document.getElementById(inputId);
 
 const container =
-document.getElementById(
-containerId
-);
+document.getElementById(containerId);
 
 const info =
-document.getElementById(
-infoId
-);
+document.getElementById(infoId);
 
 const clear =
-document.getElementById(
-clearId
-);
+document.getElementById(clearId);
 
 if(!input){
-
 return;
-
 }
-
 
 input.addEventListener(
 "input",
 function(){
 
-const query =
-input.value;
+const query = input.value;
 
 const results =
 searchNews(query);
@@ -3073,6 +2542,7 @@ clear
 
 });
 
+if(clear){
 
 clear.addEventListener(
 "click",
@@ -3094,10 +2564,8 @@ input.focus();
 
 }
 
+}
 
-/* ==================================================
-   SETUP SEARCH
-================================================== */
 
 setupSearch(
 "homeSearchInput",
@@ -3121,40 +2589,26 @@ setupSearch(
 if(db){
 
 onValue(
-ref(
-db,
-"news"
-),
+ref(db,"news"),
 
 function(snapshot){
 
-const data =
-snapshot.val();
+const data = snapshot.val();
 
 const home =
-document.getElementById(
-"homeNews"
-);
+document.getElementById("homeNews");
 
 const news =
-document.getElementById(
-"newsList"
-);
+document.getElementById("newsList");
 
 const sports =
-document.getElementById(
-"sportsList"
-);
+document.getElementById("sportsList");
 
 const academic =
-document.getElementById(
-"academicList"
-);
+document.getElementById("academicList");
 
 const events =
-document.getElementById(
-"eventList"
-);
+document.getElementById("eventList");
 
 
 if(!data){
@@ -3166,20 +2620,11 @@ const message =
 'No updates published yet.' +
 '</div>';
 
-home.innerHTML =
-message;
-
-news.innerHTML =
-message;
-
-sports.innerHTML =
-message;
-
-academic.innerHTML =
-message;
-
-events.innerHTML =
-message;
+home.innerHTML = message;
+news.innerHTML = message;
+sports.innerHTML = message;
+academic.innerHTML = message;
+events.innerHTML = message;
 
 return;
 
@@ -3187,54 +2632,41 @@ return;
 
 
 allNewsItems =
-
 Object.keys(data)
-
 .map(function(key){
 
 return {
-
 id:key,
-
 ...data[key]
-
 };
 
 })
-
 .sort(function(a,b){
 
-return Number(
-b.createdAt || 0
-)
--
-Number(
-a.createdAt || 0
-);
+return Number(b.createdAt || 0) -
+Number(a.createdAt || 0);
 
 });
 
 
 home.innerHTML =
-
 allNewsItems
 .slice(0,5)
 .map(createNewsCard)
 .join("");
 
 
-const currentNewsQuery =
-document
-.getElementById("newsSearchInput")
-.value
-.trim();
+const newsQuery =
+document.getElementById(
+"newsSearchInput"
+).value.trim();
 
-if(currentNewsQuery){
+if(newsQuery){
 
 renderSearchResults(
-currentNewsQuery,
-searchNews(currentNewsQuery),
-document.getElementById("newsList"),
+newsQuery,
+searchNews(newsQuery),
+news,
 document.getElementById("newsSearchInfo"),
 document.getElementById("newsClearSearch")
 );
@@ -3243,7 +2675,6 @@ document.getElementById("newsClearSearch")
 else{
 
 news.innerHTML =
-
 allNewsItems
 .map(createNewsCard)
 .join("");
@@ -3251,17 +2682,16 @@ allNewsItems
 }
 
 
-const currentHomeQuery =
-document
-.getElementById("homeSearchInput")
-.value
-.trim();
+const homeQuery =
+document.getElementById(
+"homeSearchInput"
+).value.trim();
 
-if(currentHomeQuery){
+if(homeQuery){
 
 renderSearchResults(
-currentHomeQuery,
-searchNews(currentHomeQuery),
+homeQuery,
+searchNews(homeQuery),
 document.getElementById("homeSearchResults"),
 document.getElementById("homeSearchInfo"),
 document.getElementById("homeClearSearch")
@@ -3277,9 +2707,7 @@ emptyMessage
 ){
 
 const result =
-
-allNewsItems.filter(
-function(item){
+allNewsItems.filter(function(item){
 
 return String(
 item.category || ""
@@ -3289,22 +2717,15 @@ item.category || ""
 
 });
 
-
 const element =
-document.getElementById(
-elementId
-);
-
+document.getElementById(elementId);
 
 if(result.length){
 
 element.innerHTML =
-result
-.map(createNewsCard)
-.join("");
+result.map(createNewsCard).join("");
 
 }
-
 else{
 
 element.innerHTML =
@@ -3323,13 +2744,11 @@ filterNews(
 "No sports updates yet."
 );
 
-
 filterNews(
 "academic",
 "academicList",
 "No academic updates yet."
 );
-
 
 filterNews(
 "event",
@@ -3353,13 +2772,23 @@ const message =
 
 document.getElementById(
 "homeNews"
-).innerHTML =
-message;
+).innerHTML = message;
 
 document.getElementById(
 "newsList"
-).innerHTML =
-message;
+).innerHTML = message;
+
+document.getElementById(
+"sportsList"
+).innerHTML = message;
+
+document.getElementById(
+"academicList"
+).innerHTML = message;
+
+document.getElementById(
+"eventList"
+).innerHTML = message;
 
 }
 
@@ -3369,7 +2798,7 @@ message;
 
 
 /* ==================================================
-   VIEWER RATING & SATISFACTION SYSTEM
+   RATING SYSTEM
 ================================================== */
 
 let selectedRating = 0;
@@ -3381,9 +2810,7 @@ document.querySelectorAll(
 );
 
 const ratingValue =
-document.getElementById(
-"ratingValue"
-);
+document.getElementById("ratingValue");
 
 const satisfactionButtons =
 document.querySelectorAll(
@@ -3391,58 +2818,36 @@ document.querySelectorAll(
 );
 
 const ratingOpinion =
-document.getElementById(
-"ratingOpinion"
-);
+document.getElementById("ratingOpinion");
 
 const submitRating =
-document.getElementById(
-"submitRating"
-);
+document.getElementById("submitRating");
 
 const ratingStatus =
-document.getElementById(
-"ratingStatus"
-);
+document.getElementById("ratingStatus");
 
 const overallRating =
-document.getElementById(
-"overallRating"
-);
+document.getElementById("overallRating");
 
 const overallStars =
-document.getElementById(
-"overallStars"
-);
+document.getElementById("overallStars");
 
 const ratingCount =
-document.getElementById(
-"ratingCount"
-);
+document.getElementById("ratingCount");
 
 const recentOpinions =
-document.getElementById(
-"recentOpinions"
-);
+document.getElementById("recentOpinions");
 
 
-/* SELECT STARS */
+function setRatingStars(rating){
 
-function setRatingStars(
-rating
-){
+selectedRating = Number(rating);
 
-selectedRating =
-Number(rating);
-
-starButtons.forEach(
-function(star){
+starButtons.forEach(function(star){
 
 const value =
 Number(
-star.getAttribute(
-"data-rating"
-)
+star.getAttribute("data-rating")
 );
 
 star.classList.toggle(
@@ -3475,8 +2880,7 @@ ratingValue.textContent =
 }
 
 
-starButtons.forEach(
-function(star){
+starButtons.forEach(function(star){
 
 star.addEventListener(
 "click",
@@ -3484,9 +2888,7 @@ function(){
 
 setRatingStars(
 Number(
-this.getAttribute(
-"data-rating"
-)
+this.getAttribute("data-rating")
 )
 );
 
@@ -3494,8 +2896,6 @@ this.getAttribute(
 
 });
 
-
-/* SELECT SATISFACTION */
 
 satisfactionButtons.forEach(
 function(option){
@@ -3507,15 +2907,11 @@ function(){
 satisfactionButtons.forEach(
 function(item){
 
-item.classList.remove(
-"selected"
-);
+item.classList.remove("selected");
 
 });
 
-this.classList.add(
-"selected"
-);
+this.classList.add("selected");
 
 selectedSatisfaction =
 this.getAttribute(
@@ -3527,15 +2923,12 @@ this.getAttribute(
 });
 
 
-/* RATING STATUS */
-
 function showRatingStatus(
 message,
 type
 ){
 
-ratingStatus.textContent =
-message;
+ratingStatus.textContent = message;
 
 ratingStatus.className =
 "rating-status";
@@ -3555,13 +2948,14 @@ ratingStatus.classList.add(
 
 }
 
-ratingStatus.style.display =
-"block";
+ratingStatus.style.display = "block";
 
 }
 
 
-/* SUBMIT RATING */
+/* ==================================================
+   SUBMIT RATING
+================================================== */
 
 async function submitViewerRating(){
 
@@ -3569,6 +2963,17 @@ if(!auth || !auth.currentUser){
 
 showRatingStatus(
 "Please login before submitting your feedback.",
+"error"
+);
+
+return;
+
+}
+
+if(!db){
+
+showRatingStatus(
+"Database is not available right now.",
 "error"
 );
 
@@ -3605,13 +3010,13 @@ auth.currentUser;
 const opinion =
 ratingOpinion.value.trim();
 
+submitRating.disabled = true;
+submitRating.textContent = "SUBMITTING...";
 
-submitRating.disabled =
-true;
 
-submitRating.textContent =
-"SUBMITTING...";
+try{
 
+let existing = {};
 
 try{
 
@@ -3630,17 +3035,25 @@ onlyOnce:true
 }
 );
 
+});
+
+existing =
+existingSnapshot.val() || {};
+
 }
+catch(error){
+
+console.warn(
+"Could not read previous rating:",
+error
 );
 
-const existing =
-existingSnapshot.val() || {};
+}
 
 
 const ratingData = {
 
-userId:
-user.uid,
+userId:user.uid,
 
 name:
 user.displayName ||
@@ -3650,14 +3063,12 @@ email:
 user.email ||
 "",
 
-rating:
-selectedRating,
+rating:selectedRating,
 
 satisfaction:
 selectedSatisfaction,
 
-opinion:
-opinion,
+opinion:opinion,
 
 createdAt:
 existing.createdAt ||
@@ -3670,10 +3081,7 @@ Date.now()
 
 
 await set(
-ref(
-db,
-"ratings/" + user.uid
-),
+ref(db,"ratings/" + user.uid),
 ratingData
 );
 
@@ -3687,14 +3095,35 @@ submitRating.textContent =
 "UPDATE FEEDBACK";
 
 
-await loadMyRating(
-user.uid
+try{
+
+await loadMyRating(user.uid);
+
+}
+catch(error){
+
+console.error(
+"Reload rating error:",
+error
 );
+
+}
+
+try{
 
 await loadRatingSummary();
 
 }
+catch(error){
 
+console.error(
+"Reload rating summary error:",
+error
+);
+
+}
+
+}
 catch(error){
 
 console.error(
@@ -3712,13 +3141,10 @@ submitRating.textContent =
 
 }
 
-submitRating.disabled =
-false;
+submitRating.disabled = false;
 
 }
 
-
-/* SUBMIT BUTTON */
 
 submitRating.addEventListener(
 "click",
@@ -3726,29 +3152,22 @@ submitViewerRating
 );
 
 
-/* LOAD CURRENT USER RATING */
+/* ==================================================
+   LOAD MY RATING
+================================================== */
 
-async function loadMyRating(
-userId
-){
+async function loadMyRating(userId){
 
 if(!db || !userId){
-
 return;
-
 }
-
-try{
 
 const snapshot =
 await new Promise(
 function(resolve,reject){
 
 onValue(
-ref(
-db,
-"ratings/" + userId
-),
+ref(db,"ratings/" + userId),
 resolve,
 {
 onlyOnce:true
@@ -3764,7 +3183,6 @@ snapshot.val();
 if(!data){
 
 selectedRating = 0;
-
 selectedSatisfaction = "";
 
 ratingOpinion.value = "";
@@ -3774,9 +3192,7 @@ setRatingStars(0);
 satisfactionButtons.forEach(
 function(option){
 
-option.classList.remove(
-"selected"
-);
+option.classList.remove("selected");
 
 });
 
@@ -3800,9 +3216,7 @@ Number(data.rating)
 if(data.satisfaction){
 
 selectedSatisfaction =
-String(
-data.satisfaction
-);
+String(data.satisfaction);
 
 satisfactionButtons.forEach(
 function(option){
@@ -3811,8 +3225,7 @@ option.classList.toggle(
 "selected",
 option.getAttribute(
 "data-satisfaction"
-) ===
-selectedSatisfaction
+) === selectedSatisfaction
 );
 
 });
@@ -3820,59 +3233,33 @@ selectedSatisfaction
 }
 
 
-if(data.opinion){
-
 ratingOpinion.value =
-String(
-data.opinion
-);
-
-}
-else{
-
-ratingOpinion.value = "";
-
-}
-
+data.opinion ?
+String(data.opinion) :
+"";
 
 submitRating.textContent =
 "UPDATE FEEDBACK";
 
 }
 
-catch(error){
 
-console.error(
-"Could not load user rating:",
-error
-);
-
-}
-
-}
-
-
-/* LOAD OVERALL RATING */
+/* ==================================================
+   LOAD RATING SUMMARY
+================================================== */
 
 async function loadRatingSummary(){
 
 if(!db){
-
 return;
-
 }
-
-try{
 
 const snapshot =
 await new Promise(
 function(resolve,reject){
 
 onValue(
-ref(
-db,
-"ratings"
-),
+ref(db,"ratings"),
 resolve,
 {
 onlyOnce:true
@@ -3907,8 +3294,7 @@ return;
 
 const ratings =
 Object.values(data)
-.filter(
-function(item){
+.filter(function(item){
 
 return item &&
 Number(item.rating) >= 1 &&
@@ -3937,8 +3323,7 @@ const total =
 ratings.reduce(
 function(sum,item){
 
-return sum +
-Number(item.rating);
+return sum + Number(item.rating);
 
 },
 0
@@ -3946,27 +3331,18 @@ Number(item.rating);
 
 
 const average =
-total /
-ratings.length;
-
+total / ratings.length;
 
 overallRating.textContent =
-average.toFixed(1) +
-"/5";
+average.toFixed(1) + "/5";
 
 
 const rounded =
 Math.round(average);
 
-
 overallStars.textContent =
-"★".repeat(
-rounded
-) +
-"☆".repeat(
-5-rounded
-);
-
+"★".repeat(rounded) +
+"☆".repeat(5-rounded);
 
 ratingCount.textContent =
 ratings.length +
@@ -3979,34 +3355,24 @@ ratings.length === 1
 );
 
 
-/* ==================================================
-   RECENT VIEWER OPINIONS
-================================================== */
+/* RECENT OPINIONS */
 
 const opinions =
 ratings
-.filter(
-function(item){
+.filter(function(item){
 
 return item.opinion &&
-String(
-item.opinion
-).trim();
+String(item.opinion).trim();
 
 })
-.sort(
-function(a,b){
+.sort(function(a,b){
 
 return Number(
-b.updatedAt ||
-b.createdAt ||
-0
+b.updatedAt || b.createdAt || 0
 )
 -
 Number(
-a.updatedAt ||
-a.createdAt ||
-0
+a.updatedAt || a.createdAt || 0
 );
 
 })
@@ -4019,21 +3385,16 @@ recentOpinions.innerHTML =
 
 "<h4 style='font-size:16px;margin-bottom:9px;color:#111827;'>💬 Viewer Opinions</h4>" +
 
-opinions
-.map(
-function(item){
+opinions.map(function(item){
 
 const stars =
 Math.max(
 1,
 Math.min(
 5,
-Number(
-item.rating
-)
+Number(item.rating)
 )
 );
-
 
 return `
 
@@ -4041,8 +3402,7 @@ return `
 
 <strong>
 ${escapeHTML(
-item.name ||
-"Anonymous Viewer"
+item.name || "Anonymous Viewer"
 )}
 </strong>
 
@@ -4054,34 +3414,21 @@ ${"☆".repeat(5-stars)}
 </div>
 
 <p>
-${escapeHTML(
-item.opinion
-)}
+${escapeHTML(item.opinion)}
 </p>
 
 </div>
 
 `;
 
-})
-.join("");
+}).join("");
 
 }
-
 else{
 
 recentOpinions.innerHTML = "";
 
 }
-
-}
-
-catch(error){
-
-console.error(
-"Could not load rating summary:",
-error
-);
 
 }
 
@@ -4091,49 +3438,33 @@ error
 ================================================== */
 
 const notifyBtn =
-document.getElementById(
-"notifyBtn"
-);
+document.getElementById("notifyBtn");
 
 const notifyStatus =
-document.getElementById(
-"notifyStatus"
-);
+document.getElementById("notifyStatus");
 
 const tokenBox =
-document.getElementById(
-"tokenBox"
-);
+document.getElementById("tokenBox");
 
 const tokenText =
-document.getElementById(
-"tokenText"
-);
+document.getElementById("tokenText");
 
 const pushError =
-document.getElementById(
-"pushError"
-);
+document.getElementById("pushError");
 
 
-function showError(
-message
-){
+function showError(message){
 
-pushError.style.display =
-"block";
+pushError.style.display = "block";
 
-pushError.textContent =
-message;
+pushError.textContent = message;
 
 }
 
 
 async function getFCMServiceWorker(){
 
-if(
-!("serviceWorker" in navigator)
-){
+if(!("serviceWorker" in navigator)){
 
 throw new Error(
 "Your browser does not support service workers."
@@ -4141,9 +3472,7 @@ throw new Error(
 
 }
 
-return await navigator
-.serviceWorker
-.register(
+return await navigator.serviceWorker.register(
 "./firebase-messaging-sw.js",
 {
 scope:"./"
@@ -4153,9 +3482,7 @@ scope:"./"
 }
 
 
-async function saveToken(
-token
-){
+async function saveToken(token){
 
 const response =
 await fetch(
@@ -4183,11 +3510,6 @@ token:token
 const text =
 await response.text();
 
-console.log(
-"Push server response:",
-text
-);
-
 if(!text){
 
 throw new Error(
@@ -4200,8 +3522,7 @@ let result;
 
 try{
 
-result =
-JSON.parse(text);
+result = JSON.parse(text);
 
 }
 catch(error){
@@ -4228,14 +3549,11 @@ return result;
 
 async function enableNotifications(){
 
-pushError.style.display =
-"none";
+pushError.style.display = "none";
 
-notifyBtn.disabled =
-true;
+notifyBtn.disabled = true;
 
-notifyBtn.textContent =
-"Enabling...";
+notifyBtn.textContent = "Enabling...";
 
 
 try{
@@ -4259,14 +3577,13 @@ throw new Error(
 if(!messaging){
 
 throw new Error(
-"Firebase Messaging could not initialize."
+"Firebase Messaging could not initialize. The main app is still working, but notifications are currently unavailable."
 );
 
 }
 
 if(
-Notification.permission ===
-"denied"
+Notification.permission === "denied"
 ){
 
 throw new Error(
@@ -4277,7 +3594,6 @@ throw new Error(
 
 let permission =
 Notification.permission;
-
 
 if(permission !== "granted"){
 
@@ -4300,29 +3616,24 @@ throw new Error(
 notifyStatus.textContent =
 "Registering notification service...";
 
-
 const registration =
 await getFCMServiceWorker();
 
-
 notifyStatus.textContent =
 "Getting device token...";
-
 
 const token =
 await getToken(
 messaging,
 {
 
-vapidKey:
-VAPID_KEY,
+vapidKey:VAPID_KEY,
 
 serviceWorkerRegistration:
 registration
 
 }
 );
-
 
 if(!token){
 
@@ -4332,22 +3643,14 @@ throw new Error(
 
 }
 
+tokenText.textContent = token;
 
-tokenText.textContent =
-token;
-
-tokenBox.style.display =
-"block";
-
+tokenBox.style.display = "block";
 
 notifyStatus.textContent =
 "Registering this device...";
 
-
-await saveToken(
-token
-);
-
+await saveToken(token);
 
 notifyStatus.textContent =
 "✅ Notifications enabled successfully.";
@@ -4355,11 +3658,9 @@ notifyStatus.textContent =
 notifyBtn.textContent =
 "Notifications Enabled";
 
-notifyBtn.disabled =
-true;
+notifyBtn.disabled = true;
 
 }
-
 catch(error){
 
 console.error(
@@ -4375,8 +3676,7 @@ error.message ||
 String(error)
 );
 
-notifyBtn.disabled =
-false;
+notifyBtn.disabled = false;
 
 notifyBtn.textContent =
 "Try Again";
@@ -4392,34 +3692,22 @@ enableNotifications
 );
 
 
-if(
-"Notification" in window
-){
+if("Notification" in window){
 
 if(
-Notification.permission ===
-"granted"
+Notification.permission === "granted"
 ){
 
 notifyStatus.textContent =
 "Notifications are already allowed. Tap the button to register this device.";
 
 }
-
 else if(
-Notification.permission ===
-"denied"
+Notification.permission === "denied"
 ){
 
 notifyStatus.textContent =
 "❌ Notifications are blocked for this site.";
-
-}
-
-else{
-
-notifyStatus.textContent =
-"Notifications are ready. Tap the button above to enable them.";
 
 }
 
@@ -4434,19 +3722,14 @@ window.addEventListener(
 "load",
 function(){
 
-if(
-"serviceWorker" in navigator
-){
+if("serviceWorker" in navigator){
 
-navigator
-.serviceWorker
-.register(
+navigator.serviceWorker.register(
 "./service-worker.js",
 {
 scope:"./"
 }
 )
-
 .then(function(){
 
 console.log(
@@ -4454,7 +3737,6 @@ console.log(
 );
 
 })
-
 .catch(function(error){
 
 console.error(
