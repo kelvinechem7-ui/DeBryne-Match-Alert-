@@ -30,10 +30,17 @@ min-height:100%;
 }
 
 body{
-font-family:Arial,sans-serif;
+font-family:
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+sans-serif;
 background:#f5f7fa;
 color:#172033;
 padding-bottom:80px;
+-webkit-font-smoothing:antialiased;
+text-rendering:optimizeLegibility;
 }
 
 /* ==================================================
@@ -91,14 +98,12 @@ font-size:29px;
 font-weight:800;
 margin-top:22px;
 letter-spacing:.2px;
-animation:splashText .8s ease;
 }
 
 .splash-subtitle{
 color:#cbd5e1;
-font-size:13px;
+font-size:14px;
 margin-top:7px;
-animation:splashText 1s ease;
 }
 
 .splash-loader{
@@ -120,7 +125,7 @@ animation:splashLoading 1.15s infinite ease-in-out;
 
 .splash-status{
 color:#94a3b8;
-font-size:11px;
+font-size:12px;
 margin-top:13px;
 }
 
@@ -132,17 +137,6 @@ transform:scale(.75);
 to{
 opacity:1;
 transform:scale(1);
-}
-}
-
-@keyframes splashText{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
 }
 }
 
@@ -197,15 +191,16 @@ object-fit:cover;
 
 .auth-box h1{
 text-align:center;
-font-size:25px;
+font-size:26px;
+font-weight:800;
 margin-bottom:6px;
 }
 
 .auth-subtitle{
 text-align:center;
 color:#64748b;
-font-size:14px;
-line-height:1.5;
+font-size:15px;
+line-height:1.6;
 margin-bottom:20px;
 }
 
@@ -318,11 +313,13 @@ object-fit:cover;
 }
 
 .brand h1{
-font-size:22px;
+font-size:23px;
+font-weight:800;
+letter-spacing:-.2px;
 }
 
 .brand p{
-font-size:12px;
+font-size:13px;
 color:#cbd5e1;
 margin-top:3px;
 }
@@ -339,28 +336,35 @@ display:block;
 padding:18px;
 }
 
+/* ==================================================
+   GENERAL CARDS
+================================================== */
+
 .welcome,
-.card,
-.news{
+.card{
 background:white;
-border-radius:15px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 3px 10px rgba(0,0,0,.05);
+border-radius:16px;
+padding:19px;
+margin-bottom:15px;
+box-shadow:0 4px 13px rgba(0,0,0,.055);
 }
 
 .welcome h2{
-margin-bottom:7px;
+font-size:22px;
+font-weight:800;
+margin-bottom:8px;
 }
 
 .muted{
 color:#64748b;
-font-size:14px;
-line-height:1.5;
+font-size:15px;
+line-height:1.6;
 }
 
 .title{
-margin:20px 0 12px;
+font-size:21px;
+font-weight:800;
+margin:22px 0 13px;
 }
 
 .quick{
@@ -374,42 +378,83 @@ cursor:pointer;
 }
 
 .icon{
-font-size:26px;
-margin-bottom:8px;
+font-size:28px;
+margin-bottom:9px;
 }
 
+.quick .card h3{
+font-size:17px;
+font-weight:750;
+margin-bottom:5px;
+}
+
+/* ==================================================
+   NEWS CARDS
+================================================== */
+
 .news{
+background:white;
+border-radius:18px;
+padding:20px;
+margin-bottom:16px;
+box-shadow:0 4px 14px rgba(0,0,0,.06);
 overflow:hidden;
 }
 
 .news h3{
-margin:8px 0;
-font-size:19px;
-line-height:1.35;
+margin:9px 0 14px;
+font-family:
+"Trebuchet MS",
+"Segoe UI",
+Arial,
+sans-serif;
+font-size:21px;
+font-weight:800;
+line-height:1.4;
+letter-spacing:-.2px;
+color:#111827;
+}
+
+.news .muted{
+font-family:
+"Trebuchet MS",
+"Segoe UI",
+Arial,
+sans-serif;
+font-size:17px;
+font-weight:500;
+line-height:1.75;
+letter-spacing:.05px;
+color:#263244;
+margin:0;
+white-space:pre-line;
 }
 
 .label{
-font-size:11px;
-font-weight:bold;
-color:#64748b;
+font-size:12px;
+font-weight:800;
+color:#2563eb;
 text-transform:uppercase;
+letter-spacing:.7px;
 }
 
 .news-image{
 width:100%;
 height:auto;
-max-height:320px;
+max-height:340px;
 object-fit:cover;
-border-radius:12px;
-margin:12px 0 10px;
+border-radius:14px;
+margin:14px 0 14px;
 display:block;
 background:#e5e7eb;
 }
 
 .time{
-font-size:11px;
+font-size:12px;
 color:#94a3b8;
-margin-top:9px;
+margin-top:14px;
+padding-top:10px;
+border-top:1px solid #f1f5f9;
 }
 
 /* ==================================================
@@ -428,7 +473,7 @@ padding:0 48px 0 45px;
 border:1px solid #d1d5db;
 border-radius:14px;
 background:white;
-font-size:15px;
+font-size:16px;
 outline:none;
 box-shadow:0 3px 10px rgba(0,0,0,.04);
 }
@@ -468,7 +513,7 @@ cursor:pointer;
 }
 
 .search-info{
-font-size:13px;
+font-size:14px;
 color:#64748b;
 margin:-5px 0 14px;
 }
@@ -476,6 +521,25 @@ margin:-5px 0 14px;
 .search-results{
 margin-top:5px;
 }
+
+/* ==================================================
+   PAGE HEADINGS
+================================================== */
+
+.page h2{
+font-size:24px;
+font-weight:800;
+letter-spacing:-.3px;
+}
+
+.page > .container > .muted{
+font-size:15px;
+margin-top:5px;
+}
+
+/* ==================================================
+   BOTTOM NAVIGATION
+================================================== */
 
 .bottom{
 position:fixed;
@@ -493,8 +557,9 @@ z-index:9999;
 
 .nav{
 text-align:center;
-font-size:11px;
+font-size:12px;
 color:#64748b;
+font-weight:500;
 cursor:pointer;
 padding:8px 10px;
 user-select:none;
@@ -503,13 +568,13 @@ user-select:none;
 
 .nav span{
 display:block;
-font-size:20px;
+font-size:21px;
 margin-bottom:3px;
 }
 
 .nav.active{
 color:#111827;
-font-weight:bold;
+font-weight:800;
 }
 
 button{
@@ -520,6 +585,7 @@ border-radius:10px;
 background:#111827;
 color:white;
 font-size:15px;
+font-weight:700;
 margin-top:15px;
 cursor:pointer;
 }
@@ -536,9 +602,9 @@ background:#dc2626;
 .status{
 margin-top:12px;
 background:#f1f5f9;
-padding:10px;
+padding:11px;
 border-radius:8px;
-font-size:12px;
+font-size:13px;
 color:#475569;
 line-height:1.5;
 word-break:break-word;
@@ -557,10 +623,12 @@ word-break:break-all;
 
 .empty{
 text-align:center;
-padding:25px;
+padding:28px 20px;
 background:white;
-border-radius:14px;
+border-radius:15px;
 color:#64748b;
+font-size:15px;
+line-height:1.6;
 }
 
 .errorBox{
@@ -568,19 +636,19 @@ background:#fee2e2;
 color:#991b1b;
 padding:12px;
 border-radius:10px;
-font-size:12px;
+font-size:13px;
 margin-top:15px;
 display:none;
 }
 
 .profile-name{
-font-size:22px;
-font-weight:bold;
+font-size:23px;
+font-weight:800;
 margin-top:10px;
 }
 
 .profile-email{
-font-size:14px;
+font-size:15px;
 color:#64748b;
 margin-top:5px;
 word-break:break-word;
@@ -589,6 +657,10 @@ word-break:break-word;
 .profile-icon{
 font-size:60px;
 }
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
 
 @media(max-width:350px){
 
@@ -602,6 +674,15 @@ padding:8px 5px;
 
 .splash-title{
 font-size:25px;
+}
+
+.news h3{
+font-size:20px;
+}
+
+.news .muted{
+font-size:16px;
+line-height:1.7;
 }
 
 }
@@ -839,8 +920,6 @@ and sports updates.
 </p>
 
 </div>
-
-<!-- SEARCH ON HOME -->
 
 <div class="search-box">
 
@@ -2637,7 +2716,7 @@ container.innerHTML =
 '🔍 No results found for "' +
 escapeHTML(cleanQuery) +
 '".<br><br>' +
-'<span style="font-size:12px;">Try another keyword.</span>' +
+'<span style="font-size:13px;">Try another keyword.</span>' +
 '</div>';
 
 return;
