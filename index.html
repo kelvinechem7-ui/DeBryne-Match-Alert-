@@ -16,7 +16,6 @@ href="./file_000000008e5c71f4a9d057362a556762.png">
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
 <style>
-
 *{
 box-sizing:border-box;
 margin:0;
@@ -73,6 +72,7 @@ border-radius:26px;
 overflow:hidden;
 background:white;
 box-shadow:0 15px 45px rgba(0,0,0,.35);
+animation:splashLogo .8s ease;
 }
 
 .splash-logo img{
@@ -117,9 +117,24 @@ font-size:11px;
 margin-top:13px;
 }
 
+@keyframes splashLogo{
+from{
+opacity:0;
+transform:scale(.75);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
 @keyframes splashLoading{
-0%{transform:translateX(-180%);}
-100%{transform:translateX(400%);}
+0%{
+transform:translateX(-180%);
+}
+100%{
+transform:translateX(400%);
+}
 }
 
 /* ================= AUTH ================= */
@@ -129,7 +144,7 @@ position:fixed;
 inset:0;
 z-index:99999;
 background:#111827;
-display:flex;
+display:none;
 align-items:center;
 justify-content:center;
 padding:20px;
@@ -181,6 +196,10 @@ border-radius:10px;
 margin-top:11px;
 font-size:15px;
 outline:none;
+}
+
+.auth-box input:focus{
+border-color:#111827;
 }
 
 .auth-button{
@@ -363,7 +382,6 @@ letter-spacing:.6px;
 
 .news-image{
 width:100%;
-height:auto;
 max-height:320px;
 object-fit:cover;
 border-radius:12px;
@@ -394,6 +412,7 @@ border-radius:14px;
 background:white;
 font-size:15px;
 outline:none;
+box-shadow:0 3px 10px rgba(0,0,0,.04);
 }
 
 .search-icon{
@@ -481,7 +500,6 @@ cursor:pointer;
 
 button:disabled{
 opacity:.65;
-cursor:not-allowed;
 }
 
 .logout-button{
@@ -580,6 +598,7 @@ width:auto;
 padding:0;
 margin:0;
 background:none;
+border:0;
 font-size:36px;
 line-height:1;
 color:#cbd5e1;
@@ -601,6 +620,7 @@ margin-bottom:20px;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:9px;
+margin-top:12px;
 }
 
 .satisfaction-option{
@@ -704,7 +724,6 @@ margin-top:5px;
 }
 
 @media(max-width:350px){
-
 .quick{
 grid-template-columns:1fr;
 }
@@ -712,39 +731,7 @@ grid-template-columns:1fr;
 .satisfaction-options{
 grid-template-columns:1fr;
 }
-
 }
-
-/* ================= SAFETY LOADING ================= */
-
-#loadingTimeout{
-display:none;
-position:fixed;
-inset:0;
-z-index:1000001;
-background:#111827;
-color:white;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:25px;
-}
-
-#loadingTimeout .box{
-max-width:360px;
-}
-
-#loadingTimeout h2{
-font-size:22px;
-margin-bottom:10px;
-}
-
-#loadingTimeout p{
-color:#cbd5e1;
-font-size:14px;
-line-height:1.6;
-}
-
 </style>
 </head>
 
@@ -757,8 +744,7 @@ line-height:1.6;
 <div class="splash-content">
 
 <div class="splash-logo">
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
 </div>
 
@@ -781,29 +767,6 @@ Starting DeBryne Update...
 </div>
 </div>
 
-<!-- ================= SAFETY SCREEN ================= -->
-
-<div id="loadingTimeout">
-
-<div class="box">
-
-<h2>DeBryne Update</h2>
-
-<p>
-The app is taking longer than expected to connect.
-Please check your internet connection and reload the page.
-</p>
-
-<button
-type="button"
-onclick="location.reload()">
-RELOAD APP
-</button>
-
-</div>
-
-</div>
-
 <!-- ================= AUTH ================= -->
 
 <div id="authScreen">
@@ -811,8 +774,7 @@ RELOAD APP
 <div class="auth-box">
 
 <div class="auth-logo">
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
 </div>
 
@@ -826,32 +788,23 @@ events and sports updates.
 
 <div id="registerForm">
 
-<input
-id="registerName"
+<input id="registerName"
 type="text"
-placeholder="Full Name"
-autocomplete="name">
+placeholder="Full Name">
 
-<input
-id="registerEmail"
+<input id="registerEmail"
 type="email"
-placeholder="Email Address"
-autocomplete="email">
+placeholder="Email Address">
 
-<input
-id="registerPassword"
+<input id="registerPassword"
 type="password"
-placeholder="Create Password"
-autocomplete="new-password">
+placeholder="Create Password">
 
-<input
-id="registerConfirm"
+<input id="registerConfirm"
 type="password"
-placeholder="Confirm Password"
-autocomplete="new-password">
+placeholder="Confirm Password">
 
-<button
-id="registerButton"
+<button id="registerButton"
 class="auth-button"
 type="button">
 CREATE ACCOUNT
@@ -868,20 +821,15 @@ Login
 
 <div id="loginForm" style="display:none">
 
-<input
-id="loginEmail"
+<input id="loginEmail"
 type="email"
-placeholder="Email Address"
-autocomplete="email">
+placeholder="Email Address">
 
-<input
-id="loginPassword"
+<input id="loginPassword"
 type="password"
-placeholder="Password"
-autocomplete="current-password">
+placeholder="Password">
 
-<button
-id="loginButton"
+<button id="loginButton"
 class="auth-button"
 type="button">
 LOGIN
@@ -910,8 +858,7 @@ Create Account
 <div class="brand">
 
 <div class="logo">
-<img
-src="./file_000000008e5c71f4a9d057362a556762.png"
+<img src="./file_000000008e5c71f4a9d057362a556762.png"
 alt="DeBryne Update">
 </div>
 
@@ -921,7 +868,6 @@ alt="DeBryne Update">
 </div>
 
 </div>
-
 </header>
 
 <!-- HOME -->
@@ -948,14 +894,11 @@ and sports updates.
 
 <span class="search-icon">🔍</span>
 
-<input
-id="homeSearchInput"
+<input id="homeSearchInput"
 type="search"
-placeholder="Search DeBryne Update..."
-autocomplete="off">
+placeholder="Search DeBryne Update...">
 
-<button
-id="homeClearSearch"
+<button id="homeClearSearch"
 class="clear-search"
 type="button">
 ×
@@ -968,8 +911,7 @@ class="search-info"
 style="display:none">
 </div>
 
-<div
-id="homeSearchResults"
+<div id="homeSearchResults"
 style="display:none">
 </div>
 
@@ -982,25 +924,33 @@ Student Services
 <div class="card" data-page="news">
 <div class="icon">📰</div>
 <h3>Campus News</h3>
-<p class="muted">Latest student and campus updates.</p>
+<p class="muted">
+Latest student and campus updates.
+</p>
 </div>
 
 <div class="card" data-page="academics">
 <div class="icon">📚</div>
 <h3>Academics</h3>
-<p class="muted">Academic information and resources.</p>
+<p class="muted">
+Academic information and resources.
+</p>
 </div>
 
 <div class="card" data-page="events">
 <div class="icon">📅</div>
 <h3>Events</h3>
-<p class="muted">Upcoming student activities.</p>
+<p class="muted">
+Upcoming student activities.
+</p>
 </div>
 
 <div class="card" data-page="sports">
 <div class="icon">⚽</div>
 <h3>Sports</h3>
-<p class="muted">Fixtures, scores and sports news.</p>
+<p class="muted">
+Fixtures, scores and sports news.
+</p>
 </div>
 
 </div>
@@ -1010,7 +960,9 @@ Latest Updates
 </h2>
 
 <div id="homeNews">
-<div class="empty">Loading updates...</div>
+<div class="empty">
+Loading updates...
+</div>
 </div>
 
 </main>
@@ -1032,14 +984,11 @@ Latest campus news and announcements.
 
 <span class="search-icon">🔍</span>
 
-<input
-id="newsSearchInput"
+<input id="newsSearchInput"
 type="search"
-placeholder="Search campus news..."
-autocomplete="off">
+placeholder="Search campus news...">
 
-<button
-id="newsClearSearch"
+<button id="newsClearSearch"
 class="clear-search"
 type="button">
 ×
@@ -1053,7 +1002,9 @@ style="display:none">
 </div>
 
 <div id="newsList" style="margin-top:10px">
-<div class="empty">Loading news...</div>
+<div class="empty">
+Loading news...
+</div>
 </div>
 
 </main>
@@ -1072,7 +1023,9 @@ Fixtures, results and sports updates.
 </p>
 
 <div id="sportsList" style="margin-top:18px">
-<div class="empty">Loading sports...</div>
+<div class="empty">
+Loading sports...
+</div>
 </div>
 
 </main>
@@ -1111,7 +1064,9 @@ Notifications are ready.
 
 FCM token:
 
-<div id="tokenText" style="margin-top:7px"></div>
+<div id="tokenText"
+style="margin-top:7px">
+</div>
 
 </div>
 
@@ -1141,19 +1096,21 @@ style="text-align:center;margin-top:18px">
 👤
 </div>
 
-<div id="profileName" class="profile-name">
+<div id="profileName"
+class="profile-name">
 Student
 </div>
 
-<div id="profileEmail" class="profile-email"></div>
+<div id="profileEmail"
+class="profile-email">
+</div>
 
 <p id="profileJoined"
 class="muted"
 style="margin-top:12px">
 </p>
 
-<button
-id="logoutButton"
+<button id="logoutButton"
 class="logout-button"
 type="button">
 LOG OUT
@@ -1172,7 +1129,8 @@ How would you rate your experience with DeBryne Update?
 Your feedback helps us improve.
 </p>
 
-<div id="starRating" class="star-rating">
+<div id="starRating"
+class="star-rating">
 
 <button type="button" data-rating="1">★</button>
 <button type="button" data-rating="2">★</button>
@@ -1182,7 +1140,8 @@ Your feedback helps us improve.
 
 </div>
 
-<div id="ratingValue" class="rating-value">
+<div id="ratingValue"
+class="rating-value">
 Tap a star to rate
 </div>
 
@@ -1193,39 +1152,33 @@ How satisfied are you with DeBryne Update?
 <div id="satisfactionOptions"
 class="satisfaction-options">
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Very Satisfied">
 😊 Very Satisfied
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Satisfied">
 🙂 Satisfied
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Neutral">
 😐 Neutral
 </div>
 
-<div
-class="satisfaction-option"
+<div class="satisfaction-option"
 data-satisfaction="Not Satisfied">
 🙁 Not Satisfied
 </div>
 
 </div>
 
-<textarea
-id="ratingOpinion"
+<textarea id="ratingOpinion"
 class="rating-opinion"
 placeholder="Tell us what you think about DeBryne Update..."></textarea>
 
-<button
-id="submitRating"
+<button id="submitRating"
 class="rating-submit"
 type="button">
 SUBMIT FEEDBACK
@@ -1276,7 +1229,9 @@ Academic information and educational updates.
 </p>
 
 <div id="academicList" style="margin-top:18px">
-<div class="empty">Loading academic updates...</div>
+<div class="empty">
+Loading academic updates...
+</div>
 </div>
 
 </main>
@@ -1295,7 +1250,9 @@ Upcoming student events and activities.
 </p>
 
 <div id="eventList" style="margin-top:18px">
-<div class="empty">Loading events...</div>
+<div class="empty">
+Loading events...
+</div>
 </div>
 
 </main>
@@ -1334,6 +1291,49 @@ Profile
 
 </div>
 
+<!-- =====================================================
+     IMPORTANT:
+     THIS SPLASH FALLBACK IS OUTSIDE THE FIREBASE MODULE.
+     ===================================================== -->
+
+<script>
+(function(){
+
+window.setTimeout(function(){
+
+var splash =
+document.getElementById("appSplash");
+
+var auth =
+document.getElementById("authScreen");
+
+var app =
+document.getElementById("appContent");
+
+if(splash){
+
+splash.classList.add("hide");
+
+window.setTimeout(function(){
+
+splash.style.display="none";
+
+},500);
+
+}
+
+if(auth && app &&
+app.style.display !== "block"){
+
+auth.style.display="flex";
+
+}
+
+},7000);
+
+})();
+</script>
+
 <!-- ================= NAVIGATION ================= -->
 
 <script>
@@ -1344,11 +1344,13 @@ function openPage(page){
 
 document.querySelectorAll(".page")
 .forEach(function(item){
+
 item.classList.remove("active");
+
 });
 
-const target =
-document.getElementById(page + "Page");
+var target =
+document.getElementById(page+"Page");
 
 if(target){
 target.classList.add("active");
@@ -1356,14 +1358,18 @@ target.classList.add("active");
 
 document.querySelectorAll(".nav")
 .forEach(function(item){
+
 item.classList.remove("active");
+
 });
 
 document.querySelectorAll(
-'[data-page="' + page + '"]'
+'[data-page="'+page+'"]'
 )
 .forEach(function(item){
+
 item.classList.add("active");
+
 });
 
 window.scrollTo(0,0);
@@ -1384,7 +1390,6 @@ this.getAttribute("data-page")
 });
 
 })();
-
 </script>
 
 <!-- ================= FIREBASE ================= -->
@@ -1417,13 +1422,6 @@ updateProfile
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
-import {
-getMessaging,
-getToken
-}
-from
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
-
 
 const firebaseConfig = {
 
@@ -1453,7 +1451,6 @@ measurementId:
 
 };
 
-
 const VAPID_KEY =
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
 
@@ -1461,75 +1458,19 @@ const PUSH_SERVER_URL =
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
 
 
-let app = null;
-let db = null;
-let auth = null;
-let messaging = null;
+let app=null;
+let db=null;
+let auth=null;
+let messaging=null;
 
 
-/* ================= SPLASH ================= */
+/* ================= ELEMENTS ================= */
 
-const appSplash =
+const splash =
 document.getElementById("appSplash");
 
 const splashStatus =
 document.getElementById("splashStatus");
-
-let splashFinished = false;
-
-function updateSplashStatus(message){
-
-if(splashStatus){
-splashStatus.textContent = message;
-}
-
-}
-
-function hideSplash(){
-
-if(splashFinished){
-return;
-}
-
-splashFinished = true;
-
-if(appSplash){
-appSplash.classList.add("hide");
-
-setTimeout(function(){
-appSplash.style.display="none";
-},500);
-}
-
-}
-
-function finishSplash(){
-
-setTimeout(hideSplash,300);
-
-}
-
-/*
-IMPORTANT:
-The app can NEVER remain stuck on the splash screen.
-*/
-
-setTimeout(function(){
-
-if(!splashFinished){
-
-console.warn(
-"Safety timeout: releasing splash screen."
-);
-
-hideSplash();
-
-}
-
-},8000);
-
-
-/* ================= AUTH ELEMENTS ================= */
 
 const authScreen =
 document.getElementById("authScreen");
@@ -1540,21 +1481,61 @@ document.getElementById("appContent");
 const authStatus =
 document.getElementById("authStatus");
 
+const registerForm =
+document.getElementById("registerForm");
+
+const loginForm =
+document.getElementById("loginForm");
+
+
+function splashMessage(message){
+
+if(splashStatus){
+splashStatus.textContent=message;
+}
+
+}
+
+
+function hideSplash(){
+
+if(!splash){
+return;
+}
+
+splash.classList.add("hide");
+
+setTimeout(function(){
+
+splash.style.display="none";
+
+},500);
+
+}
+
+
+/* ================= AUTH STATUS ================= */
 
 function showAuthStatus(message,type){
 
-authStatus.textContent = message;
+authStatus.textContent=message;
 
-authStatus.className = "auth-status";
+authStatus.className="auth-status";
 
 if(type==="success"){
+
 authStatus.classList.add("auth-success");
+
 }
 else if(type==="error"){
+
 authStatus.classList.add("auth-error");
+
 }
 else{
+
 authStatus.classList.add("auth-info");
+
 }
 
 authStatus.style.display="block";
@@ -1562,69 +1543,53 @@ authStatus.style.display="block";
 }
 
 
-/* ================= LOGIN SWITCH ================= */
+/* ================= AUTH SWITCH ================= */
 
-function showRegister(){
+document.getElementById(
+"showLoginButton"
+).addEventListener("click",function(){
 
-document.getElementById("registerForm").style.display="block";
-document.getElementById("loginForm").style.display="none";
+registerForm.style.display="none";
+loginForm.style.display="block";
 authStatus.style.display="none";
 
-}
+});
 
-function showLogin(){
 
-document.getElementById("registerForm").style.display="none";
-document.getElementById("loginForm").style.display="block";
+document.getElementById(
+"showRegisterButton"
+).addEventListener("click",function(){
+
+registerForm.style.display="block";
+loginForm.style.display="none";
 authStatus.style.display="none";
 
-}
-
-document.getElementById("showLoginButton")
-.addEventListener("click",showLogin);
-
-document.getElementById("showRegisterButton")
-.addEventListener("click",showRegister);
+});
 
 
-/* ================= FIREBASE INIT ================= */
+/* ================= FIREBASE START ================= */
 
 try{
 
-updateSplashStatus(
+splashMessage(
 "Connecting to DeBryne Update..."
 );
 
-app = initializeApp(firebaseConfig);
+app=initializeApp(firebaseConfig);
 
-db = getDatabase(app);
+db=getDatabase(app);
 
-auth = getAuth(app);
+auth=getAuth(app);
 
 /*
-IMPORTANT FIX:
-Messaging is initialized separately so a messaging
-problem cannot stop the main application.
+ IMPORTANT:
+ Firebase Messaging is NOT initialized here.
+ It will only initialize when Notifications
+ are enabled.
 */
 
-try{
-
-messaging = getMessaging(app);
-
-}
-catch(messagingError){
-
-console.warn(
-"Messaging unavailable:",
-messagingError
-);
-
-messaging = null;
-
-}
-
-updateSplashStatus(
-"Firebase connected..."
+splashMessage(
+"Firebase connected. Checking account..."
 );
 
 }
@@ -1635,71 +1600,102 @@ console.error(
 error
 );
 
-showAuthStatus(
-"Firebase connection failed. Please check your internet connection.",
-"error"
+splashMessage(
+"Firebase could not connect."
 );
 
 authScreen.style.display="flex";
 appContent.style.display="none";
 
-finishSplash();
+showAuthStatus(
+"Unable to connect to Firebase. Please check your internet connection and reload.",
+"error"
+);
+
+hideSplash();
 
 }
 
 
 /* ================= REGISTER ================= */
 
-document.getElementById("registerButton")
-.addEventListener("click",async function(){
+document.getElementById(
+"registerButton"
+).addEventListener("click",async function(){
 
-if(!auth){
+if(!auth || !db){
+
 showAuthStatus(
-"Firebase is not connected. Please reload the app.",
+"Firebase is not ready. Please reload the page.",
 "error"
 );
+
 return;
+
 }
 
-const name =
-document.getElementById("registerName").value.trim();
+const name=
+document.getElementById("registerName")
+.value.trim();
 
-const email =
-document.getElementById("registerEmail").value.trim();
+const email=
+document.getElementById("registerEmail")
+.value.trim();
 
-const password =
-document.getElementById("registerPassword").value;
+const password=
+document.getElementById("registerPassword")
+.value;
 
-const confirmPassword =
-document.getElementById("registerConfirm").value;
+const confirm=
+document.getElementById("registerConfirm")
+.value;
 
-const button =
+const button=
 document.getElementById("registerButton");
 
+
 if(!name){
-showAuthStatus("Please enter your full name.","error");
+
+showAuthStatus(
+"Please enter your full name.",
+"error"
+);
+
 return;
+
 }
 
 if(!email){
-showAuthStatus("Please enter your email address.","error");
+
+showAuthStatus(
+"Please enter your email.",
+"error"
+);
+
 return;
+
 }
 
 if(password.length<6){
+
 showAuthStatus(
 "Password must be at least 6 characters.",
 "error"
 );
+
 return;
+
 }
 
-if(password!==confirmPassword){
+if(password!==confirm){
+
 showAuthStatus(
 "Passwords do not match.",
 "error"
 );
+
 return;
+
 }
 
 button.disabled=true;
@@ -1707,57 +1703,46 @@ button.textContent="CREATING ACCOUNT...";
 
 try{
 
-const credential =
+showAuthStatus(
+"Creating your account...",
+"info"
+);
+
+const credential=
 await createUserWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-const user =
-credential.user;
+const user=credential.user;
 
-try{
-
-await updateProfile(user,{
+await updateProfile(
+user,
+{
 displayName:name
-});
-
 }
-catch(profileError){
-
-console.warn(
-"Profile name update failed:",
-profileError
 );
-
-}
-
-try{
 
 await set(
 ref(db,"users/"+user.uid),
 {
+
 uid:user.uid,
+
 fullName:name,
+
 email:user.email,
+
 createdAt:Date.now(),
+
 status:"active"
+
 }
 );
-
-}
-catch(databaseError){
-
-console.warn(
-"User database save failed:",
-databaseError
-);
-
-}
 
 showAuthStatus(
-"✅ Account created successfully.",
+"✅ Account created successfully!",
 "success"
 );
 
@@ -1766,23 +1751,14 @@ catch(error){
 
 console.error(error);
 
-let message="Registration failed.";
-
-if(error.code==="auth/email-already-in-use"){
-message="This email is already registered. Please login instead.";
-}
-else if(error.code==="auth/invalid-email"){
-message="Please enter a valid email address.";
-}
-else if(error.code==="auth/weak-password"){
-message="Password is too weak.";
-}
-else{
-message=error.message;
-}
-
 showAuthStatus(
-"❌ "+message,
+"❌ "+(
+error.code==="auth/email-already-in-use"
+?
+"This email is already registered."
+:
+error.message
+),
 "error"
 );
 
@@ -1796,40 +1772,53 @@ button.textContent="CREATE ACCOUNT";
 
 /* ================= LOGIN ================= */
 
-document.getElementById("loginButton")
-.addEventListener("click",async function(){
+document.getElementById(
+"loginButton"
+).addEventListener("click",async function(){
 
 if(!auth){
+
 showAuthStatus(
-"Firebase is not connected. Please reload the app.",
+"Firebase is not ready. Please reload.",
 "error"
 );
+
 return;
+
 }
 
-const email =
-document.getElementById("loginEmail").value.trim();
+const email=
+document.getElementById("loginEmail")
+.value.trim();
 
-const password =
-document.getElementById("loginPassword").value;
+const password=
+document.getElementById("loginPassword")
+.value;
 
-const button =
+const button=
 document.getElementById("loginButton");
 
+
 if(!email){
+
 showAuthStatus(
-"Please enter your email address.",
+"Please enter your email.",
 "error"
 );
+
 return;
+
 }
 
 if(!password){
+
 showAuthStatus(
 "Please enter your password.",
 "error"
 );
+
 return;
+
 }
 
 button.disabled=true;
@@ -1837,45 +1826,24 @@ button.textContent="LOGGING IN...";
 
 try{
 
+showAuthStatus(
+"Signing you in...",
+"info"
+);
+
 await signInWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-showAuthStatus(
-"✅ Login successful.",
-"success"
-);
-
-button.disabled=false;
-button.textContent="LOGIN";
-
 }
 catch(error){
 
 console.error(error);
 
-let message="Login failed.";
-
-if(
-error.code==="auth/invalid-credential" ||
-error.code==="auth/wrong-password"
-){
-message="Incorrect email or password.";
-}
-else if(error.code==="auth/user-not-found"){
-message="No account was found with this email.";
-}
-else if(error.code==="auth/invalid-email"){
-message="Please enter a valid email address.";
-}
-else{
-message=error.message;
-}
-
 showAuthStatus(
-"❌ "+message,
+"❌ Incorrect email or password.",
 "error"
 );
 
@@ -1895,18 +1863,16 @@ onAuthStateChanged(
 auth,
 async function(user){
 
-try{
-
 if(!user){
 
 authScreen.style.display="flex";
 appContent.style.display="none";
 
-updateSplashStatus(
+splashMessage(
 "Ready. Please login or create an account."
 );
 
-finishSplash();
+hideSplash();
 
 return;
 
@@ -1915,41 +1881,21 @@ return;
 authScreen.style.display="none";
 appContent.style.display="block";
 
-updateSplashStatus(
+splashMessage(
 "Loading your profile..."
 );
 
-/*
-DO NOT BLOCK APP STARTUP ON PROFILE OR RATINGS.
-*/
+await loadUserProfile(user);
 
-loadUserProfile(user)
-.catch(function(error){
-console.warn("Profile loading error:",error);
-});
+await loadMyRating(user.uid);
 
-loadRatingDataSafely(user.uid);
+await loadRatingSummary();
 
-updateSplashStatus(
+splashMessage(
 "Loading latest updates..."
 );
 
-finishSplash();
-
-}
-catch(error){
-
-console.error(
-"Auth state error:",
-error
-);
-
-authScreen.style.display="flex";
-appContent.style.display="none";
-
-finishSplash();
-
-}
+hideSplash();
 
 }
 );
@@ -1961,80 +1907,42 @@ finishSplash();
 
 async function loadUserProfile(user){
 
-let name =
-user.displayName || "Student";
+let profile=null;
 
-let profile = null;
+let name=
+user.displayName || "";
 
 try{
 
-if(db){
-
-const snapshot =
-await new Promise(function(resolve){
-
-let completed=false;
-
-const timer=setTimeout(function(){
-
-if(!completed){
-completed=true;
-resolve(null);
-}
-
-},5000);
+const snapshot=
+await new Promise(function(resolve,reject){
 
 onValue(
 ref(db,"users/"+user.uid),
-function(snapshot){
-
-if(!completed){
-
-completed=true;
-clearTimeout(timer);
-resolve(snapshot);
-
+resolve,
+{
+onlyOnce:true
 }
-
-},
-function(){
-
-if(!completed){
-
-completed=true;
-clearTimeout(timer);
-resolve(null);
-
-}
-
-},
-{onlyOnce:true}
 );
 
 });
 
-profile=snapshot ? snapshot.val() : null;
+profile=snapshot.val();
+
+if(profile && profile.fullName){
+
+name=
+String(profile.fullName).trim();
 
 }
 
 }
 catch(error){
 
-console.warn(
-"Could not load profile:",
+console.error(
+"Profile loading error:",
 error
 );
-
-}
-
-if(
-profile &&
-profile.fullName
-){
-
-name=String(
-profile.fullName
-).trim();
 
 }
 
@@ -2053,7 +1961,8 @@ document.getElementById(
 
 document.getElementById(
 "profileEmail"
-).textContent=user.email || "";
+).textContent=
+user.email || "";
 
 document.getElementById(
 "profileJoined"
@@ -2071,17 +1980,15 @@ new Date(profile.createdAt)
 
 /* ================= LOGOUT ================= */
 
-document.getElementById("logoutButton")
-.addEventListener("click",async function(){
+document.getElementById(
+"logoutButton"
+).addEventListener(
+"click",
+async function(){
 
 if(auth){
 
-try{
 await signOut(auth);
-}
-catch(error){
-console.error("Logout error:",error);
-}
 
 }
 
@@ -2092,7 +1999,8 @@ console.error("Logout error:",error);
 
 function escapeHTML(value){
 
-return String(value||"")
+return String(value || "")
+
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -2106,68 +2014,69 @@ return String(value||"")
 
 function createNewsCard(item){
 
-const imageUrl =
-String(item.imageUrl||"").trim();
+const image=
+String(item.imageUrl || "").trim();
 
 let imageHTML="";
 
-if(imageUrl){
+if(image){
 
-imageHTML=`
-
-<img
-class="news-image"
-src="${escapeHTML(imageUrl)}"
-alt="${escapeHTML(item.title||"News picture")}"
-loading="lazy"
-onerror="this.style.display='none';">
-
-`;
+imageHTML=
+'<img class="news-image" src="'+
+escapeHTML(image)+
+'" alt="News" loading="lazy" onerror="this.style.display=\'none\'">';
 
 }
 
 return `
-
 <article class="news">
 
 <div class="label">
-${escapeHTML(item.category||"DEBRYNE UPDATE")}
+${escapeHTML(
+item.category || "DEBRYNE UPDATE"
+)}
 </div>
 
 <h3>
-${escapeHTML(item.title||"Untitled")}
+${escapeHTML(
+item.title || "Untitled"
+)}
 </h3>
 
 ${imageHTML}
 
 <p class="muted">
-${escapeHTML(item.content||"")}
+${escapeHTML(
+item.content || ""
+)}
 </p>
 
 <div class="time">
 ${
 item.createdAt
 ?
-new Date(item.createdAt).toLocaleString()
+new Date(item.createdAt)
+.toLocaleString()
 :
 ""
 }
 </div>
 
 </article>
-
 `;
 
 }
 
 
-/* ================= SEARCH ================= */
+/* ================= NEWS DATA ================= */
 
 let allNewsItems=[];
 
+
 function searchNews(query){
 
-query=String(query||"")
+query=
+String(query || "")
 .trim()
 .toLowerCase();
 
@@ -2175,20 +2084,23 @@ if(!query){
 return allNewsItems;
 }
 
-const words=query
-.split(/\s+/)
-.filter(Boolean);
+const words=
+query.split(/\s+/).filter(Boolean);
 
 return allNewsItems.filter(function(item){
 
 const text=(
-String(item.title||"")+" "+
-String(item.content||"")+" "+
-String(item.category||"")
+String(item.title || "")+
+" "+
+String(item.content || "")+
+" "+
+String(item.category || "")
 ).toLowerCase();
 
 return words.every(function(word){
+
 return text.includes(word);
+
 });
 
 });
@@ -2196,17 +2108,15 @@ return text.includes(word);
 }
 
 
-function renderSearchResults(
+function renderSearch(
 query,
 results,
 container,
 info,
-clearButton
+clear
 ){
 
-const clean=String(query||"").trim();
-
-if(!clean){
+if(!query){
 
 container.style.display="none";
 
@@ -2214,8 +2124,8 @@ if(info){
 info.style.display="none";
 }
 
-if(clearButton){
-clearButton.style.display="none";
+if(clear){
+clear.style.display="none";
 }
 
 return;
@@ -2224,8 +2134,8 @@ return;
 
 container.style.display="block";
 
-if(clearButton){
-clearButton.style.display="flex";
+if(clear){
+clear.style.display="flex";
 }
 
 if(info){
@@ -2237,14 +2147,14 @@ results.length+
 (results.length===1
 ?" result found"
 :" results found")+
-' for "'+clean+'"';
+' for "'+query+'"';
 
 }
 
 if(!results.length){
 
 container.innerHTML=
-'<div class="empty">🔍 No results found.<br><br>Try another keyword.</div>';
+'<div class="empty">🔍 No results found.</div>';
 
 return;
 
@@ -2256,6 +2166,8 @@ results.map(createNewsCard).join("");
 }
 
 
+/* ================= SEARCH SETUP ================= */
+
 function setupSearch(
 inputId,
 containerId,
@@ -2263,22 +2175,32 @@ infoId,
 clearId
 ){
 
-const input=document.getElementById(inputId);
-const container=document.getElementById(containerId);
-const info=document.getElementById(infoId);
-const clear=document.getElementById(clearId);
+const input=
+document.getElementById(inputId);
+
+const container=
+document.getElementById(containerId);
+
+const info=
+document.getElementById(infoId);
+
+const clear=
+document.getElementById(clearId);
 
 if(!input){
 return;
 }
 
-input.addEventListener("input",function(){
+input.addEventListener(
+"input",
+function(){
 
-const query=input.value;
+const results=
+searchNews(input.value);
 
-renderSearchResults(
-query,
-searchNews(query),
+renderSearch(
+input.value.trim(),
+results,
 container,
 info,
 clear
@@ -2286,13 +2208,15 @@ clear
 
 });
 
-clear.addEventListener("click",function(){
+clear.addEventListener(
+"click",
+function(){
 
 input.value="";
 
-renderSearchResults(
+renderSearch(
 "",
-allNewsItems,
+[],
 container,
 info,
 clear
@@ -2328,19 +2252,25 @@ onValue(
 ref(db,"news"),
 function(snapshot){
 
-try{
-
 const data=snapshot.val();
 
-const home=document.getElementById("homeNews");
-const news=document.getElementById("newsList");
-const sports=document.getElementById("sportsList");
-const academic=document.getElementById("academicList");
-const events=document.getElementById("eventList");
+const home=
+document.getElementById("homeNews");
+
+const news=
+document.getElementById("newsList");
+
+const sports=
+document.getElementById("sportsList");
+
+const academic=
+document.getElementById("academicList");
+
+const events=
+document.getElementById("eventList");
+
 
 if(!data){
-
-allNewsItems=[];
 
 const empty=
 '<div class="empty">No updates published yet.</div>';
@@ -2351,15 +2281,18 @@ sports.innerHTML=empty;
 academic.innerHTML=empty;
 events.innerHTML=empty;
 
+allNewsItems=[];
+
 return;
 
 }
+
 
 allNewsItems=
 Object.keys(data)
 .map(function(key){
 
-return{
+return {
 id:key,
 ...data[key]
 };
@@ -2367,8 +2300,8 @@ id:key,
 })
 .sort(function(a,b){
 
-return Number(b.createdAt||0)-
-Number(a.createdAt||0);
+return Number(b.createdAt || 0)-
+Number(a.createdAt || 0);
 
 });
 
@@ -2379,19 +2312,25 @@ allNewsItems
 .map(createNewsCard)
 .join("");
 
+
 const newsQuery=
 document.getElementById(
 "newsSearchInput"
 ).value.trim();
 
+
 if(newsQuery){
 
-renderSearchResults(
+renderSearch(
 newsQuery,
 searchNews(newsQuery),
 news,
-document.getElementById("newsSearchInfo"),
-document.getElementById("newsClearSearch")
+document.getElementById(
+"newsSearchInfo"
+),
+document.getElementById(
+"newsClearSearch"
+)
 );
 
 }
@@ -2405,7 +2344,7 @@ allNewsItems
 }
 
 
-function filterCategory(
+function category(
 word,
 element,
 message
@@ -2415,14 +2354,15 @@ const result=
 allNewsItems.filter(function(item){
 
 return String(
-item.category||""
+item.category || ""
 )
 .toLowerCase()
 .includes(word);
 
 });
 
-element.innerHTML=result.length
+element.innerHTML=
+result.length
 ?
 result.map(createNewsCard).join("")
 :
@@ -2431,79 +2371,78 @@ result.map(createNewsCard).join("")
 }
 
 
-filterCategory(
+category(
 "sport",
 sports,
 "No sports updates yet."
 );
 
-filterCategory(
+category(
 "academic",
 academic,
 "No academic updates yet."
 );
 
-filterCategory(
+category(
 "event",
 events,
 "No event updates yet."
 );
 
-}
-catch(error){
-
-console.error(
-"News rendering error:",
-error
-);
-
-}
-
 },
 function(error){
 
 console.error(
-"Database news error:",
+"Database error:",
 error
 );
 
 const message=
 '<div class="empty">Unable to load updates right now.</div>';
 
-document.getElementById("homeNews").innerHTML=message;
-document.getElementById("newsList").innerHTML=message;
+document.getElementById(
+"homeNews"
+).innerHTML=message;
+
+document.getElementById(
+"newsList"
+).innerHTML=message;
 
 });
 
 }
 
 
-/* ==================================================
+/* =====================================================
    RATING SYSTEM
-================================================== */
+===================================================== */
 
 let selectedRating=0;
 let selectedSatisfaction="";
 
-const starButtons=
-document.querySelectorAll("#starRating button");
+const stars=
+document.querySelectorAll(
+"#starRating button"
+);
 
-const satisfactionButtons=
-document.querySelectorAll(".satisfaction-option");
+const satisfaction=
+document.querySelectorAll(
+".satisfaction-option"
+);
 
 const ratingValue=
 document.getElementById("ratingValue");
 
-const ratingOpinion=
+const opinion=
 document.getElementById("ratingOpinion");
 
-const submitRating=
+const submit=
 document.getElementById("submitRating");
 
 const ratingStatus=
 document.getElementById("ratingStatus");
 
-const overallRating=
+const overall=
 document.getElementById("overallRating");
 
 const overallStars=
@@ -2512,22 +2451,24 @@ document.getElementById("overallStars");
 const ratingCount=
 document.getElementById("ratingCount");
 
-const recentOpinions=
+const recent=
 document.getElementById("recentOpinions");
 
 
-function setRatingStars(rating){
+function setRating(value){
 
-selectedRating=Number(rating)||0;
+selectedRating=Number(value);
 
-starButtons.forEach(function(star){
+stars.forEach(function(star){
 
-const value=
-Number(star.getAttribute("data-rating"));
+const number=
+Number(
+star.dataset.rating
+);
 
 star.classList.toggle(
 "selected",
-value<=selectedRating
+number<=selectedRating
 );
 
 });
@@ -2545,12 +2486,14 @@ selectedRating+
 }
 
 
-starButtons.forEach(function(star){
+stars.forEach(function(star){
 
-star.addEventListener("click",function(){
+star.addEventListener(
+"click",
+function(){
 
-setRatingStars(
-this.getAttribute("data-rating")
+setRating(
+this.dataset.rating
 );
 
 });
@@ -2558,31 +2501,38 @@ this.getAttribute("data-rating")
 });
 
 
-satisfactionButtons.forEach(function(option){
+satisfaction.forEach(function(item){
 
-option.addEventListener("click",function(){
+item.addEventListener(
+"click",
+function(){
 
-satisfactionButtons.forEach(function(item){
-item.classList.remove("selected");
+satisfaction.forEach(function(x){
+
+x.classList.remove("selected");
+
 });
 
-this.classList.add("selected");
+item.classList.add("selected");
 
 selectedSatisfaction=
-this.getAttribute("data-satisfaction");
+item.dataset.satisfaction;
 
 });
 
 });
 
 
-function showRatingStatus(message,type){
+function ratingMessage(
+message,
+type
+){
 
 ratingStatus.textContent=message;
 
-ratingStatus.className="rating-status";
-
-ratingStatus.classList.add(
+ratingStatus.className=
+"rating-status "+
+(
 type==="success"
 ?
 "rating-success"
@@ -2595,23 +2545,14 @@ ratingStatus.style.display="block";
 }
 
 
-async function submitViewerRating(){
+submit.addEventListener(
+"click",
+async function(){
 
 if(!auth || !auth.currentUser){
 
-showRatingStatus(
+ratingMessage(
 "Please login before submitting feedback.",
-"error"
-);
-
-return;
-
-}
-
-if(!db){
-
-showRatingStatus(
-"Database is unavailable. Please try again.",
 "error"
 );
 
@@ -2621,8 +2562,8 @@ return;
 
 if(!selectedRating){
 
-showRatingStatus(
-"Please select a star rating first.",
+ratingMessage(
+"Please select a star rating.",
 "error"
 );
 
@@ -2632,7 +2573,7 @@ return;
 
 if(!selectedSatisfaction){
 
-showRatingStatus(
+ratingMessage(
 "Please select your satisfaction level.",
 "error"
 );
@@ -2641,184 +2582,119 @@ return;
 
 }
 
+submit.disabled=true;
+submit.textContent="SUBMITTING...";
+
+try{
+
 const user=auth.currentUser;
 
-const opinion=
-ratingOpinion.value.trim();
-
-submitRating.disabled=true;
-submitRating.textContent="SUBMITTING...";
-
-try{
-
-const ratingData={
-
-userId:user.uid,
-
-name:user.displayName||
-"Anonymous Viewer",
-
-email:user.email||"",
-
-rating:selectedRating,
-
-satisfaction:selectedSatisfaction,
-
-opinion:opinion,
-
-createdAt:Date.now(),
-
-updatedAt:Date.now()
-
-};
-
-await set(
-ref(db,"ratings/"+user.uid),
-ratingData
-);
-
-showRatingStatus(
-"✅ Thank you! Your feedback has been saved.",
-"success"
-);
-
-submitRating.textContent=
-"UPDATE FEEDBACK";
-
-await loadRatingDataSafely(user.uid);
-
-}
-catch(error){
-
-console.error(
-"Rating error:",
-error
-);
-
-showRatingStatus(
-"❌ Could not save your feedback. Please try again.",
-"error"
-);
-
-submitRating.textContent=
-"SUBMIT FEEDBACK";
-
-}
-
-submitRating.disabled=false;
-
-}
-
-
-submitRating.addEventListener(
-"click",
-submitViewerRating
-);
-
-
-/* ================= SAFE RATING LOAD ================= */
-
-async function getDatabaseValue(path){
-
-if(!db){
-return null;
-}
-
-return await new Promise(function(resolve){
-
-let finished=false;
-
-const timer=setTimeout(function(){
-
-if(!finished){
-
-finished=true;
-resolve(null);
-
-}
-
-},5000);
-
-try{
+const oldSnapshot=
+await new Promise(function(resolve,reject){
 
 onValue(
-ref(db,path),
-function(snapshot){
-
-if(!finished){
-
-finished=true;
-clearTimeout(timer);
-resolve(snapshot.val());
-
-}
-
-},
-function(error){
-
-console.warn(
-"Database read failed:",
-path,
-error
-);
-
-if(!finished){
-
-finished=true;
-clearTimeout(timer);
-resolve(null);
-
-}
-
-},
+ref(db,"ratings/"+user.uid),
+resolve,
 {
 onlyOnce:true
 }
 );
 
+});
+
+const old=
+oldSnapshot.val() || {};
+
+await set(
+ref(db,"ratings/"+user.uid),
+{
+
+userId:user.uid,
+
+name:user.displayName ||
+"Anonymous Viewer",
+
+email:user.email || "",
+
+rating:selectedRating,
+
+satisfaction:selectedSatisfaction,
+
+opinion:opinion.value.trim(),
+
+createdAt:
+old.createdAt || Date.now(),
+
+updatedAt:Date.now()
+
+}
+);
+
+ratingMessage(
+"✅ Thank you! Your feedback has been saved.",
+"success"
+);
+
+submit.textContent="UPDATE FEEDBACK";
+
+await loadRatingSummary();
+
 }
 catch(error){
 
-if(!finished){
+console.error(error);
 
-finished=true;
-clearTimeout(timer);
-resolve(null);
+ratingMessage(
+"❌ Could not save your feedback.",
+"error"
+);
+
+submit.textContent="SUBMIT FEEDBACK";
 
 }
 
-}
+submit.disabled=false;
 
 });
 
-}
 
-
-async function loadRatingDataSafely(userId){
+async function loadMyRating(uid){
 
 try{
 
-const mine=
-await getDatabaseValue(
-"ratings/"+userId
+const snapshot=
+await new Promise(function(resolve,reject){
+
+onValue(
+ref(db,"ratings/"+uid),
+resolve,
+{
+onlyOnce:true
+}
 );
 
-if(mine){
+});
 
-if(mine.rating){
-setRatingStars(mine.rating);
+const data=snapshot.val();
+
+if(!data){
+return;
 }
 
-if(mine.satisfaction){
+if(data.rating){
+setRating(data.rating);
+}
+
+if(data.satisfaction){
 
 selectedSatisfaction=
-String(mine.satisfaction);
+data.satisfaction;
 
-satisfactionButtons.forEach(function(option){
+satisfaction.forEach(function(item){
 
-option.classList.toggle(
+item.classList.toggle(
 "selected",
-option.getAttribute("data-satisfaction")===
+item.dataset.satisfaction===
 selectedSatisfaction
 );
 
@@ -2826,24 +2702,17 @@ selectedSatisfaction
 
 }
 
-ratingOpinion.value=
-mine.opinion||"";
+opinion.value=
+data.opinion || "";
 
-submitRating.textContent=
+submit.textContent=
 "UPDATE FEEDBACK";
-
-}
-
-const all=
-await getDatabaseValue("ratings");
-
-renderRatingSummary(all);
 
 }
 catch(error){
 
-console.warn(
-"Rating loading skipped:",
+console.error(
+"Rating loading error:",
 error
 );
 
@@ -2852,14 +2721,30 @@ error
 }
 
 
-function renderRatingSummary(data){
+async function loadRatingSummary(){
+
+try{
+
+const snapshot=
+await new Promise(function(resolve,reject){
+
+onValue(
+ref(db,"ratings"),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+});
+
+const data=snapshot.val();
 
 if(!data){
 
-overallRating.textContent="0.0/5";
+overall.textContent="0.0/5";
 overallStars.textContent="☆☆☆☆☆";
 ratingCount.textContent="No ratings yet";
-recentOpinions.innerHTML="";
 return;
 
 }
@@ -2876,7 +2761,7 @@ Number(item.rating)<=5;
 
 if(!ratings.length){
 
-overallRating.textContent="0.0/5";
+overall.textContent="0.0/5";
 overallStars.textContent="☆☆☆☆☆";
 ratingCount.textContent="No ratings yet";
 return;
@@ -2893,7 +2778,7 @@ return sum+Number(item.rating);
 const average=
 total/ratings.length;
 
-overallRating.textContent=
+overall.textContent=
 average.toFixed(1)+"/5";
 
 const rounded=
@@ -2905,9 +2790,13 @@ overallStars.textContent=
 
 ratingCount.textContent=
 ratings.length+
-(ratings.length===1
-?" viewer rating"
-:" viewer ratings");
+(
+ratings.length===1
+?
+" viewer rating"
+:
+" viewer ratings"
+);
 
 
 const opinions=
@@ -2921,24 +2810,24 @@ String(item.opinion).trim();
 .sort(function(a,b){
 
 return Number(
-b.updatedAt||b.createdAt||0
+b.updatedAt ||
+b.createdAt ||
+0
 )-
 Number(
-a.updatedAt||a.createdAt||0
+a.updatedAt ||
+a.createdAt ||
+0
 );
 
 })
 .slice(0,3);
 
-if(!opinions.length){
 
-recentOpinions.innerHTML="";
-return;
+if(opinions.length){
 
-}
-
-recentOpinions.innerHTML=
-"<h4 style='font-size:16px;margin-bottom:9px;'>💬 Viewer Opinions</h4>"+
+recent.innerHTML=
+"<h4 style='margin-bottom:9px;'>💬 Viewer Opinions</h4>"+
 opinions.map(function(item){
 
 const stars=
@@ -2951,11 +2840,13 @@ Number(item.rating)
 );
 
 return `
-
 <div class="recent-opinion">
 
 <strong>
-${escapeHTML(item.name||"Anonymous Viewer")}
+${escapeHTML(
+item.name ||
+"Anonymous Viewer"
+)}
 </strong>
 
 <div style="color:#f59e0b;margin-top:4px;">
@@ -2968,17 +2859,29 @@ ${escapeHTML(item.opinion)}
 </p>
 
 </div>
-
 `;
 
 }).join("");
 
 }
 
+}
+catch(error){
 
-/* ==================================================
+console.error(
+"Rating summary error:",
+error
+);
+
+}
+
+}
+
+
+/* =====================================================
    NOTIFICATIONS
-================================================== */
+   Firebase Messaging is loaded ONLY when needed.
+===================================================== */
 
 const notifyBtn=
 document.getElementById("notifyBtn");
@@ -2996,7 +2899,7 @@ const pushError=
 document.getElementById("pushError");
 
 
-function showError(message){
+function pushErrorMessage(message){
 
 pushError.style.display="block";
 pushError.textContent=message;
@@ -3004,88 +2907,12 @@ pushError.textContent=message;
 }
 
 
-async function getFCMServiceWorker(){
-
-if(!("serviceWorker" in navigator)){
-
-throw new Error(
-"Your browser does not support service workers."
-);
-
-}
-
-return await navigator.serviceWorker.register(
-"./firebase-messaging-sw.js",
-{
-scope:"./"
-}
-);
-
-}
-
-
-async function saveToken(token){
-
-const response=
-await fetch(
-PUSH_SERVER_URL,
-{
-method:"POST",
-headers:{
-"Content-Type":
-"text/plain;charset=utf-8"
-},
-body:JSON.stringify({
-action:"register",
-token:token
-})
-}
-);
-
-const text=
-await response.text();
-
-if(!text){
-throw new Error(
-"Push server returned an empty response."
-);
-}
-
-let result;
-
-try{
-
-result=JSON.parse(text);
-
-}
-catch(error){
-
-throw new Error(
-"Push server returned an invalid response."
-);
-
-}
-
-if(!result.success){
-
-throw new Error(
-result.error||
-"Device registration failed."
-);
-
-}
-
-return result;
-
-}
-
-
 async function enableNotifications(){
-
-pushError.style.display="none";
 
 notifyBtn.disabled=true;
 notifyBtn.textContent="Enabling...";
+
+pushError.style.display="none";
 
 try{
 
@@ -3105,21 +2932,21 @@ throw new Error(
 
 }
 
+
+/* LOAD FIREBASE MESSAGING ONLY NOW */
+
 if(!messaging){
 
-throw new Error(
-"Firebase Messaging is unavailable."
+const module=
+await import(
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
 );
+
+messaging=
+module.getMessaging(app);
 
 }
 
-if(Notification.permission==="denied"){
-
-throw new Error(
-"Notifications are blocked for this site."
-);
-
-}
 
 let permission=
 Notification.permission;
@@ -3139,23 +2966,39 @@ throw new Error(
 
 }
 
+
+if(!("serviceWorker" in navigator)){
+
+throw new Error(
+"Service workers are not supported."
+);
+
+}
+
+
 notifyStatus.textContent=
 "Registering notification service...";
 
+
 const registration=
-await getFCMServiceWorker();
-
-notifyStatus.textContent=
-"Getting device token...";
-
-const token=
-await getToken(
-messaging,
+await navigator.serviceWorker.register(
+"./firebase-messaging-sw.js",
 {
-vapidKey:VAPID_KEY,
-serviceWorkerRegistration:registration
+scope:"./"
 }
 );
+
+
+notifyStatus.textContent=
+"Getting notification token...";
+
+
+const token=
+await getTokenSafe(
+messaging,
+registration
+);
+
 
 if(!token){
 
@@ -3165,13 +3008,74 @@ throw new Error(
 
 }
 
+
 tokenText.textContent=token;
 tokenBox.style.display="block";
+
 
 notifyStatus.textContent=
 "Registering this device...";
 
-await saveToken(token);
+
+const response=
+await fetch(
+PUSH_SERVER_URL,
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:JSON.stringify({
+
+action:"register",
+
+token:token
+
+})
+
+}
+);
+
+
+const text=
+await response.text();
+
+if(!text){
+
+throw new Error(
+"Push server returned an empty response."
+);
+
+}
+
+let result;
+
+try{
+
+result=JSON.parse(text);
+
+}
+catch(e){
+
+throw new Error(
+"Push server returned an invalid response."
+);
+
+}
+
+if(!result.success){
+
+throw new Error(
+result.error ||
+"Device registration failed."
+);
+
+}
+
 
 notifyStatus.textContent=
 "✅ Notifications enabled successfully.";
@@ -3190,8 +3094,8 @@ error
 notifyStatus.textContent=
 "❌ Notification setup failed.";
 
-showError(
-error.message||String(error)
+pushErrorMessage(
+error.message || String(error)
 );
 
 notifyBtn.disabled=false;
@@ -3202,33 +3106,39 @@ notifyBtn.textContent="Try Again";
 }
 
 
+async function getTokenSafe(
+messagingInstance,
+registration
+){
+
+const module=
+await import(
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
+);
+
+return await module.getToken(
+messagingInstance,
+{
+
+vapidKey:VAPID_KEY,
+
+serviceWorkerRegistration:
+registration
+
+}
+);
+
+
+}
+
+
 notifyBtn.addEventListener(
 "click",
 enableNotifications
 );
 
 
-if("Notification" in window){
-
-if(Notification.permission==="granted"){
-
-notifyStatus.textContent=
-"Notifications are already allowed. Tap the button to register this device.";
-
-}
-else if(Notification.permission==="denied"){
-
-notifyStatus.textContent=
-"❌ Notifications are blocked for this site.";
-
-}
-
-}
-
-
-/* ==================================================
-   PWA SERVICE WORKER
-================================================== */
+/* ================= PWA ================= */
 
 window.addEventListener(
 "load",
@@ -3236,7 +3146,8 @@ function(){
 
 if("serviceWorker" in navigator){
 
-navigator.serviceWorker.register(
+navigator.serviceWorker
+.register(
 "./service-worker.js",
 {
 scope:"./"
@@ -3251,7 +3162,7 @@ console.log(
 })
 .catch(function(error){
 
-console.warn(
+console.error(
 "PWA service worker error:",
 error
 );
