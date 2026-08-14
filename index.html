@@ -15,7 +15,13 @@ href="./file_000000008e5c71f4a9d057362a556762.png">
 <link rel="apple-touch-icon"
 href="./file_000000008e5c71f4a9d057362a556762.png">
 
+<!-- MODERN FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -28,7 +34,9 @@ min-height:100%;
 }
 
 body{
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
+font-size:16px;
+font-weight:500;
 background:#f5f7fa;
 color:#172033;
 padding-bottom:80px;
@@ -82,15 +90,18 @@ object-fit:cover;
 }
 
 .splash-title{
+font-family:'Poppins',sans-serif;
 color:white;
-font-size:29px;
+font-size:30px;
 font-weight:800;
+letter-spacing:-.8px;
 margin-top:22px;
 }
 
 .splash-subtitle{
 color:#cbd5e1;
 font-size:13px;
+font-weight:500;
 margin-top:7px;
 }
 
@@ -114,6 +125,7 @@ animation:splashLoading 1.15s infinite ease-in-out;
 .splash-status{
 color:#94a3b8;
 font-size:11px;
+font-weight:500;
 margin-top:13px;
 }
 
@@ -176,15 +188,18 @@ object-fit:cover;
 
 .auth-box h1{
 text-align:center;
-font-size:25px;
+font-size:26px;
+font-weight:800;
+letter-spacing:-.5px;
 margin-bottom:6px;
 }
 
 .auth-subtitle{
 text-align:center;
 color:#64748b;
-font-size:14px;
-line-height:1.5;
+font-size:13px;
+font-weight:500;
+line-height:1.7;
 margin-bottom:20px;
 }
 
@@ -194,7 +209,9 @@ padding:14px;
 border:1px solid #d1d5db;
 border-radius:10px;
 margin-top:11px;
-font-size:15px;
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:500;
 outline:none;
 }
 
@@ -209,8 +226,10 @@ border:0;
 border-radius:10px;
 background:#111827;
 color:white;
-font-size:15px;
-font-weight:bold;
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:800;
+letter-spacing:.2px;
 margin-top:16px;
 cursor:pointer;
 }
@@ -222,7 +241,8 @@ opacity:.6;
 .auth-switch{
 text-align:center;
 margin-top:18px;
-font-size:14px;
+font-size:13px;
+font-weight:500;
 color:#64748b;
 }
 
@@ -232,7 +252,8 @@ padding:0;
 margin:0;
 background:none;
 color:#2563eb;
-font-size:14px;
+font-size:13px;
+font-weight:700;
 }
 
 .auth-status{
@@ -241,7 +262,8 @@ margin-top:13px;
 padding:11px;
 border-radius:9px;
 font-size:13px;
-line-height:1.5;
+font-weight:500;
+line-height:1.6;
 }
 
 .auth-success{
@@ -296,10 +318,14 @@ object-fit:cover;
 
 .brand h1{
 font-size:22px;
+font-weight:800;
+letter-spacing:-.6px;
+color:white;
 }
 
 .brand p{
 font-size:12px;
+font-weight:500;
 color:#cbd5e1;
 margin-top:3px;
 }
@@ -316,6 +342,14 @@ display:block;
 padding:18px;
 }
 
+.container > h2{
+font-size:25px;
+font-weight:800;
+line-height:1.3;
+letter-spacing:-.6px;
+margin-bottom:5px;
+}
+
 .welcome,
 .card,
 .news{
@@ -327,16 +361,22 @@ box-shadow:0 3px 10px rgba(0,0,0,.05);
 }
 
 .welcome h2{
+font-size:23px;
+font-weight:800;
+line-height:1.35;
 margin-bottom:7px;
 }
 
 .muted{
-color:#64748b;
+color:#475569;
 font-size:15px;
-line-height:1.65;
+font-weight:500;
+line-height:1.75;
 }
 
 .title{
+font-size:21px;
+font-weight:800;
 margin:20px 0 12px;
 }
 
@@ -351,9 +391,17 @@ cursor:pointer;
 }
 
 .icon{
-font-size:26px;
+font-size:27px;
 margin-bottom:8px;
 }
+
+.card h3{
+font-size:17px;
+font-weight:700;
+line-height:1.4;
+}
+
+/* ================= NEWS ================= */
 
 .news{
 overflow:hidden;
@@ -361,23 +409,26 @@ overflow:hidden;
 
 .news h3{
 margin:8px 0;
-font-size:21px;
-line-height:1.4;
+font-size:20px;
+line-height:1.45;
 font-weight:800;
+letter-spacing:-.35px;
+color:#172033;
 }
 
 .news p.muted{
-font-size:16px;
-line-height:1.75;
+font-size:15px;
+font-weight:500;
+line-height:1.8;
 color:#334155;
 }
 
 .label{
 font-size:11px;
-font-weight:bold;
+font-weight:700;
 color:#64748b;
 text-transform:uppercase;
-letter-spacing:.6px;
+letter-spacing:.8px;
 }
 
 .news-image{
@@ -391,7 +442,8 @@ background:#e5e7eb;
 }
 
 .time{
-font-size:12px;
+font-size:11px;
+font-weight:500;
 color:#94a3b8;
 margin-top:11px;
 }
@@ -410,9 +462,16 @@ padding:0 48px 0 45px;
 border:1px solid #d1d5db;
 border-radius:14px;
 background:white;
+font-family:'Poppins',sans-serif;
 font-size:15px;
+font-weight:500;
 outline:none;
 box-shadow:0 3px 10px rgba(0,0,0,.04);
+}
+
+.search-box input::placeholder{
+font-weight:400;
+color:#94a3b8;
 }
 
 .search-icon{
@@ -446,6 +505,7 @@ cursor:pointer;
 
 .search-info{
 font-size:13px;
+font-weight:500;
 color:#64748b;
 margin:-5px 0 14px;
 }
@@ -468,7 +528,9 @@ z-index:9999;
 
 .nav{
 text-align:center;
+font-family:'Poppins',sans-serif;
 font-size:11px;
+font-weight:600;
 color:#64748b;
 cursor:pointer;
 padding:8px 10px;
@@ -483,8 +545,18 @@ margin-bottom:3px;
 
 .nav.active{
 color:#111827;
-font-weight:bold;
+font-weight:800;
 }
+
+/* ================= BUTTONS ================= */
+
+button{
+font-family:'Poppins',sans-serif;
+font-weight:700;
+letter-spacing:.2px;
+}
+
+/* ================= GENERAL ================= */
 
 button{
 width:100%;
@@ -493,7 +565,7 @@ border:0;
 border-radius:10px;
 background:#111827;
 color:white;
-font-size:15px;
+font-size:14px;
 margin-top:15px;
 cursor:pointer;
 }
@@ -512,8 +584,9 @@ background:#f1f5f9;
 padding:10px;
 border-radius:8px;
 font-size:12px;
+font-weight:500;
 color:#475569;
-line-height:1.5;
+line-height:1.6;
 word-break:break-word;
 }
 
@@ -524,6 +597,7 @@ background:#ecfdf5;
 padding:12px;
 border-radius:8px;
 font-size:11px;
+font-weight:500;
 color:#065f46;
 word-break:break-all;
 }
@@ -534,6 +608,9 @@ padding:25px;
 background:white;
 border-radius:14px;
 color:#64748b;
+font-size:14px;
+font-weight:500;
+line-height:1.6;
 }
 
 .errorBox{
@@ -542,18 +619,21 @@ color:#991b1b;
 padding:12px;
 border-radius:10px;
 font-size:12px;
+font-weight:500;
 margin-top:15px;
 display:none;
 }
 
 .profile-name{
 font-size:22px;
-font-weight:bold;
+font-weight:800;
+letter-spacing:-.4px;
 margin-top:10px;
 }
 
 .profile-email{
-font-size:14px;
+font-size:13px;
+font-weight:500;
 color:#64748b;
 margin-top:5px;
 word-break:break-word;
@@ -581,8 +661,9 @@ margin-bottom:7px;
 
 .rating-subtitle{
 font-size:14px;
+font-weight:500;
 color:#64748b;
-line-height:1.6;
+line-height:1.7;
 margin-bottom:16px;
 }
 
@@ -648,8 +729,9 @@ margin-top:16px;
 padding:13px;
 border:1px solid #d1d5db;
 border-radius:12px;
-font-family:Arial,sans-serif;
-font-size:15px;
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:500;
 line-height:1.65;
 resize:vertical;
 outline:none;
@@ -665,7 +747,8 @@ margin-top:12px;
 padding:11px;
 border-radius:10px;
 font-size:13px;
-line-height:1.5;
+font-weight:500;
+line-height:1.6;
 }
 
 .rating-success{
@@ -701,6 +784,7 @@ margin:4px 0;
 
 .rating-count{
 font-size:13px;
+font-weight:500;
 color:#64748b;
 }
 
@@ -714,16 +798,19 @@ margin-top:10px;
 
 .recent-opinion strong{
 font-size:13px;
+font-weight:700;
 }
 
 .recent-opinion p{
 font-size:14px;
+font-weight:500;
 color:#475569;
 line-height:1.6;
 margin-top:5px;
 }
 
 @media(max-width:350px){
+
 .quick{
 grid-template-columns:1fr;
 }
@@ -731,7 +818,22 @@ grid-template-columns:1fr;
 .satisfaction-options{
 grid-template-columns:1fr;
 }
+
 }
+
+/* ================= EXTRA TYPOGRAPHY POLISH ================= */
+
+input,
+textarea,
+button{
+-webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4,p,button,input,textarea{
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+}
+
 </style>
 </head>
 
@@ -1140,8 +1242,7 @@ class="star-rating">
 
 </div>
 
-<div id="ratingValue"
-class="rating-value">
+<div id="ratingValue" class="rating-value">
 Tap a star to rate
 </div>
 
@@ -1291,12 +1392,10 @@ Profile
 
 </div>
 
-<!-- =====================================================
-     IMPORTANT:
-     THIS SPLASH FALLBACK IS OUTSIDE THE FIREBASE MODULE.
-     ===================================================== -->
+<!-- ================= SPLASH FALLBACK ================= -->
 
 <script>
+
 (function(){
 
 window.setTimeout(function(){
@@ -1332,6 +1431,7 @@ auth.style.display="flex";
 },7000);
 
 })();
+
 </script>
 
 <!-- ================= NAVIGATION ================= -->
@@ -1390,6 +1490,7 @@ this.getAttribute("data-page")
 });
 
 })();
+
 </script>
 
 <!-- ================= FIREBASE ================= -->
@@ -1580,13 +1681,6 @@ app=initializeApp(firebaseConfig);
 db=getDatabase(app);
 
 auth=getAuth(app);
-
-/*
- IMPORTANT:
- Firebase Messaging is NOT initialized here.
- It will only initialize when Notifications
- are enabled.
-*/
 
 splashMessage(
 "Firebase connected. Checking account..."
@@ -2880,7 +2974,6 @@ error
 
 /* =====================================================
    NOTIFICATIONS
-   Firebase Messaging is loaded ONLY when needed.
 ===================================================== */
 
 const notifyBtn=
@@ -2931,9 +3024,6 @@ throw new Error(
 );
 
 }
-
-
-/* LOAD FIREBASE MESSAGING ONLY NOW */
 
 if(!messaging){
 
@@ -3127,7 +3217,6 @@ registration
 
 }
 );
-
 
 }
 
