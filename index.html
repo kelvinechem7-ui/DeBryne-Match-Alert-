@@ -30,17 +30,10 @@ min-height:100%;
 }
 
 body{
-font-family:
-"Segoe UI",
-Roboto,
-"Helvetica Neue",
-Arial,
-sans-serif;
+font-family:Arial,sans-serif;
 background:#f5f7fa;
 color:#172033;
 padding-bottom:80px;
--webkit-font-smoothing:antialiased;
-text-rendering:optimizeLegibility;
 }
 
 /* ==================================================
@@ -98,12 +91,14 @@ font-size:29px;
 font-weight:800;
 margin-top:22px;
 letter-spacing:.2px;
+animation:splashText .8s ease;
 }
 
 .splash-subtitle{
 color:#cbd5e1;
-font-size:14px;
+font-size:13px;
 margin-top:7px;
+animation:splashText 1s ease;
 }
 
 .splash-loader{
@@ -125,7 +120,7 @@ animation:splashLoading 1.15s infinite ease-in-out;
 
 .splash-status{
 color:#94a3b8;
-font-size:12px;
+font-size:11px;
 margin-top:13px;
 }
 
@@ -137,6 +132,17 @@ transform:scale(.75);
 to{
 opacity:1;
 transform:scale(1);
+}
+}
+
+@keyframes splashText{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
 }
 }
 
@@ -191,16 +197,15 @@ object-fit:cover;
 
 .auth-box h1{
 text-align:center;
-font-size:26px;
-font-weight:800;
+font-size:25px;
 margin-bottom:6px;
 }
 
 .auth-subtitle{
 text-align:center;
 color:#64748b;
-font-size:15px;
-line-height:1.6;
+font-size:14px;
+line-height:1.5;
 margin-bottom:20px;
 }
 
@@ -313,13 +318,11 @@ object-fit:cover;
 }
 
 .brand h1{
-font-size:23px;
-font-weight:800;
-letter-spacing:-.2px;
+font-size:22px;
 }
 
 .brand p{
-font-size:13px;
+font-size:12px;
 color:#cbd5e1;
 margin-top:3px;
 }
@@ -336,35 +339,28 @@ display:block;
 padding:18px;
 }
 
-/* ==================================================
-   GENERAL CARDS
-================================================== */
-
 .welcome,
-.card{
+.card,
+.news{
 background:white;
-border-radius:16px;
-padding:19px;
-margin-bottom:15px;
-box-shadow:0 4px 13px rgba(0,0,0,.055);
+border-radius:15px;
+padding:18px;
+margin-bottom:14px;
+box-shadow:0 3px 10px rgba(0,0,0,.05);
 }
 
 .welcome h2{
-font-size:22px;
-font-weight:800;
-margin-bottom:8px;
+margin-bottom:7px;
 }
 
 .muted{
 color:#64748b;
 font-size:15px;
-line-height:1.6;
+line-height:1.65;
 }
 
 .title{
-font-size:21px;
-font-weight:800;
-margin:22px 0 13px;
+margin:20px 0 12px;
 }
 
 .quick{
@@ -378,73 +374,43 @@ cursor:pointer;
 }
 
 .icon{
-font-size:28px;
-margin-bottom:9px;
+font-size:26px;
+margin-bottom:8px;
 }
-
-.quick .card h3{
-font-size:17px;
-font-weight:750;
-margin-bottom:5px;
-}
-
-/* ==================================================
-   NEWS CARDS
-================================================== */
 
 .news{
-background:white;
-border-radius:18px;
-padding:20px;
-margin-bottom:16px;
-box-shadow:0 4px 14px rgba(0,0,0,.06);
 overflow:hidden;
 }
 
 .news h3{
-margin:9px 0 14px;
-font-family:
-"Trebuchet MS",
-"Segoe UI",
-Arial,
-sans-serif;
+margin:8px 0;
 font-size:21px;
-font-weight:800;
 line-height:1.4;
+font-weight:800;
 letter-spacing:-.2px;
-color:#111827;
 }
 
-.news .muted{
-font-family:
-"Trebuchet MS",
-"Segoe UI",
-Arial,
-sans-serif;
-font-size:17px;
-font-weight:500;
+.news p.muted{
+font-size:16px;
 line-height:1.75;
-letter-spacing:.05px;
-color:#263244;
-margin:0;
-white-space:pre-line;
+color:#334155;
 }
 
 .label{
-font-size:12px;
-font-weight:800;
-color:#2563eb;
+font-size:11px;
+font-weight:bold;
+color:#64748b;
 text-transform:uppercase;
-letter-spacing:.7px;
+letter-spacing:.6px;
 }
 
 .news-image{
 width:100%;
 height:auto;
-max-height:340px;
+max-height:320px;
 object-fit:cover;
-border-radius:14px;
-margin:14px 0 14px;
+border-radius:12px;
+margin:12px 0 10px;
 display:block;
 background:#e5e7eb;
 }
@@ -452,9 +418,7 @@ background:#e5e7eb;
 .time{
 font-size:12px;
 color:#94a3b8;
-margin-top:14px;
-padding-top:10px;
-border-top:1px solid #f1f5f9;
+margin-top:11px;
 }
 
 /* ==================================================
@@ -473,7 +437,7 @@ padding:0 48px 0 45px;
 border:1px solid #d1d5db;
 border-radius:14px;
 background:white;
-font-size:16px;
+font-size:15px;
 outline:none;
 box-shadow:0 3px 10px rgba(0,0,0,.04);
 }
@@ -513,7 +477,7 @@ cursor:pointer;
 }
 
 .search-info{
-font-size:14px;
+font-size:13px;
 color:#64748b;
 margin:-5px 0 14px;
 }
@@ -521,25 +485,6 @@ margin:-5px 0 14px;
 .search-results{
 margin-top:5px;
 }
-
-/* ==================================================
-   PAGE HEADINGS
-================================================== */
-
-.page h2{
-font-size:24px;
-font-weight:800;
-letter-spacing:-.3px;
-}
-
-.page > .container > .muted{
-font-size:15px;
-margin-top:5px;
-}
-
-/* ==================================================
-   BOTTOM NAVIGATION
-================================================== */
 
 .bottom{
 position:fixed;
@@ -557,9 +502,8 @@ z-index:9999;
 
 .nav{
 text-align:center;
-font-size:12px;
+font-size:11px;
 color:#64748b;
-font-weight:500;
 cursor:pointer;
 padding:8px 10px;
 user-select:none;
@@ -568,13 +512,13 @@ user-select:none;
 
 .nav span{
 display:block;
-font-size:21px;
+font-size:20px;
 margin-bottom:3px;
 }
 
 .nav.active{
 color:#111827;
-font-weight:800;
+font-weight:bold;
 }
 
 button{
@@ -585,7 +529,6 @@ border-radius:10px;
 background:#111827;
 color:white;
 font-size:15px;
-font-weight:700;
 margin-top:15px;
 cursor:pointer;
 }
@@ -602,9 +545,9 @@ background:#dc2626;
 .status{
 margin-top:12px;
 background:#f1f5f9;
-padding:11px;
+padding:10px;
 border-radius:8px;
-font-size:13px;
+font-size:12px;
 color:#475569;
 line-height:1.5;
 word-break:break-word;
@@ -623,12 +566,10 @@ word-break:break-all;
 
 .empty{
 text-align:center;
-padding:28px 20px;
+padding:25px;
 background:white;
-border-radius:15px;
+border-radius:14px;
 color:#64748b;
-font-size:15px;
-line-height:1.6;
 }
 
 .errorBox{
@@ -636,19 +577,19 @@ background:#fee2e2;
 color:#991b1b;
 padding:12px;
 border-radius:10px;
-font-size:13px;
+font-size:12px;
 margin-top:15px;
 display:none;
 }
 
 .profile-name{
-font-size:23px;
-font-weight:800;
+font-size:22px;
+font-weight:bold;
 margin-top:10px;
 }
 
 .profile-email{
-font-size:15px;
+font-size:14px;
 color:#64748b;
 margin-top:5px;
 word-break:break-word;
@@ -659,8 +600,188 @@ font-size:60px;
 }
 
 /* ==================================================
-   RESPONSIVE
+   VIEWER RATING & SATISFACTION
 ================================================== */
+
+.rating-card{
+background:white;
+border-radius:18px;
+padding:20px;
+margin-top:18px;
+box-shadow:0 4px 14px rgba(0,0,0,.06);
+text-align:left;
+}
+
+.rating-card h3{
+font-size:20px;
+font-weight:800;
+color:#111827;
+margin-bottom:7px;
+}
+
+.rating-subtitle{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.star-rating{
+display:flex;
+justify-content:center;
+gap:7px;
+margin:12px 0 10px;
+}
+
+.star-rating button{
+width:auto;
+padding:0;
+margin:0;
+background:none;
+border:0;
+font-size:36px;
+line-height:1;
+color:#cbd5e1;
+cursor:pointer;
+transition:transform .15s ease,color .15s ease;
+}
+
+.star-rating button:hover{
+transform:scale(1.12);
+}
+
+.star-rating button.selected{
+color:#f59e0b;
+}
+
+.rating-value{
+text-align:center;
+font-size:14px;
+font-weight:700;
+color:#475569;
+margin-bottom:20px;
+}
+
+.satisfaction-options{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.satisfaction-option{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+padding:13px 8px;
+text-align:center;
+font-size:13px;
+font-weight:600;
+color:#475569;
+cursor:pointer;
+transition:.15s ease;
+}
+
+.satisfaction-option:hover{
+transform:translateY(-1px);
+}
+
+.satisfaction-option.selected{
+background:#eff6ff;
+border-color:#2563eb;
+color:#1d4ed8;
+}
+
+.rating-opinion{
+width:100%;
+min-height:115px;
+margin-top:16px;
+padding:13px;
+border:1px solid #d1d5db;
+border-radius:12px;
+font-family:Arial,sans-serif;
+font-size:15px;
+line-height:1.65;
+resize:vertical;
+outline:none;
+color:#172033;
+}
+
+.rating-opinion:focus{
+border-color:#2563eb;
+box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.rating-submit{
+margin-top:14px;
+background:#111827;
+}
+
+.rating-status{
+display:none;
+margin-top:12px;
+padding:11px;
+border-radius:10px;
+font-size:13px;
+line-height:1.5;
+}
+
+.rating-success{
+display:block;
+background:#ecfdf5;
+color:#166534;
+}
+
+.rating-error{
+display:block;
+background:#fef2f2;
+color:#991b1b;
+}
+
+.rating-summary{
+margin-top:20px;
+padding-top:20px;
+border-top:1px solid #e5e7eb;
+text-align:center;
+}
+
+.rating-score{
+font-size:30px;
+font-weight:800;
+color:#111827;
+}
+
+.rating-stars-display{
+font-size:25px;
+color:#f59e0b;
+letter-spacing:2px;
+margin:4px 0;
+}
+
+.rating-count{
+font-size:13px;
+color:#64748b;
+}
+
+.recent-opinion{
+text-align:left;
+background:#f8fafc;
+border-radius:12px;
+padding:13px;
+margin-top:10px;
+}
+
+.recent-opinion strong{
+font-size:13px;
+color:#111827;
+}
+
+.recent-opinion p{
+font-size:14px;
+color:#475569;
+line-height:1.6;
+margin-top:5px;
+}
 
 @media(max-width:350px){
 
@@ -676,13 +797,12 @@ padding:8px 5px;
 font-size:25px;
 }
 
-.news h3{
-font-size:20px;
+.satisfaction-options{
+grid-template-columns:1fr;
 }
 
-.news .muted{
-font-size:16px;
-line-height:1.7;
+.star-rating button{
+font-size:32px;
 }
 
 }
@@ -1221,6 +1341,167 @@ type="button">
 LOG OUT
 
 </button>
+
+</div>
+
+
+<!-- ==================================================
+     VIEWER RATING
+================================================== -->
+
+<div class="rating-card">
+
+<h3>⭐ Rate DeBryne Update</h3>
+
+<p class="rating-subtitle">
+How would you rate your experience with DeBryne Update?
+Your feedback helps us improve.
+</p>
+
+<div
+id="starRating"
+class="star-rating">
+
+<button
+type="button"
+data-rating="1">
+★
+</button>
+
+<button
+type="button"
+data-rating="2">
+★
+</button>
+
+<button
+type="button"
+data-rating="3">
+★
+</button>
+
+<button
+type="button"
+data-rating="4">
+★
+</button>
+
+<button
+type="button"
+data-rating="5">
+★
+</button>
+
+</div>
+
+<div
+id="ratingValue"
+class="rating-value">
+
+Tap a star to rate
+
+</div>
+
+
+<p class="rating-subtitle">
+How satisfied are you with DeBryne Update?
+</p>
+
+<div
+id="satisfactionOptions"
+class="satisfaction-options">
+
+<div
+class="satisfaction-option"
+data-satisfaction="Very Satisfied">
+
+😊 Very Satisfied
+
+</div>
+
+<div
+class="satisfaction-option"
+data-satisfaction="Satisfied">
+
+🙂 Satisfied
+
+</div>
+
+<div
+class="satisfaction-option"
+data-satisfaction="Neutral">
+
+😐 Neutral
+
+</div>
+
+<div
+class="satisfaction-option"
+data-satisfaction="Not Satisfied">
+
+🙁 Not Satisfied
+
+</div>
+
+</div>
+
+
+<textarea
+id="ratingOpinion"
+class="rating-opinion"
+placeholder="Tell us what you think about DeBryne Update..."></textarea>
+
+
+<button
+id="submitRating"
+class="rating-submit"
+type="button">
+
+SUBMIT FEEDBACK
+
+</button>
+
+
+<div
+id="ratingStatus"
+class="rating-status">
+</div>
+
+
+<div class="rating-summary">
+
+<div
+class="rating-score"
+id="overallRating">
+
+0.0/5
+
+</div>
+
+<div
+class="rating-stars-display"
+id="overallStars">
+
+☆☆☆☆☆
+
+</div>
+
+<div
+class="rating-count"
+id="ratingCount">
+
+No ratings yet
+
+</div>
+
+</div>
+
+
+<div
+id="recentOpinions"
+style="margin-top:15px;">
+
+</div>
 
 </div>
 
@@ -2283,6 +2564,12 @@ appContent.style.display =
 
 await loadUserProfile(user);
 
+/* LOAD VIEWER FEEDBACK */
+
+await loadMyRating(user.uid);
+
+await loadRatingSummary();
+
 updateSplashStatus(
 "Loading latest updates..."
 );
@@ -2716,7 +3003,7 @@ container.innerHTML =
 '🔍 No results found for "' +
 escapeHTML(cleanQuery) +
 '".<br><br>' +
-'<span style="font-size:13px;">Try another keyword.</span>' +
+'<span style="font-size:12px;">Try another keyword.</span>' +
 '</div>';
 
 return;
@@ -3076,6 +3363,724 @@ message;
 
 }
 
+);
+
+}
+
+
+/* ==================================================
+   VIEWER RATING & SATISFACTION SYSTEM
+================================================== */
+
+let selectedRating = 0;
+let selectedSatisfaction = "";
+
+const starButtons =
+document.querySelectorAll(
+"#starRating button"
+);
+
+const ratingValue =
+document.getElementById(
+"ratingValue"
+);
+
+const satisfactionButtons =
+document.querySelectorAll(
+".satisfaction-option"
+);
+
+const ratingOpinion =
+document.getElementById(
+"ratingOpinion"
+);
+
+const submitRating =
+document.getElementById(
+"submitRating"
+);
+
+const ratingStatus =
+document.getElementById(
+"ratingStatus"
+);
+
+const overallRating =
+document.getElementById(
+"overallRating"
+);
+
+const overallStars =
+document.getElementById(
+"overallStars"
+);
+
+const ratingCount =
+document.getElementById(
+"ratingCount"
+);
+
+const recentOpinions =
+document.getElementById(
+"recentOpinions"
+);
+
+
+/* SELECT STARS */
+
+function setRatingStars(
+rating
+){
+
+selectedRating =
+Number(rating);
+
+starButtons.forEach(
+function(star){
+
+const value =
+Number(
+star.getAttribute(
+"data-rating"
+)
+);
+
+star.classList.toggle(
+"selected",
+value <= selectedRating
+);
+
+});
+
+if(selectedRating){
+
+ratingValue.textContent =
+selectedRating +
+(
+selectedRating === 1
+?
+" star selected"
+:
+" stars selected"
+);
+
+}
+else{
+
+ratingValue.textContent =
+"Tap a star to rate";
+
+}
+
+}
+
+
+starButtons.forEach(
+function(star){
+
+star.addEventListener(
+"click",
+function(){
+
+setRatingStars(
+Number(
+this.getAttribute(
+"data-rating"
+)
+)
+);
+
+});
+
+});
+
+
+/* SELECT SATISFACTION */
+
+satisfactionButtons.forEach(
+function(option){
+
+option.addEventListener(
+"click",
+function(){
+
+satisfactionButtons.forEach(
+function(item){
+
+item.classList.remove(
+"selected"
+);
+
+});
+
+this.classList.add(
+"selected"
+);
+
+selectedSatisfaction =
+this.getAttribute(
+"data-satisfaction"
+);
+
+});
+
+});
+
+
+/* RATING STATUS */
+
+function showRatingStatus(
+message,
+type
+){
+
+ratingStatus.textContent =
+message;
+
+ratingStatus.className =
+"rating-status";
+
+if(type === "success"){
+
+ratingStatus.classList.add(
+"rating-success"
+);
+
+}
+else{
+
+ratingStatus.classList.add(
+"rating-error"
+);
+
+}
+
+ratingStatus.style.display =
+"block";
+
+}
+
+
+/* SUBMIT RATING */
+
+async function submitViewerRating(){
+
+if(!auth || !auth.currentUser){
+
+showRatingStatus(
+"Please login before submitting your feedback.",
+"error"
+);
+
+return;
+
+}
+
+if(!selectedRating){
+
+showRatingStatus(
+"Please select a star rating first.",
+"error"
+);
+
+return;
+
+}
+
+if(!selectedSatisfaction){
+
+showRatingStatus(
+"Please select your satisfaction level.",
+"error"
+);
+
+return;
+
+}
+
+
+const user =
+auth.currentUser;
+
+const opinion =
+ratingOpinion.value.trim();
+
+
+submitRating.disabled =
+true;
+
+submitRating.textContent =
+"SUBMITTING...";
+
+
+try{
+
+const existingSnapshot =
+await new Promise(
+function(resolve,reject){
+
+onValue(
+ref(
+db,
+"ratings/" + user.uid
+),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+}
+);
+
+const existing =
+existingSnapshot.val() || {};
+
+
+const ratingData = {
+
+userId:
+user.uid,
+
+name:
+user.displayName ||
+"Anonymous Viewer",
+
+email:
+user.email ||
+"",
+
+rating:
+selectedRating,
+
+satisfaction:
+selectedSatisfaction,
+
+opinion:
+opinion,
+
+createdAt:
+existing.createdAt ||
+Date.now(),
+
+updatedAt:
+Date.now()
+
+};
+
+
+await set(
+ref(
+db,
+"ratings/" + user.uid
+),
+ratingData
+);
+
+
+showRatingStatus(
+"✅ Thank you! Your feedback has been saved successfully.",
+"success"
+);
+
+submitRating.textContent =
+"UPDATE FEEDBACK";
+
+
+await loadMyRating(
+user.uid
+);
+
+await loadRatingSummary();
+
+}
+
+catch(error){
+
+console.error(
+"Rating submission error:",
+error
+);
+
+showRatingStatus(
+"❌ Could not save your feedback. Please try again.",
+"error"
+);
+
+submitRating.textContent =
+"SUBMIT FEEDBACK";
+
+}
+
+submitRating.disabled =
+false;
+
+}
+
+
+/* SUBMIT BUTTON */
+
+submitRating.addEventListener(
+"click",
+submitViewerRating
+);
+
+
+/* LOAD CURRENT USER RATING */
+
+async function loadMyRating(
+userId
+){
+
+if(!db || !userId){
+
+return;
+
+}
+
+try{
+
+const snapshot =
+await new Promise(
+function(resolve,reject){
+
+onValue(
+ref(
+db,
+"ratings/" + userId
+),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+}
+);
+
+const data =
+snapshot.val();
+
+if(!data){
+
+selectedRating = 0;
+
+selectedSatisfaction = "";
+
+ratingOpinion.value = "";
+
+setRatingStars(0);
+
+satisfactionButtons.forEach(
+function(option){
+
+option.classList.remove(
+"selected"
+);
+
+});
+
+submitRating.textContent =
+"SUBMIT FEEDBACK";
+
+return;
+
+}
+
+
+if(data.rating){
+
+setRatingStars(
+Number(data.rating)
+);
+
+}
+
+
+if(data.satisfaction){
+
+selectedSatisfaction =
+String(
+data.satisfaction
+);
+
+satisfactionButtons.forEach(
+function(option){
+
+option.classList.toggle(
+"selected",
+option.getAttribute(
+"data-satisfaction"
+) ===
+selectedSatisfaction
+);
+
+});
+
+}
+
+
+if(data.opinion){
+
+ratingOpinion.value =
+String(
+data.opinion
+);
+
+}
+else{
+
+ratingOpinion.value = "";
+
+}
+
+
+submitRating.textContent =
+"UPDATE FEEDBACK";
+
+}
+
+catch(error){
+
+console.error(
+"Could not load user rating:",
+error
+);
+
+}
+
+}
+
+
+/* LOAD OVERALL RATING */
+
+async function loadRatingSummary(){
+
+if(!db){
+
+return;
+
+}
+
+try{
+
+const snapshot =
+await new Promise(
+function(resolve,reject){
+
+onValue(
+ref(
+db,
+"ratings"
+),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+}
+);
+
+const data =
+snapshot.val();
+
+
+if(!data){
+
+overallRating.textContent =
+"0.0/5";
+
+overallStars.textContent =
+"☆☆☆☆☆";
+
+ratingCount.textContent =
+"No ratings yet";
+
+recentOpinions.innerHTML =
+"";
+
+return;
+
+}
+
+
+const ratings =
+Object.values(data)
+.filter(
+function(item){
+
+return item &&
+Number(item.rating) >= 1 &&
+Number(item.rating) <= 5;
+
+});
+
+
+if(!ratings.length){
+
+overallRating.textContent =
+"0.0/5";
+
+overallStars.textContent =
+"☆☆☆☆☆";
+
+ratingCount.textContent =
+"No ratings yet";
+
+return;
+
+}
+
+
+const total =
+ratings.reduce(
+function(sum,item){
+
+return sum +
+Number(item.rating);
+
+},
+0
+);
+
+
+const average =
+total /
+ratings.length;
+
+
+overallRating.textContent =
+average.toFixed(1) +
+"/5";
+
+
+const rounded =
+Math.round(average);
+
+
+overallStars.textContent =
+"★".repeat(
+rounded
+) +
+"☆".repeat(
+5-rounded
+);
+
+
+ratingCount.textContent =
+ratings.length +
+(
+ratings.length === 1
+?
+" viewer rating"
+:
+" viewer ratings"
+);
+
+
+/* ==================================================
+   RECENT VIEWER OPINIONS
+================================================== */
+
+const opinions =
+ratings
+.filter(
+function(item){
+
+return item.opinion &&
+String(
+item.opinion
+).trim();
+
+})
+.sort(
+function(a,b){
+
+return Number(
+b.updatedAt ||
+b.createdAt ||
+0
+)
+-
+Number(
+a.updatedAt ||
+a.createdAt ||
+0
+);
+
+})
+.slice(0,3);
+
+
+if(opinions.length){
+
+recentOpinions.innerHTML =
+
+"<h4 style='font-size:16px;margin-bottom:9px;color:#111827;'>💬 Viewer Opinions</h4>" +
+
+opinions
+.map(
+function(item){
+
+const stars =
+Math.max(
+1,
+Math.min(
+5,
+Number(
+item.rating
+)
+)
+);
+
+
+return `
+
+<div class="recent-opinion">
+
+<strong>
+${escapeHTML(
+item.name ||
+"Anonymous Viewer"
+)}
+</strong>
+
+<div style="color:#f59e0b;margin-top:4px;">
+
+${"★".repeat(stars)}
+${"☆".repeat(5-stars)}
+
+</div>
+
+<p>
+${escapeHTML(
+item.opinion
+)}
+</p>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}
+
+else{
+
+recentOpinions.innerHTML = "";
+
+}
+
+}
+
+catch(error){
+
+console.error(
+"Could not load rating summary:",
+error
 );
 
 }
