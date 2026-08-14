@@ -481,12 +481,26 @@ display:block;
 background:#e5e7eb;
 }
 
-.news p.muted{
+/* ===== IMPORTANT NEWS SPACING FIX ===== */
+
+.news-content{
 margin:0;
 font-size:15px;
 font-weight:500;
 line-height:1.9;
 color:#334155;
+
+white-space:pre-wrap;
+word-wrap:break-word;
+overflow-wrap:anywhere;
+}
+
+/* Preserve line breaks and empty lines */
+
+.news-content br{
+display:block;
+content:"";
+margin-bottom:10px;
 }
 
 .news .time{
@@ -899,9 +913,9 @@ font-size:19px;
 line-height:1.5;
 }
 
-.news p.muted{
+.news-content{
 font-size:15px;
-line-height:1.85;
+line-height:1.9;
 }
 
 .news-image{
@@ -1318,8 +1332,6 @@ LOG OUT
 
 </div>
 
-<!-- RATING -->
-
 <div class="rating-card">
 
 <h3>⭐ Rate DeBryne Update</h3>
@@ -1329,8 +1341,7 @@ How would you rate your experience with DeBryne Update?
 Your feedback helps us improve.
 </p>
 
-<div id="starRating"
-class="star-rating">
+<div id="starRating" class="star-rating">
 
 <button type="button" data-rating="1">★</button>
 <button type="button" data-rating="2">★</button>
@@ -1348,8 +1359,7 @@ Tap a star to rate
 How satisfied are you with DeBryne Update?
 </p>
 
-<div id="satisfactionOptions"
-class="satisfaction-options">
+<div id="satisfactionOptions" class="satisfaction-options">
 
 <div class="satisfaction-option"
 data-satisfaction="Very Satisfied">
@@ -1383,24 +1393,19 @@ type="button">
 SUBMIT FEEDBACK
 </button>
 
-<div id="ratingStatus"
-class="rating-status">
-</div>
+<div id="ratingStatus" class="rating-status"></div>
 
 <div class="rating-summary">
 
-<div id="overallRating"
-class="rating-score">
+<div id="overallRating" class="rating-score">
 0.0/5
 </div>
 
-<div id="overallStars"
-class="rating-stars-display">
+<div id="overallStars" class="rating-stars-display">
 ☆☆☆☆☆
 </div>
 
-<div id="ratingCount"
-class="rating-count">
+<div id="ratingCount" class="rating-count">
 No ratings yet
 </div>
 
@@ -1490,31 +1495,22 @@ Profile
 
 </div>
 
-<!-- ================= SPLASH FALLBACK ================= -->
-
 <script>
 
 (function(){
 
 window.setTimeout(function(){
 
-var splash =
-document.getElementById("appSplash");
-
-var auth =
-document.getElementById("authScreen");
-
-var app =
-document.getElementById("appContent");
+var splash=document.getElementById("appSplash");
+var auth=document.getElementById("authScreen");
+var app=document.getElementById("appContent");
 
 if(splash){
 
 splash.classList.add("hide");
 
 window.setTimeout(function(){
-
 splash.style.display="none";
-
 },500);
 
 }
@@ -1532,8 +1528,6 @@ auth.style.display="flex";
 
 </script>
 
-<!-- ================= NAVIGATION ================= -->
-
 <script>
 
 (function(){
@@ -1542,13 +1536,10 @@ function openPage(page){
 
 document.querySelectorAll(".page")
 .forEach(function(item){
-
 item.classList.remove("active");
-
 });
 
-var target =
-document.getElementById(page+"Page");
+var target=document.getElementById(page+"Page");
 
 if(target){
 target.classList.add("active");
@@ -1556,18 +1547,14 @@ target.classList.add("active");
 
 document.querySelectorAll(".nav")
 .forEach(function(item){
-
 item.classList.remove("active");
-
 });
 
 document.querySelectorAll(
 '[data-page="'+page+'"]'
 )
 .forEach(function(item){
-
 item.classList.add("active");
-
 });
 
 window.scrollTo(0,0);
@@ -1590,8 +1577,6 @@ this.getAttribute("data-page")
 })();
 
 </script>
-
-<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
@@ -1665,26 +1650,13 @@ let messaging=null;
 
 /* ================= ELEMENTS ================= */
 
-const splash =
-document.getElementById("appSplash");
-
-const splashStatus =
-document.getElementById("splashStatus");
-
-const authScreen =
-document.getElementById("authScreen");
-
-const appContent =
-document.getElementById("appContent");
-
-const authStatus =
-document.getElementById("authStatus");
-
-const registerForm =
-document.getElementById("registerForm");
-
-const loginForm =
-document.getElementById("loginForm");
+const splash=document.getElementById("appSplash");
+const splashStatus=document.getElementById("splashStatus");
+const authScreen=document.getElementById("authScreen");
+const appContent=document.getElementById("appContent");
+const authStatus=document.getElementById("authStatus");
+const registerForm=document.getElementById("registerForm");
+const loginForm=document.getElementById("loginForm");
 
 
 function splashMessage(message){
@@ -1722,19 +1694,13 @@ authStatus.textContent=message;
 authStatus.className="auth-status";
 
 if(type==="success"){
-
 authStatus.classList.add("auth-success");
-
 }
 else if(type==="error"){
-
 authStatus.classList.add("auth-error");
-
 }
 else{
-
 authStatus.classList.add("auth-info");
-
 }
 
 authStatus.style.display="block";
@@ -1826,24 +1792,11 @@ return;
 
 }
 
-const name=
-document.getElementById("registerName")
-.value.trim();
-
-const email=
-document.getElementById("registerEmail")
-.value.trim();
-
-const password=
-document.getElementById("registerPassword")
-.value;
-
-const confirm=
-document.getElementById("registerConfirm")
-.value;
-
-const button=
-document.getElementById("registerButton");
+const name=document.getElementById("registerName").value.trim();
+const email=document.getElementById("registerEmail").value.trim();
+const password=document.getElementById("registerPassword").value;
+const confirm=document.getElementById("registerConfirm").value;
+const button=document.getElementById("registerButton");
 
 
 if(!name){
@@ -1979,16 +1932,9 @@ return;
 
 }
 
-const email=
-document.getElementById("loginEmail")
-.value.trim();
-
-const password=
-document.getElementById("loginPassword")
-.value;
-
-const button=
-document.getElementById("loginButton");
+const email=document.getElementById("loginEmail").value.trim();
+const password=document.getElementById("loginPassword").value;
+const button=document.getElementById("loginButton");
 
 
 if(!email){
@@ -2101,8 +2047,7 @@ async function loadUserProfile(user){
 
 let profile=null;
 
-let name=
-user.displayName || "";
+let name=user.displayName || "";
 
 try{
 
@@ -2123,8 +2068,7 @@ profile=snapshot.val();
 
 if(profile && profile.fullName){
 
-name=
-String(profile.fullName).trim();
+name=String(profile.fullName).trim();
 
 }
 
@@ -2179,9 +2123,7 @@ document.getElementById(
 async function(){
 
 if(auth){
-
 await signOut(auth);
-
 }
 
 });
@@ -2203,6 +2145,18 @@ return String(value || "")
 
 
 /* ================= NEWS CARD ================= */
+
+/*
+IMPORTANT:
+The news content is placed inside .news-content.
+CSS white-space:pre-wrap preserves:
+
+• line breaks
+• empty lines
+• paragraphs
+• numbered lists
+• spacing typed in the admin update box
+*/
 
 function createNewsCard(item){
 
@@ -2237,11 +2191,11 @@ item.title || "Untitled"
 
 ${imageHTML}
 
-<p class="muted">
+<div class="news-content">
 ${escapeHTML(
 item.content || ""
 )}
-</p>
+</div>
 
 <div class="time">
 ${
@@ -2367,17 +2321,10 @@ infoId,
 clearId
 ){
 
-const input=
-document.getElementById(inputId);
-
-const container=
-document.getElementById(containerId);
-
-const info=
-document.getElementById(infoId);
-
-const clear=
-document.getElementById(clearId);
+const input=document.getElementById(inputId);
+const container=document.getElementById(containerId);
+const info=document.getElementById(infoId);
+const clear=document.getElementById(clearId);
 
 if(!input){
 return;
@@ -2446,20 +2393,11 @@ function(snapshot){
 
 const data=snapshot.val();
 
-const home=
-document.getElementById("homeNews");
-
-const news=
-document.getElementById("newsList");
-
-const sports=
-document.getElementById("sportsList");
-
-const academic=
-document.getElementById("academicList");
-
-const events=
-document.getElementById("eventList");
+const home=document.getElementById("homeNews");
+const news=document.getElementById("newsList");
+const sports=document.getElementById("sportsList");
+const academic=document.getElementById("academicList");
+const events=document.getElementById("eventList");
 
 
 if(!data){
