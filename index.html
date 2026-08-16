@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Google AdSense verification -->
-<meta name="google-adsense-account" content="ca-pub-1834730377528073">
+<meta name="google-adsense-account"
+content="ca-pub-1834730377528073">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<!-- Google AdSense -->
 <script async
 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1834730377528073"
 crossorigin="anonymous"></script>
@@ -26,7 +26,9 @@ href="./file_000000008e5c71f4a9d057362a556762.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -42,23 +44,31 @@ min-height:100%;
 }
 
 body{
-font-family:'Inter','Poppins',sans-serif;
+font-family:Inter,Poppins,sans-serif;
 font-size:16px;
 font-weight:500;
 background:#f5f7fa;
 color:#172033;
 padding-bottom:82px;
 -webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
 }
 
-h1,h2,h3,h4,
-button,
-input,
-textarea{
-font-family:'Inter','Poppins',sans-serif;
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
+button,input,textarea{
+font-family:inherit;
+}
+
+button{
+font-weight:800;
+cursor:pointer;
+}
+
+button:active{
+transform:scale(.98);
+}
+
+button:disabled{
+opacity:.6;
+cursor:not-allowed;
 }
 
 /* ================= SPLASH ================= */
@@ -71,8 +81,7 @@ background:#111827;
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden;
-transition:opacity .45s ease,visibility .45s ease;
+transition:.45s ease;
 }
 
 #appSplash.hide{
@@ -86,20 +95,16 @@ width:100%;
 max-width:430px;
 padding:30px;
 text-align:center;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
 }
 
 .splash-logo{
 width:105px;
 height:105px;
+margin:auto;
 border-radius:26px;
 overflow:hidden;
 background:white;
 box-shadow:0 15px 45px rgba(0,0,0,.35);
-animation:splashLogo .8s ease;
 }
 
 .splash-logo img{
@@ -112,59 +117,40 @@ object-fit:cover;
 color:white;
 font-size:30px;
 font-weight:900;
-letter-spacing:-1px;
 margin-top:22px;
 }
 
 .splash-subtitle{
 color:#cbd5e1;
 font-size:13px;
-font-weight:500;
 margin-top:7px;
 }
 
 .splash-loader{
 width:180px;
 height:4px;
+margin:30px auto 0;
 background:rgba(255,255,255,.15);
 border-radius:20px;
 overflow:hidden;
-margin-top:30px;
 }
 
 .splash-loader-bar{
 width:45%;
 height:100%;
 background:white;
-border-radius:20px;
-animation:splashLoading 1.15s infinite ease-in-out;
+animation:loading 1.15s infinite ease-in-out;
 }
 
 .splash-status{
 color:#94a3b8;
 font-size:11px;
-font-weight:500;
 margin-top:13px;
 }
 
-@keyframes splashLogo{
-from{
-opacity:0;
-transform:scale(.75);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-
-@keyframes splashLoading{
-0%{
-transform:translateX(-180%);
-}
-100%{
-transform:translateX(400%);
-}
+@keyframes loading{
+0%{transform:translateX(-180%);}
+100%{transform:translateX(400%);}
 }
 
 /* ================= AUTH ================= */
@@ -208,7 +194,6 @@ object-fit:cover;
 text-align:center;
 font-size:27px;
 font-weight:900;
-letter-spacing:-.7px;
 margin-bottom:6px;
 }
 
@@ -216,7 +201,6 @@ margin-bottom:6px;
 text-align:center;
 color:#64748b;
 font-size:13px;
-font-weight:500;
 line-height:1.7;
 margin-bottom:20px;
 }
@@ -228,7 +212,6 @@ border:1px solid #d1d5db;
 border-radius:11px;
 margin-top:11px;
 font-size:14px;
-font-weight:500;
 outline:none;
 }
 
@@ -244,27 +227,13 @@ border:0;
 border-radius:11px;
 background:#111827;
 color:white;
-font-size:14px;
-font-weight:800;
-letter-spacing:.2px;
 margin-top:16px;
-cursor:pointer;
-transition:.2s ease;
-}
-
-.auth-button:active{
-transform:scale(.98);
-}
-
-.auth-button:disabled{
-opacity:.6;
 }
 
 .auth-switch{
 text-align:center;
 margin-top:18px;
 font-size:13px;
-font-weight:500;
 color:#64748b;
 }
 
@@ -273,34 +242,39 @@ width:auto;
 padding:0;
 margin:0;
 background:none;
+border:0;
 color:#2563eb;
-font-size:13px;
-font-weight:800;
 }
 
-.auth-status{
+.auth-status,
+.rating-status,
+.photo-status{
 display:none;
 margin-top:13px;
 padding:11px;
 border-radius:9px;
 font-size:13px;
-font-weight:500;
 line-height:1.6;
 }
 
-.auth-success{
+.auth-success,
+.rating-success,
+.photo-success{
 display:block;
 background:#ecfdf5;
 color:#166534;
 }
 
-.auth-error{
+.auth-error,
+.rating-error,
+.photo-error{
 display:block;
 background:#fef2f2;
 color:#991b1b;
 }
 
-.auth-info{
+.auth-info,
+.photo-info{
 display:block;
 background:#eff6ff;
 color:#1d4ed8;
@@ -343,13 +317,10 @@ object-fit:cover;
 .brand h1{
 font-size:22px;
 font-weight:900;
-letter-spacing:-.7px;
-color:white;
 }
 
 .brand p{
 font-size:12px;
-font-weight:500;
 color:#cbd5e1;
 margin-top:3px;
 }
@@ -368,13 +339,10 @@ max-width:700px;
 margin:auto;
 }
 
-.container > h2{
+.container>h2{
 font-size:26px;
 font-weight:900;
-line-height:1.3;
-letter-spacing:-.7px;
 margin-bottom:6px;
-color:#111827;
 }
 
 .welcome,
@@ -390,14 +358,12 @@ border:1px solid #eef1f5;
 .welcome h2{
 font-size:23px;
 font-weight:900;
-line-height:1.35;
 margin-bottom:8px;
 }
 
 .muted{
 color:#475569;
 font-size:15px;
-font-weight:500;
 line-height:1.75;
 }
 
@@ -405,8 +371,6 @@ line-height:1.75;
 font-size:21px;
 font-weight:900;
 margin:23px 0 13px;
-letter-spacing:-.4px;
-color:#111827;
 }
 
 .quick{
@@ -417,11 +381,6 @@ gap:13px;
 
 .quick .card{
 cursor:pointer;
-transition:.2s ease;
-}
-
-.quick .card:active{
-transform:scale(.98);
 }
 
 .icon{
@@ -432,30 +391,18 @@ margin-bottom:9px;
 .card h3{
 font-size:17px;
 font-weight:800;
-line-height:1.4;
-color:#172033;
 }
 
 /* ================= NEWS ================= */
 
 .news{
-background:#ffffff;
+background:white;
 border-radius:18px;
 padding:20px;
-margin:0 0 22px 0;
+margin-bottom:22px;
 box-shadow:0 4px 15px rgba(0,0,0,.07);
 border:1px solid #e9edf2;
 overflow:hidden;
-transition:transform .2s ease,box-shadow .2s ease;
-}
-
-.news + .news{
-margin-top:22px;
-}
-
-.news:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 22px rgba(0,0,0,.09);
 }
 
 .news .label{
@@ -468,15 +415,13 @@ color:#475569;
 font-size:10px;
 font-weight:900;
 text-transform:uppercase;
-letter-spacing:.9px;
 }
 
 .news h3{
-margin:0 0 15px;
+margin-bottom:15px;
 font-size:21px;
 line-height:1.45;
 font-weight:900;
-letter-spacing:-.4px;
 color:#111827;
 }
 
@@ -490,24 +435,13 @@ display:block;
 background:#e5e7eb;
 }
 
-/* ===== IMPORTANT NEWS SPACING FIX ===== */
-
 .news-content{
-margin:0;
 font-size:15px;
-font-weight:500;
 line-height:1.9;
 color:#334155;
-
 white-space:pre-wrap;
 word-wrap:break-word;
 overflow-wrap:anywhere;
-}
-
-.news-content br{
-display:block;
-content:"";
-margin-bottom:10px;
 }
 
 .news .time{
@@ -515,7 +449,6 @@ margin-top:18px;
 padding-top:12px;
 border-top:1px solid #eef1f5;
 font-size:11px;
-font-weight:600;
 color:#94a3b8;
 }
 
@@ -523,7 +456,7 @@ color:#94a3b8;
 
 .search-box{
 position:relative;
-margin:0 0 19px;
+margin-bottom:19px;
 }
 
 .search-box input{
@@ -534,19 +467,7 @@ border:1px solid #d7dce3;
 border-radius:15px;
 background:white;
 font-size:15px;
-font-weight:500;
 outline:none;
-box-shadow:0 3px 10px rgba(0,0,0,.04);
-}
-
-.search-box input:focus{
-border-color:#111827;
-box-shadow:0 0 0 3px rgba(17,24,39,.06);
-}
-
-.search-box input::placeholder{
-font-weight:400;
-color:#94a3b8;
 }
 
 .search-icon{
@@ -555,7 +476,6 @@ left:15px;
 top:50%;
 transform:translateY(-50%);
 font-size:20px;
-pointer-events:none;
 }
 
 .clear-search{
@@ -570,22 +490,18 @@ margin:0;
 border:0;
 border-radius:50%;
 background:#e5e7eb;
-color:#374151;
-font-size:16px;
 display:none;
 align-items:center;
 justify-content:center;
-cursor:pointer;
 }
 
 .search-info{
 font-size:13px;
-font-weight:600;
 color:#64748b;
 margin:-5px 0 15px;
 }
 
-/* ================= NAV ================= */
+/* ================= BOTTOM NAV ================= */
 
 .bottom{
 position:fixed;
@@ -595,7 +511,6 @@ right:0;
 height:74px;
 background:rgba(255,255,255,.98);
 backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
 border-top:1px solid #e5e7eb;
 display:flex;
 justify-content:space-around;
@@ -610,11 +525,8 @@ text-align:center;
 font-size:10px;
 font-weight:700;
 color:#64748b;
-cursor:pointer;
 padding:7px 8px;
 border-radius:12px;
-user-select:none;
-transition:.2s ease;
 }
 
 .nav span{
@@ -633,12 +545,6 @@ background:#f1f5f9;
 /* ================= BUTTONS ================= */
 
 button{
-font-family:'Inter','Poppins',sans-serif;
-font-weight:800;
-letter-spacing:.2px;
-}
-
-button{
 width:100%;
 padding:14px;
 border:0;
@@ -647,16 +553,6 @@ background:#111827;
 color:white;
 font-size:14px;
 margin-top:15px;
-cursor:pointer;
-transition:transform .15s ease,opacity .15s ease;
-}
-
-button:active{
-transform:scale(.98);
-}
-
-button:disabled{
-opacity:.65;
 }
 
 .logout-button{
@@ -671,7 +567,6 @@ background:#f1f5f9;
 padding:11px;
 border-radius:9px;
 font-size:12px;
-font-weight:500;
 color:#475569;
 line-height:1.6;
 word-break:break-word;
@@ -684,7 +579,6 @@ background:#ecfdf5;
 padding:12px;
 border-radius:8px;
 font-size:11px;
-font-weight:500;
 color:#065f46;
 word-break:break-all;
 }
@@ -696,7 +590,6 @@ background:white;
 border-radius:16px;
 color:#64748b;
 font-size:14px;
-font-weight:500;
 line-height:1.7;
 box-shadow:0 3px 10px rgba(0,0,0,.04);
 }
@@ -707,28 +600,189 @@ color:#991b1b;
 padding:12px;
 border-radius:10px;
 font-size:12px;
-font-weight:500;
 margin-top:15px;
 display:none;
 }
 
+/* =====================================================
+   SOCIAL MEDIA PROFILE
+===================================================== */
+
+.profile-card{
+padding:0;
+overflow:hidden;
+text-align:left !important;
+border-radius:22px;
+}
+
+.profile-cover{
+height:145px;
+background:
+linear-gradient(
+135deg,
+#111827,
+#1e293b,
+#334155
+);
+position:relative;
+overflow:hidden;
+}
+
+.profile-cover:before{
+content:"";
+position:absolute;
+width:220px;
+height:220px;
+border-radius:50%;
+background:rgba(255,255,255,.06);
+top:-100px;
+right:-40px;
+}
+
+.profile-cover:after{
+content:"";
+position:absolute;
+width:170px;
+height:170px;
+border-radius:50%;
+background:rgba(255,255,255,.05);
+bottom:-100px;
+left:-30px;
+}
+
+.profile-main{
+padding:0 20px 16px;
+}
+
+.profile-photo-wrapper{
+width:110px;
+height:110px;
+position:relative;
+margin-top:-55px;
+z-index:2;
+}
+
+.profile-photo{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+background:#e5e7eb;
+border:5px solid white;
+box-shadow:0 5px 18px rgba(0,0,0,.2);
+display:block;
+}
+
+.photo-edit{
+position:absolute;
+right:0;
+bottom:2px;
+width:37px;
+height:37px;
+border-radius:50%;
+background:#111827;
+border:3px solid white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:15px;
+cursor:pointer;
+}
+
+.profile-details{
+margin-top:12px;
+}
+
 .profile-name{
-font-size:22px;
+font-size:24px;
 font-weight:900;
 letter-spacing:-.4px;
-margin-top:10px;
+margin-top:0;
+color:#111827;
+}
+
+.profile-verified{
+display:inline-block;
+margin-top:7px;
+padding:4px 8px;
+border-radius:7px;
+background:#eff6ff;
+color:#2563eb;
+font-size:10px;
+font-weight:800;
 }
 
 .profile-email{
 font-size:13px;
 font-weight:500;
 color:#64748b;
-margin-top:5px;
+margin-top:7px;
 word-break:break-word;
 }
 
-.profile-icon{
-font-size:60px;
+.profile-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+padding:0 20px 18px;
+}
+
+.profile-actions button{
+margin:0;
+padding:12px 7px;
+font-size:12px;
+}
+
+.remove-photo-button{
+background:#f1f5f9;
+color:#475569;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-top:1px solid #edf0f3;
+border-bottom:1px solid #edf0f3;
+padding:15px 8px;
+text-align:center;
+}
+
+.profile-stat{
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.profile-stat strong{
+font-size:19px;
+font-weight:900;
+color:#111827;
+}
+
+.profile-stat span{
+font-size:11px;
+color:#64748b;
+}
+
+.profile-bio{
+padding:18px 20px;
+}
+
+.profile-bio h4{
+font-size:15px;
+font-weight:900;
+margin-bottom:6px;
+}
+
+.profile-bio p{
+font-size:13px;
+line-height:1.7;
+color:#64748b;
+}
+
+.profile-card .logout-button{
+margin:0 20px 20px;
+width:calc(100% - 40px);
 }
 
 /* ================= RATING ================= */
@@ -750,7 +804,6 @@ margin-bottom:7px;
 
 .rating-subtitle{
 font-size:14px;
-font-weight:500;
 color:#64748b;
 line-height:1.7;
 margin-bottom:16px;
@@ -768,9 +821,7 @@ width:auto;
 padding:0;
 margin:0;
 background:none;
-border:0;
 font-size:36px;
-line-height:1;
 color:#cbd5e1;
 }
 
@@ -819,36 +870,9 @@ padding:13px;
 border:1px solid #d1d5db;
 border-radius:12px;
 font-size:14px;
-font-weight:500;
 line-height:1.65;
 resize:vertical;
 outline:none;
-}
-
-.rating-submit{
-margin-top:14px;
-}
-
-.rating-status{
-display:none;
-margin-top:12px;
-padding:11px;
-border-radius:10px;
-font-size:13px;
-font-weight:500;
-line-height:1.6;
-}
-
-.rating-success{
-display:block;
-background:#ecfdf5;
-color:#166534;
-}
-
-.rating-error{
-display:block;
-background:#fef2f2;
-color:#991b1b;
 }
 
 .rating-summary{
@@ -872,7 +896,6 @@ margin:4px 0;
 
 .rating-count{
 font-size:13px;
-font-weight:500;
 color:#64748b;
 }
 
@@ -891,7 +914,6 @@ font-weight:800;
 
 .recent-opinion p{
 font-size:14px;
-font-weight:500;
 color:#475569;
 line-height:1.6;
 margin-top:5px;
@@ -907,27 +929,14 @@ padding:19px 16px;
 
 .news{
 padding:18px;
-margin-bottom:20px;
-border-radius:17px;
-}
-
-.news + .news{
-margin-top:20px;
 }
 
 .news h3{
 font-size:19px;
-line-height:1.5;
 }
 
 .news-content{
 font-size:15px;
-line-height:1.9;
-}
-
-.news-image{
-border-radius:12px;
-margin-bottom:15px;
 }
 
 }
@@ -942,13 +951,8 @@ grid-template-columns:1fr;
 grid-template-columns:1fr;
 }
 
-.brand h1{
-font-size:20px;
-}
-
-.nav{
-font-size:9px;
-padding:7px 5px;
+.profile-actions{
+grid-template-columns:1fr;
 }
 
 }
@@ -981,7 +985,8 @@ Student News • Education • Sports
 <div class="splash-loader-bar"></div>
 </div>
 
-<div id="splashStatus" class="splash-status">
+<div id="splashStatus"
+class="splash-status">
 Starting DeBryne Update...
 </div>
 
@@ -1065,7 +1070,9 @@ Create Account
 
 </div>
 
-<div id="authStatus" class="auth-status"></div>
+<div id="authStatus"
+class="auth-status">
+</div>
 
 </div>
 </div>
@@ -1091,7 +1098,7 @@ alt="DeBryne Update">
 </div>
 </header>
 
-<!-- HOME -->
+<!-- ================= HOME ================= -->
 
 <section id="homePage" class="page active">
 
@@ -1189,7 +1196,7 @@ Loading updates...
 </main>
 </section>
 
-<!-- NEWS -->
+<!-- ================= NEWS ================= -->
 
 <section id="newsPage" class="page">
 
@@ -1231,7 +1238,7 @@ Loading news...
 </main>
 </section>
 
-<!-- SPORTS -->
+<!-- ================= SPORTS ================= -->
 
 <section id="sportsPage" class="page">
 
@@ -1252,7 +1259,7 @@ Loading sports...
 </main>
 </section>
 
-<!-- ALERTS -->
+<!-- ================= ALERTS ================= -->
 
 <section id="alertsPage" class="page">
 
@@ -1291,14 +1298,16 @@ style="margin-top:7px">
 
 </div>
 
-<div id="pushError" class="errorBox"></div>
+<div id="pushError"
+class="errorBox">
+</div>
 
 </div>
 
 </main>
 </section>
 
-<!-- PROFILE -->
+<!-- ================= PROFILE ================= -->
 
 <section id="profilePage" class="page">
 
@@ -1307,20 +1316,48 @@ style="margin-top:7px">
 <h2>👤 Profile</h2>
 
 <p class="muted">
-Your DeBryne Update profile.
+Your personal DeBryne Update profile.
 </p>
 
-<div class="card"
-style="text-align:center;margin-top:18px">
+<div class="card profile-card"
+style="margin-top:18px">
 
-<div class="profile-icon">
-👤
+<div class="profile-cover"></div>
+
+<div class="profile-main">
+
+<div class="profile-photo-wrapper">
+
+<img
+id="profilePhoto"
+class="profile-photo"
+src="./file_000000008e5c71f4a9d057362a556762.png"
+alt="Profile Picture">
+
+<label
+for="profilePhotoInput"
+class="photo-edit">
+📷
+</label>
+
+<input
+id="profilePhotoInput"
+type="file"
+accept="image/*"
+style="display:none">
+
 </div>
+
+<div class="profile-details">
 
 <div id="profileName"
 class="profile-name">
 Student
 </div>
+
+<span class="profile-verified">
+✓ DeBryne Member
+</span>
 
 <div id="profileEmail"
 class="profile-email">
@@ -1328,16 +1365,77 @@ class="profile-email">
 
 <p id="profileJoined"
 class="muted"
-style="margin-top:12px">
+style="margin-top:8px">
 </p>
 
-<button id="logoutButton"
+</div>
+
+</div>
+
+<div class="profile-actions">
+
+<button
+id="changePhotoButton"
+type="button">
+📷 Change Photo
+</button>
+
+<button
+id="removePhotoButton"
+class="remove-photo-button"
+type="button">
+🗑️ Remove Photo
+</button>
+
+</div>
+
+<div
+id="profilePhotoStatus"
+class="photo-status"
+style="margin-left:20px;margin-right:20px">
+</div>
+
+<div class="profile-stats">
+
+<div class="profile-stat">
+<strong id="profileNewsCount">0</strong>
+<span>Updates</span>
+</div>
+
+<div class="profile-stat">
+<strong>⚽</strong>
+<span>Sports</span>
+</div>
+
+<div class="profile-stat">
+<strong>📚</strong>
+<span>Academics</span>
+</div>
+
+</div>
+
+<div class="profile-bio">
+
+<h4>About Me</h4>
+
+<p>
+Welcome to my DeBryne Update profile.
+Stay informed with the latest campus news,
+academic information, events and sports updates.
+</p>
+
+</div>
+
+<button
+id="logoutButton"
 class="logout-button"
 type="button">
 LOG OUT
 </button>
 
 </div>
+
+<!-- ================= RATING ================= -->
 
 <div class="rating-card">
 
@@ -1366,7 +1464,8 @@ Tap a star to rate
 How satisfied are you with DeBryne Update?
 </p>
 
-<div id="satisfactionOptions" class="satisfaction-options">
+<div id="satisfactionOptions"
+class="satisfaction-options">
 
 <div class="satisfaction-option"
 data-satisfaction="Very Satisfied">
@@ -1390,29 +1489,35 @@ data-satisfaction="Not Satisfied">
 
 </div>
 
-<textarea id="ratingOpinion"
+<textarea
+id="ratingOpinion"
 class="rating-opinion"
 placeholder="Tell us what you think about DeBryne Update..."></textarea>
 
-<button id="submitRating"
-class="rating-submit"
+<button
+id="submitRating"
 type="button">
 SUBMIT FEEDBACK
 </button>
 
-<div id="ratingStatus" class="rating-status"></div>
+<div id="ratingStatus"
+class="rating-status">
+</div>
 
 <div class="rating-summary">
 
-<div id="overallRating" class="rating-score">
+<div id="overallRating"
+class="rating-score">
 0.0/5
 </div>
 
-<div id="overallStars" class="rating-stars-display">
+<div id="overallStars"
+class="rating-stars-display">
 ☆☆☆☆☆
 </div>
 
-<div id="ratingCount" class="rating-count">
+<div id="ratingCount"
+class="rating-count">
 No ratings yet
 </div>
 
@@ -1427,7 +1532,7 @@ style="margin-top:15px">
 </main>
 </section>
 
-<!-- ACADEMICS -->
+<!-- ================= ACADEMICS ================= -->
 
 <section id="academicsPage" class="page">
 
@@ -1448,7 +1553,7 @@ Loading academic updates...
 </main>
 </section>
 
-<!-- EVENTS -->
+<!-- ================= EVENTS ================= -->
 
 <section id="eventsPage" class="page">
 
@@ -1469,7 +1574,7 @@ Loading events...
 </main>
 </section>
 
-<!-- NAV -->
+<!-- ================= NAV ================= -->
 
 <nav class="bottom">
 
@@ -1504,34 +1609,24 @@ Profile
 
 <script>
 
-(function(){
+setTimeout(function(){
 
-window.setTimeout(function(){
-
-var splash=document.getElementById("appSplash");
-var auth=document.getElementById("authScreen");
-var app=document.getElementById("appContent");
+const splash=
+document.getElementById("appSplash");
 
 if(splash){
 
 splash.classList.add("hide");
 
-window.setTimeout(function(){
+setTimeout(function(){
+
 splash.style.display="none";
+
 },500);
 
 }
 
-if(auth && app &&
-app.style.display !== "block"){
-
-auth.style.display="flex";
-
-}
-
 },7000);
-
-})();
 
 </script>
 
@@ -1543,25 +1638,34 @@ function openPage(page){
 
 document.querySelectorAll(".page")
 .forEach(function(item){
+
 item.classList.remove("active");
+
 });
 
-var target=document.getElementById(page+"Page");
+const target=
+document.getElementById(page+"Page");
 
 if(target){
+
 target.classList.add("active");
+
 }
 
 document.querySelectorAll(".nav")
 .forEach(function(item){
+
 item.classList.remove("active");
+
 });
 
 document.querySelectorAll(
 '[data-page="'+page+'"]'
 )
 .forEach(function(item){
+
 item.classList.add("active");
+
 });
 
 window.scrollTo(0,0);
@@ -1571,7 +1675,9 @@ window.scrollTo(0,0);
 document.querySelectorAll("[data-page]")
 .forEach(function(item){
 
-item.addEventListener("click",function(){
+item.addEventListener(
+"click",
+function(){
 
 openPage(
 this.getAttribute("data-page")
@@ -1613,8 +1719,20 @@ updateProfile
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
+import {
+getStorage,
+ref as storageRef,
+uploadBytes,
+getDownloadURL,
+deleteObject
+}
+from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
-const firebaseConfig = {
+
+/* ================= FIREBASE ================= */
+
+const firebaseConfig={
 
 apiKey:
 "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
@@ -1642,34 +1760,53 @@ measurementId:
 
 };
 
-const VAPID_KEY =
+const VAPID_KEY=
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
 
-const PUSH_SERVER_URL =
+const PUSH_SERVER_URL=
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
 
 
 let app=null;
 let db=null;
 let auth=null;
+let storage=null;
 let messaging=null;
+
+const DEFAULT_PHOTO=
+"./file_000000008e5c71f4a9d057362a556762.png";
 
 
 /* ================= ELEMENTS ================= */
 
-const splash=document.getElementById("appSplash");
-const splashStatus=document.getElementById("splashStatus");
-const authScreen=document.getElementById("authScreen");
-const appContent=document.getElementById("appContent");
-const authStatus=document.getElementById("authStatus");
-const registerForm=document.getElementById("registerForm");
-const loginForm=document.getElementById("loginForm");
+const splash=
+document.getElementById("appSplash");
+
+const splashStatus=
+document.getElementById("splashStatus");
+
+const authScreen=
+document.getElementById("authScreen");
+
+const appContent=
+document.getElementById("appContent");
+
+const authStatus=
+document.getElementById("authStatus");
+
+const registerForm=
+document.getElementById("registerForm");
+
+const loginForm=
+document.getElementById("loginForm");
 
 
 function splashMessage(message){
 
 if(splashStatus){
+
 splashStatus.textContent=message;
+
 }
 
 }
@@ -1677,9 +1814,7 @@ splashStatus.textContent=message;
 
 function hideSplash(){
 
-if(!splash){
-return;
-}
+if(!splash)return;
 
 splash.classList.add("hide");
 
@@ -1692,22 +1827,33 @@ splash.style.display="none";
 }
 
 
-/* ================= AUTH STATUS ================= */
-
 function showAuthStatus(message,type){
 
 authStatus.textContent=message;
 
-authStatus.className="auth-status";
+authStatus.className=
+"auth-status";
 
 if(type==="success"){
-authStatus.classList.add("auth-success");
+
+authStatus.classList.add(
+"auth-success"
+);
+
 }
 else if(type==="error"){
-authStatus.classList.add("auth-error");
+
+authStatus.classList.add(
+"auth-error"
+);
+
 }
 else{
-authStatus.classList.add("auth-info");
+
+authStatus.classList.add(
+"auth-info"
+);
+
 }
 
 authStatus.style.display="block";
@@ -1719,27 +1865,27 @@ authStatus.style.display="block";
 
 document.getElementById(
 "showLoginButton"
-).addEventListener("click",function(){
+).onclick=function(){
 
 registerForm.style.display="none";
 loginForm.style.display="block";
 authStatus.style.display="none";
 
-});
+};
 
 
 document.getElementById(
 "showRegisterButton"
-).addEventListener("click",function(){
+).onclick=function(){
 
 registerForm.style.display="block";
 loginForm.style.display="none";
 authStatus.style.display="none";
 
-});
+};
 
 
-/* ================= FIREBASE START ================= */
+/* ================= FIREBASE INIT ================= */
 
 try{
 
@@ -1753,27 +1899,21 @@ db=getDatabase(app);
 
 auth=getAuth(app);
 
+storage=getStorage(app);
+
 splashMessage(
-"Firebase connected. Checking account..."
+"Firebase connected..."
 );
 
 }
 catch(error){
 
-console.error(
-"Firebase initialization error:",
-error
-);
-
-splashMessage(
-"Firebase could not connect."
-);
+console.error(error);
 
 authScreen.style.display="flex";
-appContent.style.display="none";
 
 showAuthStatus(
-"Unable to connect to Firebase. Please check your internet connection and reload.",
+"Unable to connect to Firebase. Please reload.",
 "error"
 );
 
@@ -1786,12 +1926,12 @@ hideSplash();
 
 document.getElementById(
 "registerButton"
-).addEventListener("click",async function(){
+).onclick=async function(){
 
 if(!auth || !db){
 
 showAuthStatus(
-"Firebase is not ready. Please reload the page.",
+"Firebase is not ready.",
 "error"
 );
 
@@ -1799,11 +1939,30 @@ return;
 
 }
 
-const name=document.getElementById("registerName").value.trim();
-const email=document.getElementById("registerEmail").value.trim();
-const password=document.getElementById("registerPassword").value;
-const confirm=document.getElementById("registerConfirm").value;
-const button=document.getElementById("registerButton");
+const name=
+document.getElementById(
+"registerName"
+).value.trim();
+
+const email=
+document.getElementById(
+"registerEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"registerPassword"
+).value;
+
+const confirm=
+document.getElementById(
+"registerConfirm"
+).value;
+
+const button=
+document.getElementById(
+"registerButton"
+);
 
 
 if(!name){
@@ -1851,7 +2010,9 @@ return;
 }
 
 button.disabled=true;
-button.textContent="CREATING ACCOUNT...";
+
+button.textContent=
+"CREATING ACCOUNT...";
 
 try{
 
@@ -1867,7 +2028,8 @@ email,
 password
 );
 
-const user=credential.user;
+const user=
+credential.user;
 
 await updateProfile(
 user,
@@ -1885,6 +2047,8 @@ uid:user.uid,
 fullName:name,
 
 email:user.email,
+
+photoURL:"",
 
 createdAt:Date.now(),
 
@@ -1904,7 +2068,8 @@ catch(error){
 console.error(error);
 
 showAuthStatus(
-"❌ "+(
+"❌ "+
+(
 error.code==="auth/email-already-in-use"
 ?
 "This email is already registered."
@@ -1915,34 +2080,35 @@ error.message
 );
 
 button.disabled=false;
-button.textContent="CREATE ACCOUNT";
+
+button.textContent=
+"CREATE ACCOUNT";
 
 }
 
-});
+};
 
 
 /* ================= LOGIN ================= */
 
 document.getElementById(
 "loginButton"
-).addEventListener("click",async function(){
+).onclick=async function(){
 
-if(!auth){
+const email=
+document.getElementById(
+"loginEmail"
+).value.trim();
 
-showAuthStatus(
-"Firebase is not ready. Please reload.",
-"error"
+const password=
+document.getElementById(
+"loginPassword"
+).value;
+
+const button=
+document.getElementById(
+"loginButton"
 );
-
-return;
-
-}
-
-const email=document.getElementById("loginEmail").value.trim();
-const password=document.getElementById("loginPassword").value;
-const button=document.getElementById("loginButton");
-
 
 if(!email){
 
@@ -1967,14 +2133,11 @@ return;
 }
 
 button.disabled=true;
-button.textContent="LOGGING IN...";
+
+button.textContent=
+"LOGGING IN...";
 
 try{
-
-showAuthStatus(
-"Signing you in...",
-"info"
-);
 
 await signInWithEmailAndPassword(
 auth,
@@ -1993,73 +2156,55 @@ showAuthStatus(
 );
 
 button.disabled=false;
-button.textContent="LOGIN";
+
+button.textContent=
+"LOGIN";
 
 }
 
-});
+};
 
 
-/* ================= AUTH STATE ================= */
+/* =====================================================
+   PROFILE
+===================================================== */
 
-if(auth){
+const profilePhoto=
+document.getElementById("profilePhoto");
 
-onAuthStateChanged(
-auth,
-async function(user){
+const profileInput=
+document.getElementById("profilePhotoInput");
 
-if(!user){
+const changePhoto=
+document.getElementById("changePhotoButton");
 
-authScreen.style.display="flex";
-appContent.style.display="none";
+const removePhoto=
+document.getElementById("removePhotoButton");
 
-splashMessage(
-"Ready. Please login or create an account."
-);
+const photoStatus=
+document.getElementById("profilePhotoStatus");
 
-hideSplash();
 
-return;
+function photoMessage(message,type){
 
-}
+photoStatus.textContent=message;
 
-authScreen.style.display="none";
-appContent.style.display="block";
+photoStatus.className=
+"photo-status photo-"+type;
 
-splashMessage(
-"Loading your profile..."
-);
-
-await loadUserProfile(user);
-
-await loadMyRating(user.uid);
-
-await loadRatingSummary();
-
-splashMessage(
-"Loading latest updates..."
-);
-
-hideSplash();
-
-}
-);
+photoStatus.style.display="block";
 
 }
 
-
-/* ================= PROFILE ================= */
 
 async function loadUserProfile(user){
 
 let profile=null;
 
-let name=user.displayName || "";
-
 try{
 
 const snapshot=
-await new Promise(function(resolve,reject){
+await new Promise(function(resolve){
 
 onValue(
 ref(db,"users/"+user.uid),
@@ -2073,25 +2218,21 @@ onlyOnce:true
 
 profile=snapshot.val();
 
-if(profile && profile.fullName){
-
-name=String(profile.fullName).trim();
-
-}
-
 }
 catch(error){
 
-console.error(
-"Profile loading error:",
-error
-);
+console.error(error);
 
 }
 
-if(!name){
-name="Student";
-}
+const name=
+profile &&
+profile.fullName
+?
+profile.fullName
+:
+user.displayName || "Student";
+
 
 document.getElementById(
 "welcomeName"
@@ -2110,38 +2251,368 @@ user.email || "";
 document.getElementById(
 "profileJoined"
 ).textContent=
-profile && profile.createdAt
+profile &&
+profile.createdAt
 ?
 "Member since: "+
-new Date(profile.createdAt)
-.toLocaleDateString()
+new Date(
+profile.createdAt
+).toLocaleDateString()
 :
 "DeBryne Update member";
 
+
+if(
+profile &&
+profile.photoURL
+){
+
+profilePhoto.src=
+profile.photoURL;
+
 }
+else if(user.photoURL){
+
+profilePhoto.src=
+user.photoURL;
+
+}
+else{
+
+profilePhoto.src=
+DEFAULT_PHOTO;
+
+}
+
+document.getElementById(
+"profileNewsCount"
+).textContent=
+allNewsItems.length;
+
+}
+
+
+/* ================= CHANGE PHOTO ================= */
+
+changePhoto.onclick=function(){
+
+profileInput.click();
+
+};
+
+
+profileInput.onchange=async function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+
+photoMessage(
+"Please select an image file.",
+"error"
+);
+
+return;
+
+}
+
+if(file.size>5*1024*1024){
+
+photoMessage(
+"Image must be smaller than 5MB.",
+"error"
+);
+
+return;
+
+}
+
+if(!auth.currentUser){
+
+photoMessage(
+"Please login first.",
+"error"
+);
+
+return;
+
+}
+
+const user=
+auth.currentUser;
+
+changePhoto.disabled=true;
+
+removePhoto.disabled=true;
+
+changePhoto.textContent=
+"Uploading...";
+
+photoMessage(
+"Uploading your profile picture...",
+"info"
+);
+
+try{
+
+const extension=
+file.name
+.split(".")
+.pop()
+.toLowerCase();
+
+const imageRef=
+storageRef(
+storage,
+"profilePictures/"+
+user.uid+"."+extension
+);
+
+await uploadBytes(
+imageRef,
+file,
+{
+contentType:file.type
+}
+);
+
+const photoURL=
+await getDownloadURL(
+imageRef
+);
+
+await updateProfile(
+user,
+{
+photoURL:photoURL
+}
+);
+
+await set(
+ref(
+db,
+"users/"+user.uid+"/photoURL"
+),
+photoURL
+);
+
+profilePhoto.src=
+photoURL+
+"?t="+Date.now();
+
+photoMessage(
+"✅ Profile picture updated successfully.",
+"success"
+);
+
+changePhoto.textContent=
+"📷 Change Photo";
+
+}
+catch(error){
+
+console.error(error);
+
+photoMessage(
+"❌ Upload failed: "+
+error.message,
+"error"
+);
+
+changePhoto.textContent=
+"📷 Change Photo";
+
+}
+
+changePhoto.disabled=false;
+
+removePhoto.disabled=false;
+
+profileInput.value="";
+
+};
+
+
+/* ================= REMOVE PHOTO ================= */
+
+removePhoto.onclick=async function(){
+
+if(!auth.currentUser){
+
+return;
+
+}
+
+if(profilePhoto.src.includes(
+DEFAULT_PHOTO
+)){
+
+photoMessage(
+"No profile picture to remove.",
+"info"
+);
+
+return;
+
+}
+
+if(!confirm(
+"Remove your profile picture?"
+)){
+
+return;
+
+}
+
+const user=
+auth.currentUser;
+
+changePhoto.disabled=true;
+
+removePhoto.disabled=true;
+
+photoMessage(
+"Removing profile picture...",
+"info"
+);
+
+try{
+
+const snapshot=
+await new Promise(function(resolve){
+
+onValue(
+ref(db,"users/"+user.uid),
+resolve,
+{
+onlyOnce:true
+}
+);
+
+});
+
+const profile=
+snapshot.val();
+
+if(profile && profile.photoURL){
+
+try{
+
+const oldImage=
+storageRef(
+storage,
+profile.photoURL
+);
+
+await deleteObject(
+oldImage
+);
+
+}
+catch(error){
+
+console.log(
+"Old storage image could not be deleted."
+);
+
+}
+
+}
+
+await updateProfile(
+user,
+{
+photoURL:""
+}
+);
+
+await set(
+ref(
+db,
+"users/"+user.uid+"/photoURL"
+),
+null
+);
+
+profilePhoto.src=
+DEFAULT_PHOTO;
+
+photoMessage(
+"✅ Profile picture removed.",
+"success"
+);
+
+}
+catch(error){
+
+console.error(error);
+
+photoMessage(
+"❌ Could not remove profile picture.",
+"error"
+);
+
+}
+
+changePhoto.disabled=false;
+
+removePhoto.disabled=false;
+
+};
 
 
 /* ================= LOGOUT ================= */
 
 document.getElementById(
 "logoutButton"
-).addEventListener(
-"click",
-async function(){
+).onclick=async function(){
 
-if(auth){
 await signOut(auth);
+
+};
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(
+auth,
+async function(user){
+
+if(!user){
+
+authScreen.style.display="flex";
+
+appContent.style.display="none";
+
+hideSplash();
+
+return;
+
 }
 
-});
+authScreen.style.display="none";
+
+appContent.style.display="block";
+
+await loadUserProfile(user);
+
+await loadMyRating(user.uid);
+
+await loadRatingSummary();
+
+hideSplash();
+
+}
+);
 
 
 /* ================= ESCAPE ================= */
 
 function escapeHTML(value){
 
-return String(value || "")
-
+return String(value||"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -2151,12 +2622,15 @@ return String(value || "")
 }
 
 
-/* ================= NEWS CARD ================= */
+/* ================= NEWS ================= */
+
+let allNewsItems=[];
+
 
 function createNewsCard(item){
 
 const image=
-String(item.imageUrl || "").trim();
+String(item.imageUrl||"").trim();
 
 let imageHTML="";
 
@@ -2173,31 +2647,24 @@ return `
 <article class="news">
 
 <div class="label">
-${escapeHTML(
-item.category || "DEBRYNE UPDATE"
-)}
+${escapeHTML(item.category||"DEBRYNE UPDATE")}
 </div>
 
 <h3>
-${escapeHTML(
-item.title || "Untitled"
-)}
+${escapeHTML(item.title||"Untitled")}
 </h3>
 
 ${imageHTML}
 
 <div class="news-content">
-${escapeHTML(
-item.content || ""
-)}
+${escapeHTML(item.content||"")}
 </div>
 
 <div class="time">
 ${
 item.createdAt
 ?
-new Date(item.createdAt)
-.toLocaleString()
+new Date(item.createdAt).toLocaleString()
 :
 ""
 }
@@ -2209,36 +2676,33 @@ new Date(item.createdAt)
 }
 
 
-/* ================= NEWS DATA ================= */
-
-let allNewsItems=[];
-
-
 function searchNews(query){
 
 query=
-String(query || "")
+String(query||"")
 .trim()
 .toLowerCase();
 
 if(!query){
-return allNewsItems;
-}
 
-const words=
-query.split(/\s+/).filter(Boolean);
+return allNewsItems;
+
+}
 
 return allNewsItems.filter(function(item){
 
-const text=(
-String(item.title || "")+
+const text=
+(
+String(item.title||"")+
 " "+
-String(item.content || "")+
+String(item.content||"")+
 " "+
-String(item.category || "")
+String(item.category||"")
 ).toLowerCase();
 
-return words.every(function(word){
+return query
+.split(/\s+/)
+.every(function(word){
 
 return text.includes(word);
 
@@ -2261,13 +2725,9 @@ if(!query){
 
 container.style.display="none";
 
-if(info){
 info.style.display="none";
-}
 
-if(clear){
 clear.style.display="none";
-}
 
 return;
 
@@ -2275,22 +2735,22 @@ return;
 
 container.style.display="block";
 
-if(clear){
 clear.style.display="flex";
-}
-
-if(info){
 
 info.style.display="block";
 
 info.textContent=
 results.length+
-(results.length===1
-?" result found"
-:" results found")+
-' for "'+query+'"';
-
-}
+(
+results.length===1
+?
+" result found"
+:
+" results found"
+)+
+' for "'+
+query+
+'"';
 
 if(!results.length){
 
@@ -2307,8 +2767,6 @@ results.map(createNewsCard).join("");
 }
 
 
-/* ================= SEARCH SETUP ================= */
-
 function setupSearch(
 inputId,
 containerId,
@@ -2316,14 +2774,17 @@ infoId,
 clearId
 ){
 
-const input=document.getElementById(inputId);
-const container=document.getElementById(containerId);
-const info=document.getElementById(infoId);
-const clear=document.getElementById(clearId);
+const input=
+document.getElementById(inputId);
 
-if(!input){
-return;
-}
+const container=
+document.getElementById(containerId);
+
+const info=
+document.getElementById(infoId);
+
+const clear=
+document.getElementById(clearId);
 
 input.addEventListener(
 "input",
@@ -2380,20 +2841,27 @@ setupSearch(
 
 /* ================= LOAD NEWS ================= */
 
-if(db){
-
 onValue(
 ref(db,"news"),
 function(snapshot){
 
-const data=snapshot.val();
+const data=
+snapshot.val();
 
-const home=document.getElementById("homeNews");
-const news=document.getElementById("newsList");
-const sports=document.getElementById("sportsList");
-const academic=document.getElementById("academicList");
-const events=document.getElementById("eventList");
+const home=
+document.getElementById("homeNews");
 
+const news=
+document.getElementById("newsList");
+
+const sports=
+document.getElementById("sportsList");
+
+const academic=
+document.getElementById("academicList");
+
+const events=
+document.getElementById("eventList");
 
 if(!data){
 
@@ -2412,12 +2880,11 @@ return;
 
 }
 
-
 allNewsItems=
 Object.keys(data)
 .map(function(key){
 
-return {
+return{
 id:key,
 ...data[key]
 };
@@ -2425,11 +2892,10 @@ id:key,
 })
 .sort(function(a,b){
 
-return Number(b.createdAt || 0)-
-Number(a.createdAt || 0);
+return Number(b.createdAt||0)-
+Number(a.createdAt||0);
 
 });
-
 
 home.innerHTML=
 allNewsItems
@@ -2437,25 +2903,19 @@ allNewsItems
 .map(createNewsCard)
 .join("");
 
-
-const newsQuery=
+const query=
 document.getElementById(
 "newsSearchInput"
 ).value.trim();
 
-
-if(newsQuery){
+if(query){
 
 renderSearch(
-newsQuery,
-searchNews(newsQuery),
+query,
+searchNews(query),
 news,
-document.getElementById(
-"newsSearchInfo"
-),
-document.getElementById(
-"newsClearSearch"
-)
+document.getElementById("newsSearchInfo"),
+document.getElementById("newsClearSearch")
 );
 
 }
@@ -2479,7 +2939,7 @@ const result=
 allNewsItems.filter(function(item){
 
 return String(
-item.category || ""
+item.category||""
 )
 .toLowerCase()
 .includes(word);
@@ -2494,7 +2954,6 @@ result.map(createNewsCard).join("")
 '<div class="empty">'+message+'</div>';
 
 }
-
 
 category(
 "sport",
@@ -2514,28 +2973,33 @@ events,
 "No event updates yet."
 );
 
+
+/* UPDATE PROFILE COUNT */
+
+const count=
+document.getElementById(
+"profileNewsCount"
+);
+
+if(count){
+
+count.textContent=
+allNewsItems.length;
+
+}
+
 },
 function(error){
 
-console.error(
-"Database error:",
-error
-);
-
-const message=
-'<div class="empty">Unable to load updates right now.</div>';
+console.error(error);
 
 document.getElementById(
 "homeNews"
-).innerHTML=message;
-
-document.getElementById(
-"newsList"
-).innerHTML=message;
-
-});
+).innerHTML=
+'<div class="empty">Unable to load updates right now.</div>';
 
 }
+);
 
 
 /* =====================================================
@@ -2556,81 +3020,92 @@ document.querySelectorAll(
 );
 
 const ratingValue=
-document.getElementById("ratingValue");
+document.getElementById(
+"ratingValue"
+);
 
 const opinion=
-document.getElementById("ratingOpinion");
+document.getElementById(
+"ratingOpinion"
+);
 
 const submit=
-document.getElementById("submitRating");
+document.getElementById(
+"submitRating"
+);
 
 const ratingStatus=
-document.getElementById("ratingStatus");
+document.getElementById(
+"ratingStatus"
+);
 
 const overall=
-document.getElementById("overallRating");
+document.getElementById(
+"overallRating"
+);
 
 const overallStars=
-document.getElementById("overallStars");
+document.getElementById(
+"overallStars"
+);
 
 const ratingCount=
-document.getElementById("ratingCount");
+document.getElementById(
+"ratingCount"
+);
 
 const recent=
-document.getElementById("recentOpinions");
+document.getElementById(
+"recentOpinions"
+);
 
 
 function setRating(value){
 
-selectedRating=Number(value);
+selectedRating=
+Number(value);
 
 stars.forEach(function(star){
 
-const number=
-Number(
-star.dataset.rating
-);
+const n=
+Number(star.dataset.rating);
 
 star.classList.toggle(
 "selected",
-number<=selectedRating
+n<=selectedRating
 );
 
 });
 
 ratingValue.textContent=
-selectedRating
-?
 selectedRating+
-(selectedRating===1
-?" star selected"
-:" stars selected")
+(
+selectedRating===1
+?
+" star selected"
 :
-"Tap a star to rate";
+" stars selected"
+);
 
 }
 
 
 stars.forEach(function(star){
 
-star.addEventListener(
-"click",
-function(){
+star.onclick=function(){
 
 setRating(
 this.dataset.rating
 );
 
-});
+};
 
 });
 
 
 satisfaction.forEach(function(item){
 
-item.addEventListener(
-"click",
-function(){
+item.onclick=function(){
 
 satisfaction.forEach(function(x){
 
@@ -2643,7 +3118,7 @@ item.classList.add("selected");
 selectedSatisfaction=
 item.dataset.satisfaction;
 
-});
+};
 
 });
 
@@ -2670,11 +3145,9 @@ ratingStatus.style.display="block";
 }
 
 
-submit.addEventListener(
-"click",
-async function(){
+submit.onclick=async function(){
 
-if(!auth || !auth.currentUser){
+if(!auth.currentUser){
 
 ratingMessage(
 "Please login before submitting feedback.",
@@ -2708,14 +3181,17 @@ return;
 }
 
 submit.disabled=true;
-submit.textContent="SUBMITTING...";
+
+submit.textContent=
+"SUBMITTING...";
 
 try{
 
-const user=auth.currentUser;
+const user=
+auth.currentUser;
 
-const oldSnapshot=
-await new Promise(function(resolve,reject){
+const snapshot=
+await new Promise(function(resolve){
 
 onValue(
 ref(db,"ratings/"+user.uid),
@@ -2728,7 +3204,7 @@ onlyOnce:true
 });
 
 const old=
-oldSnapshot.val() || {};
+snapshot.val()||{};
 
 await set(
 ref(db,"ratings/"+user.uid),
@@ -2736,21 +3212,24 @@ ref(db,"ratings/"+user.uid),
 
 userId:user.uid,
 
-name:user.displayName ||
+name:user.displayName||
 "Anonymous Viewer",
 
-email:user.email || "",
+email:user.email||"",
 
 rating:selectedRating,
 
 satisfaction:selectedSatisfaction,
 
-opinion:opinion.value.trim(),
+opinion:
+opinion.value.trim(),
 
 createdAt:
-old.createdAt || Date.now(),
+old.createdAt||
+Date.now(),
 
-updatedAt:Date.now()
+updatedAt:
+Date.now()
 
 }
 );
@@ -2760,7 +3239,8 @@ ratingMessage(
 "success"
 );
 
-submit.textContent="UPDATE FEEDBACK";
+submit.textContent=
+"UPDATE FEEDBACK";
 
 await loadRatingSummary();
 
@@ -2774,13 +3254,14 @@ ratingMessage(
 "error"
 );
 
-submit.textContent="SUBMIT FEEDBACK";
+submit.textContent=
+"SUBMIT FEEDBACK";
 
 }
 
 submit.disabled=false;
 
-});
+};
 
 
 async function loadMyRating(uid){
@@ -2788,7 +3269,7 @@ async function loadMyRating(uid){
 try{
 
 const snapshot=
-await new Promise(function(resolve,reject){
+await new Promise(function(resolve){
 
 onValue(
 ref(db,"ratings/"+uid),
@@ -2800,14 +3281,17 @@ onlyOnce:true
 
 });
 
-const data=snapshot.val();
+const data=
+snapshot.val();
 
-if(!data){
-return;
-}
+if(!data)return;
 
 if(data.rating){
-setRating(data.rating);
+
+setRating(
+data.rating
+);
+
 }
 
 if(data.satisfaction){
@@ -2828,7 +3312,7 @@ selectedSatisfaction
 }
 
 opinion.value=
-data.opinion || "";
+data.opinion||"";
 
 submit.textContent=
 "UPDATE FEEDBACK";
@@ -2836,10 +3320,7 @@ submit.textContent=
 }
 catch(error){
 
-console.error(
-"Rating loading error:",
-error
-);
+console.error(error);
 
 }
 
@@ -2851,7 +3332,7 @@ async function loadRatingSummary(){
 try{
 
 const snapshot=
-await new Promise(function(resolve,reject){
+await new Promise(function(resolve){
 
 onValue(
 ref(db,"ratings"),
@@ -2863,13 +3344,18 @@ onlyOnce:true
 
 });
 
-const data=snapshot.val();
+const data=
+snapshot.val();
 
 if(!data){
 
 overall.textContent="0.0/5";
+
 overallStars.textContent="☆☆☆☆☆";
-ratingCount.textContent="No ratings yet";
+
+ratingCount.textContent=
+"No ratings yet";
+
 return;
 
 }
@@ -2886,9 +3372,6 @@ Number(item.rating)<=5;
 
 if(!ratings.length){
 
-overall.textContent="0.0/5";
-overallStars.textContent="☆☆☆☆☆";
-ratingCount.textContent="No ratings yet";
 return;
 
 }
@@ -2896,7 +3379,8 @@ return;
 const total=
 ratings.reduce(function(sum,item){
 
-return sum+Number(item.rating);
+return sum+
+Number(item.rating);
 
 },0);
 
@@ -2923,7 +3407,6 @@ ratings.length===1
 " viewer ratings"
 );
 
-
 const opinions=
 ratings
 .filter(function(item){
@@ -2935,19 +3418,18 @@ String(item.opinion).trim();
 .sort(function(a,b){
 
 return Number(
-b.updatedAt ||
-b.createdAt ||
+b.updatedAt||
+b.createdAt||
 0
 )-
 Number(
-a.updatedAt ||
-a.createdAt ||
+a.updatedAt||
+a.createdAt||
 0
 );
 
 })
 .slice(0,3);
-
 
 if(opinions.length){
 
@@ -2955,7 +3437,7 @@ recent.innerHTML=
 "<h4 style='margin-bottom:9px;'>💬 Viewer Opinions</h4>"+
 opinions.map(function(item){
 
-const stars=
+const r=
 Math.max(
 1,
 Math.min(
@@ -2969,14 +3451,13 @@ return `
 
 <strong>
 ${escapeHTML(
-item.name ||
-"Anonymous Viewer"
+item.name||"Anonymous Viewer"
 )}
 </strong>
 
 <div style="color:#f59e0b;margin-top:4px;">
-${"★".repeat(stars)}
-${"☆".repeat(5-stars)}
+${"★".repeat(r)}
+${"☆".repeat(5-r)}
 </div>
 
 <p>
@@ -2993,10 +3474,7 @@ ${escapeHTML(item.opinion)}
 }
 catch(error){
 
-console.error(
-"Rating summary error:",
-error
-);
+console.error(error);
 
 }
 
@@ -3026,7 +3504,34 @@ document.getElementById("pushError");
 function pushErrorMessage(message){
 
 pushError.style.display="block";
+
 pushError.textContent=message;
+
+}
+
+
+async function getTokenSafe(
+messagingInstance,
+registration
+){
+
+const module=
+await import(
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
+);
+
+return await module.getToken(
+messagingInstance,
+{
+
+vapidKey:VAPID_KEY,
+
+serviceWorkerRegistration:
+registration
+
+}
+);
+
 
 }
 
@@ -3034,7 +3539,9 @@ pushError.textContent=message;
 async function enableNotifications(){
 
 notifyBtn.disabled=true;
-notifyBtn.textContent="Enabling...";
+
+notifyBtn.textContent=
+"Enabling...";
 
 pushError.style.display="none";
 
@@ -3068,7 +3575,6 @@ module.getMessaging(app);
 
 }
 
-
 let permission=
 Notification.permission;
 
@@ -3087,20 +3593,6 @@ throw new Error(
 
 }
 
-
-if(!("serviceWorker" in navigator)){
-
-throw new Error(
-"Service workers are not supported."
-);
-
-}
-
-
-notifyStatus.textContent=
-"Registering notification service...";
-
-
 const registration=
 await navigator.serviceWorker.register(
 "./firebase-messaging-sw.js",
@@ -3109,17 +3601,11 @@ scope:"./"
 }
 );
 
-
-notifyStatus.textContent=
-"Getting notification token...";
-
-
 const token=
 await getTokenSafe(
 messaging,
 registration
 );
-
 
 if(!token){
 
@@ -3129,14 +3615,9 @@ throw new Error(
 
 }
 
-
 tokenText.textContent=token;
+
 tokenBox.style.display="block";
-
-
-notifyStatus.textContent=
-"Registering this device...";
-
 
 const response=
 await fetch(
@@ -3161,23 +3642,15 @@ token:token
 }
 );
 
-
 const text=
 await response.text();
-
-if(!text){
-
-throw new Error(
-"Push server returned an empty response."
-);
-
-}
 
 let result;
 
 try{
 
-result=JSON.parse(text);
+result=
+JSON.parse(text);
 
 }
 catch(e){
@@ -3191,12 +3664,11 @@ throw new Error(
 if(!result.success){
 
 throw new Error(
-result.error ||
+result.error||
 "Device registration failed."
 );
 
 }
-
 
 notifyStatus.textContent=
 "✅ Notifications enabled successfully.";
@@ -3207,55 +3679,28 @@ notifyBtn.textContent=
 }
 catch(error){
 
-console.error(
-"Notification error:",
-error
-);
+console.error(error);
 
 notifyStatus.textContent=
 "❌ Notification setup failed.";
 
 pushErrorMessage(
-error.message || String(error)
+error.message||
+String(error)
 );
 
 notifyBtn.disabled=false;
-notifyBtn.textContent="Try Again";
+
+notifyBtn.textContent=
+"Try Again";
 
 }
 
 }
 
 
-async function getTokenSafe(
-messagingInstance,
-registration
-){
-
-const module=
-await import(
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
-);
-
-return await module.getToken(
-messagingInstance,
-{
-
-vapidKey:VAPID_KEY,
-
-serviceWorkerRegistration:
-registration
-
-}
-);
-
-}
-
-
-notifyBtn.addEventListener(
-"click",
-enableNotifications
-);
+notifyBtn.onclick=
+enableNotifications;
 
 
 /* ================= PWA ================= */
