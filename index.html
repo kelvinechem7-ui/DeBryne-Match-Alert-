@@ -604,9 +604,7 @@ margin-top:15px;
 display:none;
 }
 
-/* =====================================================
-   SOCIAL MEDIA PROFILE
-===================================================== */
+/* ================= PROFILE ================= */
 
 .profile-card{
 padding:0;
@@ -617,8 +615,7 @@ border-radius:22px;
 
 .profile-cover{
 height:145px;
-background:
-linear-gradient(
+background:linear-gradient(
 135deg,
 #111827,
 #1e293b,
@@ -1098,7 +1095,7 @@ alt="DeBryne Update">
 </div>
 </header>
 
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 
 <section id="homePage" class="page active">
 
@@ -1196,7 +1193,7 @@ Loading updates...
 </main>
 </section>
 
-<!-- ================= NEWS ================= -->
+<!-- NEWS -->
 
 <section id="newsPage" class="page">
 
@@ -1238,7 +1235,7 @@ Loading news...
 </main>
 </section>
 
-<!-- ================= SPORTS ================= -->
+<!-- SPORTS -->
 
 <section id="sportsPage" class="page">
 
@@ -1259,7 +1256,7 @@ Loading sports...
 </main>
 </section>
 
-<!-- ================= ALERTS ================= -->
+<!-- ALERTS -->
 
 <section id="alertsPage" class="page">
 
@@ -1307,7 +1304,7 @@ class="errorBox">
 </main>
 </section>
 
-<!-- ================= PROFILE ================= -->
+<!-- PROFILE -->
 
 <section id="profilePage" class="page">
 
@@ -1435,7 +1432,7 @@ LOG OUT
 
 </div>
 
-<!-- ================= RATING ================= -->
+<!-- RATING -->
 
 <div class="rating-card">
 
@@ -1532,7 +1529,7 @@ style="margin-top:15px">
 </main>
 </section>
 
-<!-- ================= ACADEMICS ================= -->
+<!-- ACADEMICS -->
 
 <section id="academicsPage" class="page">
 
@@ -1553,7 +1550,7 @@ Loading academic updates...
 </main>
 </section>
 
-<!-- ================= EVENTS ================= -->
+<!-- EVENTS -->
 
 <section id="eventsPage" class="page">
 
@@ -1574,7 +1571,7 @@ Loading events...
 </main>
 </section>
 
-<!-- ================= NAV ================= -->
+<!-- NAV -->
 
 <nav class="bottom">
 
@@ -1611,7 +1608,7 @@ Profile
 
 setTimeout(function(){
 
-const splash=
+const splash =
 document.getElementById("appSplash");
 
 if(splash){
@@ -1643,7 +1640,7 @@ item.classList.remove("active");
 
 });
 
-const target=
+const target =
 document.getElementById(page+"Page");
 
 if(target){
@@ -1719,20 +1716,10 @@ updateProfile
 from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
-import {
-getStorage,
-ref as storageRef,
-uploadBytes,
-getDownloadURL,
-deleteObject
-}
-from
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
-
 
 /* ================= FIREBASE ================= */
 
-const firebaseConfig={
+const firebaseConfig = {
 
 apiKey:
 "AIzaSyBKHJEeLkkTRc_X6E_ZMaBqGyGkwO87-zo",
@@ -1760,44 +1747,43 @@ measurementId:
 
 };
 
-const VAPID_KEY=
+const VAPID_KEY =
 "BGEHicdQKOU7wXPvbyTG_HkLoxxnh31pOWlg31-E30qaOZ3oLyqTFa1MNlS1ppLfk8L2avdj3FYgZjLh4PC0G-o";
 
-const PUSH_SERVER_URL=
+const PUSH_SERVER_URL =
 "https://script.google.com/macros/s/AKfycbywGN_hoAD2NJhRrdikFgU5A0QHm5Psgr51ZLXTTacYhrGnWoDC7q3HuiU6YwBvrv7xXA/exec";
 
 
-let app=null;
-let db=null;
-let auth=null;
-let storage=null;
-let messaging=null;
+let app = null;
+let db = null;
+let auth = null;
+let messaging = null;
 
-const DEFAULT_PHOTO=
+const DEFAULT_PHOTO =
 "./file_000000008e5c71f4a9d057362a556762.png";
 
 
 /* ================= ELEMENTS ================= */
 
-const splash=
+const splash =
 document.getElementById("appSplash");
 
-const splashStatus=
+const splashStatus =
 document.getElementById("splashStatus");
 
-const authScreen=
+const authScreen =
 document.getElementById("authScreen");
 
-const appContent=
+const appContent =
 document.getElementById("appContent");
 
-const authStatus=
+const authStatus =
 document.getElementById("authStatus");
 
-const registerForm=
+const registerForm =
 document.getElementById("registerForm");
 
-const loginForm=
+const loginForm =
 document.getElementById("loginForm");
 
 
@@ -1805,7 +1791,7 @@ function splashMessage(message){
 
 if(splashStatus){
 
-splashStatus.textContent=message;
+splashStatus.textContent = message;
 
 }
 
@@ -1829,30 +1815,23 @@ splash.style.display="none";
 
 function showAuthStatus(message,type){
 
-authStatus.textContent=message;
+authStatus.textContent = message;
 
-authStatus.className=
-"auth-status";
+authStatus.className = "auth-status";
 
 if(type==="success"){
 
-authStatus.classList.add(
-"auth-success"
-);
+authStatus.classList.add("auth-success");
 
 }
 else if(type==="error"){
 
-authStatus.classList.add(
-"auth-error"
-);
+authStatus.classList.add("auth-error");
 
 }
 else{
 
-authStatus.classList.add(
-"auth-info"
-);
+authStatus.classList.add("auth-info");
 
 }
 
@@ -1868,7 +1847,9 @@ document.getElementById(
 ).onclick=function(){
 
 registerForm.style.display="none";
+
 loginForm.style.display="block";
+
 authStatus.style.display="none";
 
 };
@@ -1879,7 +1860,9 @@ document.getElementById(
 ).onclick=function(){
 
 registerForm.style.display="block";
+
 loginForm.style.display="none";
+
 authStatus.style.display="none";
 
 };
@@ -1893,13 +1876,11 @@ splashMessage(
 "Connecting to DeBryne Update..."
 );
 
-app=initializeApp(firebaseConfig);
+app = initializeApp(firebaseConfig);
 
-db=getDatabase(app);
+db = getDatabase(app);
 
-auth=getAuth(app);
-
-storage=getStorage(app);
+auth = getAuth(app);
 
 splashMessage(
 "Firebase connected..."
@@ -1939,27 +1920,27 @@ return;
 
 }
 
-const name=
+const name =
 document.getElementById(
 "registerName"
 ).value.trim();
 
-const email=
+const email =
 document.getElementById(
 "registerEmail"
 ).value.trim();
 
-const password=
+const password =
 document.getElementById(
 "registerPassword"
 ).value;
 
-const confirm=
+const confirm =
 document.getElementById(
 "registerConfirm"
 ).value;
 
-const button=
+const button =
 document.getElementById(
 "registerButton"
 );
@@ -2011,7 +1992,7 @@ return;
 
 button.disabled=true;
 
-button.textContent=
+button.textContent =
 "CREATING ACCOUNT...";
 
 try{
@@ -2021,14 +2002,14 @@ showAuthStatus(
 "info"
 );
 
-const credential=
+const credential =
 await createUserWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-const user=
+const user =
 credential.user;
 
 await updateProfile(
@@ -2081,7 +2062,7 @@ error.message
 
 button.disabled=false;
 
-button.textContent=
+button.textContent =
 "CREATE ACCOUNT";
 
 }
@@ -2095,17 +2076,17 @@ document.getElementById(
 "loginButton"
 ).onclick=async function(){
 
-const email=
+const email =
 document.getElementById(
 "loginEmail"
 ).value.trim();
 
-const password=
+const password =
 document.getElementById(
 "loginPassword"
 ).value;
 
-const button=
+const button =
 document.getElementById(
 "loginButton"
 );
@@ -2134,7 +2115,7 @@ return;
 
 button.disabled=true;
 
-button.textContent=
+button.textContent =
 "LOGGING IN...";
 
 try{
@@ -2157,7 +2138,7 @@ showAuthStatus(
 
 button.disabled=false;
 
-button.textContent=
+button.textContent =
 "LOGIN";
 
 }
@@ -2167,29 +2148,33 @@ button.textContent=
 
 /* =====================================================
    PROFILE
+   IMPORTANT:
+   Firebase Storage has been completely removed.
+   Profile images are compressed and stored in
+   Realtime Database under users/USER_ID/photoURL.
 ===================================================== */
 
-const profilePhoto=
+const profilePhoto =
 document.getElementById("profilePhoto");
 
-const profileInput=
+const profileInput =
 document.getElementById("profilePhotoInput");
 
-const changePhoto=
+const changePhoto =
 document.getElementById("changePhotoButton");
 
-const removePhoto=
+const removePhoto =
 document.getElementById("removePhotoButton");
 
-const photoStatus=
+const photoStatus =
 document.getElementById("profilePhotoStatus");
 
 
 function photoMessage(message,type){
 
-photoStatus.textContent=message;
+photoStatus.textContent = message;
 
-photoStatus.className=
+photoStatus.className =
 "photo-status photo-"+type;
 
 photoStatus.style.display="block";
@@ -2197,13 +2182,139 @@ photoStatus.style.display="block";
 }
 
 
+/* ================= IMAGE COMPRESSION ================= */
+
+function compressImage(file){
+
+return new Promise(function(resolve,reject){
+
+const reader =
+new FileReader();
+
+reader.onload=function(event){
+
+const img =
+new Image();
+
+img.onload=function(){
+
+const MAX_SIZE = 800;
+
+let width = img.width;
+
+let height = img.height;
+
+
+/* Resize while keeping aspect ratio */
+
+if(width > height){
+
+if(width > MAX_SIZE){
+
+height =
+Math.round(
+height * MAX_SIZE / width
+);
+
+width = MAX_SIZE;
+
+}
+
+}
+else{
+
+if(height > MAX_SIZE){
+
+width =
+Math.round(
+width * MAX_SIZE / height
+);
+
+height = MAX_SIZE;
+
+}
+
+}
+
+
+const canvas =
+document.createElement("canvas");
+
+canvas.width = width;
+
+canvas.height = height;
+
+
+const ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+
+/*
+   JPEG compression keeps the Firebase
+   Realtime Database payload much smaller.
+*/
+
+const compressed =
+canvas.toDataURL(
+"image/jpeg",
+0.70
+);
+
+resolve(compressed);
+
+};
+
+
+img.onerror=function(){
+
+reject(
+new Error(
+"Unable to process this image."
+)
+);
+
+};
+
+img.src =
+event.target.result;
+
+};
+
+
+reader.onerror=function(){
+
+reject(
+new Error(
+"Unable to read the selected image."
+)
+);
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* ================= LOAD USER PROFILE ================= */
+
 async function loadUserProfile(user){
 
-let profile=null;
+let profile = null;
 
 try{
 
-const snapshot=
+const snapshot =
 await new Promise(function(resolve){
 
 onValue(
@@ -2216,7 +2327,8 @@ onlyOnce:true
 
 });
 
-profile=snapshot.val();
+profile =
+snapshot.val();
 
 }
 catch(error){
@@ -2225,7 +2337,8 @@ console.error(error);
 
 }
 
-const name=
+
+const name =
 profile &&
 profile.fullName
 ?
@@ -2236,21 +2349,25 @@ user.displayName || "Student";
 
 document.getElementById(
 "welcomeName"
-).textContent=
+).textContent =
 "Welcome, "+name+" 👋";
+
 
 document.getElementById(
 "profileName"
-).textContent=name;
+).textContent =
+name;
+
 
 document.getElementById(
 "profileEmail"
-).textContent=
+).textContent =
 user.email || "";
+
 
 document.getElementById(
 "profileJoined"
-).textContent=
+).textContent =
 profile &&
 profile.createdAt
 ?
@@ -2262,31 +2379,41 @@ profile.createdAt
 "DeBryne Update member";
 
 
+/*
+   IMPORTANT:
+   Read the photo from Realtime Database.
+*/
+
 if(
 profile &&
-profile.photoURL
+profile.photoURL &&
+String(profile.photoURL).trim()
 ){
 
-profilePhoto.src=
+profilePhoto.src =
 profile.photoURL;
 
 }
-else if(user.photoURL){
+else if(
+user.photoURL &&
+String(user.photoURL).trim()
+){
 
-profilePhoto.src=
+profilePhoto.src =
 user.photoURL;
 
 }
 else{
 
-profilePhoto.src=
+profilePhoto.src =
 DEFAULT_PHOTO;
 
 }
 
+
 document.getElementById(
 "profileNewsCount"
-).textContent=
+).textContent =
 allNewsItems.length;
 
 }
@@ -2303,14 +2430,20 @@ profileInput.click();
 
 profileInput.onchange=async function(){
 
-const file=this.files[0];
+const file =
+this.files[0];
 
-if(!file)return;
+if(!file){
+
+return;
+
+}
+
 
 if(!file.type.startsWith("image/")){
 
 photoMessage(
-"Please select an image file.",
+"Please select a valid image file.",
 "error"
 );
 
@@ -2318,16 +2451,23 @@ return;
 
 }
 
-if(file.size>5*1024*1024){
+
+/*
+   Maximum original image size:
+   10MB.
+*/
+
+if(file.size > 10 * 1024 * 1024){
 
 photoMessage(
-"Image must be smaller than 5MB.",
+"Image is too large. Please choose an image below 10MB.",
 "error"
 );
 
 return;
 
 }
+
 
 if(!auth.currentUser){
 
@@ -2340,91 +2480,140 @@ return;
 
 }
 
-const user=
+
+const user =
 auth.currentUser;
+
 
 changePhoto.disabled=true;
 
 removePhoto.disabled=true;
 
-changePhoto.textContent=
-"Uploading...";
+changePhoto.textContent =
+"Processing...";
+
 
 photoMessage(
-"Uploading your profile picture...",
+"Preparing your profile picture...",
 "info"
 );
 
+
 try{
 
-const extension=
-file.name
-.split(".")
-.pop()
-.toLowerCase();
+/* Compress the image */
 
-const imageRef=
-storageRef(
-storage,
-"profilePictures/"+
-user.uid+"."+extension
+const compressedImage =
+await compressImage(file);
+
+
+/*
+   Estimate the resulting Base64 size.
+*/
+
+const sizeInBytes =
+Math.round(
+(compressedImage.length * 3) / 4
 );
 
-await uploadBytes(
-imageRef,
-file,
-{
-contentType:file.type
+
+/*
+   Keep the final image safely below
+   the Realtime Database single-value limit.
+*/
+
+if(sizeInBytes > 900000){
+
+throw new Error(
+"Image is still too large. Please choose another picture."
+);
+
 }
+
+
+photoMessage(
+"Saving your profile picture...",
+"info"
 );
 
-const photoURL=
-await getDownloadURL(
-imageRef
-);
 
-await updateProfile(
-user,
-{
-photoURL:photoURL
-}
-);
+/*
+   SAVE DIRECTLY TO REALTIME DATABASE
+*/
 
 await set(
 ref(
 db,
 "users/"+user.uid+"/photoURL"
 ),
-photoURL
+compressedImage
 );
 
-profilePhoto.src=
-photoURL+
-"?t="+Date.now();
+
+/*
+   Also update Firebase Auth profile.
+   If this fails, the database copy still works.
+*/
+
+try{
+
+await updateProfile(
+user,
+{
+photoURL:compressedImage
+}
+);
+
+}
+catch(profileError){
+
+console.log(
+"Auth profile photo update skipped:",
+profileError
+);
+
+}
+
+
+/*
+   Display immediately.
+*/
+
+profilePhoto.src =
+compressedImage;
+
 
 photoMessage(
 "✅ Profile picture updated successfully.",
 "success"
 );
 
-changePhoto.textContent=
+
+changePhoto.textContent =
 "📷 Change Photo";
 
 }
 catch(error){
 
-console.error(error);
+console.error(
+"Profile photo error:",
+error
+);
 
 photoMessage(
 "❌ Upload failed: "+
-error.message,
+(
+error.message ||
+"Please try again."
+),
 "error"
 );
 
-changePhoto.textContent=
+changePhoto.textContent =
 "📷 Change Photo";
 
 }
+
 
 changePhoto.disabled=false;
 
@@ -2441,13 +2630,21 @@ removePhoto.onclick=async function(){
 
 if(!auth.currentUser){
 
+photoMessage(
+"Please login first.",
+"error"
+);
+
 return;
 
 }
 
-if(profilePhoto.src.includes(
+
+if(
+profilePhoto.src.includes(
 DEFAULT_PHOTO
-)){
+)
+){
 
 photoMessage(
 "No profile picture to remove.",
@@ -2458,68 +2655,54 @@ return;
 
 }
 
-if(!confirm(
+
+if(
+!confirm(
 "Remove your profile picture?"
-)){
+)
+){
 
 return;
 
 }
 
-const user=
+
+const user =
 auth.currentUser;
+
 
 changePhoto.disabled=true;
 
 removePhoto.disabled=true;
+
 
 photoMessage(
 "Removing profile picture...",
 "info"
 );
 
-try{
-
-const snapshot=
-await new Promise(function(resolve){
-
-onValue(
-ref(db,"users/"+user.uid),
-resolve,
-{
-onlyOnce:true
-}
-);
-
-});
-
-const profile=
-snapshot.val();
-
-if(profile && profile.photoURL){
 
 try{
 
-const oldImage=
-storageRef(
-storage,
-profile.photoURL
+/*
+   Remove the Base64 image from
+   Realtime Database.
+*/
+
+await set(
+ref(
+db,
+"users/"+user.uid+"/photoURL"
+),
+""
 );
 
-await deleteObject(
-oldImage
-);
 
-}
-catch(error){
+/*
+   Remove Firebase Auth photo too.
+*/
 
-console.log(
-"Old storage image could not be deleted."
-);
-
-}
-
-}
+try{
 
 await updateProfile(
 user,
@@ -2528,26 +2711,37 @@ photoURL:""
 }
 );
 
-await set(
-ref(
-db,
-"users/"+user.uid+"/photoURL"
-),
-null
+}
+catch(profileError){
+
+console.log(
+"Auth photo removal skipped:",
+profileError
 );
 
-profilePhoto.src=
+}
+
+
+/*
+   Reset to DeBryne default image.
+*/
+
+profilePhoto.src =
 DEFAULT_PHOTO;
 
+
 photoMessage(
-"✅ Profile picture removed.",
+"✅ Profile picture removed successfully.",
 "success"
 );
 
 }
 catch(error){
 
-console.error(error);
+console.error(
+"Remove photo error:",
+error
+);
 
 photoMessage(
 "❌ Could not remove profile picture.",
@@ -2555,6 +2749,7 @@ photoMessage(
 );
 
 }
+
 
 changePhoto.disabled=false;
 
@@ -2592,9 +2787,11 @@ return;
 
 }
 
+
 authScreen.style.display="none";
 
 appContent.style.display="block";
+
 
 await loadUserProfile(user);
 
@@ -2608,7 +2805,7 @@ hideSplash();
 );
 
 
-/* ================= ESCAPE ================= */
+/* ================= ESCAPE HTML ================= */
 
 function escapeHTML(value){
 
@@ -2629,21 +2826,24 @@ let allNewsItems=[];
 
 function createNewsCard(item){
 
-const image=
+const image =
 String(item.imageUrl||"").trim();
 
 let imageHTML="";
 
+
 if(image){
 
-imageHTML=
+imageHTML =
 '<img class="news-image" src="'+
 escapeHTML(image)+
 '" alt="News" loading="lazy" onerror="this.style.display=\'none\'">';
 
 }
 
+
 return `
+
 <article class="news">
 
 <div class="label">
@@ -2671,6 +2871,7 @@ new Date(item.createdAt).toLocaleString()
 </div>
 
 </article>
+
 `;
 
 }
@@ -2678,10 +2879,11 @@ new Date(item.createdAt).toLocaleString()
 
 function searchNews(query){
 
-query=
+query =
 String(query||"")
 .trim()
 .toLowerCase();
+
 
 if(!query){
 
@@ -2689,9 +2891,10 @@ return allNewsItems;
 
 }
 
+
 return allNewsItems.filter(function(item){
 
-const text=
+const text =
 (
 String(item.title||"")+
 " "+
@@ -2699,6 +2902,7 @@ String(item.content||"")+
 " "+
 String(item.category||"")
 ).toLowerCase();
+
 
 return query
 .split(/\s+/)
@@ -2733,13 +2937,15 @@ return;
 
 }
 
+
 container.style.display="block";
 
 clear.style.display="flex";
 
 info.style.display="block";
 
-info.textContent=
+
+info.textContent =
 results.length+
 (
 results.length===1
@@ -2752,16 +2958,18 @@ results.length===1
 query+
 '"';
 
+
 if(!results.length){
 
-container.innerHTML=
+container.innerHTML =
 '<div class="empty">🔍 No results found.</div>';
 
 return;
 
 }
 
-container.innerHTML=
+
+container.innerHTML =
 results.map(createNewsCard).join("");
 
 }
@@ -2774,23 +2982,24 @@ infoId,
 clearId
 ){
 
-const input=
+const input =
 document.getElementById(inputId);
 
-const container=
+const container =
 document.getElementById(containerId);
 
-const info=
+const info =
 document.getElementById(infoId);
 
-const clear=
+const clear =
 document.getElementById(clearId);
+
 
 input.addEventListener(
 "input",
 function(){
 
-const results=
+const results =
 searchNews(input.value);
 
 renderSearch(
@@ -2802,6 +3011,7 @@ clear
 );
 
 });
+
 
 clear.addEventListener(
 "click",
@@ -2831,6 +3041,7 @@ setupSearch(
 "homeClearSearch"
 );
 
+
 setupSearch(
 "newsSearchInput",
 "newsList",
@@ -2845,27 +3056,28 @@ onValue(
 ref(db,"news"),
 function(snapshot){
 
-const data=
+const data =
 snapshot.val();
 
-const home=
+const home =
 document.getElementById("homeNews");
 
-const news=
+const news =
 document.getElementById("newsList");
 
-const sports=
+const sports =
 document.getElementById("sportsList");
 
-const academic=
+const academic =
 document.getElementById("academicList");
 
-const events=
+const events =
 document.getElementById("eventList");
+
 
 if(!data){
 
-const empty=
+const empty =
 '<div class="empty">No updates published yet.</div>';
 
 home.innerHTML=empty;
@@ -2880,7 +3092,8 @@ return;
 
 }
 
-allNewsItems=
+
+allNewsItems =
 Object.keys(data)
 .map(function(key){
 
@@ -2892,21 +3105,24 @@ id:key,
 })
 .sort(function(a,b){
 
-return Number(b.createdAt||0)-
+return Number(b.createdAt||0) -
 Number(a.createdAt||0);
 
 });
 
-home.innerHTML=
+
+home.innerHTML =
 allNewsItems
 .slice(0,5)
 .map(createNewsCard)
 .join("");
 
-const query=
+
+const query =
 document.getElementById(
 "newsSearchInput"
 ).value.trim();
+
 
 if(query){
 
@@ -2921,7 +3137,7 @@ document.getElementById("newsClearSearch")
 }
 else{
 
-news.innerHTML=
+news.innerHTML =
 allNewsItems
 .map(createNewsCard)
 .join("");
@@ -2935,7 +3151,7 @@ element,
 message
 ){
 
-const result=
+const result =
 allNewsItems.filter(function(item){
 
 return String(
@@ -2946,7 +3162,8 @@ item.category||""
 
 });
 
-element.innerHTML=
+
+element.innerHTML =
 result.length
 ?
 result.map(createNewsCard).join("")
@@ -2955,17 +3172,20 @@ result.map(createNewsCard).join("")
 
 }
 
+
 category(
 "sport",
 sports,
 "No sports updates yet."
 );
 
+
 category(
 "academic",
 academic,
 "No academic updates yet."
 );
+
 
 category(
 "event",
@@ -2974,16 +3194,15 @@ events,
 );
 
 
-/* UPDATE PROFILE COUNT */
-
-const count=
+const count =
 document.getElementById(
 "profileNewsCount"
 );
 
+
 if(count){
 
-count.textContent=
+count.textContent =
 allNewsItems.length;
 
 }
@@ -2995,7 +3214,7 @@ console.error(error);
 
 document.getElementById(
 "homeNews"
-).innerHTML=
+).innerHTML =
 '<div class="empty">Unable to load updates right now.</div>';
 
 }
@@ -3007,54 +3226,56 @@ document.getElementById(
 ===================================================== */
 
 let selectedRating=0;
+
 let selectedSatisfaction="";
 
-const stars=
+
+const stars =
 document.querySelectorAll(
 "#starRating button"
 );
 
-const satisfaction=
+const satisfaction =
 document.querySelectorAll(
 ".satisfaction-option"
 );
 
-const ratingValue=
+const ratingValue =
 document.getElementById(
 "ratingValue"
 );
 
-const opinion=
+const opinion =
 document.getElementById(
 "ratingOpinion"
 );
 
-const submit=
+const submit =
 document.getElementById(
 "submitRating"
 );
 
-const ratingStatus=
+const ratingStatus =
 document.getElementById(
 "ratingStatus"
 );
 
-const overall=
+const overall =
 document.getElementById(
 "overallRating"
 );
 
-const overallStars=
+const overallStars =
 document.getElementById(
 "overallStars"
 );
 
-const ratingCount=
+const ratingCount =
 document.getElementById(
 "ratingCount"
 );
 
-const recent=
+const recent =
 document.getElementById(
 "recentOpinions"
 );
@@ -3062,12 +3283,13 @@ document.getElementById(
 
 function setRating(value){
 
-selectedRating=
+selectedRating =
 Number(value);
+
 
 stars.forEach(function(star){
 
-const n=
+const n =
 Number(star.dataset.rating);
 
 star.classList.toggle(
@@ -3077,7 +3299,8 @@ n<=selectedRating
 
 });
 
-ratingValue.textContent=
+
+ratingValue.textContent =
 selectedRating+
 (
 selectedRating===1
@@ -3113,9 +3336,10 @@ x.classList.remove("selected");
 
 });
 
+
 item.classList.add("selected");
 
-selectedSatisfaction=
+selectedSatisfaction =
 item.dataset.satisfaction;
 
 };
@@ -3128,9 +3352,10 @@ message,
 type
 ){
 
-ratingStatus.textContent=message;
+ratingStatus.textContent =
+message;
 
-ratingStatus.className=
+ratingStatus.className =
 "rating-status "+
 (
 type==="success"
@@ -3158,6 +3383,7 @@ return;
 
 }
 
+
 if(!selectedRating){
 
 ratingMessage(
@@ -3168,6 +3394,7 @@ ratingMessage(
 return;
 
 }
+
 
 if(!selectedSatisfaction){
 
@@ -3180,17 +3407,20 @@ return;
 
 }
 
+
 submit.disabled=true;
 
-submit.textContent=
+submit.textContent =
 "SUBMITTING...";
+
 
 try{
 
-const user=
+const user =
 auth.currentUser;
 
-const snapshot=
+
+const snapshot =
 await new Promise(function(resolve){
 
 onValue(
@@ -3203,8 +3433,10 @@ onlyOnce:true
 
 });
 
-const old=
+
+const old =
 snapshot.val()||{};
+
 
 await set(
 ref(db,"ratings/"+user.uid),
@@ -3234,13 +3466,16 @@ Date.now()
 }
 );
 
+
 ratingMessage(
 "✅ Thank you! Your feedback has been saved.",
 "success"
 );
 
-submit.textContent=
+
+submit.textContent =
 "UPDATE FEEDBACK";
+
 
 await loadRatingSummary();
 
@@ -3254,10 +3489,11 @@ ratingMessage(
 "error"
 );
 
-submit.textContent=
+submit.textContent =
 "SUBMIT FEEDBACK";
 
 }
+
 
 submit.disabled=false;
 
@@ -3268,7 +3504,7 @@ async function loadMyRating(uid){
 
 try{
 
-const snapshot=
+const snapshot =
 await new Promise(function(resolve){
 
 onValue(
@@ -3281,10 +3517,13 @@ onlyOnce:true
 
 });
 
-const data=
+
+const data =
 snapshot.val();
 
+
 if(!data)return;
+
 
 if(data.rating){
 
@@ -3294,10 +3533,12 @@ data.rating
 
 }
 
+
 if(data.satisfaction){
 
-selectedSatisfaction=
+selectedSatisfaction =
 data.satisfaction;
+
 
 satisfaction.forEach(function(item){
 
@@ -3311,10 +3552,12 @@ selectedSatisfaction
 
 }
 
-opinion.value=
+
+opinion.value =
 data.opinion||"";
 
-submit.textContent=
+
+submit.textContent =
 "UPDATE FEEDBACK";
 
 }
@@ -3331,7 +3574,7 @@ async function loadRatingSummary(){
 
 try{
 
-const snapshot=
+const snapshot =
 await new Promise(function(resolve){
 
 onValue(
@@ -3344,23 +3587,28 @@ onlyOnce:true
 
 });
 
-const data=
+
+const data =
 snapshot.val();
+
 
 if(!data){
 
-overall.textContent="0.0/5";
+overall.textContent =
+"0.0/5";
 
-overallStars.textContent="☆☆☆☆☆";
+overallStars.textContent =
+"☆☆☆☆☆";
 
-ratingCount.textContent=
+ratingCount.textContent =
 "No ratings yet";
 
 return;
 
 }
 
-const ratings=
+
+const ratings =
 Object.values(data)
 .filter(function(item){
 
@@ -3370,13 +3618,15 @@ Number(item.rating)<=5;
 
 });
 
+
 if(!ratings.length){
 
 return;
 
 }
 
-const total=
+
+const total =
 ratings.reduce(function(sum,item){
 
 return sum+
@@ -3384,20 +3634,25 @@ Number(item.rating);
 
 },0);
 
-const average=
+
+const average =
 total/ratings.length;
 
-overall.textContent=
+
+overall.textContent =
 average.toFixed(1)+"/5";
 
-const rounded=
+
+const rounded =
 Math.round(average);
 
-overallStars.textContent=
+
+overallStars.textContent =
 "★".repeat(rounded)+
 "☆".repeat(5-rounded);
 
-ratingCount.textContent=
+
+ratingCount.textContent =
 ratings.length+
 (
 ratings.length===1
@@ -3407,7 +3662,8 @@ ratings.length===1
 " viewer ratings"
 );
 
-const opinions=
+
+const opinions =
 ratings
 .filter(function(item){
 
@@ -3431,13 +3687,14 @@ a.createdAt||
 })
 .slice(0,3);
 
+
 if(opinions.length){
 
-recent.innerHTML=
+recent.innerHTML =
 "<h4 style='margin-bottom:9px;'>💬 Viewer Opinions</h4>"+
 opinions.map(function(item){
 
-const r=
+const r =
 Math.max(
 1,
 Math.min(
@@ -3446,7 +3703,9 @@ Number(item.rating)
 )
 );
 
+
 return `
+
 <div class="recent-opinion">
 
 <strong>
@@ -3465,6 +3724,7 @@ ${escapeHTML(item.opinion)}
 </p>
 
 </div>
+
 `;
 
 }).join("");
@@ -3485,19 +3745,19 @@ console.error(error);
    NOTIFICATIONS
 ===================================================== */
 
-const notifyBtn=
+const notifyBtn =
 document.getElementById("notifyBtn");
 
-const notifyStatus=
+const notifyStatus =
 document.getElementById("notifyStatus");
 
-const tokenBox=
+const tokenBox =
 document.getElementById("tokenBox");
 
-const tokenText=
+const tokenText =
 document.getElementById("tokenText");
 
-const pushError=
+const pushError =
 document.getElementById("pushError");
 
 
@@ -3515,10 +3775,11 @@ messagingInstance,
 registration
 ){
 
-const module=
+const module =
 await import(
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
 );
+
 
 return await module.getToken(
 messagingInstance,
@@ -3532,7 +3793,6 @@ registration
 }
 );
 
-
 }
 
 
@@ -3540,10 +3800,11 @@ async function enableNotifications(){
 
 notifyBtn.disabled=true;
 
-notifyBtn.textContent=
+notifyBtn.textContent =
 "Enabling...";
 
 pushError.style.display="none";
+
 
 try{
 
@@ -3555,6 +3816,7 @@ throw new Error(
 
 }
 
+
 if(!("Notification" in window)){
 
 throw new Error(
@@ -3563,27 +3825,32 @@ throw new Error(
 
 }
 
+
 if(!messaging){
 
-const module=
+const module =
 await import(
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
 );
 
-messaging=
+
+messaging =
 module.getMessaging(app);
 
 }
 
-let permission=
+
+let permission =
 Notification.permission;
+
 
 if(permission!=="granted"){
 
-permission=
+permission =
 await Notification.requestPermission();
 
 }
+
 
 if(permission!=="granted"){
 
@@ -3593,7 +3860,8 @@ throw new Error(
 
 }
 
-const registration=
+
+const registration =
 await navigator.serviceWorker.register(
 "./firebase-messaging-sw.js",
 {
@@ -3601,11 +3869,13 @@ scope:"./"
 }
 );
 
-const token=
+
+const token =
 await getTokenSafe(
 messaging,
 registration
 );
+
 
 if(!token){
 
@@ -3615,11 +3885,14 @@ throw new Error(
 
 }
 
-tokenText.textContent=token;
+
+tokenText.textContent =
+token;
 
 tokenBox.style.display="block";
 
-const response=
+
+const response =
 await fetch(
 PUSH_SERVER_URL,
 {
@@ -3642,14 +3915,17 @@ token:token
 }
 );
 
-const text=
+
+const text =
 await response.text();
+
 
 let result;
 
+
 try{
 
-result=
+result =
 JSON.parse(text);
 
 }
@@ -3661,6 +3937,7 @@ throw new Error(
 
 }
 
+
 if(!result.success){
 
 throw new Error(
@@ -3670,10 +3947,11 @@ result.error||
 
 }
 
-notifyStatus.textContent=
+
+notifyStatus.textContent =
 "✅ Notifications enabled successfully.";
 
-notifyBtn.textContent=
+notifyBtn.textContent =
 "Notifications Enabled";
 
 }
@@ -3681,7 +3959,7 @@ catch(error){
 
 console.error(error);
 
-notifyStatus.textContent=
+notifyStatus.textContent =
 "❌ Notification setup failed.";
 
 pushErrorMessage(
@@ -3691,7 +3969,7 @@ String(error)
 
 notifyBtn.disabled=false;
 
-notifyBtn.textContent=
+notifyBtn.textContent =
 "Try Again";
 
 }
@@ -3699,7 +3977,7 @@ notifyBtn.textContent=
 }
 
 
-notifyBtn.onclick=
+notifyBtn.onclick =
 enableNotifications;
 
 
